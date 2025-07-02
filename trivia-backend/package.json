@@ -1,0 +1,21 @@
+{
+  "name": "trivia-backend",
+  "version": "1.0.0",
+  "description": "Data processing and management for trivia venue database",
+  "type": "module",
+  "scripts": {
+    "import-venues": "tsx supabase/scripts/import-venues.ts",
+    "validate-places": "tsx supabase/scripts/validate-places.ts",
+    "process-photos": "tsx supabase/scripts/process-photos.ts",
+    "migrate": "supabase db reset"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
