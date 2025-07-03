@@ -48,7 +48,7 @@ export interface Event {
 export interface VenueWithEvents extends Venue {
   longitude?: number
   latitude?: number
-  distance_km?: number
+  distance_miles?: number
   events: Array<{
     id: string
     event_type: string

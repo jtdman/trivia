@@ -3,6 +3,7 @@ import { ThemeContext } from './context/theme_context'
 import { Search, Brain, Beer, MapPin, Sun, Moon } from 'lucide-react'
 import TriviaList from './components/TriviaList'
 import DataTest from './components/DataTest'
+import LocationAutocomplete from './components/LocationAutocomplete'
 
 type AppState = 'splash' | 'manual-location' | 'trivia-list'
 
@@ -11,6 +12,7 @@ const App = () => {
   const [appState, setAppState] = useState<AppState>('splash')
   const [location, setLocation] = useState<string>('')
   const [manualLocation, setManualLocation] = useState<string>('')
+  const [geocodedCoords, setGeocodedCoords] = useState<{lat: number, lng: number} | null>(null)
 
   // Debug logging
   console.log('App render - current state:', { appState, location, theme })
@@ -42,16 +44,47 @@ const App = () => {
     }
   }
 
-  const handleManualLocationSubmit = (e: React.FormEvent) => {
+  const handleLocationSelect = (locationName: string, coords: {lat: number, lng: number}) => {
+    setLocation(locationName)
+    setGeocodedCoords(coords)
+    setAppState('trivia-list')
+  }
+
+  const handleManualLocationSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (manualLocation.trim()) {
       setLocation(manualLocation.trim())
+      
+      // If no coordinates were set by autocomplete, try to geocode
+      if (!geocodedCoords) {
+        try {
+          const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation.trim())}&limit=1`
+          const response = await fetch(geocodeUrl)
+          const data = await response.json()
+          
+          if (data && data.length > 0) {
+            const { lat, lon } = data[0]
+            const coords = { lat: parseFloat(lat), lng: parseFloat(lon) }
+            console.log('Manual geocoding result:', coords)
+            setGeocodedCoords(coords)
+          }
+        } catch (error) {
+          console.warn('Geocoding failed:', error)
+        }
+      }
+      
+      // Navigate to trivia list after geocoding attempt
       setAppState('trivia-list')
     }
   }
 
   if (appState === 'trivia-list') {
-    return <TriviaList location={location} />
+    return <TriviaList location={location} geocodedCoords={geocodedCoords} onBack={() => {
+      setAppState('splash')
+      setGeocodedCoords(null)
+      setLocation('')
+      setManualLocation('')
+    }} />
   }
 
   if (appState === 'manual-location') {
@@ -106,12 +139,11 @@ const App = () => {
             onSubmit={handleManualLocationSubmit}
             className='w-full max-w-sm space-y-4'
           >
-            <input
-              type='text'
+            <LocationAutocomplete
               value={manualLocation}
-              onChange={(e) => setManualLocation(e.target.value)}
-              placeholder='City or ZIP code'
-              className='w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500'
+              onChange={setManualLocation}
+              onSelect={handleLocationSelect}
+              placeholder="City or ZIP code"
             />
             <button
               type='submit'

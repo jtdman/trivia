@@ -4,7 +4,7 @@ import { supabase, type VenueWithEvents } from '../lib/supabase'
 interface UseVenuesOptions {
   latitude?: number
   longitude?: number
-  radiusKm?: number
+  radiusMiles?: number
   limit?: number
 }
 
@@ -15,19 +15,19 @@ interface UseVenuesResult {
   refetch: () => void
 }
 
-export function useVenues(options: UseVenuesOptions = {}): UseVenuesResult {
+export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
   const [venues, setVenues] = useState<VenueWithEvents[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const { latitude, longitude, radiusKm = 50, limit = 50 } = options
+  const { latitude, longitude, radiusMiles = 30, limit = 50 } = options || {}
 
   const fetchVenues = async () => {
     try {
       setLoading(true)
       setError(null)
       
-      console.log('Fetching venues with options:', { latitude, longitude, radiusKm, limit })
+      console.log('Fetching venues with options:', { latitude, longitude, radiusMiles, limit })
 
       // For now, let's use the basic query and calculate distances on the client
       // We'll improve this with PostGIS later
@@ -79,7 +79,6 @@ export function useVenues(options: UseVenuesOptions = {}): UseVenuesResult {
         console.log('Using PostGIS distance function...')
         
         try {
-          const radiusMiles = radiusKm * 0.621371 // Convert km to miles
           
           // Get today's day of the week for filtering
           const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()
@@ -118,7 +117,7 @@ export function useVenues(options: UseVenuesOptions = {}): UseVenuesResult {
             // Transform the data to match our interface
             const venuesWithDistance = venuesWithTodayEvents.map((venue: any) => ({
               ...venue,
-              distance_km: venue.distance_miles, // Store as distance_km for compatibility with existing code
+              distance_miles: venue.distance_miles,
               events: Array.isArray(venue.events) ? venue.events.filter((event: any) => 
                 event.is_active && event.day_of_week?.toLowerCase() === today
               ) : []
@@ -148,7 +147,7 @@ export function useVenues(options: UseVenuesOptions = {}): UseVenuesResult {
 
   useEffect(() => {
     fetchVenues()
-  }, [latitude, longitude, radiusKm, limit])
+  }, [latitude, longitude, radiusMiles, limit])
 
   return {
     venues,
