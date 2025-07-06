@@ -1,10 +1,10 @@
-import { VenueWithEvents } from '../lib/supabase'
+import type { VenueWithEvents } from '../lib/supabase'
 import { calculateDistance } from './geolocation'
 
 export interface VenueWithDistance extends VenueWithEvents {
-  distance_km?: number
-  longitude?: number
-  latitude?: number
+  distance_km: number
+  longitude: number
+  latitude: number
 }
 
 // Hard-coded venue coordinates for Tennessee venues (temporary solution)
@@ -29,7 +29,12 @@ export function filterVenuesByLocation(
   radiusKm: number = 50
 ): VenueWithDistance[] {
   if (!userLatitude || !userLongitude) {
-    return venues.map(venue => ({ ...venue }))
+    return venues.map(venue => ({ 
+      ...venue, 
+      distance_km: 0, 
+      longitude: 0, 
+      latitude: 0 
+    }))
   }
 
   console.log('Filtering venues by location:', { userLatitude, userLongitude, radiusKm })
@@ -56,9 +61,9 @@ export function filterVenuesByLocation(
         distance_km
       }
     })
-    .filter((venue): venue is VenueWithDistance => venue !== null)
-    .filter(venue => venue.distance_km! <= radiusKm)
-    .sort((a, b) => a.distance_km! - b.distance_km!)
+    .filter((venue): venue is VenueWithDistance => venue !== null && venue.distance_km !== undefined)
+    .filter(venue => venue.distance_km <= radiusKm)
+    .sort((a, b) => a.distance_km - b.distance_km)
 
   console.log('Filtered venues:', {
     original: venues.length,

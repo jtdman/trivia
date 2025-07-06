@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import {
   MapPin,
   Calendar,
@@ -18,7 +18,6 @@ import {
   formatDayOfWeek,
   formatTime,
   formatPrize,
-  getLocationName,
   formatDistance,
 } from '../utils/location'
 import { getImageProps } from '../utils/images'

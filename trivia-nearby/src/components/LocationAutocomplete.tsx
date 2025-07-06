@@ -27,7 +27,7 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout>()
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Debounced search for location suggestions
   useEffect(() => {
