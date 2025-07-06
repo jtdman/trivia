@@ -1,0 +1,446 @@
+{
+  "name": "CE Claude Optimized",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        -660
+      ],
+      "id": "43085359-fae7-4f14-afc0-cb5580ff188b",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://challengeentertainment.com/show-sitemap.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2580,
+        -660
+      ],
+      "id": "81ea3385-584a-4e69-ba87-6e8258b302af",
+      "name": "Get Sitemap"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        -660
+      ],
+      "id": "c2176ec0-ec5b-45b7-a20d-9828ce49b417",
+      "name": "Parse XML"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "urlset.url",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3020,
+        -660
+      ],
+      "id": "34c7c334-340e-4db2-aeea-cb3c1174796d",
+      "name": "Split URLs"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url_assignment",
+              "name": "url",
+              "value": "={{ $json.loc }}",
+              "type": "string"
+            },
+            {
+              "id": "lastmod_assignment",
+              "name": "lastmod",
+              "value": "={{ $json.lastmod }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3240,
+        -660
+      ],
+      "id": "b02bb802-cb50-43aa-b2aa-320f32edde00",
+      "name": "Clean URL Data"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2360,
+        -200
+      ],
+      "id": "d34a6bcf-6c64-4f73-a32c-caff9bf184d4",
+      "name": "Batch URLs (10)"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2800,
+        -200
+      ],
+      "id": "b41bab85-4ec3-498f-92f5-7e9251f58e5a",
+      "name": "Fetch Page (with retry)",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const cheerio = require('cheerio');\nconst html = $json.data;\n\nif (typeof html !== 'string') {\n  return [{ \n    json: { \n      error: \"Invalid HTML content\", \n      url: $json.url || 'unknown',\n      type: typeof html \n    } \n  }];\n}\n\ntry {\n  const $ = cheerio.load(html);\n  \n  // Extract venue info\n  const venueTitle = $('.venue-title').text().trim();\n  const venueAddress = $('.venue-address').text().trim().replace(/\\s\\s+/g, ' ');\n  \n  const venueLinks = {\n    website: $('.venue-links a[href^=\"http\"]').first().attr('href') || null,\n    social: [],\n  };\n  \n  $('.venue-links a[href*=\"facebook\"], .venue-links a[href*=\"instagram\"], .venue-links a[href*=\"twitter\"]').each((_, el) => {\n    venueLinks.social.push($(el).attr('href'));\n  });\n  venueLinks.social = [...new Set(venueLinks.social)];\n  \n  // Extract shows\n  const shows = [];\n  const upcomingShowsHeader = $('h3').filter(function () {\n    return $(this).text().trim().toLowerCase() === 'upcoming shows';\n  });\n  \n  if (upcomingShowsHeader.length > 0) {\n    const showsContainer = upcomingShowsHeader.parent();\n    showsContainer.find('.show-post').each((_, el) => {\n      const showElement = $(el);\n      const showListTimeElement = showElement.find('.md-col-1.show-list-time');\n      if (showListTimeElement.length === 0) return;\n      \n      const gameLogoSrc = showListTimeElement.find('img.game-logo').attr('src');\n      let game = 'Unknown Game';\n      if (gameLogoSrc) {\n        const filename = gameLogoSrc.split('/').pop();\n        game = filename.replace(/\\.(png|jpg|jpeg|gif|svg)$/i, '')\n                       .replace(/-/g, ' ')\n                       .replace(/\\b\\w/g, l => l.toUpperCase());\n      }\n      \n      const dateTimeText = showListTimeElement.clone().children('img').remove().end().text().trim();\n      let date = '', time = '';\n      if (dateTimeText.includes('@')) {\n        [date, time] = dateTimeText.split('@').map(part => part.trim());\n      } else {\n        date = dateTimeText;\n      }\n      \n      if (date && time) {\n        shows.push({ date, time, game });\n      }\n    });\n  }\n  \n  // Return only essential data - no raw HTML\n  return {\n    json: {\n      venueInfo: {\n        url: $json.url,\n        venueTitle,\n        venueAddress, \n        venueLinks,\n        shows,\n        scrapedAt: new Date().toISOString()\n      }\n    }\n  };\n  \n} catch (error) {\n  return [{\n    json: {\n      error: error.message,\n      url: $json.url || 'unknown',\n      scrapedAt: new Date().toISOString()\n    }\n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3020,
+        -200
+      ],
+      "id": "6a60fef4-64b2-446d-89b2-0e0f5ef2337d",
+      "name": "Extract Data (Clean)"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3680,
+        -120
+      ],
+      "id": "81a0f2c4-c1e1-4530-ae8c-b0ed59600255",
+      "name": "Rate Limit (5s)",
+      "webhookId": "ca75a55a-e13c-4649-b90c-23ea4445fad2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Convert JSON to JSONL format and create binary data\nconst jsonLine = JSON.stringify($json) + '\\n';\n\nreturn {\n  json: $json,\n  binary: {\n    data: {\n      data: Buffer.from(jsonLine, 'utf8'),\n      mimeType: 'text/plain',\n      fileName: 'venue_data.jsonl'\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3240,
+        -200
+      ],
+      "id": "a0fff162-fb4f-4b31-bc09-0883b9dac940",
+      "name": "Convert to JSONL"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "ChallengeEntertainment_Data.jsonl",
+        "options": {
+          "append": true
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        3460,
+        -200
+      ],
+      "id": "b58c4ab2-19a5-4590-957d-f7f8a7bb12ed",
+      "name": "Append to JSONL File"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "batch_complete",
+              "leftValue": "={{ $('batch_urls').isCompleted }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              }
+            },
+            {
+              "id": "dc24c208-c0c0-40ad-a8a3-7e7a9f76852a",
+              "leftValue": "=={{ $('Batch URLs (10)').isExecuted }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2440,
+        275
+      ],
+      "id": "29ee4eab-5d2c-4f2a-990b-7a71c13f05b7",
+      "name": "Check if Complete",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2800,
+        -400
+      ],
+      "id": "1170765b-e04f-4f9d-8925-03a02e1fcfb9",
+      "name": "Convert Final JSON"
+    },
+    {
+      "parameters": {
+        "name": "ChallengeEntertainment_Final.json",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1CGaCEQ8gDr7Fs4koTQMkPf9gHx1cH0lV",
+          "mode": "list",
+          "cachedResultName": "n8n-data",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1CGaCEQ8gDr7Fs4koTQMkPf9gHx1cH0lV"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3020,
+        -400
+      ],
+      "id": "7af52a12-8102-477c-b94f-4b871ffaaea6",
+      "name": "Upload Final File",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Kam8uEuyscTCuzXw",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "maxItems": 10
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        3460,
+        -660
+      ],
+      "id": "065880aa-20ae-4fa7-9b1f-68ec0e75405e",
+      "name": "Limit",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Sitemap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Sitemap": {
+      "main": [
+        [
+          {
+            "node": "Parse XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse XML": {
+      "main": [
+        [
+          {
+            "node": "Split URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split URLs": {
+      "main": [
+        [
+          {
+            "node": "Clean URL Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean URL Data": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Batch URLs (10)": {
+      "main": [
+        [
+          {
+            "node": "Convert Final JSON",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Page (with retry)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Page (with retry)": {
+      "main": [
+        [
+          {
+            "node": "Extract Data (Clean)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data (Clean)": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSONL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSONL": {
+      "main": [
+        [
+          {
+            "node": "Append to JSONL File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append to JSONL File": {
+      "main": [
+        [
+          {
+            "node": "Rate Limit (5s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rate Limit (5s)": {
+      "main": [
+        [
+          {
+            "node": "Batch URLs (10)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Complete": {
+      "main": [
+        []
+      ]
+    },
+    "Convert Final JSON": {
+      "main": [
+        [
+          {
+            "node": "Upload Final File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Batch URLs (10)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "34054511-a1e9-42bc-90ce-c04e823fcfd9",
+  "meta": {
+    "instanceId": "bbc0af725e961e80f06459612b1d966bb6c8dce839fe0574cd1177b52cd299c0"
+  },
+  "id": "5P79oN5tKW0diNaL",
+  "tags": []
+}
