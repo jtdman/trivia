@@ -60,38 +60,54 @@ export function formatPrize(amount?: number, description?: string): string {
 }
 
 // Reverse geocoding - convert coordinates to city name
-export function getLocationName(latitude: number, longitude: number): string {
+export async function getLocationName(latitude: number, longitude: number): Promise<string> {
   try {
-    // Franklin, TN area (35.9, -86.87)
-    if (latitude > 35.85 && latitude < 36.0 && longitude > -87.0 && longitude < -86.7) {
-      return 'Franklin, TN'
+    // Use Nominatim API for reverse geocoding (same as used in LocationAutocomplete)
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1&accept-language=en`
+    )
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
     
-    // Nashville area
-    if (latitude > 36.0 && latitude < 36.3 && longitude > -87.0 && longitude < -86.5) {
-      return 'Nashville, TN'
+    const data = await response.json()
+    
+    if (data.error) {
+      throw new Error(data.error)
     }
     
-    // Murfreesboro area
-    if (latitude > 35.8 && latitude < 36.0 && longitude > -86.5 && longitude < -86.3) {
-      return 'Murfreesboro, TN'
+    // Extract city and state from the response
+    const address = data.address
+    if (!address) {
+      throw new Error('No address found')
     }
     
-    // Hendersonville area
-    if (latitude > 36.25 && latitude < 36.35 && longitude > -86.7 && longitude < -86.5) {
-      return 'Hendersonville, TN'
+    // Try to get city name from various possible fields
+    const city = address.city || 
+                address.town || 
+                address.village || 
+                address.hamlet || 
+                address.suburb ||
+                address.neighbourhood
+    
+    // Get state abbreviation
+    const stateAbbr = address.state_code || address.state
+    
+    if (city && stateAbbr) {
+      return `${city}, ${stateAbbr.toUpperCase()}`
+    } else if (city) {
+      return city
+    } else if (address.county) {
+      return `${address.county}, ${stateAbbr?.toUpperCase() || 'USA'}`
     }
     
-    // Default for other Tennessee locations
-    if (latitude > 34.9 && latitude < 36.7 && longitude > -90.3 && longitude < -81.6) {
-      return 'Tennessee'
-    }
-    
-    // Fallback to coordinates if outside Tennessee
+    // Fallback to coordinates if we can't get a good location name
     return `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
     
   } catch (error) {
     console.error('Error getting location name:', error)
+    // Fallback to coordinates on error
     return `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
   }
 }

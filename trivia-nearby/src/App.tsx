@@ -4,6 +4,7 @@ import { Search, Brain, Beer, MapPin, Sun, Moon } from 'lucide-react'
 import TriviaList from './components/TriviaList'
 import DataTest from './components/DataTest'
 import LocationAutocomplete from './components/LocationAutocomplete'
+import { getLocationName } from './utils/location'
 
 type AppState = 'splash' | 'manual-location' | 'trivia-list'
 
@@ -22,12 +23,15 @@ const App = () => {
     if (navigator.geolocation) {
       console.log('Geolocation is available, requesting position...')
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           console.log('Position received:', position.coords)
-          // In a real app, you'd reverse geocode this to get city name
-          const locationString = `${position.coords.latitude.toFixed(
-            2
-          )}, ${position.coords.longitude.toFixed(2)}`
+          
+          // Use reverse geocoding to get city name
+          const locationString = await getLocationName(
+            position.coords.latitude,
+            position.coords.longitude
+          )
+          
           console.log('Setting location to:', locationString)
           setLocation(locationString)
           console.log('Changing app state to trivia-list')
