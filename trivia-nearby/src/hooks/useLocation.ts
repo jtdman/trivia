@@ -71,7 +71,8 @@ export function useLocation(options: UseLocationOptions = {}): LocationState {
       }))
     }
 
-    const watchId = navigator.geolocation.watchPosition(
+    // Use getCurrentPosition instead of watchPosition to avoid continuous updates
+    navigator.geolocation.getCurrentPosition(
       handleSuccess,
       handleError,
       {
@@ -80,10 +81,6 @@ export function useLocation(options: UseLocationOptions = {}): LocationState {
         maximumAge
       }
     )
-
-    return () => {
-      navigator.geolocation.clearWatch(watchId)
-    }
   }, [enableHighAccuracy, timeout, maximumAge])
 
   return location

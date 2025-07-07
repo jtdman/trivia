@@ -102,12 +102,12 @@ export async function getLocationName(latitude: number, longitude: number): Prom
       return `${address.county}, ${stateAbbr?.toUpperCase() || 'USA'}`
     }
     
-    // Fallback to coordinates if we can't get a good location name
-    return `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
+    // Fallback to a generic location name instead of coordinates
+    return 'Your Location'
     
   } catch (error) {
     console.error('Error getting location name:', error)
-    // Fallback to coordinates on error
-    return `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
+    // Fallback to a generic location name instead of coordinates
+    return 'Your Location'
   }
 }

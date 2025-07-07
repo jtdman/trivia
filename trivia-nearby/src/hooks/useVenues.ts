@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { supabase, type VenueWithEvents } from '../lib/supabase'
 
 interface UseVenuesOptions {
@@ -19,10 +19,11 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
   const [venues, setVenues] = useState<VenueWithEvents[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const lastFetchedCoords = useRef<{lat: number, lng: number} | null>(null)
 
   const { latitude, longitude, radiusMiles = 30, limit = 50 } = options || {}
 
-  const fetchVenues = async () => {
+  const fetchVenues = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -143,11 +144,25 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
     } finally {
       setLoading(false)
     }
-  }
+  }, [latitude, longitude, radiusMiles, limit])
 
   useEffect(() => {
-    fetchVenues()
-  }, [latitude, longitude, radiusMiles, limit])
+    // Only fetch if coordinates have changed significantly (more than ~100m)
+    if (latitude !== undefined && longitude !== undefined) {
+      const current = { lat: latitude, lng: longitude }
+      const last = lastFetchedCoords.current
+      
+      if (!last || 
+          Math.abs(current.lat - last.lat) > 0.001 || 
+          Math.abs(current.lng - last.lng) > 0.001) {
+        lastFetchedCoords.current = current
+        fetchVenues()
+      }
+    } else if (latitude === undefined && longitude === undefined) {
+      // Fetch without coordinates
+      fetchVenues()
+    }
+  }, [latitude, longitude, radiusMiles, limit, fetchVenues])
 
   return {
     venues,

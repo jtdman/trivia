@@ -147,7 +147,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       // Otherwise sort by name
       return a.venue.localeCompare(b.venue)
     })
-  }, [venues, userLocation.latitude, userLocation.longitude])
+  }, [venues])
 
   if (loading) {
     return (
