@@ -43,7 +43,6 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     limit: 50,
   })
 
-
   // Helper function to get day order (today = 0, tomorrow = 1, etc.)
   const getDayOrder = (dayOfWeek: string): number => {
     const today = new Date()
