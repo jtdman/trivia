@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import {
-  MapPin,
   Calendar,
   Clock,
   DollarSign,
@@ -412,13 +411,13 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       )}
 
       {/* Venue Cards */}
-      <div className='space-y-4'>
+      <div className='space-y-6'>
         {venueCards.map((venueCard) => (
           <div
             key={venueCard.venue_id}
-            className='bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden shadow-sm'
+            className='bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700'
           >
-            {/* Venue Image */}
+            {/* Venue Image with Overlaid Text */}
             <div className='relative h-48 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
               <img
                 {...getImageProps(
@@ -433,20 +432,20 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                   {venueCard.distance}
                 </div>
               )}
-              {/* Image overlay for better text contrast */}
-              <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent' />
-            </div>
-
-            {/* Venue Details */}
-            <div className='p-4'>
-              <h3 className='text-xl font-bold mb-2'>{venueCard.venue}</h3>
-
-              <div className='space-y-2 text-sm text-gray-600 dark:text-gray-400 mb-4'>
-                <div className='flex items-center gap-2'>
-                  <MapPin className='w-4 h-4' />
-                  <span>{venueCard.address}</span>
+              {/* Stronger gradient overlay for better text contrast */}
+              <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
+              
+              {/* Overlaid Venue Details */}
+              <div className='absolute bottom-0 left-0 right-0 p-4 text-white'>
+                <h3 className='text-xl font-bold mb-1 drop-shadow-lg'>{venueCard.venue}</h3>
+                <div className='text-sm text-white/90 drop-shadow-md'>
+                  {venueCard.address}
                 </div>
               </div>
+            </div>
+
+            {/* Events Section Only */}
+            <div className='p-4'>
 
               {/* Events */}
               <div className='space-y-2'>
