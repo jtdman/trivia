@@ -53,6 +53,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
           updated_at,
           events!inner (
             id,
+            provider_id,
             event_type,
             day_of_week,
             start_time,

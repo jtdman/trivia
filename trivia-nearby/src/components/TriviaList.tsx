@@ -19,6 +19,7 @@ import {
   formatTime,
   formatPrize,
   formatDistance,
+  formatEventTitle,
 } from '../utils/location'
 import { getImageProps } from '../utils/images'
 import { ThemeContext } from '../context/theme_context'
@@ -29,9 +30,12 @@ interface TriviaListProps {
   onBack: () => void
 }
 
+type DateFilter = 'today' | 'tomorrow' | 'this-week'
+
 const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBack }) => {
   const { theme, toggleTheme } = React.useContext(ThemeContext)
   const userLocation = useLocation()
+  const [dateFilter, setDateFilter] = React.useState<DateFilter>('today')
   const { venues, loading, error } = useVenues({
     latitude: geocodedCoords?.lat || userLocation.latitude || undefined,
     longitude: geocodedCoords?.lng || userLocation.longitude || undefined,
@@ -39,19 +43,62 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     limit: 50,
   })
 
-  // Debug logging
-  console.log('TriviaList Debug:', {
-    userLocation,
-    geocodedCoords,
-    finalCoords: {
-      lat: geocodedCoords?.lat || userLocation.latitude,
-      lng: geocodedCoords?.lng || userLocation.longitude
-    },
-    venues: venues?.length,
-    loading,
-    error,
-    location,
-  })
+  // Helper function to get day order (today = 0, tomorrow = 1, etc.)
+  const getDayOrder = (dayOfWeek: string): number => {
+    const today = new Date()
+    const todayDay = today.getDay() // 0 = Sunday, 1 = Monday, etc.
+    
+    const dayMap: Record<string, number> = {
+      'Sunday': 0,
+      'Monday': 1,
+      'Tuesday': 2,
+      'Wednesday': 3,
+      'Thursday': 4,
+      'Friday': 5,
+      'Saturday': 6
+    }
+    
+    const eventDay = dayMap[dayOfWeek]
+    if (eventDay === undefined) return 999 // Unknown day goes to end
+    
+    // Calculate days from today (0 = today, 1 = tomorrow, etc.)
+    let daysFromToday = eventDay - todayDay
+    if (daysFromToday < 0) daysFromToday += 7 // Next week
+    
+    return daysFromToday
+  }
+
+  // Helper function to check if an event should be shown based on date filter
+  const shouldShowEvent = (eventDayOfWeek: string, filter: DateFilter): boolean => {
+    const today = new Date()
+    const todayDay = today.toLocaleDateString('en-US', { weekday: 'long' })
+    
+    const tomorrow = new Date(today)
+    tomorrow.setDate(today.getDate() + 1)
+    const tomorrowDay = tomorrow.toLocaleDateString('en-US', { weekday: 'long' })
+    
+    // Get days from today through end of week (Sunday)
+    const thisWeekDays: string[] = []
+    const currentDay = new Date(today)
+    
+    // Add days from today through Sunday
+    while (currentDay.getDay() !== 0 || thisWeekDays.length === 0) { // 0 = Sunday
+      thisWeekDays.push(currentDay.toLocaleDateString('en-US', { weekday: 'long' }))
+      currentDay.setDate(currentDay.getDate() + 1)
+      if (thisWeekDays.length > 7) break // Safety check
+    }
+    
+    switch (filter) {
+      case 'today':
+        return eventDayOfWeek === todayDay
+      case 'tomorrow':
+        return eventDayOfWeek === tomorrowDay
+      case 'this-week':
+        return thisWeekDays.includes(eventDayOfWeek)
+      default:
+        return true
+    }
+  }
 
   // Transform venues data for display (one card per venue with all events)
   const venueCards = useMemo(() => {
@@ -75,7 +122,9 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
 
     venues.forEach((venue) => {
       const activeEvents =
-        venue.events?.filter((event) => event.is_active) || []
+        venue.events?.filter((event) => 
+          event.is_active && shouldShowEvent(event.day_of_week, dateFilter)
+        ) || []
 
       if (activeEvents.length === 0) return
 
@@ -103,7 +152,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           // First occurrence of this event
           eventMap.set(key, {
             id: event.id,
-            title: event.event_type,
+            title: formatEventTitle(event.event_type, event.provider_id),
             day: formatDayOfWeek(event.day_of_week),
             frequency:
               event.frequency.charAt(0).toUpperCase() +
@@ -132,22 +181,51 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       })
     })
 
-    // Sort by distance if available, then by venue name
+    // Sort by day of week for "this week", otherwise by distance
     return cards.sort((a, b) => {
       const aVenue = venues.find((v) => v.id === a.venue_id)
       const bVenue = venues.find((v) => v.id === b.venue_id)
 
-      // If both have distances, sort by distance
+      // Special sorting for "this week" filter
+      if (dateFilter === 'this-week') {
+        // Get the earliest day order for each venue's events
+        const aEarliestDay = Math.min(...a.events.map(event => {
+          // Need to get the actual day name from the venue's events
+          const venueEvent = aVenue?.events?.find(ve => ve.id === event.id)
+          return venueEvent ? getDayOrder(venueEvent.day_of_week) : 999
+        }))
+        
+        const bEarliestDay = Math.min(...b.events.map(event => {
+          // Need to get the actual day name from the venue's events
+          const venueEvent = bVenue?.events?.find(ve => ve.id === event.id)
+          return venueEvent ? getDayOrder(venueEvent.day_of_week) : 999
+        }))
+
+        // Sort by day first
+        if (aEarliestDay !== bEarliestDay) {
+          return aEarliestDay - bEarliestDay
+        }
+
+        // If same day, sort by distance
+        if (aVenue?.distance_miles && bVenue?.distance_miles) {
+          return aVenue.distance_miles - bVenue.distance_miles
+        }
+        if (aVenue?.distance_miles && !bVenue?.distance_miles) return -1
+        if (!aVenue?.distance_miles && bVenue?.distance_miles) return 1
+        
+        // Finally by name
+        return a.venue.localeCompare(b.venue)
+      }
+
+      // Default sorting for other filters: distance first, then name
       if (aVenue?.distance_miles && bVenue?.distance_miles) {
         return aVenue.distance_miles - bVenue.distance_miles
       }
-      // If only one has distance, prioritize it
       if (aVenue?.distance_miles && !bVenue?.distance_miles) return -1
       if (!aVenue?.distance_miles && bVenue?.distance_miles) return 1
-      // Otherwise sort by name
       return a.venue.localeCompare(b.venue)
     })
-  }, [venues])
+  }, [venues, dateFilter])
 
   if (loading) {
     return (
@@ -284,6 +362,42 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           {userLocation.loading && ' • Getting location...'}
           {userLocation.error && ' • Location unavailable'}
         </p>
+      </div>
+
+      {/* Date Filter Pillboxes */}
+      <div className='mb-6'>
+        <div className='flex gap-2'>
+          <button
+            onClick={() => setDateFilter('today')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              dateFilter === 'today'
+                ? 'bg-purple-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
+          >
+            Today
+          </button>
+          <button
+            onClick={() => setDateFilter('tomorrow')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              dateFilter === 'tomorrow'
+                ? 'bg-purple-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
+          >
+            Tomorrow
+          </button>
+          <button
+            onClick={() => setDateFilter('this-week')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              dateFilter === 'this-week'
+                ? 'bg-purple-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
+          >
+            This Week
+          </button>
+        </div>
       </div>
 
       {/* No venues found */}
