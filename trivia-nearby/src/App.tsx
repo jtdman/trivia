@@ -166,11 +166,11 @@ const App = () => {
   // Splash screen
   return (
     <div
-      className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-6 py-8'
+      className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-6 py-4'
       data-theme={theme || 'dark'}
     >
       {/* Header with theme toggle */}
-      <div className='flex justify-between items-center mb-12'>
+      <div className='flex justify-between items-center mb-6'>
         <div></div>
         <button onClick={toggleTheme} className='p-2'>
           {theme === 'dark' ? (
@@ -184,26 +184,26 @@ const App = () => {
       {/* Main content */}
       <div className='flex flex-col items-center text-center'>
         {/* App title */}
-        <h1 className='text-5xl font-bold mb-8'>
+        <h1 className='text-5xl font-bold mb-4'>
           <span className='text-purple-400'>TRIVIA</span>
           <span className='text-black dark:text-white'>NEARBY</span>
         </h1>
 
         {/* Logo icons */}
-        <div className='flex gap-6 mb-12'>
+        <div className='flex gap-6 mb-6'>
           <Search className='w-8 h-8 text-black dark:text-white' />
           <Brain className='w-8 h-8 text-black dark:text-white' />
           <Beer className='w-8 h-8 text-black dark:text-white' />
         </div>
 
-        {/* Location pin icon */}
-        <div className='bg-purple-500/20 rounded-full p-8 mb-12'>
+        {/* Location pin icon - reduced padding */}
+        <div className='bg-purple-500/20 rounded-full p-6 mb-6'>
           <MapPin className='w-12 h-12 text-purple-400 fill-purple-400' />
         </div>
 
         {/* Headline and description */}
         <h2 className='text-2xl font-semibold mb-4'>Find Trivia Near You</h2>
-        <p className='text-gray-600 dark:text-gray-400 mb-8 max-w-sm leading-relaxed'>
+        <p className='text-gray-600 dark:text-gray-400 mb-4 max-w-sm leading-relaxed'>
           Discover the best trivia nights at bars and restaurants in your area.
         </p>
 
@@ -223,17 +223,11 @@ const App = () => {
           Enter location manually
         </button>
 
-        {/* Privacy text */}
-        <p className='text-gray-500 text-sm mt-6 max-w-sm leading-relaxed'>
-          We only use your location to find trivia events near you. We don't
-          store or share your precise location.
-        </p>
-
-        {/* Event details disclaimer */}
-        <p className='text-gray-500 text-sm mt-6 max-w-sm leading-relaxed'>
-          Event details may change. Please check with the venue to confirm current 
-          trivia schedules and availability.
-        </p>
+        {/* Combined disclaimer text */}
+        <div className='text-gray-500 text-sm mt-3 max-w-sm leading-relaxed space-y-2'>
+          <p>We only use your location to find trivia events near you. We don't store or share your precise location.</p>
+          <p>Event details may change. Please check with venues to confirm current schedules.</p>
+        </div>
       </div>
     </div>
   )
