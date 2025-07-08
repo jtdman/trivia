@@ -44,10 +44,12 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
     timeoutRef.current = setTimeout(async () => {
       setLoading(true)
       try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(value)}&limit=5&countrycodes=us&addressdetails=1`
-        )
-        const data = await response.json()
+        const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(value)}&limit=5&countrycodes=us&addressdetails=1`
+        // Use CORS proxy for Nominatim
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(nominatimUrl)}`
+        const response = await fetch(proxyUrl)
+        const proxyData = await response.json()
+        const data = JSON.parse(proxyData.contents)
         
         // Filter and format suggestions
         const formatted = data.map((item: any) => ({

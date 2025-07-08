@@ -62,8 +62,11 @@ const App = () => {
       if (!geocodedCoords) {
         try {
           const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation.trim())}&limit=1`
-          const response = await fetch(geocodeUrl)
-          const data = await response.json()
+          // Use CORS proxy for Nominatim
+          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(geocodeUrl)}`
+          const response = await fetch(proxyUrl)
+          const proxyData = await response.json()
+          const data = JSON.parse(proxyData.contents)
           
           if (data && data.length > 0) {
             const { lat, lon } = data[0]

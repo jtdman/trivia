@@ -63,29 +63,36 @@ export function formatPrize(amount?: number, description?: string): string {
 export function formatEventTitle(eventType: string, providerId: string): string {
   const NERDY_TALK_PROVIDER_ID = '3e3b8ff6-e564-41e1-bf30-b19f10ffc5ce'
   
-  console.log('formatEventTitle called with:', { eventType, providerId, expectedId: NERDY_TALK_PROVIDER_ID })
-  
   if (providerId === NERDY_TALK_PROVIDER_ID) {
     const lowerEventType = eventType.toLowerCase()
-    console.log('Nerdy Talk event detected:', { lowerEventType })
     if (lowerEventType.includes('trivia')) {
-      console.log('Returning TRIVIA - Nerdy Talk')
       return 'TRIVIA - Nerdy Talk'
     } else if (lowerEventType.includes('bingo')) {
-      console.log('Returning BALLAD BINGO - Nerdy Talk')
       return 'BALLAD BINGO - Nerdy Talk'
     }
   }
   
-  console.log('Returning original event type:', eventType)
   return eventType
+}
+
+// Helper function to make CORS-enabled requests to Nominatim
+const fetchWithCors = async (url: string) => {
+  // Use allorigins as a CORS proxy
+  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
+  const response = await fetch(proxyUrl)
+  const data = await response.json()
+  return {
+    ok: response.ok,
+    status: response.status,
+    json: () => Promise.resolve(JSON.parse(data.contents))
+  }
 }
 
 // Reverse geocoding - convert coordinates to city name
 export async function getLocationName(latitude: number, longitude: number): Promise<string> {
   try {
-    // Use Nominatim API for reverse geocoding (same as used in LocationAutocomplete)
-    const response = await fetch(
+    // Use Nominatim API for reverse geocoding with CORS proxy
+    const response = await fetchWithCors(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1&accept-language=en`
     )
     
