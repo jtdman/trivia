@@ -59,6 +59,28 @@ export function formatPrize(amount?: number, description?: string): string {
   return 'Prize TBD'
 }
 
+// Format event title based on provider and event type
+export function formatEventTitle(eventType: string, providerId: string): string {
+  const NERDY_TALK_PROVIDER_ID = '3e3b8ff6-e564-41e1-bf30-b19f10ffc5ce'
+  
+  console.log('formatEventTitle called with:', { eventType, providerId, expectedId: NERDY_TALK_PROVIDER_ID })
+  
+  if (providerId === NERDY_TALK_PROVIDER_ID) {
+    const lowerEventType = eventType.toLowerCase()
+    console.log('Nerdy Talk event detected:', { lowerEventType })
+    if (lowerEventType.includes('trivia')) {
+      console.log('Returning TRIVIA - Nerdy Talk')
+      return 'TRIVIA - Nerdy Talk'
+    } else if (lowerEventType.includes('bingo')) {
+      console.log('Returning BALLAD BINGO - Nerdy Talk')
+      return 'BALLAD BINGO - Nerdy Talk'
+    }
+  }
+  
+  console.log('Returning original event type:', eventType)
+  return eventType
+}
+
 // Reverse geocoding - convert coordinates to city name
 export async function getLocationName(latitude: number, longitude: number): Promise<string> {
   try {

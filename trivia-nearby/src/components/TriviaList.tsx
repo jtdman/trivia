@@ -19,6 +19,7 @@ import {
   formatTime,
   formatPrize,
   formatDistance,
+  formatEventTitle,
 } from '../utils/location'
 import { getImageProps } from '../utils/images'
 import { ThemeContext } from '../context/theme_context'
@@ -94,6 +95,12 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       >()
 
       activeEvents.forEach((event) => {
+        console.log('Processing event:', { 
+          event_type: event.event_type, 
+          provider_id: event.provider_id,
+          venue: venue.google_name || venue.name_original 
+        })
+        
         const key = `${event.event_type}-${event.day_of_week}-${event.start_time}`
 
         if (eventMap.has(key)) {
@@ -103,7 +110,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           // First occurrence of this event
           eventMap.set(key, {
             id: event.id,
-            title: event.event_type,
+            title: formatEventTitle(event.event_type, event.provider_id),
             day: formatDayOfWeek(event.day_of_week),
             frequency:
               event.frequency.charAt(0).toUpperCase() +

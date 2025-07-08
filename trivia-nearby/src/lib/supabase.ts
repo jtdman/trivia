@@ -51,6 +51,7 @@ export interface VenueWithEvents extends Venue {
   distance_miles?: number
   events: Array<{
     id: string
+    provider_id: string
     event_type: string
     day_of_week: string
     start_time: string

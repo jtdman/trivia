@@ -53,6 +53,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
           updated_at,
           events!inner (
             id,
+            provider_id,
             event_type,
             day_of_week,
             start_time,
@@ -101,31 +102,82 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
               } : null
             })
             
-            // Filter venues to only show those with events today
-            const venuesWithTodayEvents = distanceData.filter((venue: any) => {
-              const events = Array.isArray(venue.events) ? venue.events : []
-              return events.some((event: any) => 
-                event.is_active && event.day_of_week?.toLowerCase() === today
-              )
-            })
+            // PostGIS function doesn't return provider_id, so we need to merge with basic query
+            console.log('PostGIS data missing provider_id, fetching complete event data...')
             
-            console.log('Venues with events today:', {
-              total: distanceData.length,
-              withTodayEvents: venuesWithTodayEvents.length,
-              today: today
-            })
+            // Get venue IDs from PostGIS results
+            const venueIds = distanceData.map((venue: any) => venue.id)
             
-            // Transform the data to match our interface
-            const venuesWithDistance = venuesWithTodayEvents.map((venue: any) => ({
-              ...venue,
-              distance_miles: venue.distance_miles,
-              events: Array.isArray(venue.events) ? venue.events.filter((event: any) => 
-                event.is_active && event.day_of_week?.toLowerCase() === today
-              ) : []
-            }))
+            // Fetch complete event data including provider_id for these venues
+            const { data: completeData, error: completeError } = await supabase
+              .from('venues')
+              .select(`
+                id,
+                name_original,
+                address_original,
+                google_place_id,
+                google_name,
+                google_formatted_address,
+                google_rating,
+                google_phone_number,
+                google_website,
+                google_photo_reference,
+                thumbnail_url,
+                verification_status,
+                created_at,
+                updated_at,
+                events!inner (
+                  id,
+                  provider_id,
+                  event_type,
+                  day_of_week,
+                  start_time,
+                  end_time,
+                  frequency,
+                  prize_amount,
+                  prize_description,
+                  max_teams,
+                  is_active
+                )
+              `)
+              .eq('events.is_active', true)
+              .in('id', venueIds)
             
-            setVenues(venuesWithDistance.slice(0, limit)) // Limit final results
-            return
+            if (completeError) {
+              console.error('Error fetching complete event data:', completeError)
+              // Fall through to basic query
+            } else if (completeData) {
+              // Merge distance data with complete event data
+              const mergedVenues = completeData.map((venue: any) => {
+                const distanceVenue = distanceData.find((dv: any) => dv.id === venue.id)
+                return {
+                  ...venue,
+                  distance_miles: distanceVenue?.distance_miles,
+                  longitude: distanceVenue?.longitude,
+                  latitude: distanceVenue?.latitude
+                }
+              })
+              
+              // Sort by distance
+              const sortedVenues = mergedVenues.sort((a: any, b: any) => {
+                if (a.distance_miles && b.distance_miles) {
+                  return a.distance_miles - b.distance_miles
+                }
+                return 0
+              })
+              
+              console.log('Merged venues with complete data:', {
+                count: sortedVenues.length,
+                firstVenue: sortedVenues[0] ? {
+                  name: sortedVenues[0].google_name || sortedVenues[0].name_original,
+                  distance: sortedVenues[0].distance_miles?.toFixed(1) + ' mi',
+                  events: sortedVenues[0].events?.length || 0
+                } : null
+              })
+              
+              setVenues(sortedVenues.slice(0, limit))
+              return
+            }
           } else {
             console.warn('PostGIS distance query failed:', distanceError)
             // Fall through to basic query

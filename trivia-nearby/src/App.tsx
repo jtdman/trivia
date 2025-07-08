@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { ThemeContext } from './context/theme_context'
 import { Search, Brain, Beer, MapPin, Sun, Moon } from 'lucide-react'
 import TriviaList from './components/TriviaList'
-import DataTest from './components/DataTest'
 import LocationAutocomplete from './components/LocationAutocomplete'
 import { getLocationName } from './utils/location'
 
@@ -227,10 +226,11 @@ const App = () => {
           store or share your precise location.
         </p>
 
-        {/* Database test */}
-        <div className='mt-8 w-full max-w-sm'>
-          <DataTest />
-        </div>
+        {/* Event details disclaimer */}
+        <p className='text-gray-500 text-sm mt-6 max-w-sm leading-relaxed'>
+          Event details may change. Please check with the venue to confirm current 
+          trivia schedules and availability.
+        </p>
       </div>
     </div>
   )
