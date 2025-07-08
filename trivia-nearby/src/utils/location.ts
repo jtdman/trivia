@@ -59,6 +59,25 @@ export function formatPrize(amount?: number, description?: string): string {
   return 'Prize TBD'
 }
 
+// Helper function to convert state names to abbreviations
+const getStateAbbreviation = (stateName: string): string => {
+  const stateMap: Record<string, string> = {
+    'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
+    'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',
+    'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
+    'Kansas': 'KS', 'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+    'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS', 'Missouri': 'MO',
+    'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV', 'New Hampshire': 'NH', 'New Jersey': 'NJ',
+    'New Mexico': 'NM', 'New York': 'NY', 'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH',
+    'Oklahoma': 'OK', 'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+    'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT',
+    'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY',
+    'District of Columbia': 'DC'
+  }
+  
+  return stateMap[stateName] || stateName
+}
+
 // Format event title based on provider and event type
 export function formatEventTitle(eventType: string, providerId: string): string {
   const NERDY_TALK_PROVIDER_ID = '3e3b8ff6-e564-41e1-bf30-b19f10ffc5ce'
@@ -120,8 +139,11 @@ export async function getLocationName(latitude: number, longitude: number): Prom
                 address.suburb ||
                 address.neighbourhood
     
-    // Get state abbreviation
-    const stateAbbr = address.state_code || address.state
+    // Get state abbreviation - use state_code if available, otherwise abbreviate the full state name
+    let stateAbbr = address.state_code
+    if (!stateAbbr && address.state) {
+      stateAbbr = getStateAbbreviation(address.state)
+    }
     
     if (city && stateAbbr) {
       return `${city}, ${stateAbbr.toUpperCase()}`
