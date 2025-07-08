@@ -5,12 +5,18 @@
   "type": "module",
   "scripts": {
     "import-venues": "tsx supabase/scripts/import-venues.ts",
+    "import-venues-enhanced": "tsx supabase/scripts/import-venues-enhanced.ts",
+    "import-nerdytalk": "tsx providers/nerdytalk/import-nerdytalk.ts",
+    "import-nerdytalk-corrected": "tsx providers/nerdytalk/import-nerdytalk-corrected.ts",
+    "scrape-nerdytalk-city-aware": "node providers/nerdytalk/scrape-nerdytalk-city-aware.js",
     "validate-places": "tsx supabase/scripts/validate-places.ts",
     "process-photos": "tsx supabase/scripts/process-photos.ts",
     "migrate": "supabase db reset"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {

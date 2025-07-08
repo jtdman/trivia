@@ -2,7 +2,19 @@
   "permissions": {
     "allow": [
       "mcp__supabase__execute_sql",
+<<<<<<< HEAD
       "Bash(pnpm lint:*)"
+=======
+      "WebFetch(domain:nerdytalktrivia.com)",
+      "Bash(node:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(mv:*)"
+>>>>>>> 13f81a2 (Reorganize providers into directories and implement city-aware scraping)
     ]
   },
   "enableAllProjectMcpServers": true,

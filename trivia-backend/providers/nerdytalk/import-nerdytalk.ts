@@ -1,22 +1,31 @@
-import { supabase, GOOGLE_PLACES_API_KEY, RATE_LIMITS } from '../config/supabase.js'
+import { supabase, GOOGLE_PLACES_API_KEY, RATE_LIMITS } from '../../supabase/config/supabase.js'
 import fs from 'fs/promises'
 
-interface VenueData {
-  venueInfo: {
-    venueTitle: string
-    venueAddress: string
-    venueLinks: {
-      website: string | null
-      social: string[]
-    }
-    shows: Array<{
-      date: string
-      time: string
-      game: string
-    }>
-    scrapedAt: string
-  }
-  fileName: string
+interface NerdyTalkVenue {
+  venue_name: string
+  address: string
+  events: Array<{
+    day_of_week: string
+    start_time: string
+    event_type: string
+    host: string
+    prize_info: string
+  }>
+  provider: string
+  scraped_at: string
+}
+
+interface NerdyTalkData {
+  provider: string
+  scraped_at: string
+  total_venues: number
+  venues: NerdyTalkVenue[]
+  google_places_format: Array<{
+    name_original: string
+    address_original: string
+    provider: string
+    events: any[]
+  }>
 }
 
 interface GooglePlacesResponse {
@@ -29,10 +38,6 @@ interface GooglePlacesResponse {
         lat: number
         lng: number
       }
-      viewport: {
-        northeast: { lat: number; lng: number }
-        southwest: { lat: number; lng: number }
-      }
     }
     rating?: number
     user_ratings_total?: number
@@ -41,16 +46,14 @@ interface GooglePlacesResponse {
     types?: string[]
     photos?: Array<{
       photo_reference: string
-      height: number
-      width: number
     }>
   }>
   status: string
 }
 
-class VenueImporter {
+class NerdyTalkImporter {
   private apiCallsToday = 0
-  private challengeEntertainmentId: string | null = null
+  private nerdyTalkProviderId: string | null = null
 
   async checkDailyLimit(): Promise<boolean> {
     const { data } = await supabase.rpc('check_daily_api_limit', { service: 'google_places' })
@@ -65,21 +68,37 @@ class VenueImporter {
     return true
   }
 
-  async getChallengeEntertainmentId(): Promise<string> {
-    if (this.challengeEntertainmentId) return this.challengeEntertainmentId
+  async getNerdyTalkProviderId(): Promise<string> {
+    if (this.nerdyTalkProviderId) return this.nerdyTalkProviderId
 
-    const { data, error } = await supabase
+    // First try to find existing provider
+    const { data: existingProvider } = await supabase
       .from('trivia_providers')
       .select('id')
-      .eq('name', 'Challenge Entertainment')
+      .eq('name', 'NerdyTalk Trivia')
       .single()
 
-    if (error || !data) {
-      throw new Error('Challenge Entertainment provider not found in database')
+    if (existingProvider) {
+      this.nerdyTalkProviderId = existingProvider.id
+      return existingProvider.id
     }
 
-    this.challengeEntertainmentId = data.id
-    return data.id
+    // Create provider if it doesn't exist
+    const { data: newProvider, error } = await supabase
+      .from('trivia_providers')
+      .insert({
+        name: 'NerdyTalk Trivia',
+        website: 'http://nerdytalktrivia.com'
+      })
+      .select('id')
+      .single()
+
+    if (error) {
+      throw new Error(`Failed to create NerdyTalk provider: ${error.message}`)
+    }
+
+    this.nerdyTalkProviderId = newProvider.id
+    return newProvider.id
   }
 
   async searchGooglePlaces(venueName: string, address: string): Promise<GooglePlacesResponse | null> {
@@ -88,7 +107,6 @@ class VenueImporter {
       return null
     }
 
-    // Check if we've hit our daily limit
     if (this.apiCallsToday >= RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS) {
       console.warn('Daily API limit reached, skipping Google Places lookup')
       return null
@@ -109,9 +127,7 @@ class VenueImporter {
       'price_level',
       'business_status',
       'types',
-      'photos',
-      'formatted_phone_number',
-      'website'
+      'photos'
     ].join(','))
     url.searchParams.set('key', GOOGLE_PLACES_API_KEY)
 
@@ -140,7 +156,6 @@ class VenueImporter {
     } catch (error) {
       console.error(`Error searching Google Places for ${query}:`, error)
       
-      // Log the error
       await supabase.rpc('log_api_usage', {
         p_service_name: 'google_places',
         p_endpoint: 'findplacefromtext',
@@ -151,38 +166,54 @@ class VenueImporter {
     }
   }
 
-  parseDateAndTime(dateStr: string, timeStr: string) {
-    // Parse day of week from date string like "Tuesday, July 1, 2025"
-    const dayOfWeek = dateStr.split(',')[0].trim()
+  parseTime(timeStr: string): string {
+    // Handle various time formats from NerdyTalk data
+    const cleanTime = timeStr.replace(/[^\d:AMP\s]/g, '').trim()
     
-    // Parse time from string like "7:00 PM"
-    const timeMatch = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i)
+    // Try to match HH:MM AM/PM format
+    let timeMatch = cleanTime.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i)
+    
+    // Try to match H:MM AM/PM format
     if (!timeMatch) {
-      throw new Error(`Unable to parse time: ${timeStr}`)
+      timeMatch = cleanTime.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i)
+    }
+    
+    // Try to match HMM PM format (like "630 PM")
+    if (!timeMatch) {
+      timeMatch = cleanTime.match(/(\d{1,2})(\d{2})\s*(AM|PM)/i)
+    }
+    
+    // Try to match H PM format (like "7 PM")
+    if (!timeMatch) {
+      timeMatch = cleanTime.match(/(\d{1,2})\s*(AM|PM)/i)
+      if (timeMatch) {
+        timeMatch = [timeMatch[0], timeMatch[1], '00', timeMatch[2]]
+      }
+    }
+
+    if (!timeMatch) {
+      console.warn(`Unable to parse time: ${timeStr}, using default 19:00:00`)
+      return '19:00:00'
     }
 
     let hours = parseInt(timeMatch[1])
-    const minutes = parseInt(timeMatch[2])
-    const period = timeMatch[3].toUpperCase()
+    const minutes = timeMatch[2] ? parseInt(timeMatch[2]) : 0
+    const period = timeMatch[3] ? timeMatch[3].toUpperCase() : 'PM'
 
     if (period === 'PM' && hours !== 12) hours += 12
     if (period === 'AM' && hours === 12) hours = 0
 
-    const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`
-
-    return { dayOfWeek, timeString }
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`
   }
 
-  async importVenue(venueData: VenueData): Promise<void> {
-    const { venueInfo } = venueData
-    
+  async importVenue(venue: NerdyTalkVenue): Promise<void> {
     try {
       // Check if venue already exists
       const { data: existingVenue } = await supabase
         .from('venues')
         .select('id, google_place_id, last_places_api_call, verification_status')
-        .eq('name_original', venueInfo.venueTitle)
-        .eq('address_original', venueInfo.venueAddress)
+        .eq('name_original', venue.venue_name)
+        .eq('address_original', venue.address)
         .single()
 
       let venueId: string
@@ -191,9 +222,8 @@ class VenueImporter {
 
       if (existingVenue) {
         venueId = existingVenue.id
-        console.log(`Venue already exists: ${venueInfo.venueTitle}`)
+        console.log(`Venue already exists: ${venue.venue_name}`)
         
-        // Check if venue data is stale (older than 1 year) or missing Google Places data
         const oneYearAgo = new Date()
         oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
         
@@ -203,25 +233,21 @@ class VenueImporter {
         
         if (isDataStale || missingPlacesData) {
           console.log(`Venue data is ${isDataStale ? 'stale' : 'missing Google Places data'}, updating...`)
-          placesData = await this.searchGooglePlaces(venueInfo.venueTitle, venueInfo.venueAddress)
+          placesData = await this.searchGooglePlaces(venue.venue_name, venue.address)
           shouldUpdateVenue = true
           
-          // Rate limiting delay
           await new Promise(resolve => setTimeout(resolve, RATE_LIMITS.GOOGLE_PLACES.DELAY_BETWEEN_REQUESTS))
-        } else {
-          console.log(`Venue data is fresh (< 1 year), skipping Google Places API call`)
         }
       } else {
         // Search Google Places for new venue
-        placesData = await this.searchGooglePlaces(venueInfo.venueTitle, venueInfo.venueAddress)
+        placesData = await this.searchGooglePlaces(venue.venue_name, venue.address)
         
-        // Rate limiting delay
         await new Promise(resolve => setTimeout(resolve, RATE_LIMITS.GOOGLE_PLACES.DELAY_BETWEEN_REQUESTS))
 
         // Create venue record
         const venueRecord: any = {
-          name_original: venueInfo.venueTitle,
-          address_original: venueInfo.venueAddress,
+          name_original: venue.venue_name,
+          address_original: venue.address,
           verification_status: placesData ? 'needs_review' : 'failed',
           last_places_api_call: new Date().toISOString()
         }
@@ -239,8 +265,6 @@ class VenueImporter {
           venueRecord.google_business_status = place.business_status
           venueRecord.google_types = place.types
           venueRecord.google_photo_reference = place.photos?.[0]?.photo_reference
-          venueRecord.google_phone_number = place.formatted_phone_number
-          venueRecord.google_website = place.website
         }
 
         const { data: newVenue, error: venueError } = await supabase
@@ -251,7 +275,7 @@ class VenueImporter {
 
         if (venueError) throw venueError
         venueId = newVenue.id
-        console.log(`Created venue: ${venueInfo.venueTitle}`)
+        console.log(`Created venue: ${venue.venue_name}`)
       }
       
       // Update existing venue with fresh Google Places data if needed
@@ -268,8 +292,6 @@ class VenueImporter {
           google_business_status: place.business_status,
           google_types: place.types,
           google_photo_reference: place.photos?.[0]?.photo_reference,
-          google_phone_number: place.formatted_phone_number,
-          google_website: place.website,
           last_places_api_call: new Date().toISOString(),
           verification_status: 'needs_review'
         }
@@ -279,71 +301,66 @@ class VenueImporter {
           .update(updateRecord)
           .eq('id', venueId)
           
-        console.log(`Updated venue with fresh Google Places data: ${venueInfo.venueTitle}`)
+        console.log(`Updated venue with fresh Google Places data: ${venue.venue_name}`)
       }
 
-      // Replace events for this venue (delete old, insert new)
-      const providerId = await this.getChallengeEntertainmentId()
+      // Replace events for this venue
+      const providerId = await this.getNerdyTalkProviderId()
       
-      // First, delete all existing events for this venue
+      // Delete existing events for this venue from this provider
       const { error: deleteError } = await supabase
         .from('events')
         .delete()
         .eq('venue_id', venueId)
+        .eq('provider_id', providerId)
         
       if (deleteError) {
-        console.error(`Error deleting existing events for ${venueInfo.venueTitle}:`, deleteError)
-      } else {
-        console.log(`Deleted existing events for venue: ${venueInfo.venueTitle}`)
+        console.error(`Error deleting existing events for ${venue.venue_name}:`, deleteError)
       }
       
-      // Insert new events from the JSON data
+      // Insert new events
       const newEvents = []
-      for (const show of venueInfo.shows) {
+      for (const event of venue.events) {
         try {
-          const { dayOfWeek, timeString } = this.parseDateAndTime(show.date, show.time)
+          const timeString = this.parseTime(event.start_time)
 
           const eventRecord = {
             venue_id: venueId,
             provider_id: providerId,
-            event_type: show.game,
-            day_of_week: dayOfWeek,
+            event_type: event.event_type,
+            day_of_week: event.day_of_week,
             start_time: timeString,
-            original_date_text: show.date,
-            original_time_text: show.time,
-            scraped_at: venueInfo.scrapedAt
+            prize_description: event.prize_info,
+            original_time_text: event.start_time,
+            scraped_at: venue.scraped_at
           }
           
           newEvents.push(eventRecord)
         } catch (parseError) {
-          console.error(`Error parsing event data for ${venueInfo.venueTitle}:`, parseError)
+          console.error(`Error parsing event data for ${venue.venue_name}:`, parseError)
         }
       }
       
-      // Bulk insert new events
       if (newEvents.length > 0) {
         const { error: insertError } = await supabase
           .from('events')
           .insert(newEvents)
           
         if (insertError) {
-          console.error(`Error inserting new events for ${venueInfo.venueTitle}:`, insertError)
+          console.error(`Error inserting new events for ${venue.venue_name}:`, insertError)
         } else {
-          console.log(`Inserted ${newEvents.length} new events for venue: ${venueInfo.venueTitle}`)
+          console.log(`Inserted ${newEvents.length} new events for venue: ${venue.venue_name}`)
         }
-      } else {
-        console.log(`No valid events to insert for venue: ${venueInfo.venueTitle}`)
       }
 
     } catch (error) {
-      console.error(`Error importing venue ${venueInfo.venueTitle}:`, error)
+      console.error(`Error importing venue ${venue.venue_name}:`, error)
     }
   }
 
   async importFromFile(filePath: string): Promise<void> {
-    console.log('Starting venue import...')
+    console.log('Starting NerdyTalk venue import...')
     
-    // Check daily API limit
     const canProceed = await this.checkDailyLimit()
     if (!canProceed) {
       console.error('Cannot proceed: Daily API limit reached')
@@ -352,63 +369,57 @@ class VenueImporter {
 
     try {
       const fileContent = await fs.readFile(filePath, 'utf-8')
-      const venueData: VenueData[] = JSON.parse(fileContent)
+      const data: NerdyTalkData = JSON.parse(fileContent)
 
-      console.log(`Found ${venueData.length} venues to import`)
+      console.log(`Found ${data.total_venues} NerdyTalk venues to import`)
 
       let processed = 0
       let successful = 0
       let failed = 0
 
-      for (const venue of venueData) {
+      for (const venue of data.venues) {
         processed++
         
         try {
           await this.importVenue(venue)
           successful++
           
-          // Check if we've hit the daily limit
           if (this.apiCallsToday >= RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS) {
             console.warn(`Stopping import: Daily API limit reached after ${processed} venues`)
             break
           }
           
-          // Progress update
-          if (processed % 10 === 0) {
-            console.log(`Progress: ${processed}/${venueData.length} venues processed`)
+          if (processed % 5 === 0) {
+            console.log(`Progress: ${processed}/${data.total_venues} venues processed`)
+            console.log(`API calls used: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
           }
         } catch (error) {
           failed++
-          console.error(`Failed to import venue ${venue.venueInfo.venueTitle}:`, error)
+          console.error(`Failed to import venue ${venue.venue_name}:`, error)
         }
       }
 
-      console.log('\nImport completed!')
-      console.log(`Processed: ${processed}/${venueData.length}`)
+      console.log('\nNerdyTalk import completed!')
+      console.log(`Processed: ${processed}/${data.total_venues}`)
       console.log(`Successful: ${successful}`)
       console.log(`Failed: ${failed}`)
       console.log(`API calls used: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
 
     } catch (error) {
-      console.error('Error reading or parsing venue file:', error)
+      console.error('Error reading or parsing NerdyTalk venue file:', error)
     }
   }
 }
 
 // CLI usage
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const filePath = process.argv[2]
+  const filePath = process.argv[2] || '/home/jason/code/trivia/trivia-backend/providers/nerdytalk/nerdytalk-comprehensive-cleaned.json'
   
-  if (!filePath) {
-    console.error('Usage: npm run import-venues <path-to-venues-json>')
-    process.exit(1)
-  }
-
-  const importer = new VenueImporter()
+  const importer = new NerdyTalkImporter()
   importer.importFromFile(filePath)
     .then(() => process.exit(0))
     .catch((error) => {
-      console.error('Import failed:', error)
+      console.error('NerdyTalk import failed:', error)
       process.exit(1)
     })
 }

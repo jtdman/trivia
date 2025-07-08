@@ -1,0 +1,42 @@
+{
+  "corrections": [
+    {
+      "original_name": "ML ROSE – MELROSE",
+      "correct_venue": {
+        "venue_name": "ML Rose Franklin",
+        "address": "3084 Columbia Ave, Franklin, TN 37064",
+        "events": [
+          {
+            "day_of_week": "Thursday",
+            "start_time": "07:30 PM", 
+            "event_type": "trivia",
+            "prize_info": "1st Place: $50 Gift Card, 2nd Place: $25 Gift Card, 3rd Place: $10 Gift Card",
+            "host": "Jake"
+          }
+        ]
+      }
+    },
+    {
+      "original_name": "Casa Mexicana (Battle Bingo - Reminder Email",
+      "correct_venue": {
+        "venue_name": "Casa Mexicana",
+        "address": "Shelbyville, TN",
+        "events": [
+          {
+            "day_of_week": "Tuesday",
+            "start_time": "06:30 PM",
+            "event_type": "bingo", 
+            "prize_info": "Battle Bingo",
+            "host": ""
+          }
+        ]
+      }
+    }
+  ],
+  "remove_venues": [
+    "Casa Mexicana (Battle Bingo",
+    "Casa Mexicana Battle Bingo - Reminder Email", 
+    "Casa Mexicana Battle Bingo",
+    "CASA MEXICANA"
+  ]
+}

@@ -1,0 +1,5606 @@
+{
+  "provider": "NerdyTalk Trivia",
+  "scraped_at": "2025-07-07T20:33:39.756Z",
+  "total_venues": 193,
+  "venues": [
+    {
+      "venue_name": "Hops and Crafts",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Broadway Brewpub & Grub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Villa Castrioti",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $100 2nd: $75 3rd: $50",
+          "host": "Georgia"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "M.L. Rose (Sylvan Park / Nations",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Game Terminal (Ballad Bingo",
+      "address": "201 Terminal Ct, Nashville, TN 37210",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Sonny's",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $70 Gift Card2nd Place: $30 Gift Card3rd Place: $20 Gift Card",
+          "host": "Caid"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Monday Night Brewing Co",
+      "address": "1308 Adams St, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.841Z"
+    },
+    {
+      "venue_name": "Jack Brown's (Germantown",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Jack Brown's (Edgehill",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Bottle Cap",
+      "address": "2403 12th Ave S",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Urban Dog Bar",
+      "address": "5700 Ohio Ave, Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Steven"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Lost Paddy Pub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Serena"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Reunion Bar",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "LowBar (East Nashville",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Hattie B's (The Nations/West",
+      "address": "5209 Charlotte Ave, Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Neighbors",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Neighbors",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Game Terminal",
+      "address": "201 Terminal Ct, Nashville, TN 37210",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Neighbors - Germantown (Ballad Bingo",
+      "address": "313 Jefferson StNashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Bottle Cap - Ballad Bingo",
+      "address": "2403 12th Ave S",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Von Elrod's",
+      "address": "1004 4th Ave NNashville, TN 37219",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Brian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Streetcar Taps & Garden",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card 2nd: $25 Gift Card3rd: Free Dessert",
+          "host": "Ally"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Boombozz (East Nashville",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Yazoo Brewing Company",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "The Asbury (BINGO",
+      "address": "1516A Demonbreun St, Nashville, TN 37203",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "New Heights Brewery Company",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $10 3rd: New Heights Pint Glass",
+          "host": "Bella"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Brotherly Love Cheesecakes",
+      "address": "1610 54th Ave N #100Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Andrew"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Game Terminal (BINGO",
+      "address": "201 Terminal Ct, Nashville, TN 37210",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Grandpa Bar (Opinionary - Family Feud Trivia",
+      "address": "1501 Herman St #123, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Monday Night Brewing Co (Ballad Bingo",
+      "address": "1308 Adams St, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Crazy Gnome Brewery",
+      "address": "948 Main St Nashville, TN 37206",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.842Z"
+    },
+    {
+      "venue_name": "Diskin Cider",
+      "address": "1235 Martin St Nashville, TN 37203",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Seth"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Cyanide Cider",
+      "address": "410 Woodbine St, Nashville, TN 37211",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Cards for top Three Teams.",
+          "host": "Murphy"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Brewhouse 100 *Ballad Bingo",
+      "address": "8098 TN-100, Nashville, TN 37221",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Brewhouse 100",
+      "address": "8098 TN-100, Nashville, TN 37221",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "O'Charley's",
+      "address": "674 N Riverside Dr, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Jefferson's",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Corky's Ribs & BBQ",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Old Chicago",
+      "address": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Old Chicago (Ballad Bingo",
+      "address": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "O'Charleys",
+      "address": "674 N Riverside Dr, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Tequila Mexican Grill (Bingo",
+      "address": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Cookeville Pizza and Pub",
+      "address": "3449 Dickerson Pike",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Tin Roof 2",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Will"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Party Fowl",
+      "address": "2620 Lebanon Pike",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Derek"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Corner Pub",
+      "address": "1916 Columbia Ave, Franklin, TN 37064",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25",
+          "host": "Grayson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Brewhouse South",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "10:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Samuel"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.843Z"
+    },
+    {
+      "venue_name": "Neighbors",
+      "address": "4425 Murphy Rd Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Brewhouse South - Ballad Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "10:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Samuel"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Neighbors - Ballad Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Taylor"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Mellow Mushroom",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Curio Brewing Company",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "ML Rose",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "El Guadalajara Mexican",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Greenbrier Pizza and Pub",
+      "address": "3449 Dickerson Pike",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Edly's",
+      "address": "2145 Nashville Pike Suite 200, Gallatin, TN 37066",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Ian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Prince Street Pizza & Pub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Jolly Ollie's Pizza & Pub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Birdie Bro's",
+      "address": "300 Indian Lake Blvd E160Hendersonville, TN 37075",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Nikki"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "The Rudder",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Half Batch Brewing",
+      "address": "393 E Main St #6a",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Sara"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Famous Daves",
+      "address": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "The Lucky Rooster",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Hayley"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.844Z"
+    },
+    {
+      "venue_name": "Dominic's Bar and Grill",
+      "address": "4719 Andrew Jackson Pkwy, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $253rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Famous Dave's (Ballad Bingo",
+      "address": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "O'Charleys - Kingston Pike",
+      "address": "674 N Riverside Dr, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Yazoo Brewing Company **Ballad Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Jack Brown's Beer & Burger Joint",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "The Goat",
+      "address": "2355 Adwell St, Murfreesboro, TN 37129",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $303rd: $20",
+          "host": "Michael"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Miller's Ale House",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Kadie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Jefferson's (by MTSU",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Boombozz Pizza",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Middle Ground Brewing Company",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Kat's Bar & Grille",
+      "address": "2037 N Mt Juliet Rd #130 Mt. Juliet, TN 37122",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $10",
+          "host": "Cade"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Brothers Burger Joint",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Mill Creek Brewing Co",
+      "address": "1308 Adams St, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.845Z"
+    },
+    {
+      "venue_name": "Roadside Grill",
+      "address": "4617 Old Hickory Blvd,",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Brian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Portland Pizza & Pub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Casa Mexicana (Battle Bingo - Reminder Email",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "La Hacienda Mexican Restaurant",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Famous Dave's",
+      "address": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Froggy & Jeffro's",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Casa Mexicana (Battle Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "BoomBozz Craft Pizza & Taphouse",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.846Z"
+    },
+    {
+      "venue_name": "Froggy & Jeffro's (Battle Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.847Z"
+    },
+    {
+      "venue_name": "White House Pizza & Pub",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.847Z"
+    },
+    {
+      "venue_name": "Davo's",
+      "address": "3115 Canton St",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Ginnie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.847Z"
+    },
+    {
+      "venue_name": "Union Brewing Company",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.847Z"
+    },
+    {
+      "venue_name": "Four Finger Distillery",
+      "address": "636 Virginia Ave.Indianapolis, IN 46203",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.847Z"
+    },
+    {
+      "venue_name": "Ralston's Drafthouse",
+      "address": "635 Massachusetts AvenueIndianapolis, IN 46204",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Rise & Revel",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Daniel's Vineyard",
+      "address": "9061 N 700 W,McCordsville, IN 46055",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "The Mash House at West Fork Whisky Co",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Four Finger Distillery North",
+      "address": "636 Virginia Ave.Indianapolis, IN 46203",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Dry Falls Brewing (Battle Bingo - Reminder Email",
+      "address": "425 Kanuga Rd Hendersonville, NC 28739",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "M.L. Rose Sylvan Park / Nations",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Game Terminal Ballad Bingo",
+      "address": "201 Terminal Ct, Nashville, TN 37210",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Jack Brown's Germantown",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Jack Brown's Edgehill",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "LowBar East Nashville",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Hattie B's The Nations/West",
+      "address": "5209 Charlotte Ave, Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.848Z"
+    },
+    {
+      "venue_name": "Neighbors Sylvan Park - Ballad Bingo",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Neighbors The Gulch - Ballad Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Neighbors - Germantown Ballad Bingo",
+      "address": "313 Jefferson StNashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Boombozz East Nashville",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "The Asbury BINGO",
+      "address": "1516A Demonbreun St, Nashville, TN 37203",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Game Terminal BINGO",
+      "address": "201 Terminal Ct, Nashville, TN 37210",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Grandpa Bar Opinionary - Family Feud Trivia",
+      "address": "1501 Herman St #123, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Monday Night Brewing Co Ballad Bingo",
+      "address": "1308 Adams St, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Old Chicago Ballad Bingo",
+      "address": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Tequila Mexican Grill Bingo",
+      "address": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Famous Dave's Ballad Bingo",
+      "address": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Jefferson's by MTSU",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Casa Mexicana Battle Bingo - Reminder Email",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.849Z"
+    },
+    {
+      "venue_name": "Casa Mexicana Battle Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.852Z"
+    },
+    {
+      "venue_name": "Froggy & Jeffro's Battle Bingo",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.852Z"
+    },
+    {
+      "venue_name": "Dry Falls Brewing Battle Bingo - Reminder Email",
+      "address": "425 Kanuga Rd Hendersonville, NC 28739",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "Weekly Clues",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "section_598794691",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "TENNESSEE",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "5 PM, Sundays | TRIVIA hosted by Andrew",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $25 3rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "HOPS AND CRAFTS – The Gulch",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "MONDAY NIGHT BREWING CO – GERMANTOWN",
+      "address": "1308 Adams St, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "SONNY’S – Germantown",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $70 Gift Card2nd Place: $30 Gift Card3rd Place: $20 Gift Card",
+          "host": "Caid"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ML ROSE – SYLVAN PARK",
+      "address": "4408 Charlotte AveNashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "JACK BROWN’S BURGER JOINT – GERMANTOWN",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "Urban Dog Bar- The Nations",
+      "address": "5700 Ohio Ave, Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Steven"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "NEIGHBORS – SYLVAN PARK",
+      "address": "4425 Murphy Rd Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "NEIGHBORS – THE GULCH",
+      "address": "610 12th Ave S, Nashville, TN 37203",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Justin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BREWHOUSE 100 – BELLEVUE",
+      "address": "8098 TN-100, Nashville, TN 37221",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BOTTLE CAP – 12 SOUTH",
+      "address": "2403 12th Ave S",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "NEIGHBORS – GERMANTOWN",
+      "address": "313 Jefferson StNashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "LOWBAR – EAST NASHVILLE",
+      "address": "917 Woodland St, Nashville, TN 37206",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 + TWO tickets to any Basement East Show! 2nd: $253rd: $10",
+          "host": "Emma"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "HATTIE B’S – NATIONS/WEST",
+      "address": "5209 Charlotte Ave, Nashville, TN 37209",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "REUNION – East Nashville",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card + 100% bar tab2nd: $25 Gift Card + 50% bar tab3rd: $10 Gift Card + 25% bar tab",
+          "host": "Stephanie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "HOPPIN RIVER NORTH",
+      "address": "2300 Bowline Ave #103,Nashville, TN 37207",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Aaron"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "THE LOST PADDY",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Serena"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "Edley’s BBQ – Lenox Village",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Jamie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ML ROSE – MELROSE",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Dylan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "STREETCAR TAPS & GARDEN – THE NATIONS",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card 2nd: $25 Gift Card3rd: Free Dessert",
+          "host": "Ally"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ROCK’N DOUGH PIZZA AND BREWERY – EAST NASHVILLE",
+      "address": "3449 Dickerson Pike",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BOOMBOZZ – EAST NASHVILLE",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Jonathan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ML ROSE – CAPITOL VIEW",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Justin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "VON ELROD’S – GERMANTOWN",
+      "address": "1004 4th Ave NNashville, TN 37219",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Brian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "NEW HEIGHTS BREWING CO. – SOBRO",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $10 3rd: New Heights Pint Glass",
+          "host": "Bella"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "GRANDPA BAR",
+      "address": "1501 Herman St #123, Nashville, TN 37208",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "THE ASBURY – MIDTOWN",
+      "address": "1516A Demonbreun St, Nashville, TN 37203",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "YAZOO BREWING COMPANY – MADISON",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "CRAZY GNOME BREWERY – EAST NASHVILLE",
+      "address": "948 Main St Nashville, TN 37206",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "SOUTHERN GRIST BREWING – THE NATIONS",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BAR LOUIE – BELLEVUE",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $50 Gift Card2nd Place: $25 Gift Card",
+          "host": "Austin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "O CHARLEY’S – BELLEVUE",
+      "address": "110 Coley Davis Rd, Nashville, TN 37221",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $502nd Place: $253rd Place: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "JEFFERSON’S",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "CORKY’S RIBS & BBQ",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "STAR SPANGLED BREWERY CO",
+      "address": "1030 Progress Dr suite E",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Elizabeth"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "O’Charleys",
+      "address": "674 N Riverside Dr, Clarksville, TN 37040",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "TEQUILA’S MEXICAN GRILL",
+      "address": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "COOKEVILLE PIZZA AND COMPANY",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "Josh"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "EL GUADALAJARA MEXICAN RESTAURANT",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "EDLY’S",
+      "address": "2145 Nashville Pike Suite 200, Gallatin, TN 37066",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Ian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "PRINCE STREET PIZZA AND PUB",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $15 3rd: $10",
+          "host": "Sierra"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "JOLLY OLLIE’S PIZZA AND PUB",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Justin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BIRDIE BRO’S",
+      "address": "300 Indian Lake Blvd E160Hendersonville, TN 37075",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Nikki"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "HALF BATCH BREWING CO",
+      "address": "393 E Main St #6a",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Sara"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "THE RUDDER AT ANCHOR HIGH MARINA",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "DOMINIC’S BAR & GRILL",
+      "address": "4719 Andrew Jackson Pkwy, Hermitage, TN 37076",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $253rd: $10",
+          "host": "Bernie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "FAMOUS DAVE’S",
+      "address": "208 Advantage Pl, Knoxville, TN 37922",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "TENN LAKES BREWING COMPANY",
+      "address": "300 N Maple St Suite 4-135, Lebanon, TN 37087",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Jami"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "O’CHARLEY’S",
+      "address": "902 Murfreesboro Rd, Lebanon, TN 37090",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Jami"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "JACK BROWN’S BEER & BURGER JOINT",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Patrick"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "MILLER’S ALE HOUSE",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Kadie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "JEFFERSON’S (BY MTSU",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Georgia"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "BOOMBOZZ",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ML ROSE – MT. JULIET",
+      "address": "401 S Mt Juliet Rd Ste 130",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "KAT’S BAR AND GRILL",
+      "address": "2037 N Mt Juliet Rd #130 Mt. Juliet, TN 37122",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $10",
+          "host": "Cade"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "STOCK & BARREL – THE GULCH",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $15 3rd: $10",
+          "host": "Sam"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "MILL CREEK BREWING",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Kory"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "ROADSIDE BAR & GRILL",
+      "address": "4617 Old Hickory Blvd,",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Brian"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "PORTLAND PIZZA AND PUB",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $15 2nd: $10 3rd: $5",
+          "host": "Jake"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "CASA MEXICANA",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "FROGGY AND JEFFRO’S",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "FROGGY & JEFFRO’S",
+      "address": "4910 Port Royal Rd Spring Hill, TN 37174",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "73:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Five Rounds with Gift Cards Each Round!",
+          "host": "Sam"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "WHITE HOUSE PIZZA AND PUB",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Zack"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "RALSTON’S DRAFTHOUSE",
+      "address": "635 Massachusetts AvenueIndianapolis, IN 46204",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "RISE & RIVEL",
+      "address": "1233 Shelby StSuite 125Indianapolis, IN 46203",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "FOUR FINGER DISTILLERY INDY",
+      "address": "636 Virginia Ave.Indianapolis, IN 46203",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "FOUR FINGER DISTILLERY – Lebanon",
+      "address": "126 W Washington St, Lebanon, IN 46052",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "DANIEL’S VINEYARD",
+      "address": "9061 N 700 W,McCordsville, IN 46055",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "DAVO’S",
+      "address": "3115 Canton St",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Ginnie"
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "DRY FALLS BREWING COMPANY",
+      "address": "425 Kanuga Rd Hendersonville, NC 28739",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "section_1979734878",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "Become a Host",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    },
+    {
+      "venue_name": "CDATA",
+      "address": "",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ],
+      "provider": "NerdyTalk Trivia",
+      "scraped_at": "2025-07-07T20:32:45.853Z"
+    }
+  ],
+  "google_places_format": [
+    {
+      "name_original": "Hops and Crafts",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ]
+    },
+    {
+      "name_original": "Broadway Brewpub & Grub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Villa Castrioti",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $100 2nd: $75 3rd: $50",
+          "host": "Georgia"
+        }
+      ]
+    },
+    {
+      "name_original": "M.L. Rose (Sylvan Park / Nations",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "Game Terminal (Ballad Bingo",
+      "address_original": "201 Terminal Ct, Nashville, TN 37210",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Sonny's",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $70 Gift Card2nd Place: $30 Gift Card3rd Place: $20 Gift Card",
+          "host": "Caid"
+        }
+      ]
+    },
+    {
+      "name_original": "Monday Night Brewing Co",
+      "address_original": "1308 Adams St, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ]
+    },
+    {
+      "name_original": "Jack Brown's (Germantown",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "Jack Brown's (Edgehill",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "Bottle Cap",
+      "address_original": "2403 12th Ave S",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ]
+    },
+    {
+      "name_original": "Urban Dog Bar",
+      "address_original": "5700 Ohio Ave, Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Steven"
+        }
+      ]
+    },
+    {
+      "name_original": "Lost Paddy Pub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Serena"
+        }
+      ]
+    },
+    {
+      "name_original": "Reunion Bar",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "LowBar (East Nashville",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "Hattie B's (The Nations/West",
+      "address_original": "5209 Charlotte Ave, Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ]
+    },
+    {
+      "name_original": "Game Terminal",
+      "address_original": "201 Terminal Ct, Nashville, TN 37210",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors - Germantown (Ballad Bingo",
+      "address_original": "313 Jefferson StNashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ]
+    },
+    {
+      "name_original": "Bottle Cap - Ballad Bingo",
+      "address_original": "2403 12th Ave S",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ]
+    },
+    {
+      "name_original": "Von Elrod's",
+      "address_original": "1004 4th Ave NNashville, TN 37219",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Brian"
+        }
+      ]
+    },
+    {
+      "name_original": "Streetcar Taps & Garden",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card 2nd: $25 Gift Card3rd: Free Dessert",
+          "host": "Ally"
+        }
+      ]
+    },
+    {
+      "name_original": "Boombozz (East Nashville",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "Yazoo Brewing Company",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "The Asbury (BINGO",
+      "address_original": "1516A Demonbreun St, Nashville, TN 37203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "New Heights Brewery Company",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $10 3rd: New Heights Pint Glass",
+          "host": "Bella"
+        }
+      ]
+    },
+    {
+      "name_original": "Brotherly Love Cheesecakes",
+      "address_original": "1610 54th Ave N #100Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Andrew"
+        }
+      ]
+    },
+    {
+      "name_original": "Game Terminal (BINGO",
+      "address_original": "201 Terminal Ct, Nashville, TN 37210",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Grandpa Bar (Opinionary - Family Feud Trivia",
+      "address_original": "1501 Herman St #123, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ]
+    },
+    {
+      "name_original": "Monday Night Brewing Co (Ballad Bingo",
+      "address_original": "1308 Adams St, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ]
+    },
+    {
+      "name_original": "Crazy Gnome Brewery",
+      "address_original": "948 Main St Nashville, TN 37206",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "Diskin Cider",
+      "address_original": "1235 Martin St Nashville, TN 37203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Seth"
+        }
+      ]
+    },
+    {
+      "name_original": "Cyanide Cider",
+      "address_original": "410 Woodbine St, Nashville, TN 37211",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Cards for top Three Teams.",
+          "host": "Murphy"
+        }
+      ]
+    },
+    {
+      "name_original": "Brewhouse 100 *Ballad Bingo",
+      "address_original": "8098 TN-100, Nashville, TN 37221",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Brewhouse 100",
+      "address_original": "8098 TN-100, Nashville, TN 37221",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "O'Charley's",
+      "address_original": "674 N Riverside Dr, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ]
+    },
+    {
+      "name_original": "Jefferson's",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ]
+    },
+    {
+      "name_original": "Corky's Ribs & BBQ",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Old Chicago",
+      "address_original": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ]
+    },
+    {
+      "name_original": "Old Chicago (Ballad Bingo",
+      "address_original": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ]
+    },
+    {
+      "name_original": "O'Charleys",
+      "address_original": "674 N Riverside Dr, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ]
+    },
+    {
+      "name_original": "Tequila Mexican Grill (Bingo",
+      "address_original": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ]
+    },
+    {
+      "name_original": "Cookeville Pizza and Pub",
+      "address_original": "3449 Dickerson Pike",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Tin Roof 2",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Will"
+        }
+      ]
+    },
+    {
+      "name_original": "Party Fowl",
+      "address_original": "2620 Lebanon Pike",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Derek"
+        }
+      ]
+    },
+    {
+      "name_original": "Corner Pub",
+      "address_original": "1916 Columbia Ave, Franklin, TN 37064",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25",
+          "host": "Grayson"
+        }
+      ]
+    },
+    {
+      "name_original": "Brewhouse South",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "10:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Samuel"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors",
+      "address_original": "4425 Murphy Rd Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "Brewhouse South - Ballad Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "10:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card2nd: $25 Gift Card3rd $10 Gift Card",
+          "host": "Samuel"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors - Ballad Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Taylor"
+        }
+      ]
+    },
+    {
+      "name_original": "Mellow Mushroom",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Curio Brewing Company",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "ML Rose",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "El Guadalajara Mexican",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Greenbrier Pizza and Pub",
+      "address_original": "3449 Dickerson Pike",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Edly's",
+      "address_original": "2145 Nashville Pike Suite 200, Gallatin, TN 37066",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Ian"
+        }
+      ]
+    },
+    {
+      "name_original": "Prince Street Pizza & Pub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ]
+    },
+    {
+      "name_original": "Jolly Ollie's Pizza & Pub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ]
+    },
+    {
+      "name_original": "Birdie Bro's",
+      "address_original": "300 Indian Lake Blvd E160Hendersonville, TN 37075",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Nikki"
+        }
+      ]
+    },
+    {
+      "name_original": "The Rudder",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ]
+    },
+    {
+      "name_original": "Half Batch Brewing",
+      "address_original": "393 E Main St #6a",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Sara"
+        }
+      ]
+    },
+    {
+      "name_original": "Famous Daves",
+      "address_original": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "The Lucky Rooster",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Hayley"
+        }
+      ]
+    },
+    {
+      "name_original": "Dominic's Bar and Grill",
+      "address_original": "4719 Andrew Jackson Pkwy, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $253rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "Famous Dave's (Ballad Bingo",
+      "address_original": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "O'Charleys - Kingston Pike",
+      "address_original": "674 N Riverside Dr, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ]
+    },
+    {
+      "name_original": "Yazoo Brewing Company **Ballad Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "Jack Brown's Beer & Burger Joint",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "The Goat",
+      "address_original": "2355 Adwell St, Murfreesboro, TN 37129",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $303rd: $20",
+          "host": "Michael"
+        }
+      ]
+    },
+    {
+      "name_original": "Miller's Ale House",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Kadie"
+        }
+      ]
+    },
+    {
+      "name_original": "Jefferson's (by MTSU",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ]
+    },
+    {
+      "name_original": "Boombozz Pizza",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ]
+    },
+    {
+      "name_original": "Middle Ground Brewing Company",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "Kat's Bar & Grille",
+      "address_original": "2037 N Mt Juliet Rd #130 Mt. Juliet, TN 37122",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $10",
+          "host": "Cade"
+        }
+      ]
+    },
+    {
+      "name_original": "Brothers Burger Joint",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "Mill Creek Brewing Co",
+      "address_original": "1308 Adams St, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ]
+    },
+    {
+      "name_original": "Roadside Grill",
+      "address_original": "4617 Old Hickory Blvd,",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Brian"
+        }
+      ]
+    },
+    {
+      "name_original": "Portland Pizza & Pub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ]
+    },
+    {
+      "name_original": "Casa Mexicana (Battle Bingo - Reminder Email",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ]
+    },
+    {
+      "name_original": "La Hacienda Mexican Restaurant",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Famous Dave's",
+      "address_original": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "Froggy & Jeffro's",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ]
+    },
+    {
+      "name_original": "Casa Mexicana (Battle Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ]
+    },
+    {
+      "name_original": "BoomBozz Craft Pizza & Taphouse",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ]
+    },
+    {
+      "name_original": "Froggy & Jeffro's (Battle Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ]
+    },
+    {
+      "name_original": "White House Pizza & Pub",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Autumn"
+        }
+      ]
+    },
+    {
+      "name_original": "Davo's",
+      "address_original": "3115 Canton St",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Ginnie"
+        }
+      ]
+    },
+    {
+      "name_original": "Union Brewing Company",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "Four Finger Distillery",
+      "address_original": "636 Virginia Ave.Indianapolis, IN 46203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Ralston's Drafthouse",
+      "address_original": "635 Massachusetts AvenueIndianapolis, IN 46204",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Rise & Revel",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Daniel's Vineyard",
+      "address_original": "9061 N 700 W,McCordsville, IN 46055",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "The Mash House at West Fork Whisky Co",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ]
+    },
+    {
+      "name_original": "Four Finger Distillery North",
+      "address_original": "636 Virginia Ave.Indianapolis, IN 46203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Dry Falls Brewing (Battle Bingo - Reminder Email",
+      "address_original": "425 Kanuga Rd Hendersonville, NC 28739",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "M.L. Rose Sylvan Park / Nations",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "Game Terminal Ballad Bingo",
+      "address_original": "201 Terminal Ct, Nashville, TN 37210",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Jack Brown's Germantown",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "Jack Brown's Edgehill",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Lansing"
+        }
+      ]
+    },
+    {
+      "name_original": "LowBar East Nashville",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "Hattie B's The Nations/West",
+      "address_original": "5209 Charlotte Ave, Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors Sylvan Park - Ballad Bingo",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors The Gulch - Ballad Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ]
+    },
+    {
+      "name_original": "Neighbors - Germantown Ballad Bingo",
+      "address_original": "313 Jefferson StNashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ]
+    },
+    {
+      "name_original": "Boombozz East Nashville",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "The Asbury BINGO",
+      "address_original": "1516A Demonbreun St, Nashville, TN 37203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Game Terminal BINGO",
+      "address_original": "201 Terminal Ct, Nashville, TN 37210",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes for All Five Rounds",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Grandpa Bar Opinionary - Family Feud Trivia",
+      "address_original": "1501 Herman St #123, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ]
+    },
+    {
+      "name_original": "Monday Night Brewing Co Ballad Bingo",
+      "address_original": "1308 Adams St, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ]
+    },
+    {
+      "name_original": "Old Chicago Ballad Bingo",
+      "address_original": "2815 Wilma Rudolph Blvd, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": "Patrick"
+        }
+      ]
+    },
+    {
+      "name_original": "Tequila Mexican Grill Bingo",
+      "address_original": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ]
+    },
+    {
+      "name_original": "Famous Dave's Ballad Bingo",
+      "address_original": "5000 Old Hickory Blvd, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "Jefferson's by MTSU",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ]
+    },
+    {
+      "name_original": "Casa Mexicana Battle Bingo - Reminder Email",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ]
+    },
+    {
+      "name_original": "Casa Mexicana Battle Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ]
+    },
+    {
+      "name_original": "Froggy & Jeffro's Battle Bingo",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ]
+    },
+    {
+      "name_original": "Dry Falls Brewing Battle Bingo - Reminder Email",
+      "address_original": "425 Kanuga Rd Hendersonville, NC 28739",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Weekly Clues",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "section_598794691",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "TENNESSEE",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "5 PM, Sundays | TRIVIA hosted by Andrew",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $25 3rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "HOPS AND CRAFTS – The Gulch",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift3rd Place: $10 Gift",
+          "host": "Andrew"
+        }
+      ]
+    },
+    {
+      "name_original": "MONDAY NIGHT BREWING CO – GERMANTOWN",
+      "address_original": "1308 Adams St, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $303rd: $20",
+          "host": "Brooks"
+        }
+      ]
+    },
+    {
+      "name_original": "SONNY’S – Germantown",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $70 Gift Card2nd Place: $30 Gift Card3rd Place: $20 Gift Card",
+          "host": "Caid"
+        }
+      ]
+    },
+    {
+      "name_original": "ML ROSE – SYLVAN PARK",
+      "address_original": "4408 Charlotte AveNashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Megan"
+        }
+      ]
+    },
+    {
+      "name_original": "JACK BROWN’S BURGER JOINT – GERMANTOWN",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "Urban Dog Bar- The Nations",
+      "address_original": "5700 Ohio Ave, Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Steven"
+        }
+      ]
+    },
+    {
+      "name_original": "NEIGHBORS – SYLVAN PARK",
+      "address_original": "4425 Murphy Rd Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "NEIGHBORS – THE GULCH",
+      "address_original": "610 12th Ave S, Nashville, TN 37203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Justin"
+        }
+      ]
+    },
+    {
+      "name_original": "BREWHOUSE 100 – BELLEVUE",
+      "address_original": "8098 TN-100, Nashville, TN 37221",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "BOTTLE CAP – 12 SOUTH",
+      "address_original": "2403 12th Ave S",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Seth"
+        }
+      ]
+    },
+    {
+      "name_original": "NEIGHBORS – GERMANTOWN",
+      "address_original": "313 Jefferson StNashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Robyn"
+        }
+      ]
+    },
+    {
+      "name_original": "LOWBAR – EAST NASHVILLE",
+      "address_original": "917 Woodland St, Nashville, TN 37206",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 + TWO tickets to any Basement East Show! 2nd: $253rd: $10",
+          "host": "Emma"
+        }
+      ]
+    },
+    {
+      "name_original": "HATTIE B’S – NATIONS/WEST",
+      "address_original": "5209 Charlotte Ave, Nashville, TN 37209",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "REUNION – East Nashville",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card + 100% bar tab2nd: $25 Gift Card + 50% bar tab3rd: $10 Gift Card + 25% bar tab",
+          "host": "Stephanie"
+        }
+      ]
+    },
+    {
+      "name_original": "HOPPIN RIVER NORTH",
+      "address_original": "2300 Bowline Ave #103,Nashville, TN 37207",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "Aaron"
+        }
+      ]
+    },
+    {
+      "name_original": "THE LOST PADDY",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Serena"
+        }
+      ]
+    },
+    {
+      "name_original": "Edley’s BBQ – Lenox Village",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Jamie"
+        }
+      ]
+    },
+    {
+      "name_original": "ML ROSE – MELROSE",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Dylan"
+        }
+      ]
+    },
+    {
+      "name_original": "STREETCAR TAPS & GARDEN – THE NATIONS",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 Gift Card 2nd: $25 Gift Card3rd: Free Dessert",
+          "host": "Ally"
+        }
+      ]
+    },
+    {
+      "name_original": "ROCK’N DOUGH PIZZA AND BREWERY – EAST NASHVILLE",
+      "address_original": "3449 Dickerson Pike",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "BOOMBOZZ – EAST NASHVILLE",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Jonathan"
+        }
+      ]
+    },
+    {
+      "name_original": "ML ROSE – CAPITOL VIEW",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Justin"
+        }
+      ]
+    },
+    {
+      "name_original": "VON ELROD’S – GERMANTOWN",
+      "address_original": "1004 4th Ave NNashville, TN 37219",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Brian"
+        }
+      ]
+    },
+    {
+      "name_original": "NEW HEIGHTS BREWING CO. – SOBRO",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $10 3rd: New Heights Pint Glass",
+          "host": "Bella"
+        }
+      ]
+    },
+    {
+      "name_original": "GRANDPA BAR",
+      "address_original": "1501 Herman St #123, Nashville, TN 37208",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "Prizes for Top Teams!",
+          "host": "Emma"
+        }
+      ]
+    },
+    {
+      "name_original": "THE ASBURY – MIDTOWN",
+      "address_original": "1516A Demonbreun St, Nashville, TN 37203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "YAZOO BREWING COMPANY – MADISON",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $15",
+          "host": "Ryan"
+        }
+      ]
+    },
+    {
+      "name_original": "CRAZY GNOME BREWERY – EAST NASHVILLE",
+      "address_original": "948 Main St Nashville, TN 37206",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "SOUTHERN GRIST BREWING – THE NATIONS",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: 50% off a tab of up to $100 2nd Place: 30% off a tab up to $1003rd Place: 15% off a tab up to $100",
+          "host": "Courtney"
+        }
+      ]
+    },
+    {
+      "name_original": "BAR LOUIE – BELLEVUE",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $50 Gift Card2nd Place: $25 Gift Card",
+          "host": "Austin"
+        }
+      ]
+    },
+    {
+      "name_original": "O CHARLEY’S – BELLEVUE",
+      "address_original": "110 Coley Davis Rd, Nashville, TN 37221",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $502nd Place: $253rd Place: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "JEFFERSON’S",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Carli"
+        }
+      ]
+    },
+    {
+      "name_original": "CORKY’S RIBS & BBQ",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "STAR SPANGLED BREWERY CO",
+      "address_original": "1030 Progress Dr suite E",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Elizabeth"
+        }
+      ]
+    },
+    {
+      "name_original": "O’Charleys",
+      "address_original": "674 N Riverside Dr, Clarksville, TN 37040",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: 253rd: $10",
+          "host": "Jason"
+        }
+      ]
+    },
+    {
+      "name_original": "TEQUILA’S MEXICAN GRILL",
+      "address_original": "1547 Bear Creek Pike Suite D, Columbia, TN 38401",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes",
+          "host": "Amanda"
+        }
+      ]
+    },
+    {
+      "name_original": "COOKEVILLE PIZZA AND COMPANY",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "Josh"
+        }
+      ]
+    },
+    {
+      "name_original": "EL GUADALAJARA MEXICAN RESTAURANT",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Friday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st Place: $30 Gift Card2nd Place: $20 Gift Card3rd Place: $10 Gift Card",
+          "host": "John"
+        }
+      ]
+    },
+    {
+      "name_original": "EDLY’S",
+      "address_original": "2145 Nashville Pike Suite 200, Gallatin, TN 37066",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Ian"
+        }
+      ]
+    },
+    {
+      "name_original": "PRINCE STREET PIZZA AND PUB",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $15 3rd: $10",
+          "host": "Sierra"
+        }
+      ]
+    },
+    {
+      "name_original": "JOLLY OLLIE’S PIZZA AND PUB",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Justin"
+        }
+      ]
+    },
+    {
+      "name_original": "BIRDIE BRO’S",
+      "address_original": "300 Indian Lake Blvd E160Hendersonville, TN 37075",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $253rd: $10",
+          "host": "Nikki"
+        }
+      ]
+    },
+    {
+      "name_original": "HALF BATCH BREWING CO",
+      "address_original": "393 E Main St #6a",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Sara"
+        }
+      ]
+    },
+    {
+      "name_original": "THE RUDDER AT ANCHOR HIGH MARINA",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Erin"
+        }
+      ]
+    },
+    {
+      "name_original": "DOMINIC’S BAR & GRILL",
+      "address_original": "4719 Andrew Jackson Pkwy, Hermitage, TN 37076",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $402nd: $253rd: $10",
+          "host": "Bernie"
+        }
+      ]
+    },
+    {
+      "name_original": "FAMOUS DAVE’S",
+      "address_original": "208 Advantage Pl, Knoxville, TN 37922",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "Gift Card Prizes!",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "TENN LAKES BREWING COMPANY",
+      "address_original": "300 N Maple St Suite 4-135, Lebanon, TN 37087",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $302nd: $203rd: $10",
+          "host": "Jami"
+        }
+      ]
+    },
+    {
+      "name_original": "O’CHARLEY’S",
+      "address_original": "902 Murfreesboro Rd, Lebanon, TN 37090",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $502nd: $253rd: $10",
+          "host": "Jami"
+        }
+      ]
+    },
+    {
+      "name_original": "JACK BROWN’S BEER & BURGER JOINT",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Patrick"
+        }
+      ]
+    },
+    {
+      "name_original": "MILLER’S ALE HOUSE",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Kadie"
+        }
+      ]
+    },
+    {
+      "name_original": "JEFFERSON’S (BY MTSU",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $15 3rd: $10",
+          "host": "Georgia"
+        }
+      ]
+    },
+    {
+      "name_original": "BOOMBOZZ",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $50 2nd: $25 3rd: $10",
+          "host": "Sadie"
+        }
+      ]
+    },
+    {
+      "name_original": "ML ROSE – MT. JULIET",
+      "address_original": "401 S Mt Juliet Rd Ste 130",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "08:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "KAT’S BAR AND GRILL",
+      "address_original": "2037 N Mt Juliet Rd #130 Mt. Juliet, TN 37122",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $20 2nd: $10",
+          "host": "Cade"
+        }
+      ]
+    },
+    {
+      "name_original": "STOCK & BARREL – THE GULCH",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $25 2nd: $15 3rd: $10",
+          "host": "Sam"
+        }
+      ]
+    },
+    {
+      "name_original": "MILL CREEK BREWING",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "06:30 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Kory"
+        }
+      ]
+    },
+    {
+      "name_original": "ROADSIDE BAR & GRILL",
+      "address_original": "4617 Old Hickory Blvd,",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Brian"
+        }
+      ]
+    },
+    {
+      "name_original": "PORTLAND PIZZA AND PUB",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $15 2nd: $10 3rd: $5",
+          "host": "Jake"
+        }
+      ]
+    },
+    {
+      "name_original": "CASA MEXICANA",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "06:30 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $10 2nd: $10 3rd: $10",
+          "host": "Tyson"
+        }
+      ]
+    },
+    {
+      "name_original": "FROGGY AND JEFFRO’S",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "07:30 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Bobby"
+        }
+      ]
+    },
+    {
+      "name_original": "FROGGY & JEFFRO’S",
+      "address_original": "4910 Port Royal Rd Spring Hill, TN 37174",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "73:00 PM",
+          "event_type": "bingo",
+          "prize_info": "Five Rounds with Gift Cards Each Round!",
+          "host": "Sam"
+        }
+      ]
+    },
+    {
+      "name_original": "WHITE HOUSE PIZZA AND PUB",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "63:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $30 2nd: $20 3rd: $10",
+          "host": "Zack"
+        }
+      ]
+    },
+    {
+      "name_original": "RALSTON’S DRAFTHOUSE",
+      "address_original": "635 Massachusetts AvenueIndianapolis, IN 46204",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "RISE & RIVEL",
+      "address_original": "1233 Shelby StSuite 125Indianapolis, IN 46203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "FOUR FINGER DISTILLERY INDY",
+      "address_original": "636 Virginia Ave.Indianapolis, IN 46203",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "FOUR FINGER DISTILLERY – Lebanon",
+      "address_original": "126 W Washington St, Lebanon, IN 46052",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Thursday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "1st: $252nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "DANIEL’S VINEYARD",
+      "address_original": "9061 N 700 W,McCordsville, IN 46055",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Wednesday",
+          "start_time": "06:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "DAVO’S",
+      "address_original": "3115 Canton St",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Tuesday",
+          "start_time": "07:00 PM",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": "Ginnie"
+        }
+      ]
+    },
+    {
+      "name_original": "DRY FALLS BREWING COMPANY",
+      "address_original": "425 Kanuga Rd Hendersonville, NC 28739",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "06:00 PM",
+          "event_type": "bingo",
+          "prize_info": "1st: $25 2nd: $153rd: $10",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "section_1979734878",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "Become a Host",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    },
+    {
+      "name_original": "CDATA",
+      "address_original": "",
+      "provider": "NerdyTalk Trivia",
+      "events": [
+        {
+          "day_of_week": "",
+          "start_time": "",
+          "event_type": "trivia",
+          "prize_info": "",
+          "host": ""
+        }
+      ]
+    }
+  ]
+}
