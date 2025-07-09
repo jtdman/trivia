@@ -53,16 +53,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUserProfile = async (userId: string) => {
     try {
+      console.log('Fetching user profile for userId:', userId)
       const { data, error } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
         .single()
 
+      console.log('Profile query result:', { data, error })
       if (error) throw error
       setUserProfile(data)
     } catch (error) {
       console.error('Error fetching user profile:', error)
+      // For debugging, let's also try to fetch without RLS
+      try {
+        console.log('Attempting to fetch user profile without RLS constraints...')
+        const { data: allProfiles } = await supabase
+          .from('user_profiles')
+          .select('*')
+        console.log('All profiles (if accessible):', allProfiles)
+      } catch (debugError) {
+        console.log('Debug query also failed:', debugError)
+      }
     }
   }
 
