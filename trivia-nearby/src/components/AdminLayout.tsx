@@ -14,7 +14,8 @@ import {
   Menu,
   X,
   Sun,
-  Moon
+  Moon,
+  Building
 } from 'lucide-react'
 import { useContext } from 'react'
 import { ThemeContext } from '../context/theme_context'
@@ -34,6 +35,9 @@ const AdminLayout: React.FC = () => {
     { path: '/admin', label: 'Dashboard', icon: Home, end: true },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
+    ...(userProfile?.role === 'platform_admin' 
+      ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
+      : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
     ...(userProfile?.role === 'admin' || userProfile?.role === 'trivia_host' 
       ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
       : []),

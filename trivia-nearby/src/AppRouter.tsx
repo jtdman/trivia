@@ -6,6 +6,15 @@ import AdminLogin from './components/AdminLogin'
 import AdminRegister from './components/AdminRegister'
 import AdminDashboard from './components/AdminDashboard'
 import VenuesList from './components/VenuesList'
+import AddVenuePage from './components/AddVenuePage'
+import EditVenuePage from './components/EditVenuePage'
+import VenueDetailPage from './components/VenueDetailPage'
+import VenueClaimPage from './components/VenueClaimPage'
+import MyVenuesPage from './components/MyVenuesPage'
+import EventsList from './components/EventsList'
+import AddEventPage from './components/AddEventPage'
+import EditEventPage from './components/EditEventPage'
+import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './context/auth_context'
@@ -34,7 +43,16 @@ const AppRouter: React.FC = () => {
           >
             <Route index element={<AdminDashboard />} />
             <Route path="venues" element={<VenuesList />} />
-            <Route path="events" element={<div className="p-8">Events page coming soon</div>} />
+            <Route path="venues/new" element={<AddVenuePage />} />
+            <Route path="venues/claim" element={<VenueClaimPage />} />
+            <Route path="venues/my-venues" element={<MyVenuesPage />} />
+            <Route path="venues/:venueId" element={<EditVenuePage />} />
+            <Route path="venues/:venueId/detail" element={<VenueDetailPage />} />
+            <Route path="venues/:venueId/edit" element={<EditVenuePage />} />
+            <Route path="events" element={<EventsList />} />
+            <Route path="events/new" element={<AddEventPage />} />
+            <Route path="events/:eventId" element={<EditEventPage />} />
+            <Route path="providers" element={<ProviderContactsPage />} />
             <Route path="team" element={<div className="p-8">Team page coming soon</div>} />
             <Route path="profile" element={<div className="p-8">Profile page coming soon</div>} />
           </Route>

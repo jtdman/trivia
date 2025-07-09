@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/auth_context'
+import { useCanCreateVenue } from '../hooks/useVenuePermissions'
 import { 
   Search, 
   MapPin, 
@@ -10,7 +12,8 @@ import {
   Clock, 
   AlertCircle,
   ExternalLink,
-  Filter
+  Filter,
+  Calendar
 } from 'lucide-react'
 
 interface Venue {
@@ -29,7 +32,8 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  // const { userProfile } = useAuth() // TODO: Use for user-specific venue filtering
+  const { userProfile } = useAuth()
+  const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
@@ -49,7 +53,7 @@ const VenuesList: React.FC = () => {
         .from('venues')
         .select(`
           *,
-          events!inner(count)
+          events(id)
         `)
         .order('updated_at', { ascending: false })
 
@@ -126,13 +130,15 @@ const VenuesList: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Venues
           </h1>
-          <Link
-            to="/admin/venues/new"
-            className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Add Venue
-          </Link>
+          {canCreateVenue && (
+            <Link
+              to="/admin/venues/new"
+              className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Add Venue
+            </Link>
+          )}
         </div>
         
         <p className="text-gray-600 dark:text-gray-400">
@@ -266,8 +272,16 @@ const VenuesList: React.FC = () => {
                       <Link
                         to={`/admin/venues/${venue.id}`}
                         className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
+                        title="Edit venue"
                       >
                         <Edit3 className="w-4 h-4" />
+                      </Link>
+                      <Link
+                        to={`/admin/venues/${venue.id}/detail`}
+                        className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
+                        title="View venue events"
+                      >
+                        <Calendar className="w-4 h-4" />
                       </Link>
                       {venue.google_website && (
                         <a
@@ -275,6 +289,7 @@ const VenuesList: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
+                          title="Visit website"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
