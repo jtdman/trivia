@@ -49,6 +49,12 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
         const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(nominatimUrl)}`
         const response = await fetch(proxyUrl)
         const proxyData = await response.json()
+        
+        // Check if proxy returned valid data
+        if (!proxyData.contents || proxyData.contents === 'undefined') {
+          throw new Error('Proxy returned no data')
+        }
+        
         const data = JSON.parse(proxyData.contents)
         
         // Filter and format suggestions

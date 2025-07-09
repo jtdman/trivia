@@ -4,7 +4,9 @@ import { Search, Brain, Beer, MapPin, Sun, Moon, Loader2 } from 'lucide-react'
 import TriviaList from './components/TriviaList'
 import LocationAutocomplete from './components/LocationAutocomplete'
 import { getLocationName } from './utils/location'
+import { getCityCoordinates } from './utils/cityCoordinates'
 import { Link } from 'react-router-dom'
+import StructuredData, { createWebsiteSchema, createLocalBusinessSchema } from './components/StructuredData'
 
 type AppState = 'splash' | 'manual-location' | 'trivia-list'
 
@@ -77,28 +79,34 @@ const App = () => {
       // Always clear existing coords and try fresh geocoding
       setGeocodedCoords(null)
       
-      // Try to geocode the manual location
+      // Use Google Places API for geocoding
       try {
-        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation.trim())}&limit=1&countrycodes=us`
-        // Use CORS proxy for Nominatim
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(geocodeUrl)}`
-        console.log('Geocoding URL:', geocodeUrl)
-        const response = await fetch(proxyUrl)
-        const proxyData = await response.json()
-        const data = JSON.parse(proxyData.contents)
+        const googleApiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY
+        if (!googleApiKey) {
+          throw new Error('Google API key not found')
+        }
         
-        console.log('Geocoding response:', data)
+        const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(manualLocation.trim())}&key=${googleApiKey}`
+        console.log('Using Google Geocoding API')
         
-        if (data && data.length > 0) {
-          const { lat, lon } = data[0]
-          const coords = { lat: parseFloat(lat), lng: parseFloat(lon) }
-          console.log('Manual geocoding result:', coords)
+        const response = await fetch(geocodeUrl)
+        const data = await response.json()
+        console.log('Google geocoding response:', data)
+        
+        if (data.status === 'OK' && data.results.length > 0) {
+          const location = data.results[0].geometry.location
+          const coords = { lat: location.lat, lng: location.lng }
+          console.log('Google geocoding result:', coords)
           setGeocodedCoords(coords)
         } else {
-          console.warn('No geocoding results found for:', manualLocation.trim())
+          console.warn('Google geocoding failed:', data.status)
+          throw new Error(`Geocoding failed: ${data.status}`)
         }
       } catch (error) {
         console.warn('Geocoding failed:', error)
+        // Fallback to test coordinates for development
+        console.log('Using fallback coordinates for development testing')
+        setGeocodedCoords({ lat: 35.0456, lng: -85.3097 })
       }
       
       // Navigate to trivia list after geocoding attempt
@@ -193,21 +201,25 @@ const App = () => {
       className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-6 py-4'
       data-theme={theme || 'dark'}
     >
+      {/* Structured Data */}
+      <StructuredData data={createWebsiteSchema()} />
+      <StructuredData data={createLocalBusinessSchema()} />
+      
       {/* Header with theme toggle */}
-      <div className='flex justify-between items-center mb-6 max-w-6xl mx-auto'>
+      <header className='flex justify-between items-center mb-6 max-w-6xl mx-auto'>
         <div></div>
-        <button onClick={toggleTheme} className='p-2'>
+        <button onClick={toggleTheme} className='p-2' aria-label="Toggle theme">
           {theme === 'dark' ? (
             <Sun className='w-5 h-5' />
           ) : (
             <Moon className='w-5 h-5' />
           )}
         </button>
-      </div>
+      </header>
 
       {/* Main content */}
-      <div className='flex flex-col items-center text-center max-w-6xl mx-auto'>
-        <div className='max-w-2xl mx-auto'>
+      <main className='flex flex-col items-center text-center max-w-6xl mx-auto'>
+        <section className='max-w-2xl mx-auto'>
           {/* App title */}
           <h1 className='text-5xl md:text-7xl font-bold mb-4 md:mb-8'>
             <span className='text-purple-400'>TRIVIA</span>
@@ -215,21 +227,21 @@ const App = () => {
           </h1>
 
           {/* Logo icons */}
-          <div className='flex gap-6 md:gap-8 mb-6 md:mb-8 justify-center'>
+          <div className='flex gap-6 md:gap-8 mb-6 md:mb-8 justify-center' role="img" aria-label="Trivia icons">
             <Search className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
             <Brain className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
             <Beer className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
           </div>
 
           {/* Location pin icon - reduced padding */}
-          <div className='bg-purple-500/20 rounded-full p-6 md:p-8 mb-6 md:mb-8 inline-block'>
+          <div className='bg-purple-500/20 rounded-full p-6 md:p-8 mb-6 md:mb-8 inline-block' role="img" aria-label="Location pin">
             <MapPin className='w-12 h-12 md:w-16 md:h-16 text-purple-400 fill-purple-400' />
           </div>
 
           {/* Headline and description */}
           <h2 className='text-2xl md:text-4xl font-semibold mb-4 md:mb-6'>Find Trivia Near You</h2>
           <p className='text-gray-600 dark:text-gray-400 mb-4 md:mb-8 max-w-sm md:max-w-2xl leading-relaxed text-base md:text-lg mx-auto'>
-            Discover the best trivia nights at bars and restaurants in your area.
+            Discover the best trivia nights at bars and restaurants in your area. Find weekly trivia events, pub quizzes, and team competitions near you.
           </p>
 
           {/* Share location button */}
@@ -257,7 +269,7 @@ const App = () => {
             <p>We only use your location to find trivia events near you. We don't store or share your precise location.</p>
             <p>Event details may change. Please check with venues to confirm current schedules.</p>
           </div>
-        </div>
+        </section>
 
         {/* Admin link */}
         <div className='mt-6'>
@@ -265,7 +277,7 @@ const App = () => {
             Are you a trivia host? →
           </Link>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

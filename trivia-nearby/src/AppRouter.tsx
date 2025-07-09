@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import App from './App'
 import AdminLayout from './components/AdminLayout'
 import AdminLogin from './components/AdminLogin'
@@ -8,6 +8,7 @@ import AdminDashboard from './components/AdminDashboard'
 import VenuesList from './components/VenuesList'
 import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
+import LocationPage from './components/LocationPage'
 import { AuthProvider } from './context/auth_context'
 
 const AppRouter: React.FC = () => {
@@ -17,6 +18,10 @@ const AppRouter: React.FC = () => {
         <Routes>
           {/* Main app routes */}
           <Route path="/" element={<App />} />
+          
+          {/* SEO location routes */}
+          <Route path="/trivia-near-me" element={<Navigate to="/" replace />} />
+          <Route path="/trivia-near-:location" element={<LocationPage onBack={() => window.history.back()} />} />
           
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />

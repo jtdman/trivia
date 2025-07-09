@@ -22,6 +22,8 @@ import {
 } from '../utils/location'
 import { getImageProps } from '../utils/images'
 import { ThemeContext } from '../context/theme_context'
+import StructuredData, { createBreadcrumbSchema } from './StructuredData'
+import SimpleSEO from './SimpleSEO'
 
 interface TriviaListProps {
   location: string
@@ -319,6 +321,20 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
 
   return (
     <div className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-4 py-6'>
+      {/* SEO */}
+      <SimpleSEO
+        location={location}
+        canonical={`https://trivia-nearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+      />
+      
+      {/* Structured Data */}
+      <StructuredData 
+        data={createBreadcrumbSchema([
+          { name: 'Home', url: 'https://trivia-nearby.com' },
+          { name: `Trivia in ${location}`, url: `https://trivia-nearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}` }
+        ])}
+      />
+      
       {/* Header with theme toggle */}
       <div className='flex justify-between items-center mb-6 max-w-7xl mx-auto'>
         <button

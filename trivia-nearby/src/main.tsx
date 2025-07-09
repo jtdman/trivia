@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import AppRouter from './AppRouter.tsx'
 import { ThemeProvider } from './context/theme_context.tsx'
+// import { HelmetProvider } from 'react-helmet-async'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <AppRouter />
-    </ThemeProvider>
+    {/* <HelmetProvider> */}
+      <ThemeProvider>
+        <AppRouter />
+      </ThemeProvider>
+    {/* </HelmetProvider> */}
   </StrictMode>
 )
