@@ -4,6 +4,7 @@ import { Search, Brain, Beer, MapPin, Sun, Moon, Loader2 } from 'lucide-react'
 import TriviaList from './components/TriviaList'
 import LocationAutocomplete from './components/LocationAutocomplete'
 import { getLocationName } from './utils/location'
+import { Link } from 'react-router-dom'
 
 type AppState = 'splash' | 'manual-location' | 'trivia-list'
 
@@ -225,7 +226,7 @@ const App = () => {
         <button
           onClick={handleShareLocation}
           disabled={isLoadingLocation}
-          className='bg-purple-500 hover:bg-purple-600 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium py-4 px-8 rounded-lg w-full max-w-sm transition-colors mb-4 flex items-center justify-center gap-2'
+          className='bg-purple-500 hover:bg-purple-600 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium text-lg py-3 px-6 rounded-lg w-full max-w-sm transition-colors mb-4 flex items-center justify-center gap-2'
         >
           {isLoadingLocation && <Loader2 className='w-5 h-5 animate-spin' />}
           {isLoadingLocation ? 'Getting Location...' : 'Share My Location'}
@@ -243,6 +244,13 @@ const App = () => {
         <div className='text-gray-500 text-sm mt-3 max-w-sm leading-relaxed space-y-2'>
           <p>We only use your location to find trivia events near you. We don't store or share your precise location.</p>
           <p>Event details may change. Please check with venues to confirm current schedules.</p>
+        </div>
+
+        {/* Admin link */}
+        <div className='mt-6'>
+          <Link to='/admin' className='text-sm text-gray-500 hover:text-purple-400 transition-colors'>
+            Are you a trivia host? →
+          </Link>
         </div>
       </div>
     </div>

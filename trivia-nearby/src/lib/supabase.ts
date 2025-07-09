@@ -63,3 +63,20 @@ export interface VenueWithEvents extends Venue {
     is_active: boolean
   }>
 }
+
+export interface UserProfile {
+  id: string
+  display_name?: string
+  role?: 'trivia_host' | 'venue_owner' | 'admin'
+  provider_id?: string
+  created_at: string
+  updated_at: string
+}
+
+export interface UserVenue {
+  user_id: string
+  venue_id: string
+  role: 'owner' | 'manager' | 'host'
+  granted_at: string
+  granted_by?: string
+}
