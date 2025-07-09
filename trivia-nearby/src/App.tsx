@@ -63,6 +63,7 @@ const App = () => {
   }
 
   const handleLocationSelect = (locationName: string, coords: {lat: number, lng: number}) => {
+    console.log('Location selected from autocomplete:', locationName, coords)
     setLocation(locationName)
     setGeocodedCoords(coords)
     setAppState('trivia-list')
@@ -73,25 +74,31 @@ const App = () => {
     if (manualLocation.trim()) {
       setLocation(manualLocation.trim())
       
-      // If no coordinates were set by autocomplete, try to geocode
-      if (!geocodedCoords) {
-        try {
-          const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation.trim())}&limit=1`
-          // Use CORS proxy for Nominatim
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(geocodeUrl)}`
-          const response = await fetch(proxyUrl)
-          const proxyData = await response.json()
-          const data = JSON.parse(proxyData.contents)
-          
-          if (data && data.length > 0) {
-            const { lat, lon } = data[0]
-            const coords = { lat: parseFloat(lat), lng: parseFloat(lon) }
-            console.log('Manual geocoding result:', coords)
-            setGeocodedCoords(coords)
-          }
-        } catch (error) {
-          console.warn('Geocoding failed:', error)
+      // Always clear existing coords and try fresh geocoding
+      setGeocodedCoords(null)
+      
+      // Try to geocode the manual location
+      try {
+        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocation.trim())}&limit=1&countrycodes=us`
+        // Use CORS proxy for Nominatim
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(geocodeUrl)}`
+        console.log('Geocoding URL:', geocodeUrl)
+        const response = await fetch(proxyUrl)
+        const proxyData = await response.json()
+        const data = JSON.parse(proxyData.contents)
+        
+        console.log('Geocoding response:', data)
+        
+        if (data && data.length > 0) {
+          const { lat, lon } = data[0]
+          const coords = { lat: parseFloat(lat), lng: parseFloat(lon) }
+          console.log('Manual geocoding result:', coords)
+          setGeocodedCoords(coords)
+        } else {
+          console.warn('No geocoding results found for:', manualLocation.trim())
         }
+      } catch (error) {
+        console.warn('Geocoding failed:', error)
       }
       
       // Navigate to trivia list after geocoding attempt
@@ -115,24 +122,24 @@ const App = () => {
         data-theme={theme || 'dark'}
       >
         {/* Header with theme toggle */}
-        <div className='flex justify-between items-center mb-8'>
+        <div className='flex justify-between items-center mb-8 max-w-6xl mx-auto'>
           <button
             onClick={() => setAppState('splash')}
-            className='text-purple-400 font-medium'
+            className='text-purple-400 font-medium text-base md:text-lg'
           >
             ← Back
           </button>
           
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg font-bold'>
+            <h1 className='text-lg md:text-xl font-bold'>
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
             </h1>
             <div className='flex gap-2'>
-              <Search className='w-4 h-4 text-black dark:text-white' />
-              <Brain className='w-4 h-4 text-black dark:text-white' />
-              <Beer className='w-4 h-4 text-black dark:text-white' />
+              <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Beer className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
             </div>
           </div>
           
@@ -146,33 +153,35 @@ const App = () => {
         </div>
 
         {/* Manual location form */}
-        <div className='flex flex-col items-center text-center'>
-          <div className='bg-purple-500/20 rounded-full p-8 mb-8'>
-            <MapPin className='w-12 h-12 text-purple-400 fill-purple-400' />
-          </div>
+        <div className='flex flex-col items-center text-center max-w-6xl mx-auto'>
+          <div className='max-w-2xl mx-auto'>
+            <div className='bg-purple-500/20 rounded-full p-8 md:p-12 mb-8 md:mb-12 inline-block'>
+              <MapPin className='w-12 h-12 md:w-20 md:h-20 text-purple-400 fill-purple-400' />
+            </div>
 
-          <h2 className='text-2xl font-semibold mb-4'>Enter Your Location</h2>
-          <p className='text-gray-600 dark:text-gray-400 mb-8 max-w-sm leading-relaxed'>
-            Enter your city or zip code to find trivia events near you.
-          </p>
+            <h2 className='text-2xl md:text-5xl font-semibold mb-4 md:mb-8'>Enter Your Location</h2>
+            <p className='text-gray-600 dark:text-gray-400 mb-8 md:mb-12 max-w-sm md:max-w-2xl leading-relaxed text-base md:text-xl mx-auto'>
+              Enter your city or zip code to find trivia events near you.
+            </p>
 
-          <form
-            onSubmit={handleManualLocationSubmit}
-            className='w-full max-w-sm space-y-4'
-          >
-            <LocationAutocomplete
-              value={manualLocation}
-              onChange={setManualLocation}
-              onSelect={handleLocationSelect}
-              placeholder="City or ZIP code"
-            />
-            <button
-              type='submit'
-              className='bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-8 rounded-lg w-full transition-colors'
+            <form
+              onSubmit={handleManualLocationSubmit}
+              className='w-full max-w-sm md:max-w-lg space-y-4 md:space-y-8 mx-auto'
             >
-              Find Trivia Events
-            </button>
-          </form>
+              <LocationAutocomplete
+                value={manualLocation}
+                onChange={setManualLocation}
+                onSelect={handleLocationSelect}
+                placeholder="City or ZIP code"
+              />
+              <button
+                type='submit'
+                className='bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 md:py-5 px-8 rounded-lg w-full transition-all duration-200 text-base md:text-xl hover:scale-105 hover:shadow-lg'
+              >
+                Find Trivia Events
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     )
@@ -185,7 +194,7 @@ const App = () => {
       data-theme={theme || 'dark'}
     >
       {/* Header with theme toggle */}
-      <div className='flex justify-between items-center mb-6'>
+      <div className='flex justify-between items-center mb-6 max-w-6xl mx-auto'>
         <div></div>
         <button onClick={toggleTheme} className='p-2'>
           {theme === 'dark' ? (
@@ -197,53 +206,57 @@ const App = () => {
       </div>
 
       {/* Main content */}
-      <div className='flex flex-col items-center text-center'>
-        {/* App title */}
-        <h1 className='text-5xl font-bold mb-4'>
-          <span className='text-purple-400'>TRIVIA</span>
-          <span className='text-black dark:text-white'>NEARBY</span>
-        </h1>
+      <div className='flex flex-col items-center text-center max-w-6xl mx-auto'>
+        <div className='max-w-2xl mx-auto'>
+          {/* App title */}
+          <h1 className='text-5xl md:text-7xl font-bold mb-4 md:mb-8'>
+            <span className='text-purple-400'>TRIVIA</span>
+            <span className='text-black dark:text-white'>NEARBY</span>
+          </h1>
 
-        {/* Logo icons */}
-        <div className='flex gap-6 mb-6'>
-          <Search className='w-8 h-8 text-black dark:text-white' />
-          <Brain className='w-8 h-8 text-black dark:text-white' />
-          <Beer className='w-8 h-8 text-black dark:text-white' />
-        </div>
+          {/* Logo icons */}
+          <div className='flex gap-6 md:gap-8 mb-6 md:mb-8 justify-center'>
+            <Search className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
+            <Brain className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
+            <Beer className='w-8 h-8 md:w-12 md:h-12 text-black dark:text-white' />
+          </div>
 
-        {/* Location pin icon - reduced padding */}
-        <div className='bg-purple-500/20 rounded-full p-6 mb-6'>
-          <MapPin className='w-12 h-12 text-purple-400 fill-purple-400' />
-        </div>
+          {/* Location pin icon - reduced padding */}
+          <div className='bg-purple-500/20 rounded-full p-6 md:p-8 mb-6 md:mb-8 inline-block'>
+            <MapPin className='w-12 h-12 md:w-16 md:h-16 text-purple-400 fill-purple-400' />
+          </div>
 
-        {/* Headline and description */}
-        <h2 className='text-2xl font-semibold mb-4'>Find Trivia Near You</h2>
-        <p className='text-gray-600 dark:text-gray-400 mb-4 max-w-sm leading-relaxed'>
-          Discover the best trivia nights at bars and restaurants in your area.
-        </p>
+          {/* Headline and description */}
+          <h2 className='text-2xl md:text-4xl font-semibold mb-4 md:mb-6'>Find Trivia Near You</h2>
+          <p className='text-gray-600 dark:text-gray-400 mb-4 md:mb-8 max-w-sm md:max-w-2xl leading-relaxed text-base md:text-lg mx-auto'>
+            Discover the best trivia nights at bars and restaurants in your area.
+          </p>
 
-        {/* Share location button */}
-        <button
-          onClick={handleShareLocation}
-          disabled={isLoadingLocation}
-          className='bg-purple-500 hover:bg-purple-600 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium text-lg py-3 px-6 rounded-lg w-full max-w-sm transition-colors mb-4 flex items-center justify-center gap-2'
-        >
-          {isLoadingLocation && <Loader2 className='w-5 h-5 animate-spin' />}
-          {isLoadingLocation ? 'Getting Location...' : 'Share My Location'}
-        </button>
+          {/* Share location button */}
+          <div className='w-full max-w-sm md:max-w-lg mx-auto mb-4 md:mb-6'>
+            <button
+              onClick={handleShareLocation}
+              disabled={isLoadingLocation}
+              className='bg-purple-500 hover:bg-purple-600 disabled:bg-purple-400 disabled:cursor-not-allowed text-white font-medium py-4 md:py-5 px-8 rounded-lg w-full transition-all duration-200 flex items-center justify-center gap-2 text-base md:text-xl hover:scale-105 hover:shadow-lg'
+            >
+              {isLoadingLocation && <Loader2 className='w-5 h-5 animate-spin' />}
+              {isLoadingLocation ? 'Getting Location...' : 'Share My Location'}
+            </button>
+          </div>
 
-        {/* Manual location option */}
-        <button
-          onClick={() => setAppState('manual-location')}
-          className='text-purple-400 font-medium hover:text-purple-300 transition-colors'
-        >
-          Enter location manually
-        </button>
+          {/* Manual location option */}
+          <button
+            onClick={() => setAppState('manual-location')}
+            className='text-purple-400 font-medium hover:text-purple-300 transition-all duration-200 text-base md:text-xl hover:scale-105'
+          >
+            Enter location manually
+          </button>
 
-        {/* Combined disclaimer text */}
-        <div className='text-gray-500 text-sm mt-3 max-w-sm leading-relaxed space-y-2'>
-          <p>We only use your location to find trivia events near you. We don't store or share your precise location.</p>
-          <p>Event details may change. Please check with venues to confirm current schedules.</p>
+          {/* Combined disclaimer text */}
+          <div className='text-gray-500 text-sm md:text-base mt-3 md:mt-6 max-w-sm md:max-w-2xl leading-relaxed space-y-2 mx-auto'>
+            <p>We only use your location to find trivia events near you. We don't store or share your precise location.</p>
+            <p>Event details may change. Please check with venues to confirm current schedules.</p>
+          </div>
         </div>
 
         {/* Admin link */}

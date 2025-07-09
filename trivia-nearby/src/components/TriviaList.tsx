@@ -230,24 +230,24 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     return (
       <div className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-4 py-6'>
         {/* Header with theme toggle */}
-        <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center mb-6 max-w-7xl mx-auto'>
           <button
             onClick={onBack}
-            className='text-purple-400 font-medium'
+            className='text-purple-400 font-medium text-base md:text-lg'
           >
             ← Back
           </button>
 
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg font-bold'>
+            <h1 className='text-lg md:text-xl font-bold'>
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
             </h1>
             <div className='flex gap-2'>
-              <Search className='w-4 h-4 text-black dark:text-white' />
-              <Brain className='w-4 h-4 text-black dark:text-white' />
-              <Beer className='w-4 h-4 text-black dark:text-white' />
+              <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Beer className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
             </div>
           </div>
 
@@ -260,10 +260,10 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           </button>
         </div>
 
-        <div className='flex items-center justify-center h-64'>
+        <div className='flex items-center justify-center h-64 md:h-96'>
           <div className='text-center'>
-            <Loader2 className='w-8 h-8 animate-spin mx-auto mb-4' />
-            <p className='text-gray-600 dark:text-gray-400'>
+            <Loader2 className='w-8 h-8 md:w-12 md:h-12 animate-spin mx-auto mb-4' />
+            <p className='text-gray-600 dark:text-gray-400 text-base md:text-lg'>
               Loading trivia events...
             </p>
           </div>
@@ -276,24 +276,24 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     return (
       <div className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-4 py-6'>
         {/* Header with theme toggle */}
-        <div className='flex justify-between items-center mb-6'>
+        <div className='flex justify-between items-center mb-6 max-w-7xl mx-auto'>
           <button
             onClick={onBack}
-            className='text-purple-400 font-medium'
+            className='text-purple-400 font-medium text-base md:text-lg'
           >
             ← Back
           </button>
 
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg font-bold'>
+            <h1 className='text-lg md:text-xl font-bold'>
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
             </h1>
             <div className='flex gap-2'>
-              <Search className='w-4 h-4 text-black dark:text-white' />
-              <Brain className='w-4 h-4 text-black dark:text-white' />
-              <Beer className='w-4 h-4 text-black dark:text-white' />
+              <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+              <Beer className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
             </div>
           </div>
 
@@ -306,11 +306,11 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           </button>
         </div>
 
-        <div className='flex items-center justify-center h-64'>
+        <div className='flex items-center justify-center h-64 md:h-96'>
           <div className='text-center'>
-            <AlertCircle className='w-8 h-8 text-red-500 mx-auto mb-4' />
-            <p className='text-red-500 mb-2'>Failed to load trivia events</p>
-            <p className='text-gray-600 dark:text-gray-400 text-sm'>{error}</p>
+            <AlertCircle className='w-8 h-8 md:w-12 md:h-12 text-red-500 mx-auto mb-4' />
+            <p className='text-red-500 mb-2 text-base md:text-lg'>Failed to load trivia events</p>
+            <p className='text-gray-600 dark:text-gray-400 text-sm md:text-base'>{error}</p>
           </div>
         </div>
       </div>
@@ -320,24 +320,24 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
   return (
     <div className='bg-white dark:bg-black w-full min-h-screen text-black dark:text-white px-4 py-6'>
       {/* Header with theme toggle */}
-      <div className='flex justify-between items-center mb-6'>
+      <div className='flex justify-between items-center mb-6 max-w-7xl mx-auto'>
         <button
           onClick={onBack}
-          className='text-purple-400 font-medium'
+          className='text-purple-400 font-medium text-base md:text-lg'
         >
           ← Back
         </button>
 
         {/* App title header */}
         <div className='flex items-center gap-3'>
-          <h1 className='text-lg font-bold'>
+          <h1 className='text-lg md:text-xl font-bold'>
             <span className='text-purple-400'>TRIVIA</span>
             <span className='text-black dark:text-white'>NEARBY</span>
           </h1>
           <div className='flex gap-2'>
-            <Search className='w-4 h-4 text-black dark:text-white' />
-            <Brain className='w-4 h-4 text-black dark:text-white' />
-            <Beer className='w-4 h-4 text-black dark:text-white' />
+            <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+            <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
+            <Beer className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
           </div>
         </div>
 
@@ -350,143 +350,143 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
         </button>
       </div>
 
-
-      {/* Header */}
-      <div className='mb-6'>
-        <h1 className='text-2xl font-bold mb-2'>
-          Trivia Near {location}
-        </h1>
-        <p className='text-gray-600 dark:text-gray-400'>
-          {venueCards.length} venues found
-          {userLocation.loading && ' • Getting location...'}
-          {userLocation.error && ' • Location unavailable'}
-        </p>
-      </div>
-
-      {/* Date Filter Pillboxes */}
-      <div className='mb-6'>
-        <div className='flex gap-2'>
-          <button
-            onClick={() => setDateFilter('today')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              dateFilter === 'today'
-                ? 'bg-purple-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-            }`}
-          >
-            Today
-          </button>
-          <button
-            onClick={() => setDateFilter('tomorrow')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              dateFilter === 'tomorrow'
-                ? 'bg-purple-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-            }`}
-          >
-            Tomorrow
-          </button>
-          <button
-            onClick={() => setDateFilter('this-week')}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              dateFilter === 'this-week'
-                ? 'bg-purple-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-            }`}
-          >
-            This Week
-          </button>
-        </div>
-      </div>
-
-      {/* No venues found */}
-      {venueCards.length === 0 && (
-        <div className='text-center py-12'>
-          <Calendar className='w-12 h-12 text-gray-400 mx-auto mb-4' />
-          <h3 className='text-lg font-medium mb-2'>No trivia venues found</h3>
-          <p className='text-gray-600 dark:text-gray-400'>
-            Try expanding your search radius or check back later for new venues.
+      <div className='max-w-7xl mx-auto'>
+        {/* Header */}
+        <div className='mb-6'>
+          <h1 className='text-2xl md:text-4xl font-bold mb-2'>
+            Trivia Near {location}
+          </h1>
+          <p className='text-gray-600 dark:text-gray-400 text-base md:text-lg'>
+            {venueCards.length} venues found
+            {userLocation.loading && ' • Getting location...'}
+            {userLocation.error && ' • Location unavailable'}
           </p>
         </div>
-      )}
 
-      {/* Venue Cards */}
-      <div className='space-y-6'>
-        {venueCards.map((venueCard) => (
-          <div
-            key={venueCard.venue_id}
-            className='bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700'
-          >
-            {/* Venue Image with Overlaid Text */}
-            <div className='relative h-48 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
-              <img
-                {...getImageProps(
-                  venueCard.image.startsWith('ATK') ? venueCard.image : null, // Google photo reference
-                  venueCard.image.startsWith('http') ? venueCard.image : null, // Thumbnail URL
-                  venueCard.venue_name
-                )}
-                className='w-full h-full object-cover'
-              />
-              {venueCard.distance && (
-                <div className='absolute top-3 right-3 bg-purple-500 text-white px-2 py-1 rounded-full text-sm font-medium backdrop-blur-sm bg-opacity-90'>
-                  {venueCard.distance}
-                </div>
-              )}
-              {/* Stronger gradient overlay for better text contrast */}
-              <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
-              
-              {/* Overlaid Venue Details */}
-              <div className='absolute bottom-0 left-0 right-0 p-4 text-white'>
-                <h3 className='text-xl font-bold mb-1 drop-shadow-lg'>{venueCard.venue}</h3>
-                <div className='text-sm text-white/90 drop-shadow-md'>
-                  {venueCard.address}
-                </div>
-              </div>
-            </div>
-
-            {/* Events Section Only */}
-            <div className='p-4'>
-
-              {/* Events */}
-              <div className='space-y-2'>
-                {venueCard.events.map((event) => (
-                  <div
-                    key={event.id}
-                    className='border-t border-gray-200 dark:border-gray-700 pt-3'
-                  >
-                    <div className='flex justify-between items-start mb-2'>
-                      <h5 className='font-medium text-purple-400'>
-                        {event.title}
-                      </h5>
-                      <span className='text-xs text-gray-500 bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded'>
-                        {event.frequency}
-                      </span>
-                    </div>
-
-                    <div className='flex items-center justify-between text-sm text-gray-600 dark:text-gray-400'>
-                      <div className='flex items-center gap-4'>
-                        <div className='flex items-center gap-1'>
-                          <Calendar className='w-4 h-4' />
-                          <span>{event.day}</span>
-                        </div>
-
-                        <div className='flex items-center gap-1'>
-                          <Clock className='w-4 h-4' />
-                          <span>{event.time}</span>
-                        </div>
-                      </div>
-
-                      <div className='flex items-center gap-1'>
-                        <DollarSign className='w-4 h-4' />
-                        <span>{event.prize}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        {/* Date Filter Pillboxes */}
+        <div className='mb-8'>
+          <div className='flex gap-3 flex-wrap justify-center md:justify-start'>
+            <button
+              onClick={() => setDateFilter('today')}
+              className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
+                dateFilter === 'today'
+                  ? 'bg-purple-500 text-white shadow-lg transform scale-105'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105'
+              }`}
+            >
+              Today
+            </button>
+            <button
+              onClick={() => setDateFilter('tomorrow')}
+              className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
+                dateFilter === 'tomorrow'
+                  ? 'bg-purple-500 text-white shadow-lg transform scale-105'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105'
+              }`}
+            >
+              Tomorrow
+            </button>
+            <button
+              onClick={() => setDateFilter('this-week')}
+              className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
+                dateFilter === 'this-week'
+                  ? 'bg-purple-500 text-white shadow-lg transform scale-105'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105'
+              }`}
+            >
+              This Week
+            </button>
           </div>
-        ))}
+        </div>
+
+        {/* No venues found */}
+        {venueCards.length === 0 && (
+          <div className='text-center py-12'>
+            <Calendar className='w-12 h-12 md:w-16 md:h-16 text-gray-400 mx-auto mb-4' />
+            <h3 className='text-lg md:text-xl font-medium mb-2'>No trivia venues found</h3>
+            <p className='text-gray-600 dark:text-gray-400 text-base md:text-lg'>
+              Try expanding your search radius or check back later for new venues.
+            </p>
+          </div>
+        )}
+
+        {/* Venue Cards - Grid Layout for Desktop */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+          {venueCards.map((venueCard) => (
+            <div
+              key={venueCard.venue_id}
+              className='bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer'
+            >
+              {/* Venue Image with Overlaid Text */}
+              <div className='relative h-48 md:h-56 lg:h-52 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
+                <img
+                  {...getImageProps(
+                    venueCard.image.startsWith('ATK') ? venueCard.image : null, // Google photo reference
+                    venueCard.image.startsWith('http') ? venueCard.image : null, // Thumbnail URL
+                    venueCard.venue_name
+                  )}
+                  className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'
+                />
+                {venueCard.distance && (
+                  <div className='absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm bg-opacity-90 shadow-lg'>
+                    {venueCard.distance}
+                  </div>
+                )}
+                {/* Stronger gradient overlay for better text contrast */}
+                <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
+                
+                {/* Overlaid Venue Details */}
+                <div className='absolute bottom-0 left-0 right-0 p-4 text-white'>
+                  <h3 className='text-lg md:text-xl font-bold mb-1 drop-shadow-lg line-clamp-2'>{venueCard.venue}</h3>
+                  <div className='text-sm text-white/90 drop-shadow-md line-clamp-1'>
+                    {venueCard.address}
+                  </div>
+                </div>
+              </div>
+
+              {/* Events Section Only */}
+              <div className='p-4 lg:p-5'>
+                {/* Events */}
+                <div className='space-y-3'>
+                  {venueCard.events.map((event) => (
+                    <div
+                      key={event.id}
+                      className='border-t border-gray-200 dark:border-gray-700 pt-3 first:border-t-0 first:pt-0'
+                    >
+                      <div className='flex justify-between items-start mb-2'>
+                        <h5 className='font-medium text-purple-400 line-clamp-1 text-sm lg:text-base'>
+                          {event.title}
+                        </h5>
+                        <span className='text-xs text-gray-500 bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded flex-shrink-0 ml-2'>
+                          {event.frequency}
+                        </span>
+                      </div>
+
+                      <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 text-sm text-gray-600 dark:text-gray-400'>
+                        <div className='flex items-center gap-3 lg:gap-4'>
+                          <div className='flex items-center gap-1'>
+                            <Calendar className='w-4 h-4' />
+                            <span className='text-xs lg:text-sm'>{event.day}</span>
+                          </div>
+
+                          <div className='flex items-center gap-1'>
+                            <Clock className='w-4 h-4' />
+                            <span className='text-xs lg:text-sm'>{event.time}</span>
+                          </div>
+                        </div>
+
+                        <div className='flex items-center gap-1'>
+                          <DollarSign className='w-4 h-4' />
+                          <span className='line-clamp-1 text-xs lg:text-sm'>{event.prize}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
