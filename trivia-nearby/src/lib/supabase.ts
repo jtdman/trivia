@@ -24,6 +24,8 @@ export interface Venue {
   google_photo_reference?: string
   thumbnail_url?: string
   verification_status: 'pending' | 'verified' | 'failed' | 'needs_review'
+  is_imported?: boolean
+  created_by?: string
   created_at: string
   updated_at: string
 }
@@ -67,7 +69,7 @@ export interface VenueWithEvents extends Venue {
 export interface UserProfile {
   id: string
   display_name?: string
-  role?: 'trivia_host' | 'venue_owner' | 'admin'
+  role?: 'platform_admin' | 'trivia_host' | 'venue_owner' | 'staff'
   provider_id?: string
   created_at: string
   updated_at: string
@@ -79,4 +81,15 @@ export interface UserVenue {
   role: 'owner' | 'manager' | 'host'
   granted_at: string
   granted_by?: string
+}
+
+export interface TriviaProvider {
+  id: string
+  name: string
+  website?: string
+  phone?: string
+  email?: string
+  is_active: boolean
+  created_at: string
+  updated_at: string
 }
