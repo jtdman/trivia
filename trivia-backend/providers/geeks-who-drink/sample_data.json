@@ -1,0 +1,850 @@
+{
+  "venues": [
+    {
+      "name_original": "Wynkoop Brewing Company",
+      "address_original": "1634 18th St, Denver, CO",
+      "city": "Denver",
+      "state": "CO",
+      "zip_code": "80202",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Falling Rock Tap House",
+      "address_original": "1919 Blake St, Denver, CO",
+      "city": "Denver",
+      "state": "CO",
+      "zip_code": "80202",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Highlands Tavern",
+      "address_original": "3927 W 32nd Ave, Denver, CO",
+      "city": "Denver",
+      "state": "CO",
+      "zip_code": "80212",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Lowry Beer Garden",
+      "address_original": "7577 E Academy Blvd, Denver, CO",
+      "city": "Denver",
+      "state": "CO",
+      "zip_code": "80230",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Draught House",
+      "address_original": "4112 Medical Pkwy, Austin, TX",
+      "city": "Austin",
+      "state": "TX",
+      "zip_code": "78756",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Scholz Garten",
+      "address_original": "1607 San Jacinto Blvd, Austin, TX",
+      "city": "Austin",
+      "state": "TX",
+      "zip_code": "78701",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Lazarus Brewing",
+      "address_original": "1902 E 6th St, Austin, TX",
+      "city": "Austin",
+      "state": "TX",
+      "zip_code": "78702",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "McMenamins Crystal Ballroom",
+      "address_original": "1332 W Burnside St, Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "zip_code": "97209",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Bailey's Taproom",
+      "address_original": "213 SW Broadway, Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "zip_code": "97205",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Prost!",
+      "address_original": "4237 N Mississippi Ave, Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "zip_code": "97227",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Fremont Brewing Company",
+      "address_original": "1050 N 34th St, Seattle, WA",
+      "city": "Seattle",
+      "state": "WA",
+      "zip_code": "98103",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Walrus and The Carpenter",
+      "address_original": "4743 Ballard Ave NW, Seattle, WA",
+      "city": "Seattle",
+      "state": "WA",
+      "zip_code": "98107",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Optimism Brewing",
+      "address_original": "1158 Broadway, Seattle, WA",
+      "city": "Seattle",
+      "state": "WA",
+      "zip_code": "98122",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Thirsty Bear Brewing",
+      "address_original": "661 Howard St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94105",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Public House",
+      "address_original": "24 Willie Mays Plaza, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94107",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Mad Dog in the Fog",
+      "address_original": "530 Haight St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94117",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Misfit Restaurant + Bar",
+      "address_original": "225 Santa Monica Blvd, Santa Monica, CA",
+      "city": "Santa Monica",
+      "state": "CA",
+      "zip_code": "90401",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Barney's Beanery",
+      "address_original": "8447 Santa Monica Blvd, West Hollywood, CA",
+      "city": "West Hollywood",
+      "state": "CA",
+      "zip_code": "90069",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Red Lion Tavern",
+      "address_original": "2366 Glendale Blvd, Los Angeles, CA",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip_code": "90039",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Goose Island Brewpub",
+      "address_original": "1800 N Clybourn Ave, Chicago, IL",
+      "city": "Chicago",
+      "state": "IL",
+      "zip_code": "60614",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Sluggers World Class Sports Bar",
+      "address_original": "3540 N Clark St, Chicago, IL",
+      "city": "Chicago",
+      "state": "IL",
+      "zip_code": "60657",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Murphy's Bleachers",
+      "address_original": "3655 N Sheffield Ave, Chicago, IL",
+      "city": "Chicago",
+      "state": "IL",
+      "zip_code": "60613",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Peculier Pub",
+      "address_original": "145 Bleecker St, New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "zip_code": "10012",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Ginger Man",
+      "address_original": "11 E 36th St, New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "zip_code": "10016",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Dive Bar",
+      "address_original": "732 E 9th St, New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "zip_code": "10009",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Thinking Cup",
+      "address_original": "85 Newbury St, Boston, MA",
+      "city": "Boston",
+      "state": "MA",
+      "zip_code": "02116",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Sunset Grill & Tap",
+      "address_original": "130 Brighton Ave, Boston, MA",
+      "city": "Boston",
+      "state": "MA",
+      "zip_code": "02134",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Quiet Man Pub",
+      "address_original": "11 Dorchester St, Boston, MA",
+      "city": "Boston",
+      "state": "MA",
+      "zip_code": "02127",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Vortex Bar & Grill",
+      "address_original": "438 Moreland Ave NE, Atlanta, GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "zip_code": "30307",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Northside Tavern",
+      "address_original": "1058 Howell Mill Rd, Atlanta, GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "zip_code": "30318",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Porter Beer Bar",
+      "address_original": "1156 Euclid Ave NE, Atlanta, GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "zip_code": "30307",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Blackbird Ordinary",
+      "address_original": "729 SW 1st Ave, Miami, FL",
+      "city": "Miami",
+      "state": "FL",
+      "zip_code": "33130",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Broken Shaker",
+      "address_original": "2727 Indian Creek Dr, Miami Beach, FL",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33140",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Regent Cocktail Club",
+      "address_original": "1690 Collins Ave, Miami Beach, FL",
+      "city": "Miami Beach",
+      "state": "FL",
+      "zip_code": "33139",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Four Peaks Brewing",
+      "address_original": "1340 E 8th St, Tempe, AZ",
+      "city": "Tempe",
+      "state": "AZ",
+      "zip_code": "85281",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "The Cornish Pasty Co",
+      "address_original": "960 W University Dr, Tempe, AZ",
+      "city": "Tempe",
+      "state": "AZ",
+      "zip_code": "85281",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    },
+    {
+      "name_original": "Zipps Sports Grill",
+      "address_original": "2320 W Northern Ave, Phoenix, AZ",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zip_code": "85021",
+      "phone_number": null,
+      "website": null,
+      "verification_status": "needs_review",
+      "is_imported": true,
+      "import_source": "geeks_who_drink"
+    }
+  ],
+  "events": [
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Monday",
+      "start_time": "7:00 PM",
+      "venue_name": "Wynkoop Brewing Company",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Tuesday",
+      "start_time": "7:30 PM",
+      "venue_name": "Wynkoop Brewing Company",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Tuesday",
+      "start_time": "7:30 PM",
+      "venue_name": "Falling Rock Tap House",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Wednesday",
+      "start_time": "8:00 PM",
+      "venue_name": "Highlands Tavern",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Thursday",
+      "start_time": "8:30 PM",
+      "venue_name": "Lowry Beer Garden",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Friday",
+      "start_time": "9:00 PM",
+      "venue_name": "Lowry Beer Garden",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Friday",
+      "start_time": "9:00 PM",
+      "venue_name": "The Draught House",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Saturday",
+      "start_time": "7:00 PM",
+      "venue_name": "Scholz Garten",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Sunday",
+      "start_time": "7:30 PM",
+      "venue_name": "Lazarus Brewing",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Monday",
+      "start_time": "8:00 PM",
+      "venue_name": "Lazarus Brewing",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Monday",
+      "start_time": "8:00 PM",
+      "venue_name": "McMenamins Crystal Ballroom",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Tuesday",
+      "start_time": "8:30 PM",
+      "venue_name": "Bailey's Taproom",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Wednesday",
+      "start_time": "9:00 PM",
+      "venue_name": "Prost!",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Thursday",
+      "start_time": "7:00 PM",
+      "venue_name": "Prost!",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Thursday",
+      "start_time": "7:00 PM",
+      "venue_name": "Fremont Brewing Company",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Friday",
+      "start_time": "7:30 PM",
+      "venue_name": "The Walrus and The Carpenter",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Saturday",
+      "start_time": "8:00 PM",
+      "venue_name": "Optimism Brewing",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Sunday",
+      "start_time": "8:30 PM",
+      "venue_name": "Optimism Brewing",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Sunday",
+      "start_time": "8:30 PM",
+      "venue_name": "Thirsty Bear Brewing",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Monday",
+      "start_time": "9:00 PM",
+      "venue_name": "Public House",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Tuesday",
+      "start_time": "7:00 PM",
+      "venue_name": "Mad Dog in the Fog",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Wednesday",
+      "start_time": "7:30 PM",
+      "venue_name": "Mad Dog in the Fog",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Wednesday",
+      "start_time": "7:30 PM",
+      "venue_name": "The Misfit Restaurant + Bar",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Thursday",
+      "start_time": "8:00 PM",
+      "venue_name": "Barney's Beanery",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Friday",
+      "start_time": "8:30 PM",
+      "venue_name": "Red Lion Tavern",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Saturday",
+      "start_time": "9:00 PM",
+      "venue_name": "Red Lion Tavern",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Saturday",
+      "start_time": "9:00 PM",
+      "venue_name": "Goose Island Brewpub",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Sunday",
+      "start_time": "7:00 PM",
+      "venue_name": "Sluggers World Class Sports Bar",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Monday",
+      "start_time": "7:30 PM",
+      "venue_name": "Murphy's Bleachers",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Tuesday",
+      "start_time": "8:00 PM",
+      "venue_name": "Murphy's Bleachers",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Tuesday",
+      "start_time": "8:00 PM",
+      "venue_name": "Peculier Pub",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Wednesday",
+      "start_time": "8:30 PM",
+      "venue_name": "The Ginger Man",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Thursday",
+      "start_time": "9:00 PM",
+      "venue_name": "Dive Bar",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Friday",
+      "start_time": "7:00 PM",
+      "venue_name": "Dive Bar",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Friday",
+      "start_time": "7:00 PM",
+      "venue_name": "The Thinking Cup",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Saturday",
+      "start_time": "7:30 PM",
+      "venue_name": "Sunset Grill & Tap",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Sunday",
+      "start_time": "8:00 PM",
+      "venue_name": "The Quiet Man Pub",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Monday",
+      "start_time": "8:30 PM",
+      "venue_name": "The Quiet Man Pub",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Monday",
+      "start_time": "8:30 PM",
+      "venue_name": "The Vortex Bar & Grill",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Tuesday",
+      "start_time": "9:00 PM",
+      "venue_name": "Northside Tavern",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Wednesday",
+      "start_time": "7:00 PM",
+      "venue_name": "The Porter Beer Bar",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Thursday",
+      "start_time": "7:30 PM",
+      "venue_name": "The Porter Beer Bar",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Thursday",
+      "start_time": "7:30 PM",
+      "venue_name": "Blackbird Ordinary",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Friday",
+      "start_time": "8:00 PM",
+      "venue_name": "Broken Shaker",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Boombox Bingo",
+      "day_of_week": "Saturday",
+      "start_time": "8:30 PM",
+      "venue_name": "The Regent Cocktail Club",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Sunday",
+      "start_time": "9:00 PM",
+      "venue_name": "The Regent Cocktail Club",
+      "end_time": "10:30 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Theme Quiz",
+      "day_of_week": "Sunday",
+      "start_time": "9:00 PM",
+      "venue_name": "Four Peaks Brewing",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "GWD Classic",
+      "day_of_week": "Monday",
+      "start_time": "7:00 PM",
+      "venue_name": "The Cornish Pasty Co",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Small Batch Trivia",
+      "day_of_week": "Tuesday",
+      "start_time": "7:30 PM",
+      "venue_name": "Zipps Sports Grill",
+      "end_time": "10:00 PM",
+      "is_active": true
+    },
+    {
+      "event_type": "Jeopardy! Bar League",
+      "day_of_week": "Wednesday",
+      "start_time": "8:00 PM",
+      "venue_name": "Zipps Sports Grill",
+      "end_time": "10:30 PM",
+      "is_active": true
+    }
+  ]
+}
