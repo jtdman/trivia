@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import TriviaList from './TriviaList'
-import SEO from './SEO'
+import SimpleSEO from './SimpleSEO'
 import StructuredData, { createBreadcrumbSchema } from './StructuredData'
 
 interface LocationPageProps {
@@ -53,7 +53,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ onBack }) => {
 
   return (
     <>
-      <SEO
+      <SimpleSEO
         title={`Trivia Events in ${locationName} - Find Trivia Near Me | Trivia Nearby`}
         description={`Find trivia nights in ${locationName}! Discover local trivia events at bars and restaurants. See weekly schedules, prizes, and venue details.`}
         keywords={`trivia ${locationName}, trivia events ${locationName}, trivia nights ${locationName}, bars ${locationName}, restaurants ${locationName}`}
