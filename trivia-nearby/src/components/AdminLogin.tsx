@@ -4,10 +4,9 @@ import { useAuth } from '../context/auth_context'
 import { Brain, Beer, Search, Loader2, AlertCircle } from 'lucide-react'
 
 const AdminLogin: React.FC = () => {
-  const { user, signIn, loading } = useAuth()
+  const { user, signIn, loading, error: authError, clearError } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Redirect if already logged in
@@ -17,7 +16,7 @@ const AdminLogin: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
+    clearError()
     setIsSubmitting(true)
 
     try {
@@ -26,7 +25,7 @@ const AdminLogin: React.FC = () => {
       console.log('Sign in successful')
     } catch (err: any) {
       console.error('Sign in error:', err)
-      setError(err.message || 'Failed to sign in')
+      // Error is now handled by auth context
     } finally {
       setIsSubmitting(false)
     }
@@ -68,10 +67,10 @@ const AdminLogin: React.FC = () => {
 
         {/* Login form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
+          {authError && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex items-center gap-2 text-red-600 dark:text-red-400">
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
-              <span className="text-sm">{error}</span>
+              <span className="text-sm">{authError}</span>
             </div>
           )}
 

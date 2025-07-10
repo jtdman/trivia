@@ -18,6 +18,7 @@ import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
 import LocationPage from './components/LocationPage'
+import UserManagement from './components/UserManagement'
 import BetaPage from './components/BetaPage'
 import { AuthProvider } from './context/auth_context'
 
@@ -60,7 +61,7 @@ const AppRouter: React.FC = () => {
             <Route path="events/new" element={<AddEventPage />} />
             <Route path="events/:eventId" element={<EditEventPage />} />
             <Route path="providers" element={<ProviderContactsPage />} />
-            <Route path="team" element={<div className="p-8">Team page coming soon</div>} />
+            <Route path="team" element={<UserManagement />} />
             <Route path="profile" element={<div className="p-8">Profile page coming soon</div>} />
           </Route>
         </Routes>
