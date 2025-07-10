@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Phone, Mail, Globe, MapPin, Users, Building, ExternalLink, Copy, CheckCircle, Edit3, Save, X, Plus, Trash2 } from 'lucide-react'
-import { supabase, TriviaProvider } from '../lib/supabase'
+import { supabase, type TriviaProvider } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 
 interface ContactInfo {

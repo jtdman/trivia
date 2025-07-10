@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, MapPin, Plus, Edit3, Calendar, Clock, DollarSign, Users, CheckCircle, XCircle } from 'lucide-react'
-import { supabase, Venue, Event } from '../lib/supabase'
+import { supabase, type Venue, type Event } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 
 interface VenueWithEvents extends Venue {
@@ -11,7 +11,7 @@ interface VenueWithEvents extends Venue {
 const VenueDetailPage: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>()
   const navigate = useNavigate()
-  const { userProfile } = useAuth()
+  const { } = useAuth()
   const [venue, setVenue] = useState<VenueWithEvents | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

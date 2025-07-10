@@ -41,7 +41,7 @@ export const useAdminStats = () => {
         setError(null)
 
         // Get total platform stats (for admins)
-        const isAdmin = userProfile.role === 'platform_admin'
+        userProfile.role === 'platform_admin'
         
         // First, get my venue IDs
         const myVenueIds = await supabase

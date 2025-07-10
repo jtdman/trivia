@@ -32,7 +32,7 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  const { userProfile } = useAuth()
+  const { } = useAuth()
   const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)

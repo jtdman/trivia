@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MapPin, Save, X, Loader2, Lock, AlertTriangle } from 'lucide-react'
-import { supabase, Venue } from '../lib/supabase'
+import { Save, X, Loader2, Lock, AlertTriangle } from 'lucide-react'
+import { supabase, type Venue } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 import { useVenuePermissions } from '../hooks/useVenuePermissions'
 
@@ -22,7 +22,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
   onCancel,
   onSuccess
 }) => {
-  const navigate = useNavigate()
+  useNavigate()
   const { userProfile } = useAuth()
   const permissions = useVenuePermissions(initialData, userOwnsVenue)
   const [loading, setLoading] = useState(false)

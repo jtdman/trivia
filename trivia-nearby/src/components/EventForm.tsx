@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Calendar, Clock, MapPin, DollarSign, Users, Save, X, Loader2, Building } from 'lucide-react'
-import { supabase, Event, Venue, TriviaProvider } from '../lib/supabase'
+import { supabase, type Event, type Venue, type TriviaProvider } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 
 interface EventFormProps {

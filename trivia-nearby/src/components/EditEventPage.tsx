@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import EventForm from './EventForm'
-import { supabase, Event, Venue } from '../lib/supabase'
+import { supabase, type Event, type Venue } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 
 interface EventData extends Event {

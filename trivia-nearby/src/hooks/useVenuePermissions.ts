@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useAuth } from '../context/auth_context'
-import { Venue } from '../lib/supabase'
+import type { Venue } from '../lib/supabase'
 
 interface VenuePermissions {
   canEdit: boolean
@@ -45,7 +45,7 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
     }
 
     // Trivia hosts and venue owners
-    if (['trivia_host', 'venue_owner'].includes(userProfile.role)) {
+    if (userProfile.role && ['trivia_host', 'venue_owner'].includes(userProfile.role)) {
       if (!isOwner) {
         return {
           canEdit: false,
@@ -83,7 +83,7 @@ export const useCanCreateVenue = (): boolean => {
   const { userProfile } = useAuth()
   
   return useMemo(() => {
-    if (!userProfile) return false
+    if (!userProfile?.role) return false
     return ['platform_admin', 'trivia_host', 'venue_owner'].includes(userProfile.role)
   }, [userProfile])
 }
