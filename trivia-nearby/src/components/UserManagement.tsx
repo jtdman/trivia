@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Shield, User, Edit3, Save, X, AlertCircle, CheckCircle } from 'lucide-react'
-import { supabase, type UserProfile } from '../lib/supabase'
+import { supabase, type UserWithEmail } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
 
 interface UserManagementProps {}
 
 const UserManagement: React.FC<UserManagementProps> = () => {
   const { userProfile } = useAuth()
-  const [users, setUsers] = useState<UserProfile[]>([])
+  const [users, setUsers] = useState<UserWithEmail[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [editingUser, setEditingUser] = useState<string | null>(null)
@@ -29,10 +29,7 @@ const UserManagement: React.FC<UserManagementProps> = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true)
-      const { data, error } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .order('created_at', { ascending: false })
+      const { data, error } = await supabase.rpc('list_all_users')
 
       if (error) throw error
       setUsers(data || [])
@@ -49,7 +46,7 @@ const UserManagement: React.FC<UserManagementProps> = () => {
       
       // Call the update_user_role function we created in the database
       const { error } = await supabase.rpc('update_user_role', {
-        user_id: userId,
+        target_user_id: userId,
         new_role: role
       })
 
@@ -69,7 +66,7 @@ const UserManagement: React.FC<UserManagementProps> = () => {
     }
   }
 
-  const startEdit = (user: UserProfile) => {
+  const startEdit = (user: UserWithEmail) => {
     setEditingUser(user.id)
     setNewRole(user.role)
   }

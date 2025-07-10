@@ -12,7 +12,6 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName?: string) => Promise<void>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
-  createUserProfile: () => Promise<void>
   clearError: () => void
 }
 
@@ -68,9 +67,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (error) {
         if (error.code === 'PGRST116') {
-          // Profile doesn't exist, try to create it
-          console.log('Profile not found, attempting to create...')
-          await createUserProfileForUser(userId)
+          // Profile doesn't exist - this shouldn't happen with the trigger, but handle gracefully
+          console.log('Profile not found - this may indicate a setup issue')
+          setError('User profile not found. Please contact an administrator.')
           return
         }
         throw error
@@ -80,35 +79,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setError(null)
     } catch (error) {
       console.error('Error fetching user profile:', error)
-      setError('Failed to load user profile. You may need to contact an administrator.')
-    }
-  }
-
-  const createUserProfileForUser = async (userId: string) => {
-    try {
-      const currentUser = await supabase.auth.getUser()
-      if (!currentUser.data.user) throw new Error('No authenticated user')
-
-      const { data, error } = await supabase
-        .from('user_profiles')
-        .insert({
-          id: userId,
-          email: currentUser.data.user.email,
-          role: 'staff', // Default role
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .select()
-        .single()
-
-      if (error) throw error
-      
-      console.log('Created user profile:', data)
-      setUserProfile(data)
-      setError(null)
-    } catch (error) {
-      console.error('Error creating user profile:', error)
-      setError('Failed to create user profile. Please contact an administrator.')
+      setError('Failed to load user profile. Please try refreshing or contact an administrator.')
     }
   }
 
@@ -156,11 +127,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }
 
-  const createUserProfile = async () => {
-    if (!user) throw new Error('No authenticated user')
-    await createUserProfileForUser(user.id)
-  }
-
   const clearError = () => {
     setError(null)
   }
@@ -174,7 +140,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp,
     signOut,
     resetPassword,
-    createUserProfile,
     clearError
   }
 
