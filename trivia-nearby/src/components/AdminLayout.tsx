@@ -38,7 +38,7 @@ const AdminLayout: React.FC = () => {
     ...(userProfile?.role === 'platform_admin' 
       ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
       : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
-    ...(userProfile?.role === 'admin' || userProfile?.role === 'trivia_host' 
+    ...(userProfile?.role === 'platform_admin' || userProfile?.role === 'trivia_host' 
       ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
       : []),
     { path: '/admin/profile', label: 'Profile', icon: User }
