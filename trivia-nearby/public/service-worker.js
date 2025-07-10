@@ -1,10 +1,14 @@
 // Service Worker for Trivia Nearby PWA
-const CACHE_NAME = 'trivia-nearby-v1';
+const CACHE_NAME = 'trivia-nearby-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg'
+  '/icon.svg',
+  '/icon-180.svg',
+  '/icon-192.svg',
+  '/icon-512.svg',
+  '/favicon.svg'
 ];
 
 // Install event - cache resources

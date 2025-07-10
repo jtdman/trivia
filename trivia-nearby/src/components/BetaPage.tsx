@@ -58,8 +58,9 @@ const BetaPage: React.FC = () => {
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <div className="mb-6">
-            <div className="w-24 h-24 bg-purple-500 rounded-2xl mx-auto flex items-center justify-center">
-              <span className="text-5xl font-bold">?</span>
+            <div className="w-24 h-24 bg-purple-500 rounded-2xl mx-auto flex items-center justify-center flex-col">
+              <span className="text-sm font-bold text-black">TRIVIA</span>
+              <span className="text-sm font-bold text-white">NEARBY</span>
             </div>
           </div>
           <h1 className="text-3xl font-bold mb-4">You're All Set!</h1>
@@ -83,8 +84,9 @@ const BetaPage: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6">
-            <div className="w-24 h-24 bg-purple-500 rounded-2xl mx-auto flex items-center justify-center">
-              <span className="text-5xl font-bold">?</span>
+            <div className="w-24 h-24 bg-purple-500 rounded-2xl mx-auto flex items-center justify-center flex-col">
+              <span className="text-sm font-bold text-black">TRIVIA</span>
+              <span className="text-sm font-bold text-white">NEARBY</span>
             </div>
           </div>
           <h1 className="text-4xl font-bold mb-4">
