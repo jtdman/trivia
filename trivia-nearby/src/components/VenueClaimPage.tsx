@@ -229,11 +229,11 @@ const VenueClaimPage: React.FC = () => {
                 </div>
 
                 <div className="ml-4">
-                  {venue.is_claimed ? (
+                  {(venue as any).is_claimed ? (
                     <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
                       <UserCheck className="w-4 h-4" />
                       <span className="text-sm font-medium">
-                        {venue.claimed_by_me ? 'Claimed by you' : 'Already claimed'}
+                        {(venue as any).claimed_by_me ? 'Claimed by you' : 'Already claimed'}
                       </span>
                     </div>
                   ) : (

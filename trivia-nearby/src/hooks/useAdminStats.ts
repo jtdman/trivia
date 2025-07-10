@@ -143,7 +143,7 @@ export const useAdminStats = () => {
           recentEvents: (recentEventsResult.data || []).map(event => ({
             id: event.id,
             event_type: event.event_type,
-            venue_name: event.venues?.google_name || event.venues?.name_original || 'Unknown Venue',
+            venue_name: (event.venues as any)?.google_name || (event.venues as any)?.name_original || 'Unknown Venue',
             day_of_week: event.day_of_week,
             start_time: event.start_time,
             created_at: event.created_at

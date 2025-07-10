@@ -68,7 +68,7 @@ const ProviderContactsPage: React.FC = () => {
   }
 
   const getContactStatus = (provider: TriviaProvider) => {
-    const contact = parseContactInfo(provider.contact_info)
+    const contact = parseContactInfo((provider as any).contact_info)
     if (contact.emails?.length) return { status: 'Complete', color: 'text-green-600', icon: CheckCircle }
     if (contact.phones?.length) return { status: 'Phone Only', color: 'text-yellow-600', icon: Phone }
     if (contact.note?.includes('research needed')) return { status: 'Research Needed', color: 'text-red-600', icon: Users }
@@ -77,7 +77,7 @@ const ProviderContactsPage: React.FC = () => {
 
   const startEditing = (provider: TriviaProvider) => {
     setEditingProvider(provider.id)
-    setEditingContact(parseContactInfo(provider.contact_info))
+    setEditingContact(parseContactInfo((provider as any).contact_info))
   }
 
   const cancelEditing = () => {
@@ -213,19 +213,19 @@ const ProviderContactsPage: React.FC = () => {
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="text-2xl font-bold text-green-600">
-            {providers.filter(p => parseContactInfo(p.contact_info).emails?.length).length}
+            {providers.filter(p => parseContactInfo((p as any).contact_info).emails?.length).length}
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">With Email</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="text-2xl font-bold text-yellow-600">
-            {providers.filter(p => parseContactInfo(p.contact_info).phones?.length).length}
+            {providers.filter(p => parseContactInfo((p as any).contact_info).phones?.length).length}
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">With Phone</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="text-2xl font-bold text-red-600">
-            {providers.filter(p => parseContactInfo(p.contact_info).note?.includes('research needed')).length}
+            {providers.filter(p => parseContactInfo((p as any).contact_info).note?.includes('research needed')).length}
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Need Research</div>
         </div>
@@ -240,7 +240,7 @@ const ProviderContactsPage: React.FC = () => {
       {/* Provider Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {providers.map((provider) => {
-          const contact = parseContactInfo(provider.contact_info)
+          const contact = parseContactInfo((provider as any).contact_info)
           const statusInfo = getContactStatus(provider)
           const StatusIcon = statusInfo.icon
           const isEditing = editingProvider === provider.id

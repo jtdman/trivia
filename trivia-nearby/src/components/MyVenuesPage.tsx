@@ -54,12 +54,12 @@ const MyVenuesPage: React.FC = () => {
 
       if (error) throw error
 
-      const processedVenues = (data || []).map(item => ({
+      const processedVenues = (data || []).map((item: any) => ({
         ...item.venue,
         role: item.role,
         claimed_at: item.granted_at,
-        event_count: item.venue.events?.length || 0,
-        active_events: item.venue.events?.filter(e => e.is_active).length || 0
+        event_count: (item.venue.events as any[])?.length || 0,
+        active_events: (item.venue.events as any[])?.filter((e: any) => e.is_active).length || 0
       }))
 
       setVenues(processedVenues)

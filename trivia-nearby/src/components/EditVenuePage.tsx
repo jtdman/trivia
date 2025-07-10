@@ -178,7 +178,7 @@ const EditVenuePage: React.FC = () => {
       <VenueForm
         mode="edit"
         venueId={venueId}
-        initialData={venue}
+        initialData={venue as any}
         userOwnsVenue={userOwnsVenue}
         onCancel={handleCancel}
         onSuccess={handleSuccess}
