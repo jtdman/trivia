@@ -18,6 +18,7 @@ import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
 import LocationPage from './components/LocationPage'
+import BetaPage from './components/BetaPage'
 import { AuthProvider } from './context/auth_context'
 
 const AppRouter: React.FC = () => {
@@ -27,6 +28,7 @@ const AppRouter: React.FC = () => {
         <Routes>
           {/* Main app routes */}
           <Route path="/" element={<App />} />
+          <Route path="/beta" element={<BetaPage />} />
           
           {/* SEO location routes */}
           <Route path="/trivia-near-me" element={<Navigate to="/" replace />} />

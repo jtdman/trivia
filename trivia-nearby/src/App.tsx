@@ -4,7 +4,7 @@ import { Search, Brain, Beer, MapPin, Sun, Moon, Loader2 } from 'lucide-react'
 import TriviaList from './components/TriviaList'
 import LocationAutocomplete from './components/LocationAutocomplete'
 import { getLocationName } from './utils/location'
-import { getCityCoordinates } from './utils/cityCoordinates'
+// import { getCityCoordinates } from './utils/cityCoordinates'
 import { Link } from 'react-router-dom'
 import StructuredData, { createWebsiteSchema, createLocalBusinessSchema } from './components/StructuredData'
 
