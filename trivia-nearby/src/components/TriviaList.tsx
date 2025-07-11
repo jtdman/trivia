@@ -242,10 +242,13 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
 
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg md:text-xl font-bold'>
+            <button
+              onClick={onBack}
+              className='text-lg md:text-xl font-bold hover:opacity-80 transition-opacity'
+            >
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
-            </h1>
+            </button>
             <div className='flex gap-2'>
               <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
               <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
@@ -288,10 +291,13 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
 
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg md:text-xl font-bold'>
+            <button
+              onClick={onBack}
+              className='text-lg md:text-xl font-bold hover:opacity-80 transition-opacity'
+            >
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
-            </h1>
+            </button>
             <div className='flex gap-2'>
               <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
               <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
