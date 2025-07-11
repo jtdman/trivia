@@ -54,13 +54,14 @@ const App = () => {
         (error) => {
           console.error('Location access denied:', error)
           setIsLoadingLocation(false)
-          setAppState('manual-location')
+          // Stay on splash screen instead of redirecting to manual entry
+          alert('Location access denied. Please use "Enter location manually" if you want to continue.')
         }
       )
     } else {
       console.log('Geolocation not available')
       setIsLoadingLocation(false)
-      setAppState('manual-location')
+      alert('Location services not available on this device. Please use "Enter location manually".')
     }
   }
 
@@ -140,10 +141,13 @@ const App = () => {
           
           {/* App title header */}
           <div className='flex items-center gap-3'>
-            <h1 className='text-lg md:text-xl font-bold'>
+            <button
+              onClick={() => setAppState('splash')}
+              className='text-lg md:text-xl font-bold hover:opacity-80 transition-opacity'
+            >
               <span className='text-purple-400'>TRIVIA</span>
               <span className='text-black dark:text-white'>NEARBY</span>
-            </h1>
+            </button>
             <div className='flex gap-2'>
               <Search className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
               <Brain className='w-4 h-4 md:w-5 md:h-5 text-black dark:text-white' />
