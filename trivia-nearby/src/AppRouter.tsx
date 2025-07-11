@@ -4,6 +4,7 @@ import App from './App'
 import AdminLayout from './components/AdminLayout'
 import AdminLogin from './components/AdminLogin'
 import AdminRegister from './components/AdminRegister'
+import AdminForgotPassword from './components/AdminForgotPassword'
 import AdminDashboard from './components/AdminDashboard'
 import VenuesList from './components/VenuesList'
 import AddVenuePage from './components/AddVenuePage'
@@ -38,6 +39,7 @@ const AppRouter: React.FC = () => {
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
+          <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
           <Route path="/admin/test" element={<AdminTest />} />
           
           {/* Protected admin routes */}
