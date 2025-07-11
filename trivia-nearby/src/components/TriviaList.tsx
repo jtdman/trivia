@@ -78,15 +78,14 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     tomorrow.setDate(today.getDate() + 1)
     const tomorrowDay = tomorrow.toLocaleDateString('en-US', { weekday: 'long' })
     
-    // Get days from today through end of week (Sunday)
+    // Get days from today through next same day (7 days total)
     const thisWeekDays: string[] = []
     const currentDay = new Date(today)
     
-    // Add days from today through Sunday
-    while (currentDay.getDay() !== 0 || thisWeekDays.length === 0) { // 0 = Sunday
+    // Add 7 days starting from today
+    for (let i = 0; i < 7; i++) {
       thisWeekDays.push(currentDay.toLocaleDateString('en-US', { weekday: 'long' }))
       currentDay.setDate(currentDay.getDate() + 1)
-      if (thisWeekDays.length > 7) break // Safety check
     }
     
     switch (filter) {
