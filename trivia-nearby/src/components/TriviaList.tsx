@@ -107,7 +107,8 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       venue: string
       address: string
       distance: string
-      image: string
+      thumbnail_url: string | null
+      google_photo_reference: string | null
       venue_name: string
       events: Array<{
         id: string
@@ -175,7 +176,8 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
         venue: venue.google_name || venue.name_original,
         address: venue.google_formatted_address || venue.address_original,
         distance,
-        image: venue.thumbnail_url || venue.google_photo_reference || '',
+        thumbnail_url: venue.thumbnail_url,
+        google_photo_reference: venue.google_photo_reference,
         venue_name: venue.google_name || venue.name_original,
         events: Array.from(eventMap.values()),
       })
@@ -442,8 +444,8 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
               <div className='relative h-48 md:h-56 lg:h-52 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
                 <img
                   {...getImageProps(
-                    venueCard.image.startsWith('ATK') ? venueCard.image : null, // Google photo reference
-                    venueCard.image.startsWith('http') ? venueCard.image : null, // Thumbnail URL
+                    venueCard.google_photo_reference,
+                    venueCard.thumbnail_url,
                     venueCard.venue_name
                   )}
                   className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'

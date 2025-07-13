@@ -17,7 +17,8 @@
     "@supabase/supabase-js": "^2.39.0",
     "axios": "^1.10.0",
     "cheerio": "^1.1.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

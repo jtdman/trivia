@@ -8,8 +8,13 @@ This is a trivia directory app for finding nearby trivia events. The project con
 
 - **Root directory**: Contains shared dependencies and project documentation
 - **trivia-nearby/**: React + TypeScript + Vite application with dark theme support
+- **trivia-backend/**: Node.js backend for data processing and venue management
 
 The app is designed as a mobile-first web application that will help users find trivia events based on location, with future plans for native mobile deployment.
+
+## Package Manager
+
+**IMPORTANT**: This project uses **pnpm** exclusively. Always use pnpm commands, never npm or yarn.
 
 ## Development Commands
 
@@ -51,10 +56,32 @@ The app uses a custom theme context that:
 - Sets `data-theme` attribute on document element
 - Provides theme toggle functionality
 
-### Backend Architecture (Planned)
+### Backend Architecture
 - **Supabase** with PostGIS for location-based queries
 - Database schema includes: venues, events, trivia_providers, users
 - Authentication system for venue owners to manage events
+- **trivia-backend/** directory contains data processing scripts
+
+### Backend Commands
+
+All backend commands should be run from the `trivia-backend/` directory using **pnpm**:
+
+```bash
+# Install backend dependencies
+pnpm install
+
+# Import venues from providers
+pnpm import-nerdytalk
+
+# Validate venues with Google Places API (downloads images)
+pnpm validate-places validate --limit 10
+
+# Process existing photos (batch download)
+pnpm process-photos
+
+# Show validation statistics
+pnpm validate-places stats
+```
 
 ## Important Technical Details
 

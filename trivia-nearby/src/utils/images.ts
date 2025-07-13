@@ -6,7 +6,10 @@ export function getGooglePlacesPhotoUrl(
   maxWidth: number = 400,
   maxHeight: number = 300
 ): string {
+  console.log('getGooglePlacesPhotoUrl called with:', { photoReference, GOOGLE_PLACES_API_KEY: !!GOOGLE_PLACES_API_KEY })
+  
   if (!GOOGLE_PLACES_API_KEY || !photoReference) {
+    console.warn('Missing API key or photo reference')
     return '/api/placeholder/400/300'
   }
 
@@ -17,7 +20,9 @@ export function getGooglePlacesPhotoUrl(
     key: GOOGLE_PLACES_API_KEY
   })
 
-  return `https://maps.googleapis.com/maps/api/place/photo?${params.toString()}`
+  const url = `https://maps.googleapis.com/maps/api/place/photo?${params.toString()}`
+  console.log('Generated photo URL:', url)
+  return url
 }
 
 // Generate fallback image based on venue type/name
@@ -83,6 +88,7 @@ export function getImageProps(
     className: `w-full h-full object-cover ${isGooglePhoto ? 'google-photo' : ''} ${isFallback ? 'fallback-image' : ''}`,
     loading: 'lazy' as const,
     onError: (e: React.SyntheticEvent<HTMLImageElement>) => {
+      console.error('Image failed to load:', e.currentTarget.src)
       // Fallback to default image on error
       e.currentTarget.src = getFallbackImage(venueName || 'venue')
     }

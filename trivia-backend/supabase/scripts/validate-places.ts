@@ -1,4 +1,5 @@
 import { supabase, GOOGLE_PLACES_API_KEY, RATE_LIMITS } from '../config/supabase.js'
+import sharp from 'sharp'
 
 interface ValidationOptions {
   status?: 'pending' | 'failed' | 'needs_review'
@@ -72,7 +73,9 @@ class PlacesValidator {
       'price_level',
       'business_status',
       'types',
-      'photos'
+      'photos',
+      'formatted_phone_number',
+      'website'
     ].join(','))
     url.searchParams.set('key', GOOGLE_PLACES_API_KEY)
 
@@ -90,6 +93,95 @@ class PlacesValidator {
     this.apiCallsToday++
 
     return data
+  }
+
+  async downloadGooglePhoto(photoReference: string, maxWidth = 400, maxHeight = 400): Promise<Buffer> {
+    if (!GOOGLE_PLACES_API_KEY) {
+      throw new Error('Google Places API key not configured')
+    }
+
+    const params = new URLSearchParams({
+      photo_reference: photoReference,
+      maxwidth: maxWidth.toString(),
+      maxheight: maxHeight.toString(),
+      key: GOOGLE_PLACES_API_KEY
+    })
+
+    const url = `https://maps.googleapis.com/maps/api/place/photo?${params.toString()}`
+    console.log(`📸 Downloading photo from: ${url.replace(GOOGLE_PLACES_API_KEY, 'API_KEY')}`)
+
+    const response = await fetch(url)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to download photo: ${response.status} ${response.statusText}`)
+    }
+
+    const arrayBuffer = await response.arrayBuffer()
+    return Buffer.from(arrayBuffer)
+  }
+
+  async ensureStorageBucketExists(): Promise<void> {
+    try {
+      // Check if bucket exists
+      const { data: buckets } = await supabase.storage.listBuckets()
+      const bucketExists = buckets?.some(bucket => bucket.name === 'venue-thumbnails')
+      
+      if (!bucketExists) {
+        console.log('Creating venue-thumbnails storage bucket...')
+        const { error } = await supabase.storage.createBucket('venue-thumbnails', {
+          public: true,
+          allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp']
+        })
+        
+        if (error) {
+          console.error('Error creating storage bucket:', error.message)
+        } else {
+          console.log('✅ Storage bucket created successfully')
+        }
+      }
+    } catch (error) {
+      console.warn('Could not verify storage bucket:', error)
+    }
+  }
+
+  async uploadPhotoToSupabase(venueId: string, imageBuffer: Buffer): Promise<string | null> {
+    try {
+      // Ensure bucket exists
+      await this.ensureStorageBucketExists()
+      
+      // Resize and optimize the image
+      const processedImageBuffer = await sharp(imageBuffer)
+        .resize(400, 400, { fit: 'cover' })
+        .jpeg({ quality: 85 })
+        .toBuffer()
+
+      const fileName = `${venueId}.jpg`
+      
+      // Upload to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from('venue-thumbnails')
+        .upload(fileName, processedImageBuffer, {
+          contentType: 'image/jpeg',
+          upsert: true // Overwrite if exists
+        })
+
+      if (error) {
+        console.error(`Error uploading photo for venue ${venueId}:`, error.message)
+        return null
+      }
+
+      // Get the public URL
+      const { data: urlData } = supabase.storage
+        .from('venue-thumbnails')
+        .getPublicUrl(fileName)
+
+      console.log(`✅ Photo uploaded: ${urlData.publicUrl}`)
+      return urlData.publicUrl
+
+    } catch (error) {
+      console.error(`Error processing photo for venue ${venueId}:`, error)
+      return null
+    }
   }
 
   async validateVenue(venue: any, dryRun = false) {
@@ -114,9 +206,30 @@ class PlacesValidator {
         console.log(`✅ Found: ${place.name}`)
         console.log(`   Address: ${place.formatted_address}`)
         console.log(`   Rating: ${place.rating || 'N/A'} (${place.user_ratings_total || 0} reviews)`)
+        console.log(`   Phone: ${place.formatted_phone_number || 'N/A'}`)
+        console.log(`   Website: ${place.website || 'N/A'}`)
         console.log(`   Place ID: ${place.place_id}`)
 
         if (!dryRun) {
+          // Download and upload photo if available
+          let thumbnailUrl = null
+          const photoReference = place.photos?.[0]?.photo_reference
+          
+          if (photoReference) {
+            try {
+              console.log(`📸 Processing photo for ${place.name}...`)
+              const imageBuffer = await this.downloadGooglePhoto(photoReference)
+              
+              // Rate limiting delay after photo download
+              await new Promise(resolve => setTimeout(resolve, RATE_LIMITS.GOOGLE_PLACES.DELAY_BETWEEN_REQUESTS))
+              
+              thumbnailUrl = await this.uploadPhotoToSupabase(venue.id, imageBuffer)
+            } catch (photoError) {
+              console.warn(`⚠️  Failed to process photo: ${photoError}`)
+              // Continue with venue update even if photo fails
+            }
+          }
+
           // Update venue with Google Places data
           const updateData: any = {
             google_place_id: place.place_id,
@@ -128,7 +241,10 @@ class PlacesValidator {
             google_price_level: place.price_level,
             google_business_status: place.business_status,
             google_types: place.types,
-            google_photo_reference: place.photos?.[0]?.photo_reference,
+            google_photo_reference: photoReference,
+            google_phone_number: place.formatted_phone_number,
+            google_website: place.website,
+            thumbnail_url: thumbnailUrl,
             verification_status: 'verified',
             last_verified_at: new Date().toISOString(),
             last_places_api_call: new Date().toISOString()
