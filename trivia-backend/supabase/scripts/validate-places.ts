@@ -19,7 +19,7 @@ class PlacesValidator {
       return false
     }
     
-    console.log(`API calls used today: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
+    // API limit logged at start of validation
     return true
   }
 
@@ -58,6 +58,8 @@ class PlacesValidator {
       throw new Error('Google Places API key not configured')
     }
 
+    // API key configured
+
     const query = `${venueName} ${address}`
     const url = new URL('https://maps.googleapis.com/maps/api/place/findplacefromtext/json')
     
@@ -73,19 +75,55 @@ class PlacesValidator {
       'price_level',
       'business_status',
       'types',
-      'photos',
-      'formatted_phone_number',
-      'website'
+      'photos'
     ].join(','))
     url.searchParams.set('key', GOOGLE_PLACES_API_KEY)
 
+    // Making API request
+
     const response = await fetch(url.toString())
     const data = await response.json()
+    
+    if (data.error_message) {
+      console.error(`❌ API Error: ${data.error_message}`)
+    }
 
     // Log API usage
     await supabase.rpc('log_api_usage', {
       p_service_name: 'google_places',
       p_endpoint: 'findplacefromtext',
+      p_response_status: response.status,
+      p_error_message: data.status !== 'OK' ? data.status : null
+    })
+
+    this.apiCallsToday++
+
+    return data
+  }
+
+  async getPlaceDetails(placeId: string) {
+    if (!GOOGLE_PLACES_API_KEY) {
+      throw new Error('Google Places API key not configured')
+    }
+
+    const url = new URL('https://maps.googleapis.com/maps/api/place/details/json')
+    
+    url.searchParams.set('place_id', placeId)
+    url.searchParams.set('fields', [
+      'formatted_phone_number',
+      'website'
+    ].join(','))
+    url.searchParams.set('key', GOOGLE_PLACES_API_KEY)
+
+    // Getting place details
+
+    const response = await fetch(url.toString())
+    const data = await response.json()
+    
+    // Log API usage for details call
+    await supabase.rpc('log_api_usage', {
+      p_service_name: 'google_places',
+      p_endpoint: 'details',
       p_response_status: response.status,
       p_error_message: data.status !== 'OK' ? data.status : null
     })
@@ -108,7 +146,7 @@ class PlacesValidator {
     })
 
     const url = `https://maps.googleapis.com/maps/api/place/photo?${params.toString()}`
-    console.log(`📸 Downloading photo from: ${url.replace(GOOGLE_PLACES_API_KEY, 'API_KEY')}`)
+    // Downloading photo
 
     const response = await fetch(url)
     
@@ -127,7 +165,7 @@ class PlacesValidator {
       const bucketExists = buckets?.some(bucket => bucket.name === 'venue-thumbnails')
       
       if (!bucketExists) {
-        console.log('Creating venue-thumbnails storage bucket...')
+        // Creating storage bucket
         const { error } = await supabase.storage.createBucket('venue-thumbnails', {
           public: true,
           allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp']
@@ -136,7 +174,7 @@ class PlacesValidator {
         if (error) {
           console.error('Error creating storage bucket:', error.message)
         } else {
-          console.log('✅ Storage bucket created successfully')
+          // Storage bucket created
         }
       }
     } catch (error) {
@@ -175,7 +213,7 @@ class PlacesValidator {
         .from('venue-thumbnails')
         .getPublicUrl(fileName)
 
-      console.log(`✅ Photo uploaded: ${urlData.publicUrl}`)
+      // Photo uploaded successfully
       return urlData.publicUrl
 
     } catch (error) {
@@ -204,11 +242,26 @@ class PlacesValidator {
         const place = placesData.candidates[0]
         
         console.log(`✅ Found: ${place.name}`)
-        console.log(`   Address: ${place.formatted_address}`)
-        console.log(`   Rating: ${place.rating || 'N/A'} (${place.user_ratings_total || 0} reviews)`)
-        console.log(`   Phone: ${place.formatted_phone_number || 'N/A'}`)
-        console.log(`   Website: ${place.website || 'N/A'}`)
-        console.log(`   Place ID: ${place.place_id}`)
+
+        // Get additional details (phone, website)
+        let phoneNumber = null
+        let website = null
+        
+        if (!dryRun) {
+          try {
+            const detailsData = await this.getPlaceDetails(place.place_id)
+            if (detailsData.status === 'OK' && detailsData.result) {
+              phoneNumber = detailsData.result.formatted_phone_number
+              website = detailsData.result.website
+              // Additional details retrieved
+            }
+            
+            // Rate limiting delay after details call
+            await new Promise(resolve => setTimeout(resolve, RATE_LIMITS.GOOGLE_PLACES.DELAY_BETWEEN_REQUESTS))
+          } catch (detailsError) {
+            console.warn(`⚠️  Could not get place details: ${detailsError}`)
+          }
+        }
 
         if (!dryRun) {
           // Download and upload photo if available
@@ -217,7 +270,7 @@ class PlacesValidator {
           
           if (photoReference) {
             try {
-              console.log(`📸 Processing photo for ${place.name}...`)
+              // Processing photo
               const imageBuffer = await this.downloadGooglePhoto(photoReference)
               
               // Rate limiting delay after photo download
@@ -242,8 +295,8 @@ class PlacesValidator {
             google_business_status: place.business_status,
             google_types: place.types,
             google_photo_reference: photoReference,
-            google_phone_number: place.formatted_phone_number,
-            google_website: place.website,
+            google_phone_number: phoneNumber,
+            google_website: website,
             thumbnail_url: thumbnailUrl,
             verification_status: 'verified',
             last_verified_at: new Date().toISOString(),
@@ -260,7 +313,7 @@ class PlacesValidator {
             return false
           }
 
-          console.log('✅ Venue updated successfully')
+          // Venue updated
         }
 
         return true
@@ -343,12 +396,11 @@ class PlacesValidator {
 
       // Progress update
       if (processed % 5 === 0) {
-        console.log(`\nProgress: ${processed}/${venues.length} venues processed`)
-        console.log(`API calls used: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
+        console.log(`Progress: ${processed}/${venues.length} venues (${this.apiCallsToday} API calls)`)
       }
     }
 
-    console.log('\n' + '='.repeat(50))
+    console.log('\n' + '-'.repeat(50))
     console.log('Validation completed!')
     console.log(`Processed: ${processed}/${venues.length}`)
     console.log(`Successful: ${successful}`)

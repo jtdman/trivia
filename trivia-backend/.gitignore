@@ -1,1 +1,7 @@
 .claude/settings.local.json
+
+# Temporary scraping data files
+providers/*/brainblast-*-????-??-??T??-??-??-???Z.json
+debug-*.html
+test-*.js
+test-*.mjs

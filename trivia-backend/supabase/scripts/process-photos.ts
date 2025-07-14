@@ -19,7 +19,7 @@ class PhotoProcessor {
       return false
     }
     
-    console.log(`API calls used today: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
+    // API limit checked
     return true
   }
 
@@ -54,7 +54,7 @@ class PhotoProcessor {
     url.searchParams.set('maxheight', maxHeight.toString())
     url.searchParams.set('key', GOOGLE_PLACES_API_KEY)
 
-    console.log(`Downloading photo: ${photoReference}`)
+    // Downloading photo
 
     const response = await fetch(url.toString())
 
@@ -96,8 +96,7 @@ class PhotoProcessor {
   }
 
   async processVenuePhoto(venue: any, options: PhotoProcessingOptions = {}): Promise<boolean> {
-    console.log(`\nProcessing photo for: ${venue.name_original}`)
-    console.log(`Photo reference: ${venue.google_photo_reference}`)
+    console.log(`Processing photo for: ${venue.name_original}`)
 
     if (this.apiCallsToday >= RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS) {
       console.warn('Daily API limit reached, stopping photo processing')
@@ -116,7 +115,7 @@ class PhotoProcessor {
       await new Promise(resolve => setTimeout(resolve, RATE_LIMITS.GOOGLE_PLACES.DELAY_BETWEEN_REQUESTS))
 
       if (options.dryRun) {
-        console.log(`✅ Photo downloaded successfully (${imageBuffer.length} bytes) - DRY RUN`)
+        // Photo downloaded (DRY RUN)
         return true
       }
 
@@ -137,7 +136,7 @@ class PhotoProcessor {
         return false
       }
 
-      console.log(`✅ Photo processed and uploaded: ${thumbnailUrl}`)
+      // Photo processed and uploaded
       return true
 
     } catch (error) {
@@ -162,7 +161,7 @@ class PhotoProcessor {
       const venueThumbailsBucket = buckets?.find(b => b.name === 'venue-thumbnails')
       
       if (!venueThumbailsBucket) {
-        console.log('Creating venue-thumbnails storage bucket...')
+        // Creating storage bucket
         const { error } = await supabase.storage.createBucket('venue-thumbnails', {
           public: true
         })
@@ -172,7 +171,7 @@ class PhotoProcessor {
           return
         }
         
-        console.log('✅ Storage bucket created')
+        // Storage bucket created
       }
     }
 
@@ -205,12 +204,11 @@ class PhotoProcessor {
 
       // Progress update
       if (processed % 5 === 0) {
-        console.log(`\nProgress: ${processed}/${venues.length} photos processed`)
-        console.log(`API calls used: ${this.apiCallsToday}/${RATE_LIMITS.GOOGLE_PLACES.MAX_DAILY_REQUESTS}`)
+        console.log(`Progress: ${processed}/${venues.length} photos (${this.apiCallsToday} API calls)`)
       }
     }
 
-    console.log('\n' + '='.repeat(50))
+    console.log('\n' + '-'.repeat(50))
     console.log('Photo processing completed!')
     console.log(`Processed: ${processed}/${venues.length}`)
     console.log(`Successful: ${successful}`)

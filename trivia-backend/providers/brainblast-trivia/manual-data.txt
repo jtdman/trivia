@@ -1,0 +1,448 @@
+<!-- 
+INSTRUCTIONS: Copy and paste the venue data from Brain Blast Trivia website here.
+Include all 5 states (AL, GA, IN, KY, TN) with their venue listings.
+
+Example format:
+ALABAMA
+
+Athens
+Monday    7pm    Venue Name    256-123-4567    Trivia
+
+Huntsville  
+Tuesday   6:30pm  Another Venue   256-555-1234   Singo
+Wednesday 7pm     Same Venue      256-555-1234   Trivia
+
+GEORGIA
+...etc
+-->
+
+Paste the Brain Blast venue data below this line:
+================================================
+ALABAMA
+Athens
+Day	Time	Location	Phone Number	Show Type
+Mon	6pm	Las Trojas	256-230-6224	Trivia
+Tues	6pm	Casa Blanca	256-771-0130	Trivia
+Tues	6pm	Las Trojas	256-230-6224	Survey Time Showdown
+cullman
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Grumpy's Italian Grill	256-734-2544	Trivia
+Sat	7pm	Alamito's Mexican Restaurant	256-734-8020	Bingo
+Hazel Green
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Las Trojas	256-813-5060	Trivia
+huntsville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Corralejos Mexican Grill	256-945-78265	Bingo
+Mon	6:30pm	Rocket City Tavern	256-319-3333	Trivia
+Mon	7pm	MELT-Huntsville	256-517-8755	Trivia
+Mon	6pm	Casa Blanca Bailey Cove	256-883-4447	Trivia
+Mon	7pm	El Vaquero Mexican Restaurant	256-858-1436	Trivia
+Mon	7pm	Phil Sandoval's Mexican Restaurant	256-489-5711	Trivia
+Tues	7pm	La Fuente	256-585-1664	Trivia
+Tues	7pm	Moe's Original BBQ	256-715-8667	Trivia
+Tues	7pm	The Boot Pizzeria	256-489-1771	Trivia
+Tues	7pm	El Monte	256-852-3333	Trivia
+Tues	6:30pm	Tulum Cantina & Grill	256-325-3022	Survey Time Showdown
+Tues	6:30pm	Urban Cookhouse	256-585-3052	Trivia
+Wed	7pm	Las Trojas	256-852-6381	Survey Time Showdown
+Wed	7pm	Moe's Original BBQ-Downtown	256-881-1227	Trivia
+Thurs	6pm	Casa Blanca Bailey Cove	256-883-4447	Trivia
+Thurs	7pm	El Vaquero Mexican Restaurant	256-858-1436	Survey Time Showdown
+Thurs	7pm	La Finka	256-513-8444	Trivia
+Thurs	7pm	Las Trojas	256-852-6381	Trivia
+Madison
+Day	Time	Location	Phone Number	Show Type
+Tues	6:30pm	Champy's	256-325-1633	Singo
+Wed	6pm	Casa Blanca	256-864-0360	Trivia
+Wed	7pm	Bishop's Westside Pub & Grill	256-800-8181	Trivia
+Wed	6:30pm	Champy's	256-325-1633	Trivia
+Wed	7pm	Jonathan's Grille	256-489-5210	Trivia
+Wed	7pm	The Stem and Stein	256-325-3779	Trivia
+Thurs	6pm	Old Mexico Cantina Browns Ferry	256-464-6044	Trivia
+Thurs	6:30pm	Lucia's Cocina Mexicana	256-262-4456	Trivia
+Thurs	7pm	Moes Original BBQ	(256) 870-6637	Trivia
+Owens Cross Roads
+Day	Time	Location	Phone Number	Show Type
+Thurs	6pm	El Olmeca	256-539-6477	Trivia
+Rogersville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Fiesta Mexicana	256-247-6180	Trivia
+Scottsboro
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Buena Vista Mexican Cantina	256-574-3543	Trivia
+
+GEORGIA
+Macon
+Day	Time	Location	Phone Number	Show Type
+Tues	8pm	Wagers	478-475-4114	Survey Time Showdown
+Wed	7pm	Wild Wing Cafe	478-477-9453	Survey Time Showdown
+Perry
+Day	Time	Location	Phone Number	Show Type
+Thurs	8pm	Survey Time		Singo
+Wednesday	7pm Bi-Weekly	Bodega Brew		Singo
+Statesboro
+Day	Time	Location	Phone Number	Show Type
+Warner Robins
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wild Wing Cafe	478-313-3453	Singo
+Wed	7pm	Wild Wing Cafe	478-313-3453	Survey Time Showdown
+
+INDIANA
+Argos
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Breakroom Pub & Grill	574-892-6845	Survey Time Showdown
+Elkhart
+Day	Time	Location	Phone Number	Show Type
+Tues	6:30pm	Rulli’s Italian Rest.	574-293-0222	Trivia
+Tues	6:30pm	Smokin' Fattys	574-333-3600	Trivia
+Tues	7pm	Heinnie’s	765-838-8301	Trivia
+Thurs	6:30pm	Flippin' Cow.	574-266-0606	Trivia
+Evansville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Chasers	812-401-1699	Bingo
+Thurs	7pm	Highland Inn	812-909-1500	Trivia
+Wed	7pm	Wings Etc	812-909-2945	Trivia
+Fish Lake
+Day	Time	Location	Phone Number	Show Type
+Mon	6:30pm(central time)	Twisted Tiki	219-344-5555	Singo
+Wed	6:30pm(central time)	Twisted Tiki	219-344-5555	Trivia
+Garrett
+Day	Time	Location	Phone Number	Show Type
+Tues	6:30pm	Coterie Pizza	260-226-6606	Trivia
+Tues	7pm	Lucky Hatchet	574-217-3727	Trivia
+Lafayette
+Day	Time	Location	Phone Number	Show Type
+Mon	8pm	Checkerboard	765-423-1776	Survey Time Showdown
+Mon	7pm	End Zone	765-471-9663	Trivia
+Wed	8pm	Rookie’s	765-446-4230	Trivia
+Wed	7pm	Big League	765-237-9711	Trivia
+Thurs	7pm	Ace’s Pub	765-269-9943	Trivia
+Thurs	7:30pm	Blind Pig	765-464-6691	Trivia
+Leesburg
+Day	Time	Location	Phone Number	Show Type
+Fri	6pm	Tippy Creek Winery	574-319-2599	Trivia
+Mentone
+Day	Time	Location	Phone Number	Show Type
+Mon	6:30pm	Bulldog Saloon	574-353-7408	Singo
+Wed	6:30pm	Bulldog Saloon	574-353-7408	Trivia
+Thurs	On summer break	Bulldog Saloon	574-353-7408	Survey Time Showdown
+Mishawaka
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Phoenix Bar & Grill	574-257-8876	Survey Time Showdown
+Newburgh
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wings Etc.	812-490-0550	Trivia
+Plymouth
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Brass Rail	574-936-7004	Trivia
+Wed	7pm	Wings Etc	574-941-2299	Trivia
+Princeton
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wings Etc	812-635-0285	Trivia
+Rochester
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	The Dam Landing	574-223-8950	Trivia
+South Bend
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Danny Boy Draftworks	574-271-3727	Trivia
+Warsaw
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wings Etc.	574-268-2299	Singo
+Wed	7pm	Wings Etc.	574-268-2299	Survey Time Showdown
+
+KENTUCKY
+Bardstown
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Bourbon Brick Oven Grill	502-348 4848	Trivia
+Wed	7pm	Mammy's Kitchen		Trivia
+Beaver Dam
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Beef O Bradys	270-363-2231	Trivia
+Benton
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Dam Brewhaus	270-252-9302	Trivia
+Bowling Green
+Day	Time	Location	Phone Number	Show Type
+Mon	6pm	Overtime Sports Bar and Grill	270-904-4430	Trivia
+Wed	7pm	Lost River Pizza Co.	270-393-0077	Trivia
+Wed	7pm	White Squirrel Brewery		Singo
+Calvert
+Day	Time	Location	Phone Number	Show Type
+Thurs	6:30pm	Southern Fried & Sweet Tea	270-909-1200	Trivia
+Central City
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Holly J's Bar & Grill	270-253-3533	Trivia
+Corbin
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Mi Casa #3 (New show!)	606-280-7080	Singo
+Thurs	7pm	Old Town Grill	606-523-5515	Trivia
+Danville
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Mi Pueblo	859-236-9884	Trivia
+Sun	7pm	Mi Pueblo	859-236-9884	Singo
+Mon	7pm	Los Rodeos	(859) 238-0041	Singo
+Mon	7pm	Mi Pueblo 2	(859) 209-2150	Survey Time
+Fulton
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	The Keg	270-472-6101	Trivia
+Georgetown
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Live Action Bar & Grill (NEW)	(502) 603-8050	Singo
+Thurs	7pm	Chinkapin Brewing	(859) 983-9744	Singo
+Gilbertsville
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Ralph's Harborview	270-362-1412	Trivia - Seasonal
+Henderson
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wings Etc	270-205-4486	Trivia
+Wed	8pm	Firedome		Singo (2 Shows)
+Thurs	7pm	Firedome Wood Fired Pizza	270-831-1977	Trivia
+Thurs	7pm	Wings Etc		Singo
+Thurs	8pm	Wings Etc		Singo
+Hopkinsville
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Hopkinsville Brew Co	270-987-3115	Singo
+Lancaster
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Los Agaves Grill	(859) 304-5177	Singo
+LaCenter
+Day	Time	Location	Phone Number	Show Type
+Thurs	6:30pm	The Infinity Farms		Trivia
+London
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Old Town Grill	(606) 862-1684	Singo
+Lebanon
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Good Buddies Brewing	(270) 402-7828	Trivia
+Lexington
+Day	Time	Location	Phone Number	Show Type
+Mon	6:30pm	Papi's	(859) 368-9369	Singo
+Tues	8pm	Sedona Taphouse (Palomar)	(859) 368-0464	Singo
+Wed	6pm	Elkhorn Tavern	(859) 368-8122	Singo
+Wed	7pm	Blue Stallion Brewing	(859) 785-1625	Singo
+Wed	7pm	Banners	(859) 223-4775	Singo
+Wed	7pm	Papi's Chevy Chase	(859) 368-9369	Singo
+Wed	8pm	Shamrock Bar & Grille	(859) 269-7621	Singo
+Mon	7pm	Cellar Bar and Grille	(859) 317-8301	Singo
+Mon	6:30pm	Papi's Palomar	(859) 523-2806	Singo
+Louisville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	El Toro	502-489-3839	Trivia
+Madisonville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Wings Etc	270-584-9061	Trivia
+Wed	7pm	Wings Etc	270-584-9061	Singo
+Thurs	7pm	Scores Pizza	270-452-2222	Trivia
+Mayfield
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Wings Etc.	270-356-1237	Trivia
+Murray
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Tap 216	270-761-4827	Trivia
+Wed	7pm	Big Apple Cafe	270-759-8866	Trivia
+Thurs	7pm	Big Apple Cafe	270-759-8866	Survey Time Showdown
+Mt Sterling
+Day	Time	Location	Phone Number	Show Type
+Thurs	6pm	Amazin' Grazin'	(859)520-3039	Trivia
+Nicholasville
+Day	Time	Location	Phone Number	Show Type
+Thurs	8pm	Shamrock Bar & Grille	(859) 245-9504	Singo
+Owensboro
+Day	Time	Location	Phone Number	Show Type
+Mon	6pm	Beef O Brady's	270-685-4968	Survey Time Showdown
+Paducah
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Casa Mexicana	270-442-1122	Trivia
+Princeton
+Day	Time	Location	Phone Number	Show Type
+Tues	6pm	Black Patch Grille	270-365-2777	Opinionation
+Richmond
+Day	Time	Location	Phone Number	Show Type
+Fri	6:30pm	Chenault Vineyards	(859)328-7773	Trivia
+Shepherdsville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Cabbana Bar and Grill	502-215-6011	Survey Time Showdown
+Winchester
+Day	Time	Location	Phone Number	Show Type
+Tues	8pm	Woody's Sports Bar and Grill	859-744-1969	Survey Time Showdown
+
+TENNESSEE
+Ardmore
+Day	Time	Location	Phone Number	Show Type
+Wed	6:30pm	Rick's BBQ	931-427-3663	Bingo
+Ashland City
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Sidelines Grill	615-792-6800	Trivia
+Wed	7pm	Don Pancho's	931-792-3240	Trivia
+Baxter
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Azteca Mexican Grill	931-792-3240	Bingo
+Thurs	7pm	Azteca Mexican Grill	931-792-3240	Trivia
+Bellevue
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Jonathan's	615-646-5233	Trivia
+Centerville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Mi Cocina	931-729-1188	Trivia
+Chapel Hill
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Amigos	931-364-4222	Bingo
+Thurs	7pm	Amigos	931-364-4222	Trivia
+Clarksville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Pancho Villa	931-358-4681	Trivia
+Tues	7pm	Los Hermanos	931-218-2265	Bingo
+Thurs	7pm	Varsity Pins	931-320-9900	Trivia
+Cleveland
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Las Margaritas Ocoee St.		Singo
+Tues	7pm	Las Margaritas 25th St.	423-614-8855	Trivia
+Tues	7pm	Las Margaritas (Ocoee St)	423-614-5333	Survey Time Showdown
+Thurs	7pm	Las Margaritas (Ocoee St)	423-614-5333	Trivia
+Columbia
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Los Hermanos	931-901-0216	Trivia
+Tues	7pm	Don Pepe's	931-381-2221	Trivia
+Wed	6:30pm	DB's	931- 388-7770	Trivia
+Wed	7pm	Cocina Real	931-982-6198	Trivia
+Thurs	7pm	La Hacienda	931-840-5955	Trivia
+Thurs	7pm	Los Hermanos	931-901-0216	Bingo
+Cookeville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Rey's Mexican Grill	931-372-1444	Bingo
+Tues	7pm	Fiesta Cancun on the Hill	423-400-0033	Bingo
+Tues	7pm	Rey's Mexican Grill	931-372-1444	Trivia
+Tues	7pm	El Magueyal	931-528-1619	Trivia
+Wed	7pm	Fiesta Cancun Grill on the hill	931-400-0033	Singo
+Wed	7pm	Mamma Rosa's Italian Restaurant	(931) 372-8694	Trivia
+Thurs	7pm	Fiesta Cancun Grill on the hill	931-400-0033	Trivia
+Sat	7pm	El Magueyal	931-528-1619	Singo
+Crossville
+Day	Time	Location	Phone Number	Show Type
+Wed	6:30pm	Red's Ale House	931-456-7337	Survey Time Showdown
+Thurs	6:30pm	Red's Ale House	931-456-7337	Trivia
+Dickson
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Las Fajitas	615-446-0252	Trivia
+Eagleville
+Day	Time	Location	Phone Number	Show Type
+Last Friday of Each Month	7pm	Grindstone Cowboy	615-640-9040	Trivia
+Etowah
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Mi Ranchito Mexican Restaurant	423-781-7396	Bingo
+Thurs	7pm	Mi Ranchito Mexican Restaurant	423-781-7396	Trivia
+Fayetteville
+Day	Time	Location	Phone Number	Show Type
+Mon	6pm	Rick's BBQ	931-433-5988	Trivia
+1st Thursday of Month	6pm	Rick's BBQ	931-433-5988	Bingo
+Franklin
+Day	Time	Location	Phone Number	Show Type
+Mon	6:30pm	Nashville Pizza Co	615-595-8001	Trivia
+Tues	7pm	Nashville Pizza Co	615-591-7050	Trivia
+Tues	7pm	Nacho's	615-595-8090	Trivia
+Wed	7pm	Don Pepes	615-472-1934	Bingo
+Thurs	7pm	Nacho's	615-595-8090	Trivia
+Thurs	7pm	La Hacienda	615-591-9590	Trivia
+Gallatin
+Day	Time	Location	Phone Number	Show Type
+Thurs	6:30pm	Swaney Swifts	615-675-4366	Survey Time Showdown
+Hendersonville
+Day	Time	Location	Phone Number	Show Type
+Wed	7pm	Jonathan‘s	615-590-7533	Trivia
+Hohenwald
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Casa Grande	931-796-1670	Survey Time Showdown
+Wed	7pm	Los Hermanos	931-796-2557	Bingo
+Thurs	7pm	Casa Grande	931-796-1670	Trivia
+Sat	7pm	Los Hermanos	931-796-2557	Bingo
+Lawrenceburg
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Cocina Real	931-762-7210	Trivia
+Tues	7pm	Fiesta Mexicana	931-829-1101	Trivia
+Tues	7pm	Puente Grande	931-244-7575	Bingo
+Thurs	7pm	Cocina Real	931-762-7210	Survey Time Showdown
+Lebanon
+Day	Time	Location	Phone Number	Show Type
+Tue	7pm	Coach's Eastgate Grill	615-470-8415	Survey Time Showdown
+Thurs	7pm	Cedar City Brewing Co		Bingo
+Lewisburg
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Herradura Taco Cantina	931-422-5501	Trivia
+Mon	7pm	Herradura Taco Cantina	931-422-5501	Bingo
+Wed	7pm	Amigo's	931-422-5575	Bingo
+Manchester
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	La Rivera	931-954-0863	Trivia
+Thurs	7pm	La Rivera	931-954-0863	Survey Time Showdown
+Thurs	7pm	Las Fajitas	931-728-5000	Trivia
+Sat	6:30pm	La Rivera	931-954-0863	Bingo
+McMinnville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Smooth Rapids	615-405-1425	Singo
+Wed	7pm	Smooth Rapids	615-405-1425	Survey Time Showdown
+Thurs	7pm	Smooth Rapids	615-405-1425	Trivia
+Mt Juliet
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	The Pub	615-754-2782	Trivia
+Tues	7pm	El Ok Corral	615-773-3598	Trivia
+Murfreesboro
+Day	Time	Location	Phone Number	Show Type
+Sun	1pm	Hop Springs	615-450-1907	Trivia
+Tues	7pm	Nacho's	615-907-2700	Trivia
+Wed	7pm	El Toro	615-809-2600	Trivia
+Thurs	7pm	El Toro	615-809-2600	Singo
+Sat	7pm	Nacho's	615-907-2700	Survey Time Showdown
+Nashville
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Troubadour		Trivia
+Wed	7pm	Johnathan's	615-678-1140	Trivia
+Pleasant View
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Sidelines Grill	615-746-4252	Trivia
+Pulaski
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Senor Lopez	931-347-4960	Trivia
+Wed	7pm	Senor Lopez	931-347-4960	Bingo
+Tues	7pm	Los Hermanos	931-292-6285	Bingo
+Sat	7pm	Los Hermanos	931-292-6285	Bingo
+Shelbyville
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	La Rivera	931-684-2766	Trivia
+Wed	7pm	Alfonso’s	931-684–0504	Trivia
+Thurs	7pm	La Rivera	931-684-2766	Survey Time Showdown
+Thurs	7pm	Los Hermanos	931-773-3010	Bingo
+Smyrna
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Hot Shotz	629-225-8296	Trivia
+Sparta
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Mulligans Bar and Grill	931-738-5835	Singo
+Fri	7pm	1938 Social	931-510-0474	Singo
+Springfield
+Day	Time	Location	Phone Number	Show Type
+Thurs	7pm	Backroads Bar & Grill	615-985-2030	Trivia
+Spring Hill
+Day	Time	Location	Phone Number	Show Type
+Mon	7pm	Amigo's	931-451-5111	Bingo
+Wed	7pm	Acapulco Mexican Grill	615-241-1166	Trivia
+Wed	7pm	Gary's Place	615-302-3636	Survey Time Showdown
+Wed	7:30pm	Jonathan's Grille	615-678-1140	Trivia
+Thurs	7pm	Gary's Place	615-302-3636	Trivia
+Thurs	7pm	Amigo's	931-451-5111	Trivia
+Tellico Plains
+Day	Time	Location	Phone Number	Show Type
+Thurs	6:30pm	Senor Lopez	423-253-3859	Bingo
+Tullahoma
+Day	Time	Location	Phone Number	Show Type
+Tues	7pm	Gondola	931-455-9738	Trivia
+Wed	7pm	El Costal	931-454-2262	Trivia
+Thurs	7pm	El Costal	931-454-2262	Survey Time Showdown
+Thurs	7pm	London's Restaurant & Bar	931-571-8410	21+ Trivia
+Sat	7pm	El Costal	931-454-2262	Trivia
+Westmoreland
+Day	Time	Location	Phone Number	Show Type
+Monthly and Wednesday	7pm	La Quesadilla	615-644-5991	Trivia
+Winchester
+Day	Time	Location	Phone Number	Show Type
+Tues	6:30pm	Skip's Grill	931-967-0925	Trivia
