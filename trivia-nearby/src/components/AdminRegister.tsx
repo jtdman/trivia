@@ -4,10 +4,14 @@ import { useAuth } from '../context/auth_context'
 import { Brain, Beer, Search, Loader2, AlertCircle } from 'lucide-react'
 
 const AdminRegister: React.FC = () => {
-  const { user, signUp } = useAuth()
+  const { user, signUp, supabase } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const [companyName, setCompanyName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [website, setWebsite] = useState('')
+  const [description, setDescription] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -23,7 +27,54 @@ const AdminRegister: React.FC = () => {
     setIsSubmitting(true)
 
     try {
-      await signUp(email, password, displayName)
+      // Create user account
+      const signUpResult = await signUp(email, password, displayName)
+      const newUser = signUpResult.user
+      
+      if (newUser) {
+        // Create trivia provider record (pending approval)
+        
+        const { data: provider, error: providerError } = await supabase
+          .from('trivia_providers')
+          .insert({
+            name: companyName || displayName,
+            contact_email: email,
+            contact_phone: phone || null,
+            website_url: website || null,
+            description: description || null,
+            status: 'pending'
+          })
+          .select()
+          .single()
+
+        if (providerError) throw providerError
+
+        // Link user to provider
+        const { error: linkError } = await supabase
+          .from('provider_users')
+          .insert({
+            user_id: newUser.id,
+            provider_id: provider.id,
+            role: 'admin'
+          })
+
+        if (linkError) throw linkError
+
+        // Create notification for god-admin
+        const { error: notificationError } = await supabase
+          .from('notifications')
+          .insert({
+            type: 'new_provider',
+            title: 'New Trivia Provider Registration',
+            message: `${companyName || displayName} (${email}) has registered and is pending approval.`,
+            related_id: provider.id,
+            related_table: 'trivia_providers',
+            created_by: newUser.id
+          })
+
+        if (notificationError) throw notificationError
+      }
+      
       setIsSuccess(true)
     } catch (err: any) {
       setError(err.message || 'Failed to create account')
@@ -41,7 +92,9 @@ const AdminRegister: React.FC = () => {
               Account Created Successfully!
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Please check your email to verify your account, then you can sign in.
+              Your trivia provider account has been created and is pending approval. 
+              Please check your email to verify your account, then you can sign in to manage your venues and events.
+              Your content will be visible on the app once approved by our team.
             </p>
             <Link
               to="/admin/login"
@@ -78,7 +131,10 @@ const AdminRegister: React.FC = () => {
             <Brain className="w-6 h-6 text-black dark:text-white" />
             <Beer className="w-6 h-6 text-black dark:text-white" />
           </div>
-          <h2 className="text-2xl font-semibold text-black dark:text-white">Create Admin Account</h2>
+          <h2 className="text-2xl font-semibold text-black dark:text-white">Register Trivia Provider</h2>
+          <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">
+            Create an account to manage your trivia events and venues
+          </p>
         </div>
 
         {/* Registration form */}
@@ -134,6 +190,63 @@ const AdminRegister: React.FC = () => {
               placeholder="••••••••"
             />
             <p className="mt-1 text-xs text-gray-500">Minimum 6 characters</p>
+          </div>
+
+          <div>
+            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Company/Trivia Provider Name
+            </label>
+            <input
+              id="companyName"
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="e.g., NerdyTalk Trivia"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Phone Number (Optional)
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="(555) 123-4567"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="website" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Website (Optional)
+            </label>
+            <input
+              id="website"
+              type="url"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="https://yourcompany.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Brief Description (Optional)
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+              placeholder="Tell us about your trivia company..."
+            />
           </div>
 
           <button
