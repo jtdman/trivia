@@ -8,13 +8,15 @@ This is a trivia directory app for finding nearby trivia events. The project con
 
 - **Root directory**: Contains shared dependencies and project documentation
 - **trivia-nearby/**: React + TypeScript + Vite application with dark theme support
-- **trivia-backend/**: Node.js backend for data processing and venue management
+- **trivia-backend/**: Node.js backend with Supabase integration and data scraping
 
-The app is designed as a mobile-first web application that will help users find trivia events based on location, with future plans for native mobile deployment.
+The app is designed as a mobile-first web application that helps users find trivia events based on location.
 
-## Package Manager
-
-**IMPORTANT**: This project uses **pnpm** exclusively. Always use pnpm commands, never npm or yarn.
+### Current Status
+- **Production URL**: https://trivianearby.com
+- **Deployment**: Hetzner VPS
+- **Domain**: trivianearby.com (may expand to .co.uk depending on success)
+- **Data Sources**: Active scraping from Challenge Entertainment, NerdyTalk, and other trivia providers
 
 ## Development Commands
 
@@ -56,8 +58,13 @@ The app uses a custom theme context that:
 - Sets `data-theme` attribute on document element
 - Provides theme toggle functionality
 
-### Backend Architecture
+### Backend Architecture (Active)
 - **Supabase** with PostGIS for location-based queries
+- **Database schema**: venues, events, trivia_providers, users, admin_users
+- **Data Collection**: N8N workflows for automated scraping
+- **Authentication**: Supabase Auth with admin dashboard
+- **API**: REST endpoints for venue/event data
+- **Location Services**: Nominatim/OpenStreetMap geocoding with Vite proxy
 - Database schema includes: venues, events, trivia_providers, users
 - Authentication system for venue owners to manage events
 - **trivia-backend/** directory contains data processing scripts
@@ -103,8 +110,21 @@ pnpm validate-places stats
 
 ## Key Requirements from PRD
 
-1. Mobile-first, responsive design with dark theme default
-2. Location-based event discovery
-3. User authentication for venue owners
-4. Event management (add/edit) functionality
-5. Event cards showing: photo, name, venue, distance, address, time, prize money
+1. Mobile-first, responsive design with dark theme default ✅
+2. Location-based event discovery ✅
+3. User authentication for venue owners ✅
+4. Event management (add/edit) functionality ✅
+5. Event cards showing: photo, name, venue, distance, address, time, prize money ✅
+
+## Partnership Strategy
+
+### Active Partnership
+- **NerdyTalk**: Local Tennessee trivia provider, data sharing agreement in progress
+- **Challenge Entertainment**: Automated scraping of event data
+
+### Target Partnerships
+- **JAMMIN' Trivia**: Multi-state presence (CO, GA, OR) - Contact: steve@myjammindjs.com
+- **Trivia Nation**: 220+ shows weekly in Florida - Contact: admin@trivianation.com
+- **OutSpoken Entertainment**: Atlanta metro area - Contact: (404) 273-1645
+- **Team Trivia Georgia**: Atlanta region - Contact: (478) 887-4842
+- **Dirty South Trivia**: Southeast region - Contact: dirtysouthtrivia.com/contact

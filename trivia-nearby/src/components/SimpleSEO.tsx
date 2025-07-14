@@ -12,7 +12,7 @@ const SimpleSEO: React.FC<SimpleSEOProps> = ({
   title = "Find Trivia Near Me - Trivia Nearby | Local Trivia Events",
   description = "Find trivia nights near you! Discover local trivia events at bars and restaurants. Search by location to find the best trivia games in your area.",
   keywords = "trivia near me, trivia nearby, local trivia, trivia events, trivia nights, bar trivia, restaurant trivia, pub quiz",
-  canonical = "https://trivia-nearby.com",
+  canonical = "https://trivianearby.com",
   location
 }) => {
   useEffect(() => {

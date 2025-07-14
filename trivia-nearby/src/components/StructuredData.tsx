@@ -22,11 +22,11 @@ export const createWebsiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Trivia Nearby",
-  "url": "https://trivia-nearby.com",
+  "url": "https://trivianearby.com",
   "description": "Find trivia nights near you! Discover local trivia events at bars and restaurants.",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://trivia-nearby.com/search?q={search_term_string}",
+    "target": "https://trivianearby.com/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 })
@@ -36,7 +36,7 @@ export const createLocalBusinessSchema = () => ({
   "@type": "LocalBusiness",
   "name": "Trivia Nearby",
   "description": "Find trivia nights near you! Discover local trivia events at bars and restaurants.",
-  "url": "https://trivia-nearby.com",
+  "url": "https://trivianearby.com",
   "sameAs": [
     "https://facebook.com/trivia-nearby",
     "https://twitter.com/trivia_nearby",

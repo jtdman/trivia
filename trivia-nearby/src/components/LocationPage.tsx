@@ -57,14 +57,14 @@ const LocationPage: React.FC<LocationPageProps> = ({ onBack }) => {
         title={`Trivia Events in ${locationName} - Find Trivia Near Me | Trivia Nearby`}
         description={`Find trivia nights in ${locationName}! Discover local trivia events at bars and restaurants. See weekly schedules, prizes, and venue details.`}
         keywords={`trivia ${locationName}, trivia events ${locationName}, trivia nights ${locationName}, bars ${locationName}, restaurants ${locationName}`}
-        canonical={`https://trivia-nearby.com/trivia-near-${location}`}
+        canonical={`https://trivianearby.com/trivia-near-${location}`}
         location={locationName}
       />
       
       <StructuredData 
         data={createBreadcrumbSchema([
-          { name: 'Home', url: 'https://trivia-nearby.com' },
-          { name: `Trivia in ${locationName}`, url: `https://trivia-nearby.com/trivia-near-${location}` }
+          { name: 'Home', url: 'https://trivianearby.com' },
+          { name: `Trivia in ${locationName}`, url: `https://trivianearby.com/trivia-near-${location}` }
         ])}
       />
       

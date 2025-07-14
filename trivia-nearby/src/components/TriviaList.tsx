@@ -331,14 +331,14 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
       {/* SEO */}
       <SimpleSEO
         location={location}
-        canonical={`https://trivia-nearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+        canonical={`https://trivianearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
       />
       
       {/* Structured Data */}
       <StructuredData 
         data={createBreadcrumbSchema([
-          { name: 'Home', url: 'https://trivia-nearby.com' },
-          { name: `Trivia in ${location}`, url: `https://trivia-nearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}` }
+          { name: 'Home', url: 'https://trivianearby.com' },
+          { name: `Trivia in ${location}`, url: `https://trivianearby.com/trivia-near-${location.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}` }
         ])}
       />
       
