@@ -176,8 +176,8 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
         venue: venue.google_name || venue.name_original,
         address: venue.google_formatted_address || venue.address_original,
         distance,
-        thumbnail_url: venue.thumbnail_url,
-        google_photo_reference: venue.google_photo_reference,
+        thumbnail_url: venue.thumbnail_url || null,
+        google_photo_reference: venue.google_photo_reference || null,
         venue_name: venue.google_name || venue.name_original,
         events: Array.from(eventMap.values()),
       })
