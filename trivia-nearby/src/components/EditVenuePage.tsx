@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import VenueForm from './VenueForm'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 
 interface VenueData {
   id: string

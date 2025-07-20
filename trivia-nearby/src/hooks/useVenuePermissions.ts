@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 import type { Venue } from '../lib/supabase'
 
 interface VenuePermissions {
@@ -12,22 +12,22 @@ interface VenuePermissions {
 }
 
 export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): VenuePermissions => {
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin, userProvider } = useAuth()
 
   return useMemo(() => {
-    if (!userProfile || !venue) {
+    if (!user || !venue) {
       return {
         canEdit: false,
         canDelete: false,
         canEditGoogleData: false,
         canEditOriginalData: false,
         canChangeStatus: false,
-        reason: 'No user profile or venue data'
+        reason: 'No user or venue data'
       }
     }
 
-    const isPlatformAdmin = userProfile.role === 'platform_admin'
-    const isOwner = userOwnsVenue || venue.created_by === userProfile.id
+    const isPlatformAdmin = isGodAdmin
+    const isOwner = userOwnsVenue || venue.created_by === user.id
     const isImported = venue.is_imported === true
     const hasEvents = false // TODO: Check if venue has events
     const needsReview = ['failed', 'needs_review'].includes(venue.verification_status)
@@ -44,8 +44,8 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       }
     }
 
-    // Trivia hosts and venue owners
-    if (userProfile.role && ['trivia_host', 'venue_owner'].includes(userProfile.role)) {
+    // Trivia providers (venue owners)
+    if (userProvider) {
       if (!isOwner) {
         return {
           canEdit: false,
@@ -76,14 +76,13 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       canChangeStatus: false,
       reason: 'Staff role has read-only access'
     }
-  }, [userProfile, venue, userOwnsVenue])
+  }, [user, isGodAdmin, userProvider, venue, userOwnsVenue])
 }
 
 export const useCanCreateVenue = (): boolean => {
-  const { userProfile } = useAuth()
+  const { isGodAdmin, userProvider } = useAuth()
   
   return useMemo(() => {
-    if (!userProfile?.role) return false
-    return ['platform_admin', 'trivia_host', 'venue_owner'].includes(userProfile.role)
-  }, [userProfile])
+    return isGodAdmin || !!userProvider
+  }, [isGodAdmin, userProvider])
 }

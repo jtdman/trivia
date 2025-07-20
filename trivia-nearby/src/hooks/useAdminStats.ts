@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 
 export interface AdminStats {
   totalVenues: number
@@ -27,13 +27,13 @@ export interface AdminStats {
 }
 
 export const useAdminStats = () => {
-  const { user, userProfile } = useAuth()
+  const { user, isGodAdmin, userProvider } = useAuth()
   const [stats, setStats] = useState<AdminStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!user || !userProfile) return
+    if (!user) return
 
     const fetchStats = async () => {
       try {
@@ -41,15 +41,19 @@ export const useAdminStats = () => {
         setError(null)
 
         // Get total platform stats (for admins)
-        userProfile.role === 'platform_admin'
         
-        // First, get my venue IDs
-        const myVenueIds = await supabase
-          .from('user_venues')
-          .select('venue_id')
-          .eq('user_id', user.id)
-
-        const myVenueIdArray = myVenueIds.data?.map(v => v.venue_id) || []
+        // For god admin, show all data. For providers, show only their data
+        let myVenueIdArray: string[] = []
+        
+        if (!isGodAdmin && userProvider) {
+          // Get venues for this provider
+          const myVenues = await supabase
+            .from('venues')
+            .select('id')
+            .eq('trivia_provider_id', userProvider.id)
+          
+          myVenueIdArray = myVenues.data?.map(v => v.id) || []
+        }
 
         const [
           totalVenuesResult,
@@ -77,15 +81,15 @@ export const useAdminStats = () => {
             .eq('is_active', true),
           
           // My venues (venues I have access to)
-          myVenueIdArray.length > 0 
+          !isGodAdmin && userProvider
             ? supabase
                 .from('venues')
                 .select('id', { count: 'exact', head: true })
-                .in('id', myVenueIdArray)
+                .eq('trivia_provider_id', userProvider.id)
             : Promise.resolve({ count: 0 }),
           
           // My events (events for venues I have access to)
-          myVenueIdArray.length > 0
+          !isGodAdmin && userProvider && myVenueIdArray.length > 0
             ? supabase
                 .from('events')
                 .select('id', { count: 'exact', head: true })
@@ -117,13 +121,10 @@ export const useAdminStats = () => {
             .limit(5)
         ])
 
-        // Count team members (users who have access to same venues)
-        const teamMembersResult = myVenueIdArray.length > 0
-          ? await supabase
-              .from('user_venues')
-              .select('user_id', { count: 'exact', head: true })
-              .in('venue_id', myVenueIdArray)
-          : { count: 1 } // Just the user themselves
+        // Count team members (for god admin: all users, for providers: just themselves)
+        const teamMembersResult = isGodAdmin
+          ? await supabase.auth.admin.listUsers()
+          : { data: { users: [user] } }
 
         // Process results
         const newStats: AdminStats = {
@@ -133,7 +134,7 @@ export const useAdminStats = () => {
           myVenues: myVenuesResult.count || 0,
           myEvents: myEventsResult.count || 0,
           myActiveEvents: 0, // Will calculate separately
-          teamMembers: teamMembersResult.count || 0,
+          teamMembers: teamMembersResult.data?.users?.length || 0,
           recentVenues: (recentVenuesResult.data || []).map(venue => ({
             id: venue.id,
             name: venue.google_name || venue.name_original,
@@ -151,7 +152,7 @@ export const useAdminStats = () => {
         }
 
         // Get active events count for my venues
-        const myActiveEventsResult = myVenueIdArray.length > 0
+        const myActiveEventsResult = !isGodAdmin && userProvider && myVenueIdArray.length > 0
           ? await supabase
               .from('events')
               .select('id', { count: 'exact', head: true })
@@ -171,10 +172,10 @@ export const useAdminStats = () => {
     }
 
     fetchStats()
-  }, [user, userProfile])
+  }, [user, isGodAdmin, userProvider])
 
   return { stats, loading, error, refetch: () => {
-    if (user && userProfile) {
+    if (user) {
       // Trigger a re-fetch
       setLoading(true)
       // The effect will re-run and fetch fresh data

@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
-import type { UserProfile } from '../lib/supabase'
 
 interface AuthContextType {
   user: User | null
-  userProfile: UserProfile | null
   loading: boolean
+  isGodAdmin: boolean
+  userProvider: any | null
   supabase: typeof supabase
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string, displayName?: string) => Promise<any>
+  signUp: (email: string, password: string, userData: any) => Promise<any>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
 }
@@ -26,15 +26,17 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isGodAdmin, setIsGodAdmin] = useState(false)
+  const [userProvider, setUserProvider] = useState<any | null>(null)
 
   useEffect(() => {
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
       if (session?.user) {
-        fetchUserProfile(session.user.id)
+        checkUserRole(session.user)
+        fetchUserProvider(session.user.id)
       }
       setLoading(false)
     })
@@ -43,39 +45,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       if (session?.user) {
-        fetchUserProfile(session.user.id)
+        checkUserRole(session.user)
+        fetchUserProvider(session.user.id)
       } else {
-        setUserProfile(null)
+        setIsGodAdmin(false)
+        setUserProvider(null)
       }
+      setLoading(false)
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
-  const fetchUserProfile = async (userId: string) => {
+  const checkUserRole = (user: User) => {
+    const role = user.user_metadata?.role || user.app_metadata?.role
+    setIsGodAdmin(role === 'god_admin')
+  }
+
+  const fetchUserProvider = async (userId: string) => {
     try {
-      console.log('Fetching user profile for userId:', userId)
       const { data, error } = await supabase
-        .from('user_profiles')
+        .from('trivia_providers')
         .select('*')
         .eq('user_id', userId)
         .maybeSingle()
 
-      console.log('Profile query result:', { data, error })
-      if (error && error.code !== 'PGRST116') throw error
-      setUserProfile(data)
-    } catch (error) {
-      console.error('Error fetching user profile:', error)
-      // For debugging, let's also try to fetch without RLS
-      try {
-        console.log('Attempting to fetch user profile without RLS constraints...')
-        const { data: allProfiles } = await supabase
-          .from('user_profiles')
-          .select('*')
-        console.log('All profiles (if accessible):', allProfiles)
-      } catch (debugError) {
-        console.log('Debug query also failed:', debugError)
+      if (!error) {
+        setUserProvider(data)
       }
+    } catch (error) {
+      console.error('Error fetching user provider:', error)
     }
   }
 
@@ -84,14 +83,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (error) throw error
   }
 
-  const signUp = async (email: string, password: string, displayName?: string) => {
+  const signUp = async (email: string, password: string, userData: any) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: {
-          full_name: displayName
-        }
+        data: userData
       }
     })
     if (error) throw error
@@ -110,8 +107,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const value = {
     user,
-    userProfile,
     loading,
+    isGodAdmin,
+    userProvider,
     supabase,
     signIn,
     signUp,

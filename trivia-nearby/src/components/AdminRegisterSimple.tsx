@@ -3,7 +3,7 @@ import { Navigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/auth_context_simple'
 import { Brain, Beer, Search, Loader2, AlertCircle } from 'lucide-react'
 
-const AdminRegister: React.FC = () => {
+const AdminRegisterSimple: React.FC = () => {
   const { user, signUp, supabase } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,26 +27,19 @@ const AdminRegister: React.FC = () => {
     setIsSubmitting(true)
 
     try {
-      // Create user account
-      const signUpResult = await signUp(email, password, displayName)
+      // Create user account with metadata
+      const signUpResult = await signUp(email, password, {
+        full_name: displayName,
+        company_name: companyName,
+        phone: phone,
+        website: website,
+        description: description
+      })
+      
       const newUser = signUpResult.user
       
       if (newUser) {
-        // Create user profile first
-        const { error: profileError } = await supabase
-          .from('user_profiles')
-          .insert({
-            user_id: newUser.id,
-            email: email,
-            full_name: displayName
-          })
-
-        if (profileError) {
-          console.error('Profile creation error:', profileError)
-        }
-
         // Create trivia provider record (pending approval)
-        
         const { data: provider, error: providerError } = await supabase
           .from('trivia_providers')
           .insert({
@@ -57,23 +50,13 @@ const AdminRegister: React.FC = () => {
               phones: phone ? [phone] : [],
               note: description || null
             },
-            status: 'pending'
+            status: 'pending',
+            user_id: newUser.id
           })
           .select()
           .single()
 
         if (providerError) throw providerError
-
-        // Link user to provider
-        const { error: linkError } = await supabase
-          .from('provider_users')
-          .insert({
-            user_id: newUser.id,
-            provider_id: provider.id,
-            role: 'admin'
-          })
-
-        if (linkError) throw linkError
 
         // Create notification for god-admin
         const { error: notificationError } = await supabase
@@ -87,11 +70,15 @@ const AdminRegister: React.FC = () => {
             created_by: newUser.id
           })
 
-        if (notificationError) throw notificationError
+        if (notificationError) {
+          console.error('Notification error:', notificationError)
+          // Don't fail registration if notification fails
+        }
       }
       
       setIsSuccess(true)
     } catch (err: any) {
+      console.error('Registration error:', err)
       setError(err.message || 'Failed to create account')
     } finally {
       setIsSubmitting(false)
@@ -163,15 +150,16 @@ const AdminRegister: React.FC = () => {
 
           <div>
             <label htmlFor="displayName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Display Name
+              Your Name
             </label>
             <input
               id="displayName"
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
+              required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Your name or company"
+              placeholder="Your full name"
             />
           </div>
 
@@ -288,4 +276,4 @@ const AdminRegister: React.FC = () => {
   )
 }
 
-export default AdminRegister
+export default AdminRegisterSimple

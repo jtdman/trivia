@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Save, X, Loader2, Lock, AlertTriangle } from 'lucide-react'
 import { supabase, type Venue } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 import { useVenuePermissions } from '../hooks/useVenuePermissions'
 
 interface VenueFormProps {

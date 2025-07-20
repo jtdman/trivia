@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Calendar, Clock, MapPin, DollarSign, Users, Save, X, Loader2, Building } from 'lucide-react'
 import { supabase, type Event, type Venue, type TriviaProvider } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 
 interface EventFormProps {
   mode: 'create' | 'edit'

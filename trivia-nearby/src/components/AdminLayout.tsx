@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 import { 
   Brain, 
   Beer, 
@@ -21,7 +21,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/theme_context'
 
 const AdminLayout: React.FC = () => {
-  const { user, userProfile, signOut } = useAuth()
+  const { user, isGodAdmin, userProvider, signOut } = useAuth()
   const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -35,10 +35,10 @@ const AdminLayout: React.FC = () => {
     { path: '/admin', label: 'Dashboard', icon: Home, end: true },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
-    ...(userProfile?.role === 'platform_admin' 
+    ...(isGodAdmin 
       ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
       : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
-    ...(userProfile?.role === 'platform_admin' || userProfile?.role === 'trivia_host' 
+    ...(isGodAdmin 
       ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
       : []),
     { path: '/admin/profile', label: 'Profile', icon: User }

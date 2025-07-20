@@ -1,11 +1,11 @@
 import React from 'react'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 import { MapPin, Calendar, Users, TrendingUp, Loader2, AlertCircle, CheckCircle, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAdminStats } from '../hooks/useAdminStats'
 
 const AdminDashboard: React.FC = () => {
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin, userProvider } = useAuth()
   const { stats, loading, error } = useAdminStats()
 
   if (loading) {
@@ -40,7 +40,7 @@ const AdminDashboard: React.FC = () => {
     <div className="px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Welcome back{userProfile?.display_name ? `, ${userProfile.display_name}` : ''}!
+          Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ''}!
         </h1>
         <p className="mt-2 text-gray-600 dark:text-gray-400">
           Manage your trivia venues and events from one place.
@@ -54,12 +54,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {userProfile?.role === 'platform_admin' ? 'Total Venues' : 'My Venues'}
+                {isGodAdmin ? 'Total Venues' : 'My Venues'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {userProfile?.role === 'platform_admin' ? stats.totalVenues : stats.myVenues}
+                {isGodAdmin ? stats.totalVenues : stats.myVenues}
               </p>
-              {userProfile?.role === 'platform_admin' && (
+              {isGodAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
                 </p>
@@ -74,12 +74,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {userProfile?.role === 'platform_admin' ? 'Total Events' : 'My Events'}
+                {isGodAdmin ? 'Total Events' : 'My Events'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {userProfile?.role === 'platform_admin' ? stats.totalEvents : stats.myEvents}
+                {isGodAdmin ? stats.totalEvents : stats.myEvents}
               </p>
-              {userProfile?.role === 'platform_admin' && (
+              {isGodAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
                 </p>
@@ -95,9 +95,9 @@ const AdminDashboard: React.FC = () => {
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Events</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {userProfile?.role === 'platform_admin' ? stats.activeEvents : stats.myActiveEvents}
+                {isGodAdmin ? stats.activeEvents : stats.myActiveEvents}
               </p>
-              {userProfile?.role === 'platform_admin' && (
+              {isGodAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
                 </p>
@@ -108,16 +108,16 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Team Members / System Users */}
-        {(userProfile?.role === 'platform_admin' || userProfile?.role === 'trivia_host') && (
+        {isGodAdmin && (
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  {userProfile?.role === 'platform_admin' ? 'System Users' : 'Team Members'}
+                  System Users
                 </p>
                 <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.teamMembers}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {userProfile?.role === 'platform_admin' ? 'Active accounts' : 'Including yourself'}
+                  Active accounts
                 </p>
               </div>
               <Users className="w-8 h-8 text-blue-500" />

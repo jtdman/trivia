@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import EventForm from './EventForm'
 import { supabase, type Event, type Venue } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 
 interface EventData extends Event {
   venue?: Venue

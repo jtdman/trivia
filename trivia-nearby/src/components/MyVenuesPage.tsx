@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MapPin, Calendar, TrendingUp, Edit3, Plus, UserCheck, AlertCircle, CheckCircle } from 'lucide-react'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/auth_context'
+import { useAuth } from '../context/auth_context_simple'
 
 interface MyVenue {
   id: string
