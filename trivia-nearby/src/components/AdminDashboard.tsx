@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../context/auth_context_simple'
-import { MapPin, Calendar, Users, TrendingUp, Loader2, AlertCircle, CheckCircle, Clock } from 'lucide-react'
+import { MapPin, Calendar, Loader2, AlertCircle, CheckCircle, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAdminStats } from '../hooks/useAdminStats'
 
@@ -40,15 +40,20 @@ const AdminDashboard: React.FC = () => {
     <div className="px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ''}!
+          Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0]}` : ''}!
         </h1>
+        {!isGodAdmin && userProvider && (
+          <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
+            {userProvider.name} Admin
+          </p>
+        )}
         <p className="mt-2 text-gray-600 dark:text-gray-400">
           Manage your trivia venues and events from one place.
         </p>
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Venues */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
@@ -74,14 +79,14 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isGodAdmin ? 'Total Events' : 'My Events'}
+                {isGodAdmin ? 'Events' : 'My Events'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isGodAdmin ? stats.totalEvents : stats.myEvents}
+                {isGodAdmin ? stats.events : stats.myEvents}
               </p>
               {isGodAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Platform-wide
+                  Active events platform-wide
                 </p>
               )}
             </div>
@@ -89,47 +94,20 @@ const AdminDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Active Events */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Events</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isGodAdmin ? stats.activeEvents : stats.myActiveEvents}
-              </p>
-              {isGodAdmin && (
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Platform-wide
-                </p>
-              )}
-            </div>
-            <TrendingUp className="w-8 h-8 text-green-500" />
-          </div>
-        </div>
-
-        {/* Team Members / System Users */}
-        {isGodAdmin && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  System Users
-                </p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.teamMembers}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Active accounts
-                </p>
-              </div>
-              <Users className="w-8 h-8 text-blue-500" />
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Quick actions */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Link
+            to="/admin/schedule"
+            className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            <Calendar className="w-5 h-5" />
+            Manage Schedule
+          </Link>
+          
           <Link
             to="/admin/venues/new"
             className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"

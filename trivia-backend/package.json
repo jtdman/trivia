@@ -13,12 +13,17 @@
     "scrape-brainblast": "node providers/brainblast-trivia/scraper.cjs",
     "validate-places": "tsx supabase/scripts/validate-places.ts",
     "process-photos": "tsx supabase/scripts/process-photos.ts",
-    "migrate": "supabase db reset"
+    "migrate": "supabase db reset",
+    "generate-events": "node jobs/generate-weekly-events.js",
+    "test-generate-events": "node jobs/generate-weekly-events.js --test",
+    "scheduler": "node sunday-night-scheduler.js",
+    "scheduler:test": "NODE_ENV=test node sunday-night-scheduler.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "axios": "^1.10.0",
     "cheerio": "^1.1.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.3.1",
     "sharp": "^0.33.2"
   },

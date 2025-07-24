@@ -32,47 +32,98 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        checkUserRole(session.user)
-        fetchUserProvider(session.user.id)
+    const initializeAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        setUser(session?.user ?? null)
+        if (session?.user) {
+          // Wait for role checks to complete before setting loading to false
+          await Promise.all([
+            checkUserRole(session.user),
+            fetchUserProvider(session.user.id)
+          ])
+        }
+      } catch (error) {
+        console.error('Error getting session:', error)
+      } finally {
+        // Always set loading to false after all checks complete
+        setLoading(false)
       }
-      setLoading(false)
-    })
+    }
+
+    initializeAuth()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null)
       if (session?.user) {
-        checkUserRole(session.user)
-        fetchUserProvider(session.user.id)
+        // Don't set loading during auth state changes
+        Promise.all([
+          checkUserRole(session.user),
+          fetchUserProvider(session.user.id)
+        ]).catch(error => {
+          console.error('Error during auth state change:', error)
+        })
       } else {
         setIsGodAdmin(false)
         setUserProvider(null)
       }
-      setLoading(false)
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
-  const checkUserRole = (user: User) => {
-    const role = user.user_metadata?.role || user.app_metadata?.role
-    setIsGodAdmin(role === 'god_admin')
+  const checkUserRole = async (user: User) => {
+    try {
+      // First check metadata for role
+      const metadataRole = user.user_metadata?.role || user.app_metadata?.role
+      
+      // Then check admin_users table
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('user_id', user.id)
+        .single()
+
+      if (!adminError && adminData) {
+        const isGod = adminData.role === 'god' || adminData.role === 'god_admin'
+        setIsGodAdmin(isGod)
+        return
+      }
+
+      // Fall back to metadata
+      setIsGodAdmin(metadataRole === 'god_admin')
+    } catch (error) {
+      console.error('Error checking user role:', error)
+      setIsGodAdmin(false)
+    }
   }
 
   const fetchUserProvider = async (userId: string) => {
     try {
-      const { data, error } = await supabase
-        .from('trivia_providers')
-        .select('*')
+      // Check provider_users table for provider association
+      const { data: providerUserData, error: providerUserError } = await supabase
+        .from('provider_users')
+        .select(`
+          id,
+          role,
+          trivia_providers (
+            id,
+            name,
+            website,
+            contact_info,
+            is_active,
+            status
+          )
+        `)
         .eq('user_id', userId)
         .maybeSingle()
 
-      if (!error) {
-        setUserProvider(data)
+      if (!providerUserError && providerUserData) {
+        setUserProvider(providerUserData.trivia_providers)
+        return
       }
+
     } catch (error) {
       console.error('Error fetching user provider:', error)
     }

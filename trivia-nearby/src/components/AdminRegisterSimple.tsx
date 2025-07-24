@@ -50,13 +50,23 @@ const AdminRegisterSimple: React.FC = () => {
               phones: phone ? [phone] : [],
               note: description || null
             },
-            status: 'pending',
-            user_id: newUser.id
+            status: 'pending'
           })
           .select()
           .single()
 
         if (providerError) throw providerError
+
+        // Create the association in provider_users table
+        const { error: providerUserError } = await supabase
+          .from('provider_users')
+          .insert({
+            user_id: newUser.id,
+            provider_id: provider.id,
+            role: 'admin'
+          })
+
+        if (providerUserError) throw providerUserError
 
         // Create notification for god-admin
         const { error: notificationError } = await supabase
@@ -206,7 +216,7 @@ const AdminRegisterSimple: React.FC = () => {
               onChange={(e) => setCompanyName(e.target.value)}
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="e.g., NerdyTalk Trivia"
+              placeholder="Your trivia company name"
             />
           </div>
 

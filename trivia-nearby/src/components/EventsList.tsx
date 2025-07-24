@@ -41,13 +41,19 @@ interface EventWithVenue {
 }
 
 const EventsList: React.FC = () => {
-  const { userProfile } = useAuth()
+  const { userProfile, isGodAdmin, userProvider } = useAuth()
   const [events, setEvents] = useState<EventWithVenue[]>([])
+  const [providers, setProviders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [dayFilter, setDayFilter] = useState<string>('all')
+  const [providerFilter, setProviderFilter] = useState<string>('all')
   const [error, setError] = useState<string | null>(null)
+  
+  // Determine user type for role-specific UI
+  const isProvider = !isGodAdmin && userProvider
+  const isIndividualHost = !isGodAdmin && !userProvider
 
   useEffect(() => {
     fetchEvents()
@@ -67,13 +73,17 @@ const EventsList: React.FC = () => {
             google_name,
             address_original,
             google_formatted_address
+          ),
+          trivia_providers(
+            id,
+            name
           )
         `)
         .order('day_of_week', { ascending: true })
         .order('start_time', { ascending: true })
 
-      // If not platform admin, only show events for venues user has access to
-      if (userProfile?.role !== 'platform_admin') {
+      // If not god admin, only show events for venues user has access to
+      if (!isGodAdmin) {
         const userVenueIds = await getUserVenueIds()
         if (userVenueIds.length > 0) {
           query = query.in('venue_id', userVenueIds)
@@ -87,6 +97,19 @@ const EventsList: React.FC = () => {
       const { data, error } = await query
       if (error) throw error
       setEvents(data || [])
+      
+      // Extract unique providers from events for dropdown
+      if (isGodAdmin && data) {
+        const uniqueProviders = Array.from(
+          new Map(
+            data
+              .filter(event => event.trivia_providers)
+              .map(event => [event.trivia_providers.id, event.trivia_providers])
+          ).values()
+        ).sort((a, b) => a.name.localeCompare(b.name))
+        
+        setProviders(uniqueProviders)
+      }
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -127,8 +150,11 @@ const EventsList: React.FC = () => {
       (statusFilter === 'inactive' && !event.is_active)
 
     const matchesDay = dayFilter === 'all' || event.day_of_week === dayFilter
+    
+    const matchesProvider = providerFilter === 'all' || 
+      (event.trivia_providers?.id === providerFilter)
 
-    return matchesSearch && matchesStatus && matchesDay
+    return matchesSearch && matchesStatus && matchesDay && matchesProvider
   })
 
   const formatTime = (time: string) => {
@@ -169,25 +195,54 @@ const EventsList: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Events
-          </h1>
-          <Link
-            to="/admin/events/new"
-            className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Add Event
-          </Link>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              {isGodAdmin ? 'All Events' : isProvider ? 'My Events' : 'My Events'}
+            </h1>
+            {isGodAdmin && (
+              <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
+                Platform-wide view • {events.length} total events
+              </p>
+            )}
+            {isProvider && userProvider && (
+              <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+                {userProvider.name} • {events.length} events
+              </p>
+            )}
+            {isIndividualHost && (
+              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                Your trivia events • {events.length} events
+              </p>
+            )}
+          </div>
+          <div className="flex items-center gap-3">
+            {isIndividualHost && (
+              <button
+                className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              >
+                <MapPin className="w-4 h-4" />
+                Claim Venue
+              </button>
+            )}
+            <Link
+              to="/admin/events/new"
+              className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              {isIndividualHost ? 'Add Event' : 'Add Event'}
+            </Link>
+          </div>
         </div>
         
         <p className="text-gray-600 dark:text-gray-400">
-          Manage trivia events and schedules
+          {isGodAdmin ? 'Manage all trivia events across providers' : 
+           isProvider ? 'Manage your provider\'s events and schedules' :
+           'Manage your personal trivia events'}
         </p>
       </div>
 
       {/* Search and Filters */}
-      <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className={`mb-6 grid grid-cols-1 gap-4 ${isGodAdmin ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
         <div className="relative md:col-span-2">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
@@ -225,6 +280,22 @@ const EventsList: React.FC = () => {
             ))}
           </select>
         </div>
+
+        {isGodAdmin && (
+          <div className="relative">
+            <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <select
+              value={providerFilter}
+              onChange={(e) => setProviderFilter(e.target.value)}
+              className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 w-full"
+            >
+              <option value="all">All Providers</option>
+              {providers.map(provider => (
+                <option key={provider.id} value={provider.id}>{provider.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* Stats */}
@@ -268,6 +339,11 @@ const EventsList: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Venue
                 </th>
+                {isGodAdmin && (
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Provider
+                  </th>
+                )}
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Schedule
                 </th>
@@ -307,6 +383,14 @@ const EventsList: React.FC = () => {
                       </div>
                     </div>
                   </td>
+                  
+                  {isGodAdmin && (
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900 dark:text-white">
+                        {event.trivia_providers?.name || 'No Provider'}
+                      </div>
+                    </td>
+                  )}
                   
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-2">
@@ -372,13 +456,32 @@ const EventsList: React.FC = () => {
         {filteredEvents.length === 0 && !loading && (
           <div className="text-center py-12">
             <Calendar className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">No events found</h3>
+            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
+              {isIndividualHost ? 'No trivia events yet' : 'No events found'}
+            </h3>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {searchTerm || statusFilter !== 'all' || dayFilter !== 'all'
+              {searchTerm || statusFilter !== 'all' || dayFilter !== 'all' || providerFilter !== 'all'
                 ? 'Try adjusting your search or filters.' 
-                : 'Get started by adding your first event.'
+                : isIndividualHost 
+                  ? 'Ready to start hosting trivia? Add your first event or claim an existing venue.'
+                  : 'Get started by adding your first event.'
               }
             </p>
+            {isIndividualHost && !searchTerm && statusFilter === 'all' && dayFilter === 'all' && (
+              <div className="mt-6 flex justify-center gap-3">
+                <button className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                  <MapPin className="w-4 h-4" />
+                  Claim Existing Venue
+                </button>
+                <Link
+                  to="/admin/events/new"
+                  className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add New Event
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </div>

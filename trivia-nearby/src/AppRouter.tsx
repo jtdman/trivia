@@ -14,6 +14,7 @@ import MyVenuesPage from './components/MyVenuesPage'
 import EventsList from './components/EventsList'
 import AddEventPage from './components/AddEventPage'
 import EditEventPage from './components/EditEventPage'
+import EventOccurrenceManager from './components/EventOccurrenceManager'
 import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
@@ -59,6 +60,7 @@ const AppRouter: React.FC = () => {
             <Route path="events" element={<EventsList />} />
             <Route path="events/new" element={<AddEventPage />} />
             <Route path="events/:eventId" element={<EditEventPage />} />
+            <Route path="schedule" element={<EventOccurrenceManager />} />
             <Route path="providers" element={<ProviderContactsPage />} />
             <Route path="team" element={<div className="p-8">Team page coming soon</div>} />
             <Route path="profile" element={<div className="p-8">Profile page coming soon</div>} />

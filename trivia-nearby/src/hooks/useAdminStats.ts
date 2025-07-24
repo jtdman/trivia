@@ -4,12 +4,9 @@ import { useAuth } from '../context/auth_context_simple'
 
 export interface AdminStats {
   totalVenues: number
-  totalEvents: number
-  activeEvents: number
+  events: number
   myVenues: number
   myEvents: number
-  myActiveEvents: number
-  teamMembers: number
   recentVenues: Array<{
     id: string
     name: string
@@ -46,19 +43,18 @@ export const useAdminStats = () => {
         let myVenueIdArray: string[] = []
         
         if (!isGodAdmin && userProvider) {
-          // Get venues for this provider
-          const myVenues = await supabase
-            .from('venues')
-            .select('id')
-            .eq('trivia_provider_id', userProvider.id)
+          // Get venue IDs for this provider by checking events table
+          const { data: providerEvents } = await supabase
+            .from('events')
+            .select('venue_id')
+            .eq('provider_id', userProvider.id)
           
-          myVenueIdArray = myVenues.data?.map(v => v.id) || []
+          myVenueIdArray = [...new Set(providerEvents?.map(e => e.venue_id) || [])]
         }
 
         const [
           totalVenuesResult,
-          totalEventsResult,
-          activeEventsResult,
+          eventsResult,
           myVenuesResult,
           myEventsResult,
           recentVenuesResult,
@@ -69,31 +65,27 @@ export const useAdminStats = () => {
             .from('venues')
             .select('id', { count: 'exact', head: true }),
           
-          // Total events 
-          supabase
-            .from('events')
-            .select('id', { count: 'exact', head: true }),
-          
-          // Active events
+          // Active events only
           supabase
             .from('events')
             .select('id', { count: 'exact', head: true })
             .eq('is_active', true),
           
           // My venues (venues I have access to)
-          !isGodAdmin && userProvider
+          !isGodAdmin && userProvider && myVenueIdArray.length > 0
             ? supabase
                 .from('venues')
                 .select('id', { count: 'exact', head: true })
-                .eq('trivia_provider_id', userProvider.id)
+                .in('id', myVenueIdArray)
             : Promise.resolve({ count: 0 }),
           
-          // My events (events for venues I have access to)
-          !isGodAdmin && userProvider && myVenueIdArray.length > 0
+          // My events (active events for this provider)
+          !isGodAdmin && userProvider
             ? supabase
                 .from('events')
                 .select('id', { count: 'exact', head: true })
-                .in('venue_id', myVenueIdArray)
+                .eq('is_active', true)
+                .eq('provider_id', userProvider.id)
             : Promise.resolve({ count: 0 }),
           
           // Recent venues (last 5)
@@ -121,20 +113,12 @@ export const useAdminStats = () => {
             .limit(5)
         ])
 
-        // Count team members (for god admin: all users, for providers: just themselves)
-        const teamMembersResult = isGodAdmin
-          ? await supabase.auth.admin.listUsers()
-          : { data: { users: [user] } }
-
         // Process results
         const newStats: AdminStats = {
           totalVenues: totalVenuesResult.count || 0,
-          totalEvents: totalEventsResult.count || 0,
-          activeEvents: activeEventsResult.count || 0,
+          events: eventsResult.count || 0,
           myVenues: myVenuesResult.count || 0,
           myEvents: myEventsResult.count || 0,
-          myActiveEvents: 0, // Will calculate separately
-          teamMembers: teamMembersResult.data?.users?.length || 0,
           recentVenues: (recentVenuesResult.data || []).map(venue => ({
             id: venue.id,
             name: venue.google_name || venue.name_original,
@@ -150,17 +134,6 @@ export const useAdminStats = () => {
             created_at: event.created_at
           }))
         }
-
-        // Get active events count for my venues
-        const myActiveEventsResult = !isGodAdmin && userProvider && myVenueIdArray.length > 0
-          ? await supabase
-              .from('events')
-              .select('id', { count: 'exact', head: true })
-              .eq('is_active', true)
-              .in('venue_id', myVenueIdArray)
-          : { count: 0 }
-
-        newStats.myActiveEvents = myActiveEventsResult.count || 0
 
         setStats(newStats)
       } catch (err) {

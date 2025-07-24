@@ -33,6 +33,7 @@ const AdminLayout: React.FC = () => {
 
   const navItems = [
     { path: '/admin', label: 'Dashboard', icon: Home, end: true },
+    { path: '/admin/schedule', label: 'Schedule', icon: Calendar },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
     ...(isGodAdmin 

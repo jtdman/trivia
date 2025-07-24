@@ -10,11 +10,6 @@ interface AdminRouteProps {
 const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
   const { user, loading, isGodAdmin, userProvider } = useAuth()
 
-  console.log('AdminRoute - user:', user)
-  console.log('AdminRoute - isGodAdmin:', isGodAdmin)
-  console.log('AdminRoute - userProvider:', userProvider)
-  console.log('AdminRoute - loading:', loading)
-
   // Show loading while authentication is being determined
   if (loading) {
     return (
@@ -26,17 +21,14 @@ const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
 
   // If no user, redirect to login
   if (!user) {
-    console.log('No user found, redirecting to login')
     return <Navigate to="/admin/login" replace />
   }
 
   // Allow access for god admin or users with a provider
   if (!isGodAdmin && !userProvider) {
-    console.log('User has no admin access or provider')
     return <Navigate to="/" replace />
   }
 
-  console.log('AdminRoute - access granted')
   return <>{children}</>
 }
 
