@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Calendar, Clock, MapPin, DollarSign, Users, Save, X, Loader2, Building } from 'lucide-react'
 import { supabase, type Event, type Venue, type TriviaProvider } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface EventFormProps {
   mode: 'create' | 'edit'
@@ -20,7 +20,7 @@ const EventForm: React.FC<EventFormProps> = ({
   onCancel,
   onSuccess
 }) => {
-  const { user, isGodAdmin } = useAuth()
+  const { user, isAdmin } = useAuth()
   const [loading, setLoading] = useState(false)
   const [venuesLoading, setVenuesLoading] = useState(false)
   const [providersLoading, setProvidersLoading] = useState(false)
@@ -53,7 +53,7 @@ const EventForm: React.FC<EventFormProps> = ({
       let query = supabase.from('venues').select('*').order('name_original')
 
       // If not platform admin, only show venues user has access to
-      if (!isGodAdmin) {
+      if (!isAdmin) {
         query = query.or(`created_by.eq.${user?.id},id.in.(${await getUserVenueIds()})`)
       }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, MapPin, Plus, Edit3, Calendar, Clock, DollarSign, Users, CheckCircle, XCircle } from 'lucide-react'
 import { supabase, type Venue, type Event } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface VenueWithEvents extends Venue {
   events: Event[]

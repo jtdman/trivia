@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import type { Venue } from '../lib/supabase'
 
 interface VenuePermissions {
@@ -12,7 +12,7 @@ interface VenuePermissions {
 }
 
 export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): VenuePermissions => {
-  const { user, isGodAdmin, userProvider } = useAuth()
+  const { user, isAdmin, userProfile } = useAuth()
 
   return useMemo(() => {
     if (!user || !venue) {
@@ -26,7 +26,7 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       }
     }
 
-    const isPlatformAdmin = isGodAdmin
+    const isPlatformAdmin = isAdmin
     const isOwner = userOwnsVenue || venue.created_by === user.id
     const isImported = venue.is_imported === true
     const hasEvents = false // TODO: Check if venue has events
@@ -45,7 +45,7 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
     }
 
     // Trivia providers (venue owners)
-    if (userProvider) {
+    if (userProfile) {
       if (!isOwner) {
         return {
           canEdit: false,
@@ -76,13 +76,13 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       canChangeStatus: false,
       reason: 'Staff role has read-only access'
     }
-  }, [user, isGodAdmin, userProvider, venue, userOwnsVenue])
+  }, [user, isAdmin, userProfile, venue, userOwnsVenue])
 }
 
 export const useCanCreateVenue = (): boolean => {
-  const { isGodAdmin, userProvider } = useAuth()
+  const { isAdmin, userProfile } = useAuth()
   
   return useMemo(() => {
-    return isGodAdmin || !!userProvider
-  }, [isGodAdmin, userProvider])
+    return isAdmin || !!userProfile
+  }, [isAdmin, userProfile])
 }

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { supabase } from '../lib/supabase'
 import { Calendar, MapPin, Check, X, Clock, Plus } from 'lucide-react'
 import { format, addWeeks } from 'date-fns'
 
 
 const EventOccurrenceManager: React.FC = () => {
-  const { isGodAdmin, userProvider } = useAuth()
+  const { isAdmin, userProfile } = useAuth()
   
   // Determine user type for role-specific UI
-  const isProvider = !isGodAdmin && userProvider
-  const isIndividualHost = !isGodAdmin && !userProvider
+  const isProvider = !isAdmin && userProfile
+  const isIndividualHost = !isAdmin && !userProfile
   const [events, setEvents] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [weeksToShow, setWeeksToShow] = useState(4)
@@ -25,7 +25,7 @@ const EventOccurrenceManager: React.FC = () => {
 
   useEffect(() => {
     fetchEvents()
-  }, [userProvider, weeksToShow, selectedProvider])
+  }, [userProfile, weeksToShow, selectedProvider])
 
   const fetchEvents = async () => {
     try {
@@ -70,10 +70,10 @@ const EventOccurrenceManager: React.FC = () => {
       // Filter by provider
       let filteredData = data || []
       
-      if (!isGodAdmin && userProvider) {
+      if (!isAdmin && userProfile) {
         // Regular user: only show their provider's events
-        filteredData = filteredData.filter(event => (event.events as any)?.provider_id === userProvider.id)
-      } else if (isGodAdmin && selectedProvider !== 'all') {
+        filteredData = filteredData.filter(event => (event.events as any)?.provider_id === userProfile.id)
+      } else if (isAdmin && selectedProvider !== 'all') {
         // God admin with specific provider selected
         filteredData = filteredData.filter(event => (event.events as any)?.trivia_providers?.name === selectedProvider)
       }
@@ -83,7 +83,7 @@ const EventOccurrenceManager: React.FC = () => {
       setEvents(filteredData)
 
       // Extract unique providers from events data
-      if (isGodAdmin && data) {
+      if (isAdmin && data) {
         const uniqueProviders = Array.from(
           new Map(
             data
@@ -168,21 +168,21 @@ const EventOccurrenceManager: React.FC = () => {
       <div className="sm:flex sm:items-center mb-8">
         <div className="sm:flex-auto">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            {isGodAdmin ? 'All Event Schedules' : isProvider ? 'My Schedule' : 'My Schedule'}
+            {isAdmin ? 'All Event Schedules' : isProvider ? 'My Schedule' : 'My Schedule'}
           </h1>
           <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-            {isGodAdmin ? 'Manage and confirm all provider event schedules' : 
+            {isAdmin ? 'Manage and confirm all provider event schedules' : 
              isProvider ? 'Manage and confirm your upcoming trivia events' :
              'Manage and confirm your personal trivia events'}
           </p>
-          {isGodAdmin && (
+          {isAdmin && (
             <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
               Platform-wide view • {events.length} upcoming events
             </p>
           )}
-          {isProvider && userProvider && (
+          {isProvider && userProfile && (
             <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-              {userProvider.name} • {events.length} upcoming events
+              {userProfile.display_name} • {events.length} upcoming events
             </p>
           )}
           {isIndividualHost && (
@@ -192,7 +192,7 @@ const EventOccurrenceManager: React.FC = () => {
           )}
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none flex items-center space-x-3">
-          {isGodAdmin && (
+          {isAdmin && (
             <select
               value={selectedProvider}
               onChange={(e) => setSelectedProvider(e.target.value)}
@@ -350,7 +350,7 @@ const EventOccurrenceManager: React.FC = () => {
                           <Calendar className="h-4 w-4 mr-1" />
                           {format(new Date(event.occurrence_date), 'EEEE, MMM d')} at {event.events?.start_time ? format(new Date(`2000-01-01T${event.events.start_time}`), 'h:mm a') : 'TBD'}
                         </div>
-                        {isGodAdmin && event.events?.trivia_providers?.name && (
+                        {isAdmin && event.events?.trivia_providers?.name && (
                           <div className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
                             {event.events.trivia_providers.name}
                           </div>

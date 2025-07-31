@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { 
   Search, 
   Calendar, 
@@ -45,7 +45,7 @@ interface EventWithVenue {
 }
 
 const EventsList: React.FC = () => {
-  const { user, isGodAdmin, userProvider } = useAuth()
+  const { user, isAdmin, userProfile } = useAuth()
   const [events, setEvents] = useState<EventWithVenue[]>([])
   const [providers, setProviders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -56,8 +56,8 @@ const EventsList: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   
   // Determine user type for role-specific UI
-  const isProvider = !isGodAdmin && userProvider
-  const isIndividualHost = !isGodAdmin && !userProvider
+  const isProvider = !isAdmin && userProfile
+  const isIndividualHost = !isAdmin && !userProfile
 
   useEffect(() => {
     fetchEvents()
@@ -87,7 +87,7 @@ const EventsList: React.FC = () => {
         .order('start_time', { ascending: true })
 
       // If not god admin, only show events for venues user has access to
-      if (!isGodAdmin) {
+      if (!isAdmin) {
         const userVenueIds = await getUserVenueIds()
         if (userVenueIds.length > 0) {
           query = query.in('venue_id', userVenueIds)
@@ -103,7 +103,7 @@ const EventsList: React.FC = () => {
       setEvents(data || [])
       
       // Extract unique providers from events for dropdown
-      if (isGodAdmin && data) {
+      if (isAdmin && data) {
         const uniqueProviders = Array.from(
           new Map(
             data
@@ -201,16 +201,16 @@ const EventsList: React.FC = () => {
         <div className="flex justify-between items-center mb-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {isGodAdmin ? 'All Events' : isProvider ? 'My Events' : 'My Events'}
+              {isAdmin ? 'All Events' : isProvider ? 'My Events' : 'My Events'}
             </h1>
-            {isGodAdmin && (
+            {isAdmin && (
               <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
                 Platform-wide view • {events.length} total events
               </p>
             )}
-            {isProvider && userProvider && (
+            {isProvider && userProfile && (
               <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
-                {userProvider.name} • {events.length} events
+                {userProfile.display_name} • {events.length} events
               </p>
             )}
             {isIndividualHost && (
@@ -239,14 +239,14 @@ const EventsList: React.FC = () => {
         </div>
         
         <p className="text-gray-600 dark:text-gray-400">
-          {isGodAdmin ? 'Manage all trivia events across providers' : 
+          {isAdmin ? 'Manage all trivia events across providers' : 
            isProvider ? 'Manage your provider\'s events and schedules' :
            'Manage your personal trivia events'}
         </p>
       </div>
 
       {/* Search and Filters */}
-      <div className={`mb-6 grid grid-cols-1 gap-4 ${isGodAdmin ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
+      <div className={`mb-6 grid grid-cols-1 gap-4 ${isAdmin ? 'md:grid-cols-5' : 'md:grid-cols-4'}`}>
         <div className="relative md:col-span-2">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
@@ -285,7 +285,7 @@ const EventsList: React.FC = () => {
           </select>
         </div>
 
-        {isGodAdmin && (
+        {isAdmin && (
           <div className="relative">
             <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <select
@@ -343,7 +343,7 @@ const EventsList: React.FC = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Venue
                 </th>
-                {isGodAdmin && (
+                {isAdmin && (
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Provider
                   </th>
@@ -388,7 +388,7 @@ const EventsList: React.FC = () => {
                     </div>
                   </td>
                   
-                  {isGodAdmin && (
+                  {isAdmin && (
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900 dark:text-white">
                         {event.trivia_providers?.name || 'No Provider'}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { 
   Brain, 
   Beer, 
@@ -21,7 +21,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/theme_context'
 
 const AdminLayout: React.FC = () => {
-  const { user, isGodAdmin, signOut } = useAuth()
+  const { user, isAdmin, signOut } = useAuth()
   const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -36,10 +36,10 @@ const AdminLayout: React.FC = () => {
     { path: '/admin/schedule', label: 'Schedule', icon: Calendar },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
-    ...(isGodAdmin 
+    ...(isAdmin 
       ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
       : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
-    ...(isGodAdmin 
+    ...(isAdmin 
       ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
       : []),
     { path: '/admin/profile', label: 'Profile', icon: User }

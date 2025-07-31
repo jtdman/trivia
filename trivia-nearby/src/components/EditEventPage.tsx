@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import EventForm from './EventForm'
 import { supabase, type Event, type Venue } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface EventData extends Event {
   venue?: Venue
@@ -12,7 +12,7 @@ interface EventData extends Event {
 const EditEventPage: React.FC = () => {
   const { eventId } = useParams<{ eventId: string }>()
   const navigate = useNavigate()
-  const { user, isGodAdmin } = useAuth()
+  const { user, isAdmin } = useAuth()
   const [event, setEvent] = useState<EventData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -80,7 +80,7 @@ const EditEventPage: React.FC = () => {
     if (!user || !event) return false
     
     // Platform admin can always delete
-    if (isGodAdmin) return true
+    if (isAdmin) return true
     
     // Check if user owns the venue this event belongs to
     return event.venue?.created_by === user.id

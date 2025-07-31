@@ -21,7 +21,7 @@ import AdminForgotPassword from './components/AdminForgotPassword'
 import AdminResetPassword from './components/AdminResetPassword'
 import AdminLoginSimple from './components/AdminLoginSimple'
 import AdminRouteSimple from './components/AdminRouteSimple'
-import { AuthProvider } from './context/auth_simple'
+import { AuthProvider } from './context/auth_context'
 
 const AppRouter: React.FC = () => {
   return (

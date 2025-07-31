@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { Brain, Beer, Search, Loader2, AlertCircle } from 'lucide-react'
 
 const AdminRegisterSimple: React.FC = () => {
@@ -28,13 +28,7 @@ const AdminRegisterSimple: React.FC = () => {
 
     try {
       // Create user account with metadata
-      const signUpResult = await signUp(email, password, {
-        full_name: displayName,
-        company_name: companyName,
-        phone: phone,
-        website: website,
-        description: description
-      })
+      const signUpResult = await signUp(email, password, displayName)
       
       const newUser = signUpResult.user
       

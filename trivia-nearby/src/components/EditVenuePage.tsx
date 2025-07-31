@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
 import VenueForm from './VenueForm'
 import { supabase } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface VenueData {
   id: string
@@ -20,7 +20,7 @@ interface VenueData {
 const EditVenuePage: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>()
   const navigate = useNavigate()
-  const { user, isGodAdmin } = useAuth()
+  const { user, isAdmin } = useAuth()
   const [venue, setVenue] = useState<VenueData | null>(null)
   const [userOwnsVenue, setUserOwnsVenue] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -164,7 +164,7 @@ const EditVenuePage: React.FC = () => {
         </button>
 
         {/* Delete button - only show for platform_admin or if user owns this venue */}
-        {isGodAdmin && (
+        {isAdmin && (
           <button
             onClick={() => setShowDeleteConfirm(true)}
             className="flex items-center gap-2 px-4 py-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 border border-red-300 dark:border-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"

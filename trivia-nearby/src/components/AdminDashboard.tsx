@@ -1,11 +1,11 @@
 import React from 'react'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { MapPin, Calendar, Loader2, AlertCircle, CheckCircle, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAdminStats } from '../hooks/useAdminStats'
 
 const AdminDashboard: React.FC = () => {
-  const { user, isGodAdmin, userProvider } = useAuth()
+  const { user, isAdmin, userProfile } = useAuth()
   const { stats, loading, error } = useAdminStats()
 
   if (loading) {
@@ -42,13 +42,13 @@ const AdminDashboard: React.FC = () => {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0]}` : ''}!
         </h1>
-        {isGodAdmin ? (
+        {isAdmin ? (
           <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1 font-semibold">
             🔱 God Admin - Platform Owner
           </p>
-        ) : userProvider && (
+        ) : userProfile && userProfile.role !== 'admin' && (
           <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
-            {userProvider.name} Admin
+            {userProfile.display_name} Admin
           </p>
         )}
         <p className="mt-2 text-gray-600 dark:text-gray-400">
@@ -63,12 +63,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isGodAdmin ? 'Total Venues' : 'My Venues'}
+                {isAdmin ? 'Total Venues' : 'My Venues'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isGodAdmin ? stats.totalVenues : stats.myVenues}
+                {isAdmin ? stats.totalVenues : stats.myVenues}
               </p>
-              {isGodAdmin && (
+              {isAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
                 </p>
@@ -83,12 +83,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isGodAdmin ? 'Events' : 'My Events'}
+                {isAdmin ? 'Events' : 'My Events'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isGodAdmin ? stats.events : stats.myEvents}
+                {isAdmin ? stats.events : stats.myEvents}
               </p>
-              {isGodAdmin && (
+              {isAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Active events platform-wide
                 </p>

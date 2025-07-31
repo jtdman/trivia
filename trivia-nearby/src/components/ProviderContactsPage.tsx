@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Phone, Mail, Globe, MapPin, Users, Building, ExternalLink, Copy, CheckCircle, Edit3, Save, X, Plus, Trash2 } from 'lucide-react'
 import { supabase, type TriviaProvider } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface ContactInfo {
   emails?: string[]
@@ -16,7 +16,7 @@ interface ContactInfo {
 }
 
 const ProviderContactsPage: React.FC = () => {
-  const { isGodAdmin } = useAuth()
+  const { isAdmin } = useAuth()
   const [providers, setProviders] = useState<TriviaProvider[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -158,7 +158,7 @@ const ProviderContactsPage: React.FC = () => {
   }
 
   // Only show for platform_admin
-  if (!isGodAdmin) {
+  if (!isAdmin) {
     return (
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center py-12">

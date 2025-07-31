@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { MapPin, Search, CheckCircle, Clock, AlertCircle, UserCheck, ArrowLeft } from 'lucide-react'
 import { supabase, type Venue } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 interface VenueWithEvents extends Venue {
   event_count: number

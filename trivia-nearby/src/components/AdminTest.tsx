@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 
 const AdminTest: React.FC = () => {
-  const { user, isGodAdmin, userProvider, loading } = useAuth()
+  const { user, isAdmin, userProfile, loading } = useAuth()
 
   return (
     <div className="p-8">
@@ -10,8 +10,8 @@ const AdminTest: React.FC = () => {
       <div className="space-y-2">
         <p><strong>Loading:</strong> {loading ? 'Yes' : 'No'}</p>
         <p><strong>User:</strong> {user ? user.email : 'None'}</p>
-        <p><strong>Is God Admin:</strong> {isGodAdmin ? 'Yes' : 'No'}</p>
-        <p><strong>User Provider:</strong> {userProvider ? JSON.stringify(userProvider) : 'None'}</p>
+        <p><strong>Is God Admin:</strong> {isAdmin ? 'Yes' : 'No'}</p>
+        <p><strong>User Provider:</strong> {userProfile ? JSON.stringify(userProfile) : 'None'}</p>
         <p><strong>User Metadata:</strong> {user?.user_metadata ? JSON.stringify(user.user_metadata) : 'None'}</p>
       </div>
     </div>

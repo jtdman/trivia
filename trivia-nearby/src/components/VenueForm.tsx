@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Save, X, Loader2, Lock, AlertTriangle } from 'lucide-react'
 import { supabase, type Venue } from '../lib/supabase'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { useVenuePermissions } from '../hooks/useVenuePermissions'
 
 interface VenueFormProps {
@@ -23,7 +23,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
   onSuccess
 }) => {
   useNavigate()
-  const { user, isGodAdmin } = useAuth()
+  const { user, isAdmin } = useAuth()
   const permissions = useVenuePermissions(initialData, userOwnsVenue)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -59,7 +59,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
         if (insertError) throw insertError
 
         // If user is not platform_admin, create a user_venue relationship
-        if (!isGodAdmin && data) {
+        if (!isAdmin && data) {
           const { error: relationError } = await supabase
             .from('user_venues')
             .insert([{

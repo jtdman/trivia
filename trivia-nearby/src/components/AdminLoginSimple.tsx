@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { useAuth } from '../context/auth_simple'
+import { useAuth } from '../context/auth_context'
 import { Brain, Beer, Search, Loader2, AlertCircle } from 'lucide-react'
 
 const AdminLoginSimple: React.FC = () => {

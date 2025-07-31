@@ -7,6 +7,7 @@ interface AuthContextType {
   user: User | null
   userProfile: UserProfile | null
   loading: boolean
+  isAdmin: boolean
   supabase: typeof supabase
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<any>
@@ -30,34 +31,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let mounted = true
+
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        fetchUserProfile(session.user.id)
+    const initializeAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        
+        if (!mounted) return
+        
+        setUser(session?.user ?? null)
+        if (session?.user) {
+          await fetchUserProfile(session.user.id)
+        }
+      } catch (error) {
+        console.error('Error getting session:', error)
+      } finally {
+        if (mounted) {
+          setLoading(false)
+        }
       }
-      setLoading(false)
-    })
+    }
+
+    initializeAuth()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!mounted) return
+      
       setUser(session?.user ?? null)
       if (session?.user) {
-        fetchUserProfile(session.user.id)
+        await fetchUserProfile(session.user.id)
       } else {
         setUserProfile(null)
       }
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
   const fetchUserProfile = async (userId: string) => {
     try {
       console.log('Fetching user profile for userId:', userId)
       
-      // Temporary: Create a default admin profile for your account
+      // For the admin user, create a profile if it doesn't exist
       if (userId === '8600177e-3e85-426a-b3b6-b760abaf983b') {
+        console.log('Setting hardcoded admin profile for known admin user')
         setUserProfile({
           id: userId,
           display_name: 'Jason (Admin)',
@@ -68,18 +90,66 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return
       }
       
-      const { data, error } = await supabase
+      // Try to get existing profile from user_profiles table
+      const { data: profileData, error: profileError } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
         .maybeSingle()
 
-      console.log('Profile query result:', { data, error })
-      if (error && error.code !== 'PGRST116') throw error
-      setUserProfile(data)
+      console.log('Profile query result:', { data: profileData, error: profileError })
+
+      if (profileData) {
+        setUserProfile(profileData)
+        return
+      }
+
+      // Check if user is in admin_users table
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('user_id', userId)
+        .maybeSingle()
+
+      console.log('Admin users query result:', { data: adminData, error: adminError })
+
+      if (adminData) {
+        // Create profile for admin user
+        const adminProfile: UserProfile = {
+          id: userId,
+          display_name: 'Admin User',
+          role: adminData.role === 'god' || adminData.role === 'god_admin' ? 'admin' : 'venue_owner',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+        
+        // Try to insert the profile (ignore errors if it already exists)
+        const { error: insertError } = await supabase
+          .from('user_profiles')
+          .insert(adminProfile)
+
+        if (insertError) {
+          console.warn('Could not insert user profile:', insertError)
+        }
+
+        setUserProfile(adminProfile)
+        return
+      }
+
+      // Default to venue_owner role for other authenticated users
+      const defaultProfile: UserProfile = {
+        id: userId,
+        display_name: 'User',
+        role: 'venue_owner' as const,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+
+      setUserProfile(defaultProfile)
+      
     } catch (error) {
       console.error('Error fetching user profile:', error)
-      // Default to venue_owner role for other users
+      // Fallback profile
       setUserProfile({
         id: userId,
         display_name: 'User',
@@ -91,8 +161,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   const signIn = async (email: string, password: string) => {
+    console.log('Attempting to sign in with email:', email)
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) throw error
+    if (error) {
+      console.error('Sign in error:', error)
+      throw error
+    }
+    console.log('Sign in successful')
   }
 
   const signUp = async (email: string, password: string, displayName?: string) => {
@@ -112,17 +187,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
+    setUserProfile(null)
   }
 
   const resetPassword = async (email: string) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset-password`
+    })
     if (error) throw error
   }
+
+  const isAdmin = userProfile?.role === 'admin'
 
   const value = {
     user,
     userProfile,
     loading,
+    isAdmin,
     supabase,
     signIn,
     signUp,
