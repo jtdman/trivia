@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import App from './App'
 import AdminLayout from './components/AdminLayout'
-import AdminLogin from './components/AdminLogin'
 import AdminRegisterSimple from './components/AdminRegisterSimple'
 import AdminDashboard from './components/AdminDashboard'
 import VenuesList from './components/VenuesList'
@@ -16,12 +15,13 @@ import EditEventPage from './components/EditEventPage'
 import EventOccurrenceManager from './components/EventOccurrenceManager'
 import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
-import AdminRoute from './components/AdminRoute'
 import LocationPage from './components/LocationPage'
 import BetaPage from './components/BetaPage'
 import AdminForgotPassword from './components/AdminForgotPassword'
 import AdminResetPassword from './components/AdminResetPassword'
-import { AuthProvider } from './context/auth_context'
+import AdminLoginSimple from './components/AdminLoginSimple'
+import AdminRouteSimple from './components/AdminRouteSimple'
+import { AuthProvider } from './context/auth_simple'
 
 const AppRouter: React.FC = () => {
   return (
@@ -37,7 +37,7 @@ const AppRouter: React.FC = () => {
           <Route path="/trivia-near-:location" element={<LocationPage onBack={() => window.history.back()} />} />
           
           {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLoginSimple />} />
           <Route path="/admin/register" element={<AdminRegisterSimple />} />
           <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
           <Route path="/admin/reset-password" element={<AdminResetPassword />} />
@@ -47,9 +47,9 @@ const AppRouter: React.FC = () => {
           <Route
             path="/admin"
             element={
-              <AdminRoute>
+              <AdminRouteSimple>
                 <AdminLayout />
-              </AdminRoute>
+              </AdminRouteSimple>
             }
           >
             <Route index element={<AdminDashboard />} />
