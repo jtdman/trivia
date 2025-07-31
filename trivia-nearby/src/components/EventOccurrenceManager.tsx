@@ -22,10 +22,13 @@ const EventOccurrenceManager: React.FC = () => {
   })
   const [providers, setProviders] = useState<any[]>([])
   const [selectedProvider, setSelectedProvider] = useState<string>('all')
+  const [selectedDayOfWeek, setSelectedDayOfWeek] = useState<string>('all')
+  const [selectedStatus, setSelectedStatus] = useState<string>('all')
+  const [venueSearch, setVenueSearch] = useState<string>('')
 
   useEffect(() => {
     fetchEvents()
-  }, [userProfile, weeksToShow, selectedProvider])
+  }, [userProfile, weeksToShow, selectedProvider, selectedDayOfWeek, selectedStatus, venueSearch])
 
   const fetchEvents = async () => {
     try {
@@ -67,17 +70,44 @@ const EventOccurrenceManager: React.FC = () => {
         return
       }
 
-      // Filter by provider
+      // Apply all filters
       let filteredData = data || []
       
+      // 1. Provider filtering (role-based)
       if (!isAdmin && userProfile) {
         // Regular user: only show their provider's events
         filteredData = filteredData.filter(event => (event.events as any)?.provider_id === userProfile.id)
       } else if (isAdmin && selectedProvider !== 'all') {
         // God admin with specific provider selected
-        filteredData = filteredData.filter(event => (event.events as any)?.trivia_providers?.name === selectedProvider)
+        filteredData = filteredData.filter(event => {
+          const providerName = (event.events as any)?.trivia_providers?.name
+          return providerName === selectedProvider
+        })
       }
-      // If god admin with selectedProvider is 'all', show all events
+      
+      // 2. Day of week filtering
+      if (selectedDayOfWeek !== 'all') {
+        filteredData = filteredData.filter(event => {
+          const eventDayOfWeek = (event.events as any)?.day_of_week
+          return eventDayOfWeek === selectedDayOfWeek
+        })
+      }
+      
+      // 3. Status filtering
+      if (selectedStatus !== 'all') {
+        filteredData = filteredData.filter(event => event.status === selectedStatus)
+      }
+      
+      // 4. Venue search filtering
+      if (venueSearch.trim()) {
+        const searchTerm = venueSearch.toLowerCase().trim()
+        filteredData = filteredData.filter(event => {
+          const venues = (event.events as any)?.venues
+          const venueName = (venues?.google_name || venues?.name_original || '').toLowerCase()
+          const address = (venues?.google_formatted_address || '').toLowerCase()
+          return venueName.includes(searchTerm) || address.includes(searchTerm)
+        })
+      }
 
       
       setEvents(filteredData)
@@ -191,28 +221,95 @@ const EventOccurrenceManager: React.FC = () => {
             </p>
           )}
         </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none flex items-center space-x-3">
-          {isAdmin && (
+        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          {/* Filters Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+            {/* Provider Filter (Admin only) */}
+            {isAdmin && (
+              <select
+                value={selectedProvider}
+                onChange={(e) => setSelectedProvider(e.target.value)}
+                className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500"
+              >
+                <option value="all">All Providers</option>
+                {providers.map(provider => (
+                  <option key={provider.name} value={provider.name}>{provider.name}</option>
+                ))}
+              </select>
+            )}
+            
+            {/* Day of Week Filter */}
             <select
-              value={selectedProvider}
-              onChange={(e) => setSelectedProvider(e.target.value)}
-              className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-base focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
+              value={selectedDayOfWeek}
+              onChange={(e) => setSelectedDayOfWeek(e.target.value)}
+              className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500"
             >
-              <option value="all">All Providers</option>
-              {providers.map(provider => (
-                <option key={provider.name} value={provider.name}>{provider.name}</option>
-              ))}
+              <option value="all">All Days</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
             </select>
-          )}
-          <select
-            value={weeksToShow}
-            onChange={(e) => setWeeksToShow(Number(e.target.value))}
-            className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-base focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
-          >
-            <option value={2}>Next 2 weeks</option>
-            <option value={4}>Next 4 weeks</option>
-            <option value={8}>Next 8 weeks</option>
-          </select>
+            
+            {/* Status Filter */}
+            <select
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+              className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500"
+            >
+              <option value="all">All Status</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            
+            {/* Venue Search */}
+            <input
+              type="text"
+              placeholder="Search venues..."
+              value={venueSearch}
+              onChange={(e) => setVenueSearch(e.target.value)}
+              className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-3 text-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500"
+            />
+            
+            {/* Time Range */}
+            <select
+              value={weeksToShow}
+              onChange={(e) => setWeeksToShow(Number(e.target.value))}
+              className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 py-2 pl-3 pr-10 text-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500"
+            >
+              <option value={2}>Next 2 weeks</option>
+              <option value={4}>Next 4 weeks</option>
+              <option value={8}>Next 8 weeks</option>
+            </select>
+          </div>
+          
+          {/* Filter Summary and Clear Button */}
+          <div className="mt-2 flex items-center justify-between">
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              Showing {events.length} events
+              {selectedProvider !== 'all' && ` • ${selectedProvider}`}
+              {selectedDayOfWeek !== 'all' && ` • ${selectedDayOfWeek}s`}
+              {selectedStatus !== 'all' && ` • ${selectedStatus}`}
+              {venueSearch.trim() && ` • "${venueSearch}"`}
+            </div>
+            {(selectedProvider !== 'all' || selectedDayOfWeek !== 'all' || selectedStatus !== 'all' || venueSearch.trim()) && (
+              <button
+                onClick={() => {
+                  setSelectedProvider('all')
+                  setSelectedDayOfWeek('all')
+                  setSelectedStatus('all')
+                  setVenueSearch('')
+                }}
+                className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 font-medium"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
