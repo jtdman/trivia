@@ -69,7 +69,7 @@ export interface VenueWithEvents extends Venue {
 export interface UserProfile {
   id: string
   display_name?: string
-  role?: 'platform_admin' | 'trivia_host' | 'venue_owner' | 'staff'
+  role: 'admin' | 'trivia_host' | 'venue_owner'
   provider_id?: string
   created_at: string
   updated_at: string
