@@ -19,6 +19,8 @@ import AdminTest from './components/AdminTest'
 import AdminRoute from './components/AdminRoute'
 import LocationPage from './components/LocationPage'
 import BetaPage from './components/BetaPage'
+import AdminForgotPassword from './components/AdminForgotPassword'
+import AdminResetPassword from './components/AdminResetPassword'
 import { AuthProvider } from './context/auth_context_simple'
 
 const AppRouter: React.FC = () => {
@@ -37,6 +39,8 @@ const AppRouter: React.FC = () => {
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegisterSimple />} />
+          <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
+          <Route path="/admin/reset-password" element={<AdminResetPassword />} />
           <Route path="/admin/test" element={<AdminTest />} />
           
           {/* Protected admin routes */}
