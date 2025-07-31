@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { useAuth } from '../context/auth_context_simple'
+import { useAuth } from '../context/auth_context'
 import { Brain, Beer, Search, Loader2, AlertCircle, CheckCircle } from 'lucide-react'
 
 const AdminForgotPassword: React.FC = () => {

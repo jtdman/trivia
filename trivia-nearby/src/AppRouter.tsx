@@ -21,7 +21,7 @@ import LocationPage from './components/LocationPage'
 import BetaPage from './components/BetaPage'
 import AdminForgotPassword from './components/AdminForgotPassword'
 import AdminResetPassword from './components/AdminResetPassword'
-import { AuthProvider } from './context/auth_context_simple'
+import { AuthProvider } from './context/auth_context'
 
 const AppRouter: React.FC = () => {
   return (
