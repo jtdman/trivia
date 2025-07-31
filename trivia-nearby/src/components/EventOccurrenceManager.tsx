@@ -72,10 +72,10 @@ const EventOccurrenceManager: React.FC = () => {
       
       if (!isGodAdmin && userProvider) {
         // Regular user: only show their provider's events
-        filteredData = filteredData.filter(event => event.events?.provider_id === userProvider.id)
+        filteredData = filteredData.filter(event => (event.events as any)?.provider_id === userProvider.id)
       } else if (isGodAdmin && selectedProvider !== 'all') {
         // God admin with specific provider selected
-        filteredData = filteredData.filter(event => event.events?.trivia_providers?.name === selectedProvider)
+        filteredData = filteredData.filter(event => (event.events as any)?.trivia_providers?.name === selectedProvider)
       }
       // If god admin with selectedProvider is 'all', show all events
 
@@ -87,8 +87,8 @@ const EventOccurrenceManager: React.FC = () => {
         const uniqueProviders = Array.from(
           new Map(
             data
-              .filter(event => event.events?.trivia_providers)
-              .map(event => [event.events.trivia_providers.name, event.events.trivia_providers])
+              .filter(event => (event.events as any)?.trivia_providers)
+              .map(event => [(event.events as any).trivia_providers.name, (event.events as any).trivia_providers])
           ).values()
         ).sort((a, b) => a.name.localeCompare(b.name))
         
