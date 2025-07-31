@@ -24,6 +24,13 @@ self.addEventListener('install', event => {
 
 // Fetch event - serve from cache when offline
 self.addEventListener('fetch', event => {
+  // Skip service worker for development files
+  if (event.request.url.includes('localhost') || 
+      event.request.url.includes('@') ||
+      event.request.url.includes('node_modules')) {
+    return;
+  }
+  
   event.respondWith(
     fetch(event.request)
       .catch(() => {

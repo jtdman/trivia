@@ -42,7 +42,11 @@ const AdminDashboard: React.FC = () => {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0]}` : ''}!
         </h1>
-        {!isGodAdmin && userProvider && (
+        {isGodAdmin ? (
+          <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1 font-semibold">
+            🔱 God Admin - Platform Owner
+          </p>
+        ) : userProvider && (
           <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
             {userProvider.name} Admin
           </p>
@@ -124,13 +128,6 @@ const AdminDashboard: React.FC = () => {
             Add New Event
           </Link>
 
-          <Link
-            to="/admin/venues/claim"
-            className="flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium py-3 px-4 rounded-lg transition-colors"
-          >
-            <MapPin className="w-5 h-5" />
-            Claim Existing Venue
-          </Link>
         </div>
       </div>
 

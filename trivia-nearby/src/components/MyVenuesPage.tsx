@@ -18,57 +18,73 @@ interface MyVenue {
 }
 
 const MyVenuesPage: React.FC = () => {
-  const { userProfile } = useAuth()
+  const { user } = useAuth()
   const [venues, setVenues] = useState<MyVenue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchMyVenues()
-  }, [])
+    let mounted = true
 
-  const fetchMyVenues = async () => {
-    try {
-      setLoading(true)
-      
-      const { data, error } = await supabase
-        .from('user_venues')
-        .select(`
-          role,
-          granted_at,
-          venue:venues (
-            id,
-            name_original,
-            google_name,
-            address_original,
-            google_formatted_address,
-            verification_status,
-            events (
+    const fetchData = async () => {
+      if (!user?.id) {
+        if (mounted) setLoading(false)
+        return
+      }
+
+      try {
+        if (mounted) {
+          setLoading(true)
+          setError(null)
+        }
+        
+        const { data, error } = await supabase
+          .from('user_venues')
+          .select(`
+            role,
+            granted_at,
+            venue:venues (
               id,
-              is_active
+              name_original,
+              google_name,
+              address_original,
+              google_formatted_address,
+              verification_status,
+              events (
+                id,
+                is_active
+              )
             )
-          )
-        `)
-        .eq('user_id', userProfile?.id)
-        .order('granted_at', { ascending: false })
+          `)
+          .eq('user_id', user.id)
+          .order('granted_at', { ascending: false })
 
-      if (error) throw error
+        if (!mounted) return
+        if (error) throw error
 
-      const processedVenues = (data || []).map((item: any) => ({
-        ...item.venue,
-        role: item.role,
-        claimed_at: item.granted_at,
-        event_count: (item.venue.events as any[])?.length || 0,
-        active_events: (item.venue.events as any[])?.filter((e: any) => e.is_active).length || 0
-      }))
+        const processedVenues = (data || []).map((item: any) => ({
+          ...item.venue,
+          role: item.role,
+          claimed_at: item.granted_at,
+          event_count: (item.venue.events as any[])?.length || 0,
+          active_events: (item.venue.events as any[])?.filter((e: any) => e.is_active).length || 0
+        }))
 
-      setVenues(processedVenues)
-    } catch (err: any) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
+        setVenues(processedVenues)
+      } catch (err: any) {
+        if (mounted) setError(err.message)
+      } finally {
+        if (mounted) setLoading(false)
+      }
     }
-  }
+
+    fetchData()
+
+    return () => {
+      mounted = false
+    }
+  }, [user?.id])
+
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -109,7 +125,7 @@ const MyVenuesPage: React.FC = () => {
           My Venues
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Manage your claimed venues and their trivia events
+          Manage venues where you provide trivia services
         </p>
       </div>
 
@@ -160,16 +176,6 @@ const MyVenuesPage: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link
-            to="/admin/venues/claim"
-            className="flex items-center gap-3 p-4 border-2 border-dashed border-purple-300 dark:border-purple-600 rounded-lg hover:border-purple-500 dark:hover:border-purple-400 transition-colors"
-          >
-            <UserCheck className="w-6 h-6 text-purple-500" />
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-white">Claim Another Venue</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Find and claim more venues you manage</p>
-            </div>
-          </Link>
           
           <Link
             to="/admin/venues/new"
@@ -253,7 +259,7 @@ const MyVenuesPage: React.FC = () => {
               </div>
 
               <div className="text-xs text-gray-500 dark:text-gray-400">
-                Claimed {new Date(venue.claimed_at).toLocaleDateString()}
+                Added {new Date(venue.claimed_at).toLocaleDateString()}
               </div>
             </div>
           ))}
@@ -262,17 +268,17 @@ const MyVenuesPage: React.FC = () => {
         <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow">
           <UserCheck className="mx-auto h-12 w-12 text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-            No venues claimed yet
+            No venues yet
           </h3>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
-            Start by claiming venues you own or manage to control their trivia listings.
+            Add venues where you provide trivia services to get started.
           </p>
           <Link
-            to="/admin/venues/claim"
+            to="/admin/venues/new"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-colors"
           >
-            <UserCheck className="w-5 h-5" />
-            Claim Your First Venue
+            <Plus className="w-5 h-5" />
+            Add Your First Venue
           </Link>
         </div>
       )}

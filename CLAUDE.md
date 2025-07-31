@@ -128,3 +128,7 @@ pnpm validate-places stats
 - **OutSpoken Entertainment**: Atlanta metro area - Contact: (404) 273-1645
 - **Team Trivia Georgia**: Atlanta region - Contact: (478) 887-4842
 - **Dirty South Trivia**: Southeast region - Contact: dirtysouthtrivia.com/contact
+
+## Technical Design Decisions
+
+- I'm not concerned with pagination for the end user - we will only show the 20 closest trivias max on a day - maybe the week filter will have more but I prefer a load more button at the bottom

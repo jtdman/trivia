@@ -31,10 +31,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userProvider, setUserProvider] = useState<any | null>(null)
 
   useEffect(() => {
+    let mounted = true
+
     // Check for existing session
     const initializeAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
+        if (!mounted) return
+        
         setUser(session?.user ?? null)
         if (session?.user) {
           // Wait for role checks to complete before setting loading to false
@@ -46,31 +50,54 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } catch (error) {
         console.error('Error getting session:', error)
       } finally {
-        // Always set loading to false after all checks complete
-        setLoading(false)
+        if (mounted) {
+          // Always set loading to false after all checks complete
+          setLoading(false)
+        }
       }
     }
 
     initializeAuth()
 
-    // Listen for auth changes
+    // Listen for auth changes with debouncing
+    let timeoutId: NodeJS.Timeout | null = null
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        // Don't set loading during auth state changes
-        Promise.all([
-          checkUserRole(session.user),
-          fetchUserProvider(session.user.id)
-        ]).catch(error => {
-          console.error('Error during auth state change:', error)
-        })
-      } else {
-        setIsGodAdmin(false)
-        setUserProvider(null)
+      if (!mounted) return
+      
+      // Clear any pending timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId)
       }
+      
+      // Debounce rapid auth state changes
+      timeoutId = setTimeout(async () => {
+        if (!mounted) return
+        
+        setUser(session?.user ?? null)
+        if (session?.user) {
+          try {
+            await Promise.all([
+              checkUserRole(session.user),
+              fetchUserProvider(session.user.id)
+            ])
+          } catch (error) {
+            console.error('Error during auth state change:', error)
+          }
+        } else {
+          setIsGodAdmin(false)
+          setUserProvider(null)
+        }
+      }, 100) // 100ms debounce
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      mounted = false
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+      subscription.unsubscribe()
+    }
   }, [])
 
   const checkUserRole = async (user: User) => {

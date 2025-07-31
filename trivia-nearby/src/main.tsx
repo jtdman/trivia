@@ -15,15 +15,5 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 )
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registered:', registration)
-      })
-      .catch(error => {
-        console.log('ServiceWorker registration failed:', error)
-      })
-  })
-}
+// Service worker disabled temporarily
+// TODO: Re-enable for production with proper dev exclusions

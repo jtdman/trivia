@@ -38,10 +38,14 @@ interface EventWithVenue {
     address_original: string
     google_formatted_address?: string
   }
+  trivia_providers?: {
+    id: string
+    name: string
+  }
 }
 
 const EventsList: React.FC = () => {
-  const { userProfile, isGodAdmin, userProvider } = useAuth()
+  const { user, isGodAdmin, userProvider } = useAuth()
   const [events, setEvents] = useState<EventWithVenue[]>([])
   const [providers, setProviders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -118,18 +122,18 @@ const EventsList: React.FC = () => {
   }
 
   const getUserVenueIds = async (): Promise<string[]> => {
-    if (!userProfile?.id) return []
+    if (!user?.id) return []
     
     // Get venues user owns or manages
     const { data: userVenues } = await supabase
       .from('user_venues')
       .select('venue_id')
-      .eq('user_id', userProfile.id)
+      .eq('user_id', user.id)
     
     const { data: createdVenues } = await supabase
       .from('venues')
       .select('id')
-      .eq('created_by', userProfile.id)
+      .eq('created_by', user.id)
     
     const venueIds = [
       ...(userVenues?.map(uv => uv.venue_id) || []),

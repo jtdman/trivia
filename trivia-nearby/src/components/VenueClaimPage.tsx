@@ -11,7 +11,7 @@ interface VenueWithEvents extends Venue {
 const VenueClaimPage: React.FC = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const { userProfile } = useAuth()
+  const { user } = useAuth()
   const [venues, setVenues] = useState<VenueWithEvents[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -56,7 +56,7 @@ const VenueClaimPage: React.FC = () => {
             ...venue,
             event_count: venue.events?.length || 0,
             is_claimed: !!userVenueData,
-            claimed_by_me: userVenueData?.user_id === userProfile?.id
+            claimed_by_me: userVenueData?.user_id === user?.id
           }
         })
       )
@@ -78,7 +78,7 @@ const VenueClaimPage: React.FC = () => {
       const { error } = await supabase
         .from('user_venues')
         .insert([{
-          user_id: userProfile?.id,
+          user_id: user?.id,
           venue_id: venueId,
           role: 'owner'
         }])

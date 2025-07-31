@@ -2,16 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/auth_context_simple'
 import { supabase } from '../lib/supabase'
 import { Calendar, MapPin, Check, X, Clock, Plus } from 'lucide-react'
-import { format, addWeeks, startOfWeek } from 'date-fns'
+import { format, addWeeks } from 'date-fns'
 
-interface EventOccurrence {
-  id: string
-  event_id: string
-  occurrence_date: string
-  status: string
-  notes: string | null
-  events?: any
-}
 
 const EventOccurrenceManager: React.FC = () => {
   const { isGodAdmin, userProvider } = useAuth()
@@ -368,8 +360,8 @@ const EventOccurrenceManager: React.FC = () => {
                     <div className="flex items-center space-x-3">
                       <div className="flex items-center">
                         {getStatusIcon(event.status)}
-                        <span className={`ml-2 inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${getStatusColor(event.status)}`}>
-                          {event.status}
+                        <span className={`ml-2 inline-flex rounded-full px-2 text-sm font-semibold leading-5 ${getStatusColor(event.status)}`}>
+                          {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
                         </span>
                       </div>
                       {event.status === 'scheduled' && (

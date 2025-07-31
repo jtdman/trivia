@@ -12,7 +12,7 @@ interface EventData extends Event {
 const EditEventPage: React.FC = () => {
   const { eventId } = useParams<{ eventId: string }>()
   const navigate = useNavigate()
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin } = useAuth()
   const [event, setEvent] = useState<EventData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -77,13 +77,13 @@ const EditEventPage: React.FC = () => {
   }
 
   const canDelete = () => {
-    if (!userProfile || !event) return false
+    if (!user || !event) return false
     
     // Platform admin can always delete
-    if (userProfile.role === 'platform_admin') return true
+    if (isGodAdmin) return true
     
     // Check if user owns the venue this event belongs to
-    return event.venue?.created_by === userProfile.id
+    return event.venue?.created_by === user.id
   }
 
   if (loading) {

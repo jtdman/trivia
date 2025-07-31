@@ -21,7 +21,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/theme_context'
 
 const AdminLayout: React.FC = () => {
-  const { user, isGodAdmin, userProvider, signOut } = useAuth()
+  const { user, isGodAdmin, signOut } = useAuth()
   const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

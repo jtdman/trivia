@@ -3,7 +3,7 @@
 ## 🎯 Daily Operations
 
 ### Morning Routine (Monday-Saturday)
-1. **Check Admin Dashboard** - http://localhost:3001/ (dev) or https://admin.trivianearby.com (prod)
+1. **Check Admin Dashboard** - http://localhost:5173/admin (dev) or https://trivianearby.com/admin (prod)
 2. **Review Event Status** - Look for events needing confirmation
 3. **Monitor Provider Activity** - Check who's actively managing their events
 
@@ -142,7 +142,8 @@ Providers can add special events through admin interface:
 
 ```bash
 # Start admin interface locally
-cd trivia-backend/admin-interface && pnpm dev
+cd trivia-nearby && pnpm dev
+# Admin interface is at http://localhost:5173/admin
 
 # Generate events manually
 cd trivia-backend && pnpm generate-events

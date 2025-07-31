@@ -30,43 +30,72 @@ const DAY_MAPPING = {
   'Saturday': 6
 }
 
-async function generateWeeklyEvents() {
-  console.log('🚀 Starting weekly event generation...')
+async function generateWeeklyEvents(dryRun = false) {
+  console.log(dryRun ? '🧪 Starting DRY RUN event generation...' : '🚀 Starting weekly event generation...')
   
   try {
-    // Get all active weekly events
-    const { data: weeklyEvents, error: eventsError } = await supabase
-      .from('events')
-      .select(`
-        id,
-        event_type,
-        day_of_week,
-        start_time,
-        end_time,
-        provider_id,
-        venue_id,
-        trivia_providers(name, contact_info)
-      `)
-      .eq('frequency', 'weekly')
-      .eq('is_active', true)
-      // Only get approved events (status column may not exist on all events)
-      // .eq('status', 'approved')
+    // Get ALL active weekly events with pagination (Supabase limits to 1000 per request)
+    let allEvents = []
+    let offset = 0
+    const batchSize = 1000
+    
+    console.log('📦 Fetching all events with pagination...')
+    
+    while (true) {
+      const { data: batch, error: eventsError } = await supabase
+        .from('events')
+        .select(`
+          id,
+          event_type,
+          day_of_week,
+          start_time,
+          end_time,
+          provider_id,
+          venue_id,
+          trivia_providers(name, contact_info)
+        `)
+        .eq('frequency', 'weekly')
+        .eq('is_active', true)
+        .range(offset, offset + batchSize - 1)
+        // Only get approved events (status column may not exist on all events)
+        // .eq('status', 'approved')
 
-    if (eventsError) {
-      throw eventsError
+      if (eventsError) {
+        throw eventsError
+      }
+
+      if (!batch || batch.length === 0) {
+        break
+      }
+
+      allEvents = allEvents.concat(batch)
+      console.log(`📥 Fetched batch: ${batch.length} events (total: ${allEvents.length})`)
+      
+      // If we got fewer than batchSize, we're done
+      if (batch.length < batchSize) {
+        break
+      }
+      
+      offset += batchSize
     }
+    
+    const weeklyEvents = allEvents
 
     console.log(`📅 Found ${weeklyEvents.length} weekly events`)
 
-    // Generate occurrences for the next 4 weeks
-    const generatedCount = await generateOccurrences(weeklyEvents)
+    // Generate occurrences for the next 1 week
+    const generatedCount = await generateOccurrences(weeklyEvents, dryRun)
     
-    console.log(`✅ Generated ${generatedCount} event occurrences`)
+    console.log(`✅ ${dryRun ? 'Would generate' : 'Generated'} ${generatedCount} event occurrences`)
 
     // Send email notifications to providers
-    await sendProviderNotifications()
+    if (!dryRun) {
+      await sendProviderNotifications()
+    } else {
+      console.log('📧 DRY RUN: Would send provider notifications')
+    }
 
-    console.log('🎉 Weekly event generation completed successfully!')
+    console.log(`🎉 Weekly event generation ${dryRun ? 'DRY RUN' : ''} completed successfully!`)
 
   } catch (error) {
     console.error('❌ Error generating weekly events:', error)
@@ -74,15 +103,17 @@ async function generateWeeklyEvents() {
   }
 }
 
-async function generateOccurrences(events) {
+async function generateOccurrences(events, dryRun = false) {
   let generatedCount = 0
-  const startDate = startOfWeek(new Date()) // This Sunday
+  // Start from next Sunday (not this past Sunday)
+  const today = new Date()
+  const startDate = addWeeks(startOfWeek(today), 1) // Next Sunday
   
   for (const event of events) {
     const eventDayNumber = DAY_MAPPING[event.day_of_week]
     
-    // Generate occurrences for the next 4 weeks
-    for (let week = 0; week < 4; week++) {
+    // Generate occurrences for the next 1 week
+    for (let week = 0; week < 1; week++) {
       const weekStart = addWeeks(startDate, week)
       const occurrenceDate = addDays(weekStart, eventDayNumber)
       
@@ -95,22 +126,27 @@ async function generateOccurrences(events) {
         .single()
 
       if (!existing) {
-        // Create new occurrence
-        const { error: insertError } = await supabase
-          .from('event_occurrences')
-          .insert({
-            event_id: event.id,
-            occurrence_date: format(occurrenceDate, 'yyyy-MM-dd'),
-            status: 'scheduled',
-            actual_start_time: event.start_time,
-            actual_end_time: event.end_time
-          })
+        if (!dryRun) {
+          // Create new occurrence
+          const { error: insertError } = await supabase
+            .from('event_occurrences')
+            .insert({
+              event_id: event.id,
+              occurrence_date: format(occurrenceDate, 'yyyy-MM-dd'),
+              status: 'scheduled',
+              actual_start_time: event.start_time,
+              actual_end_time: event.end_time
+            })
 
-        if (insertError) {
-          console.error(`❌ Error creating occurrence for event ${event.id}:`, insertError)
+          if (insertError) {
+            console.error(`❌ Error creating occurrence for event ${event.id}:`, insertError)
+          } else {
+            generatedCount++
+            console.log(`✅ Created occurrence: ${event.event_type} on ${format(occurrenceDate, 'yyyy-MM-dd')}`)
+          }
         } else {
           generatedCount++
-          console.log(`✅ Created occurrence: ${event.event_type} on ${format(occurrenceDate, 'yyyy-MM-dd')}`)
+          console.log(`🧪 Would create occurrence: ${event.event_type} on ${format(occurrenceDate, 'yyyy-MM-dd')}`)
         }
       }
     }
@@ -228,6 +264,8 @@ async function testRun() {
 // Main execution
 if (process.argv.includes('--test')) {
   testRun()
+} else if (process.argv.includes('--dry-run')) {
+  generateWeeklyEvents(true)
 } else {
   generateWeeklyEvents()
 }

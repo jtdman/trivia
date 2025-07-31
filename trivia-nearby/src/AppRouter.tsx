@@ -9,7 +9,6 @@ import VenuesList from './components/VenuesList'
 import AddVenuePage from './components/AddVenuePage'
 import EditVenuePage from './components/EditVenuePage'
 import VenueDetailPage from './components/VenueDetailPage'
-import VenueClaimPage from './components/VenueClaimPage'
 import MyVenuesPage from './components/MyVenuesPage'
 import EventsList from './components/EventsList'
 import AddEventPage from './components/AddEventPage'
@@ -52,7 +51,6 @@ const AppRouter: React.FC = () => {
             <Route index element={<AdminDashboard />} />
             <Route path="venues" element={<VenuesList />} />
             <Route path="venues/new" element={<AddVenuePage />} />
-            <Route path="venues/claim" element={<VenueClaimPage />} />
             <Route path="venues/my-venues" element={<MyVenuesPage />} />
             <Route path="venues/:venueId" element={<EditVenuePage />} />
             <Route path="venues/:venueId/detail" element={<VenueDetailPage />} />

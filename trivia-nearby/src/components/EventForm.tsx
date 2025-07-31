@@ -20,7 +20,7 @@ const EventForm: React.FC<EventFormProps> = ({
   onCancel,
   onSuccess
 }) => {
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin } = useAuth()
   const [loading, setLoading] = useState(false)
   const [venuesLoading, setVenuesLoading] = useState(false)
   const [providersLoading, setProvidersLoading] = useState(false)
@@ -53,8 +53,8 @@ const EventForm: React.FC<EventFormProps> = ({
       let query = supabase.from('venues').select('*').order('name_original')
 
       // If not platform admin, only show venues user has access to
-      if (userProfile?.role !== 'platform_admin') {
-        query = query.or(`created_by.eq.${userProfile?.id},id.in.(${await getUserVenueIds()})`)
+      if (!isGodAdmin) {
+        query = query.or(`created_by.eq.${user?.id},id.in.(${await getUserVenueIds()})`)
       }
 
       const { data, error } = await query
@@ -68,11 +68,11 @@ const EventForm: React.FC<EventFormProps> = ({
   }
 
   const getUserVenueIds = async (): Promise<string> => {
-    if (!userProfile?.id) return ''
+    if (!user?.id) return ''
     const { data } = await supabase
       .from('user_venues')
       .select('venue_id')
-      .eq('user_id', userProfile.id)
+      .eq('user_id', user.id)
     return data?.map(uv => uv.venue_id).join(',') || ''
   }
 

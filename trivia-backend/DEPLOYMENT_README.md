@@ -6,7 +6,7 @@ This system provides event management for trivia providers with automated weekly
 
 ### Architecture
 - **Main App**: `trivia-nearby/` (React, port 3000) - Public trivia finder
-- **Admin Interface**: `trivia-backend/admin-interface/` (React, port 3001) - Provider/admin dashboard  
+- **Admin Interface**: Integrated at `/admin` route in main app - Provider/admin dashboard  
 - **Backend Jobs**: `trivia-backend/jobs/` - Automated event generation
 - **Database**: Supabase PostgreSQL with PostGIS
 
@@ -31,12 +31,13 @@ MAIN_DOMAIN=trivianearby.com
 
 ### 2. Build Process
 
-**Admin Interface:**
+**Main App (includes Admin Interface):**
 ```bash
-cd trivia-backend/admin-interface
+cd trivia-nearby
 pnpm install
 pnpm build
-# Deploy dist/ folder to admin.trivianearby.com
+# Deploy dist/ folder to trivianearby.com
+# Admin interface accessible at /admin
 ```
 
 **Main App:**

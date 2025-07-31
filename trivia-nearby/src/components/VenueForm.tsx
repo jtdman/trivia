@@ -23,7 +23,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
   onSuccess
 }) => {
   useNavigate()
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin } = useAuth()
   const permissions = useVenuePermissions(initialData, userOwnsVenue)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -51,7 +51,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
             ...formData,
             verification_status: 'pending',
             is_imported: false,
-            created_by: userProfile?.id
+            created_by: user?.id
           }])
           .select()
           .single()
@@ -59,11 +59,11 @@ const VenueForm: React.FC<VenueFormProps> = ({
         if (insertError) throw insertError
 
         // If user is not platform_admin, create a user_venue relationship
-        if (userProfile?.role !== 'platform_admin' && data) {
+        if (!isGodAdmin && data) {
           const { error: relationError } = await supabase
             .from('user_venues')
             .insert([{
-              user_id: userProfile?.id,
+              user_id: user?.id,
               venue_id: data.id,
               role: 'owner'
             }])

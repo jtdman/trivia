@@ -263,7 +263,7 @@ const VenueDetailPage: React.FC = () => {
               No events yet
             </h3>
             <p className="text-gray-500 dark:text-gray-400 mb-4">
-              This venue doesn't have any trivia events scheduled yet.
+              This venue doesn't have any trivia events Scheduled yet.
             </p>
             <Link
               to={`/admin/events/new?venue_id=${venue.id}`}

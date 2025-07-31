@@ -20,7 +20,7 @@ interface VenueData {
 const EditVenuePage: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>()
   const navigate = useNavigate()
-  const { userProfile } = useAuth()
+  const { user, isGodAdmin } = useAuth()
   const [venue, setVenue] = useState<VenueData | null>(null)
   const [userOwnsVenue, setUserOwnsVenue] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -47,15 +47,15 @@ const EditVenuePage: React.FC = () => {
       setVenue(data)
 
       // Check if user owns this venue
-      if (userProfile?.id) {
+      if (user?.id) {
         const { data: userVenueData } = await supabase
           .from('user_venues')
           .select('*')
           .eq('venue_id', venueId)
-          .eq('user_id', userProfile.id)
+          .eq('user_id', user.id)
           .single()
 
-        setUserOwnsVenue(!!userVenueData || data.created_by === userProfile.id)
+        setUserOwnsVenue(!!userVenueData || data.created_by === user.id)
       }
     } catch (err: any) {
       setError(err.message)
@@ -164,7 +164,7 @@ const EditVenuePage: React.FC = () => {
         </button>
 
         {/* Delete button - only show for platform_admin or if user owns this venue */}
-        {userProfile?.role === 'platform_admin' && (
+        {isGodAdmin && (
           <button
             onClick={() => setShowDeleteConfirm(true)}
             className="flex items-center gap-2 px-4 py-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 border border-red-300 dark:border-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
