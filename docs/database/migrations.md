@@ -166,6 +166,50 @@ DROP MATERIALIZED VIEW IF EXISTS event_instances;
 
 ---
 
+---
+
+### 20250803_01 - Capitalize Event Types
+**Date**: 2025-08-03
+**Author**: Database Agent
+**Issue**: User Request
+
+**Changes**:
+- Update lowercase "trivia" to "Trivia" (75 records)
+- Update lowercase "bingo" to "Bingo" (9 records)
+- Improve data consistency for event_type field
+
+**Rollback**:
+- Revert specific records back to lowercase (best effort)
+
+**SQL**:
+```sql
+-- Forward migration
+UPDATE events 
+SET event_type = 'Trivia' 
+WHERE event_type = 'trivia';
+
+UPDATE events 
+SET event_type = 'Bingo' 
+WHERE event_type = 'bingo';
+```
+
+```sql
+-- Rollback migration (best effort)
+UPDATE events 
+SET event_type = 'trivia' 
+WHERE event_type = 'Trivia' 
+  AND updated_at >= (SELECT MAX(created_at) FROM events WHERE event_type = 'Trivia')
+LIMIT 75;
+
+UPDATE events 
+SET event_type = 'bingo' 
+WHERE event_type = 'Bingo'
+  AND updated_at >= (SELECT MAX(created_at) FROM events WHERE event_type = 'Bingo')
+LIMIT 9;
+```
+
+---
+
 ## Pending Migrations
 
 Document planned migrations here before implementation:
