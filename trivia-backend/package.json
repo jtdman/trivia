@@ -17,7 +17,13 @@
     "generate-events": "node jobs/generate-weekly-events.js",
     "test-generate-events": "node jobs/generate-weekly-events.js --test",
     "scheduler": "node sunday-night-scheduler.js",
-    "scheduler:test": "NODE_ENV=test node sunday-night-scheduler.js"
+    "scheduler:test": "NODE_ENV=test node sunday-night-scheduler.js",
+    "scheduler:dry-run": "node sunday-night-scheduler.js --dry-run",
+    "monitor": "node scheduler-monitor.js",
+    "monitor:json": "node scheduler-monitor.js --json",
+    "monitor:alert": "node scheduler-monitor.js --alert",
+    "monitor:continuous": "node scheduler-monitor.js --continuous",
+    "deploy:production": "./deploy-scheduler-production.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

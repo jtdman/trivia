@@ -55,8 +55,9 @@ function getDayOfWeekDate(weekStart, dayOfWeek) {
 /**
  * Generate event occurrences for the upcoming weeks
  */
-async function generateEventOccurrences() {
-  console.log('🗓️  Generating event occurrences for the next', WEEKS_TO_GENERATE, 'weeks...')
+async function generateEventOccurrences(dryRun = false) {
+  const mode = dryRun ? '(DRY RUN)' : ''
+  console.log(`🗓️  Generating event occurrences for the next ${WEEKS_TO_GENERATE} weeks... ${mode}`)
   
   try {
     // Get all active recurring events
@@ -139,12 +140,16 @@ async function generateEventOccurrences() {
 
     // Bulk insert new occurrences
     if (occurrencesToCreate.length > 0) {
-      const { error: insertError } = await supabase
-        .from('event_occurrences')
-        .insert(occurrencesToCreate)
+      if (!dryRun) {
+        const { error: insertError } = await supabase
+          .from('event_occurrences')
+          .insert(occurrencesToCreate)
 
-      if (insertError) throw insertError
-      console.log(`✅ Created ${occurrencesToCreate.length} new event occurrences`)
+        if (insertError) throw insertError
+        console.log(`✅ Created ${occurrencesToCreate.length} new event occurrences`)
+      } else {
+        console.log(`🧪 DRY RUN: Would create ${occurrencesToCreate.length} new event occurrences`)
+      }
     } else {
       console.log('ℹ️  No new occurrences to create')
     }
@@ -314,31 +319,41 @@ async function generateSummaryStats() {
 /**
  * Main execution function
  */
-async function main() {
-  console.log('🌙 Starting Sunday Night Event Scheduler...')
+async function main(dryRun = false) {
+  const mode = dryRun ? 'DRY RUN' : 'PRODUCTION'
+  console.log(`🌙 Starting Sunday Night Event Scheduler (${mode})...`)
   console.log('⏰ Started at:', new Date().toISOString())
+  
+  if (dryRun) {
+    console.log('🧪 DRY RUN MODE: No changes will be made to the database')
+  }
   
   try {
     // Generate event occurrences
-    const generationResults = await generateEventOccurrences()
+    const generationResults = await generateEventOccurrences(dryRun)
     
-    // Send notifications
-    const notificationResults = await sendProviderNotifications()
+    // Send notifications (skip in dry run)
+    const notificationResults = dryRun ? 
+      { providersNotified: 0, eventsNeedingConfirmation: 0, dryRun: true } :
+      await sendProviderNotifications()
     
-    // Clean up old data
-    const cleanupCount = await cleanupOldOccurrences()
+    // Clean up old data (skip in dry run)
+    const cleanupCount = dryRun ? 0 : await cleanupOldOccurrences()
     
     // Generate summary
     const stats = await generateSummaryStats()
     
     // Final summary
-    console.log('\n🎉 Sunday Night Scheduler completed successfully!')
+    console.log(`\n🎉 Sunday Night Scheduler ${mode} completed successfully!`)
     console.log('📊 Summary:')
     console.log(`   • Events processed: ${generationResults.eventsProcessed}`)
-    console.log(`   • New occurrences created: ${generationResults.occurrencesCreated}`)
-    console.log(`   • Providers notified: ${notificationResults.providersNotified}`)
-    console.log(`   • Events needing confirmation: ${notificationResults.eventsNeedingConfirmation}`)
-    console.log(`   • Old occurrences cleaned up: ${cleanupCount}`)
+    console.log(`   • New occurrences ${dryRun ? 'would be created' : 'created'}: ${generationResults.occurrencesCreated}`)
+    
+    if (!dryRun) {
+      console.log(`   • Providers notified: ${notificationResults.providersNotified}`)
+      console.log(`   • Events needing confirmation: ${notificationResults.eventsNeedingConfirmation}`)
+      console.log(`   • Old occurrences cleaned up: ${cleanupCount}`)
+    }
     
     if (stats) {
       console.log(`   • Total active events: ${stats.totalEvents}`)
@@ -348,27 +363,31 @@ async function main() {
     
     console.log('⏰ Completed at:', new Date().toISOString())
     
-    // Log to database for audit trail
-    await supabase.from('system_logs').insert({
-      type: 'sunday_scheduler',
-      message: 'Sunday night scheduler completed successfully',
-      metadata: {
-        ...generationResults,
-        ...notificationResults,
-        cleanupCount,
-        stats
-      }
-    })
+    // Log to database for audit trail (skip in dry run)
+    if (!dryRun) {
+      await supabase.from('system_logs').insert({
+        type: 'sunday_scheduler',
+        message: 'Sunday night scheduler completed successfully',
+        metadata: {
+          ...generationResults,
+          ...notificationResults,
+          cleanupCount,
+          stats
+        }
+      })
+    }
 
   } catch (error) {
-    console.error('💥 Sunday Night Scheduler failed:', error)
+    console.error(`💥 Sunday Night Scheduler ${mode} failed:`, error)
     
-    // Log error to database
-    await supabase.from('system_logs').insert({
-      type: 'sunday_scheduler_error',
-      message: 'Sunday night scheduler failed',
-      metadata: { error: error.message, stack: error.stack }
-    })
+    // Log error to database (skip in dry run)
+    if (!dryRun) {
+      await supabase.from('system_logs').insert({
+        type: 'sunday_scheduler_error',
+        message: 'Sunday night scheduler failed',
+        metadata: { error: error.message, stack: error.stack }
+      })
+    }
     
     process.exit(1)
   }
@@ -376,7 +395,9 @@ async function main() {
 
 // Run the scheduler
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main()
+  const args = process.argv.slice(2)
+  const dryRun = args.includes('--dry-run')
+  main(dryRun)
 }
 
 export { main, generateEventOccurrences, sendProviderNotifications, cleanupOldOccurrences }
