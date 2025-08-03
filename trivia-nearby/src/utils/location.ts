@@ -79,19 +79,13 @@ const getStateAbbreviation = (stateName: string): string => {
 }
 
 // Format event title based on provider and event type
-export function formatEventTitle(eventType: string, providerId: string): string {
-  const NERDY_TALK_PROVIDER_ID = '3e3b8ff6-e564-41e1-bf30-b19f10ffc5ce'
-  
-  if (providerId === NERDY_TALK_PROVIDER_ID) {
-    const lowerEventType = eventType.toLowerCase()
-    if (lowerEventType.includes('trivia')) {
-      return 'TRIVIA - Nerdy Talk'
-    } else if (lowerEventType.includes('bingo')) {
-      return 'BALLAD BINGO - Nerdy Talk'
-    }
+export function formatEventTitle(eventType: string, providerName?: string): string {
+  if (!providerName) {
+    return eventType
   }
   
-  return eventType
+  // Format as "Event Type by Provider Name"
+  return `${eventType} by ${providerName}`
 }
 
 // Helper function to make CORS-enabled requests to Nominatim

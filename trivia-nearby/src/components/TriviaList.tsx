@@ -153,7 +153,12 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
           // First occurrence of this event
           eventMap.set(key, {
             id: event.id,
-            title: formatEventTitle(event.event_type, event.provider_id),
+            title: formatEventTitle(
+              event.event_type, 
+              Array.isArray(event.trivia_providers) 
+                ? event.trivia_providers[0]?.name 
+                : event.trivia_providers?.name
+            ),
             day: formatDayOfWeek(event.day_of_week),
             frequency:
               event.frequency.charAt(0).toUpperCase() +

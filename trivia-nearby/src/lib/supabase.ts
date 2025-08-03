@@ -63,6 +63,13 @@ export interface VenueWithEvents extends Venue {
     prize_description?: string
     max_teams?: number
     is_active: boolean
+    trivia_providers?: {
+      id: string
+      name: string
+    } | {
+      id: string
+      name: string
+    }[] | null
   }>
 }
 

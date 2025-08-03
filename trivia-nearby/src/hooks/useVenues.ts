@@ -62,7 +62,11 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
             prize_amount,
             prize_description,
             max_teams,
-            is_active
+            is_active,
+            trivia_providers:provider_id (
+              id,
+              name
+            )
           )
         `)
         .eq('events.is_active', true)
@@ -137,7 +141,11 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
                   prize_amount,
                   prize_description,
                   max_teams,
-                  is_active
+                  is_active,
+                  trivia_providers:provider_id (
+                    id,
+                    name
+                  )
                 )
               `)
               .eq('events.is_active', true)
