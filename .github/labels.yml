@@ -1,0 +1,137 @@
+# GitHub Labels Configuration
+# Use with: https://github.com/crazy-max/ghaction-github-labeler
+
+# Area Labels (what part of the system)
+- name: frontend
+  color: "0052CC"
+  description: "End-user frontend work"
+  
+- name: admin
+  color: "5319E7"
+  description: "Admin dashboard work"
+  
+- name: api
+  color: "FBCA04"
+  description: "API/Backend work"
+  
+- name: database
+  color: "B60205"
+  description: "Database schema/query work"
+  
+- name: infrastructure
+  color: "1D76DB"
+  description: "Deployment/hosting/CI work"
+
+# Type Labels (what kind of work)
+- name: feature
+  color: "0E8A16"
+  description: "New feature or enhancement"
+  
+- name: bug
+  color: "D93F0B"
+  description: "Something isn't working"
+  
+- name: schema
+  color: "F9D0C4"
+  description: "Database schema change"
+  
+- name: migration
+  color: "C5DEF5"
+  description: "Data migration required"
+  
+- name: refactor
+  color: "E99695"
+  description: "Code refactoring"
+  
+- name: performance
+  color: "FEF2C0"
+  description: "Performance improvement"
+  
+- name: security
+  color: "D4C5F9"
+  description: "Security issue or improvement"
+
+# Status Labels (current state)
+- name: needs-review
+  color: "FFD700"
+  description: "Needs code review"
+  
+- name: needs-triage
+  color: "EDEDED"
+  description: "Needs priority/assignment"
+  
+- name: in-progress
+  color: "008080"
+  description: "Currently being worked on"
+  
+- name: blocked
+  color: "D93F0B"
+  description: "Blocked by dependency"
+  
+- name: ready-to-merge
+  color: "0E8A16"
+  description: "Approved and ready"
+
+# Dependency Labels (coordination)
+- name: blocks-api
+  color: "FF6B6B"
+  description: "Blocks API implementation"
+  
+- name: blocks-frontend
+  color: "FF6B6B"
+  description: "Blocks frontend work"
+  
+- name: blocks-admin
+  color: "FF6B6B"
+  description: "Blocks admin work"
+  
+- name: has-dependency
+  color: "FFA500"
+  description: "Depends on other work"
+
+# Priority Labels
+- name: "P0"
+  color: "B60205"
+  description: "Critical - Drop everything"
+  
+- name: "P1"
+  color: "FF6B6B"
+  description: "High priority"
+  
+- name: "P2"
+  color: "FFA500"
+  description: "Medium priority"
+  
+- name: "P3"
+  color: "77DD77"
+  description: "Low priority"
+
+# Agent Labels (who should work on this)
+- name: agent:database
+  color: "76448A"
+  description: "Database agent should handle"
+  
+- name: agent:frontend
+  color: "2E86AB"
+  description: "Frontend agent should handle"
+  
+- name: agent:admin
+  color: "F18F01"
+  description: "Admin agent should handle"
+  
+- name: agent:any
+  color: "666666"
+  description: "Any agent can handle"
+
+# Special Labels
+- name: good-first-issue
+  color: "7057FF"
+  description: "Good for newcomers"
+  
+- name: epic
+  color: "3F51B5"
+  description: "Large feature spanning multiple issues"
+  
+- name: hotfix
+  color: "FF0000"
+  description: "Urgent production fix"

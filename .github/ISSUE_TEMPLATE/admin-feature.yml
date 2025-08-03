@@ -1,0 +1,110 @@
+name: Admin Dashboard Feature
+description: Create or modify admin dashboard functionality
+title: "[ADMIN] "
+labels: ["admin", "feature", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Admin Dashboard Feature
+        Use this template for admin dashboard work (venue management, event moderation, etc.)
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: What admin feature needs to be implemented?
+      placeholder: |
+        Describe the admin feature:
+        - User story (As an admin/venue owner, I want to...)
+        - Business logic requirements
+        - Permissions/access control needs
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Admin Area
+      description: Which part of the admin dashboard is affected?
+      options:
+        - Event Management
+        - Venue Management
+        - User Management
+        - Data Import/Export
+        - Analytics/Reports
+        - System Configuration
+        - Authentication/Permissions
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: User Type
+      description: Who will use this feature?
+      options:
+        - Super Admin
+        - Venue Owner
+        - Event Moderator
+        - Data Manager
+        - All Admin Users
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: List any dependencies on other issues or components
+      placeholder: |
+        - Depends on: #123 (Database schema)
+        - Requires: #456 (API endpoint)
+        - Related to: #789 (Frontend display)
+
+  - type: textarea
+    id: database-changes
+    attributes:
+      label: Database Changes
+      description: Any database schema or data changes required?
+      placeholder: |
+        - New tables/columns
+        - Permission changes
+        - Data migrations
+        - Index requirements
+
+  - type: textarea
+    id: api-changes
+    attributes:
+      label: API Changes
+      description: New or modified API endpoints needed
+      placeholder: |
+        - POST /api/admin/venues/:id/approve
+        - GET /api/admin/reports/events
+        - Required auth scopes...
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - Critical (Admin blocked)
+        - P1 - High (Core admin function)
+        - P2 - Medium (Important feature)
+        - P3 - Low (Nice to have)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-merge Checklist
+      options:
+        - label: Permission checks implemented
+        - label: Audit logging added
+        - label: Database migrations tested
+        - label: API documentation updated
+        - label: Admin user tested
+        - label: Security review completed

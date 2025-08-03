@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Multi-Agent Coordination
+    url: https://github.com/[YOUR-USERNAME]/trivia/blob/main/docs/coordination/README.md
+    about: Read the multi-agent coordination guide
+  - name: API Documentation
+    url: https://github.com/[YOUR-USERNAME]/trivia/blob/main/docs/api/README.md
+    about: View the API contract documentation
+  - name: Database Schema
+    url: https://github.com/[YOUR-USERNAME]/trivia/blob/main/docs/database/schema.md
+    about: View the current database schema

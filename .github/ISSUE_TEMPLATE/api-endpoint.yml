@@ -1,0 +1,142 @@
+name: API Endpoint
+description: Create or modify API endpoints
+title: "[API] "
+labels: ["api", "backend", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## API Endpoint Request
+        Use this template for creating or modifying API endpoints that bridge frontend and database.
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: HTTP Method
+      options:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+    validations:
+      required: true
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint Path
+      description: The API endpoint path
+      placeholder: /api/events/:id/attendees
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Endpoint Description
+      description: What does this endpoint do?
+      placeholder: |
+        - Purpose of the endpoint
+        - Who can access it (public/authenticated/admin)
+        - Main use cases
+    validations:
+      required: true
+
+  - type: textarea
+    id: request-format
+    attributes:
+      label: Request Format
+      description: Expected request parameters/body
+      placeholder: |
+        ```typescript
+        // Query params
+        interface QueryParams {
+          lat: number;
+          lng: number;
+          radius?: number; // in miles, default 10
+        }
+        
+        // Request body (if applicable)
+        interface RequestBody {
+          name: string;
+          email: string;
+        }
+        ```
+
+  - type: textarea
+    id: response-format
+    attributes:
+      label: Response Format
+      description: Expected response structure
+      placeholder: |
+        ```typescript
+        // Success response
+        interface SuccessResponse {
+          data: {
+            events: Event[];
+            total: number;
+          };
+          meta: {
+            page: number;
+            limit: number;
+          };
+        }
+        
+        // Error response
+        interface ErrorResponse {
+          error: {
+            code: string;
+            message: string;
+          };
+        }
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: database-queries
+    attributes:
+      label: Database Queries
+      description: What database queries will this endpoint make?
+      placeholder: |
+        - Tables accessed
+        - Query complexity
+        - Expected performance
+        - Any special database features used (PostGIS, etc.)
+
+  - type: textarea
+    id: auth-requirements
+    attributes:
+      label: Authentication/Authorization
+      description: Auth requirements for this endpoint
+      placeholder: |
+        - Public / Authenticated / Admin only
+        - Required permissions/scopes
+        - Row-level security considerations
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Dependencies on other work
+      placeholder: |
+        Depends on:
+        - #123 (Database schema)
+        
+        Blocks:
+        - #456 (Frontend feature)
+        - #789 (Admin feature)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-merge Checklist
+      options:
+        - label: API tests written
+        - label: Request validation implemented
+        - label: Error handling complete
+        - label: Rate limiting configured
+        - label: API documentation updated
+        - label: Performance tested

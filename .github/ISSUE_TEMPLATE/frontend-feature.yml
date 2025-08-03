@@ -1,0 +1,97 @@
+name: Frontend Feature
+description: Create or modify frontend user-facing features
+title: "[FRONTEND] "
+labels: ["frontend", "feature", "needs-review"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Frontend Feature Request
+        Use this template for end-user frontend work on the trivia app.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: What feature needs to be implemented or modified?
+      placeholder: |
+        Describe the feature in detail. Include:
+        - User story (As a user, I want to...)
+        - Acceptance criteria
+        - Any UI/UX mockups or references
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Frontend Area
+      description: Which part of the frontend is affected?
+      options:
+        - Event Discovery (Map/List)
+        - Event Details
+        - User Authentication
+        - Search/Filters
+        - Theme/Styling
+        - Navigation
+        - Performance
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: List any dependencies on other issues or components
+      placeholder: |
+        - Depends on: #123 (API endpoint for X)
+        - Blocked by: #456 (Database schema change)
+        - Related to: #789 (Admin feature)
+
+  - type: textarea
+    id: api-requirements
+    attributes:
+      label: API Requirements
+      description: What API endpoints or data does this feature need?
+      placeholder: |
+        - GET /api/events?lat=X&lng=Y
+        - POST /api/users/favorites
+        - Expected response format...
+
+  - type: textarea
+    id: implementation-notes
+    attributes:
+      label: Implementation Notes
+      description: Any technical considerations or approaches
+      placeholder: |
+        - Component structure
+        - State management approach
+        - Performance considerations
+        - Mobile responsiveness requirements
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - Critical (Production broken)
+        - P1 - High (Core functionality)
+        - P2 - Medium (Important feature)
+        - P3 - Low (Nice to have)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-merge Checklist
+      description: Complete before merging
+      options:
+        - label: Tests written/updated
+        - label: Mobile responsive
+        - label: Dark theme compatible
+        - label: Accessibility checked
+        - label: API integration tested
+        - label: Performance impact assessed

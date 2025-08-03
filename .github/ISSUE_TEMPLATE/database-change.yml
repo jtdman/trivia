@@ -1,0 +1,125 @@
+name: Database Change
+description: Database schema changes, migrations, or performance improvements
+title: "[DB] "
+labels: ["database", "schema", "needs-review", "blocks-api"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Database Change Request
+        Use this template for database schema changes, migrations, or optimizations.
+        ⚠️ Database changes often block API and frontend work - coordinate carefully!
+
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Change Type
+      description: What kind of database change is this?
+      options:
+        - Schema Change (new table/column)
+        - Data Migration
+        - Index/Performance
+        - Constraint/Relationship
+        - Function/Trigger
+        - Permission/RLS Policy
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Change Description
+      description: Describe the database change in detail
+      placeholder: |
+        - What is changing and why?
+        - Business logic requirements
+        - Data integrity considerations
+    validations:
+      required: true
+
+  - type: textarea
+    id: schema-changes
+    attributes:
+      label: Schema Changes (SQL)
+      description: Provide the SQL for schema changes
+      placeholder: |
+        ```sql
+        -- Add your SQL here
+        ALTER TABLE events ADD COLUMN registration_required BOOLEAN DEFAULT FALSE;
+        
+        -- Include any indexes
+        CREATE INDEX idx_events_registration ON events(registration_required) WHERE registration_required = TRUE;
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: migration-plan
+    attributes:
+      label: Migration Plan
+      description: How will existing data be handled?
+      placeholder: |
+        - Backwards compatibility approach
+        - Data transformation needs
+        - Rollback plan
+        - Zero-downtime migration steps
+
+  - type: textarea
+    id: affected-code
+    attributes:
+      label: Affected Code
+      description: What code needs to be updated?
+      placeholder: |
+        - API endpoints that need updates
+        - Frontend components affected
+        - Admin features impacted
+        - List specific files/functions if known
+
+  - type: textarea
+    id: performance-impact
+    attributes:
+      label: Performance Impact
+      description: Expected performance implications
+      placeholder: |
+        - Query performance changes
+        - Storage requirements
+        - Index usage
+        - Expected row counts
+
+  - type: dropdown
+    id: breaking-change
+    attributes:
+      label: Breaking Change?
+      description: Will this break existing functionality?
+      options:
+        - "No - Backwards compatible"
+        - "Yes - Requires coordinated deployment"
+        - "Yes - Requires data migration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Blocks/Dependencies
+      description: What work is blocked by or blocks this change?
+      placeholder: |
+        Blocks:
+        - #123 (API endpoint implementation)
+        - #456 (Frontend feature)
+        
+        Depends on:
+        - #789 (Related schema change)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-merge Checklist
+      options:
+        - label: Migration script tested on staging
+        - label: Rollback script prepared
+        - label: Performance impact measured
+        - label: API contract updated
+        - label: Schema documentation updated
+        - label: Dependent teams notified

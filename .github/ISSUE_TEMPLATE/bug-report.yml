@@ -1,0 +1,99 @@
+name: Bug Report
+description: Report a bug in any part of the system
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        Help us fix the issue by providing detailed information.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of the system has the bug?
+      options:
+        - Frontend - End User
+        - Frontend - Admin Dashboard
+        - Backend - API
+        - Backend - Database
+        - Backend - Data Import/Scraping
+        - Infrastructure/Deployment
+        - Unknown/Multiple
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the bug
+      placeholder: |
+        What happened? What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this bug?
+      options:
+        - P0 - Critical (System down/data loss)
+        - P1 - High (Major feature broken)
+        - P2 - Medium (Feature partially broken)
+        - P3 - Low (Minor issue)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Where does this bug occur?
+      placeholder: |
+        - Browser/OS (for frontend)
+        - API endpoint (for backend)
+        - Database query (if known)
+        - Time of occurrence
+        - User type (public/authenticated/admin)
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs/Screenshots
+      description: Any relevant logs, error messages, or screenshots
+      placeholder: |
+        Paste error messages, logs, or describe attached screenshots
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Is there a temporary workaround?
+      placeholder: |
+        Any way to work around this issue temporarily?
