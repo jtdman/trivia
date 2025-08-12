@@ -12,14 +12,43 @@ type AppState = 'splash' | 'manual-location' | 'trivia-list'
 
 const App = () => {
   const { theme, toggleTheme } = useContext(ThemeContext)
-  const [appState, setAppState] = useState<AppState>('splash')
-  const [location, setLocation] = useState<string>('')
+  
+  // Initialize state from localStorage or defaults
+  const [appState, setAppState] = useState<AppState>(() => {
+    const saved = localStorage.getItem('trivianearby-appstate')
+    return saved === 'trivia-list' ? 'trivia-list' : 'splash'
+  })
+  
+  const [location, setLocation] = useState<string>(() => {
+    return localStorage.getItem('trivianearby-location') || ''
+  })
+  
   const [manualLocation, setManualLocation] = useState<string>('')
-  const [geocodedCoords, setGeocodedCoords] = useState<{lat: number, lng: number} | null>(null)
+  
+  const [geocodedCoords, setGeocodedCoords] = useState<{lat: number, lng: number} | null>(() => {
+    const saved = localStorage.getItem('trivianearby-coords')
+    return saved ? JSON.parse(saved) : null
+  })
+  
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
 
   // Debug logging
   console.log('App render - current state:', { appState, location, theme })
+
+  // Persist state to localStorage
+  React.useEffect(() => {
+    if (appState === 'trivia-list' && location) {
+      localStorage.setItem('trivianearby-appstate', appState)
+      localStorage.setItem('trivianearby-location', location)
+      if (geocodedCoords) {
+        localStorage.setItem('trivianearby-coords', JSON.stringify(geocodedCoords))
+      }
+    } else if (appState === 'splash') {
+      localStorage.removeItem('trivianearby-appstate')
+      localStorage.removeItem('trivianearby-location')
+      localStorage.removeItem('trivianearby-coords')
+    }
+  }, [appState, location, geocodedCoords])
 
   const handleShareLocation = () => {
     console.log('Share location clicked')

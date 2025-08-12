@@ -9,6 +9,7 @@ const AdminRegister: React.FC = () => {
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [contactName, setContactName] = useState('')
   const [phone, setPhone] = useState('')
   const [website, setWebsite] = useState('')
   const [description, setDescription] = useState('')
@@ -27,18 +28,29 @@ const AdminRegister: React.FC = () => {
     setIsSubmitting(true)
 
     try {
+      // Check if provider name already exists
+      const { data: existingProvider } = await supabase
+        .from('trivia_providers')
+        .select('id')
+        .eq('name', companyName)
+        .single()
+      
+      if (existingProvider) {
+        throw new Error('A trivia provider with this name already exists. Please choose a different name.')
+      }
+
       // Create user account
       const signUpResult = await signUp(email, password, displayName)
       const newUser = signUpResult.user
       
       if (newUser) {
-        // Create user profile first
+        // Create user profile first with trivia_host role
         const { error: profileError } = await supabase
           .from('user_profiles')
           .insert({
-            user_id: newUser.id,
-            email: email,
-            full_name: displayName
+            id: newUser.id,
+            display_name: displayName || contactName,
+            role: 'trivia_host'
           })
 
         if (profileError) {
@@ -53,6 +65,8 @@ const AdminRegister: React.FC = () => {
             name: companyName || displayName,
             website: website || null,
             contact_info: {
+              contact_name: contactName || displayName,
+              contact_phone: phone || null,
               emails: [email],
               phones: phone ? [phone] : [],
               note: description || null
@@ -223,14 +237,30 @@ const AdminRegister: React.FC = () => {
           </div>
 
           <div>
+            <label htmlFor="contactName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Contact Name
+            </label>
+            <input
+              id="contactName"
+              type="text"
+              value={contactName}
+              onChange={(e) => setContactName(e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="Your full name"
+            />
+          </div>
+
+          <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Phone Number (Optional)
+              Contact Phone Number
             </label>
             <input
               id="phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="(555) 123-4567"
             />

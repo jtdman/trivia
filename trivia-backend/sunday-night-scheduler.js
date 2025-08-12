@@ -118,14 +118,14 @@ async function generateEventOccurrences(dryRun = false) {
         const occurrenceDateStr = occurrenceDate.toISOString().split('T')[0]
 
         // Check if occurrence already exists
-        const { data: existing } = await supabase
+        const { data: existing, error: existingError } = await supabase
           .from('event_occurrences')
           .select('id')
           .eq('event_id', event.id)
           .eq('occurrence_date', occurrenceDateStr)
-          .single()
 
-        if (!existing) {
+        // If there are any existing occurrences (even if multiple), skip creating new ones
+        if (!existing || existing.length === 0) {
           occurrencesToCreate.push({
             event_id: event.id,
             occurrence_date: occurrenceDateStr,

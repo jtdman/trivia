@@ -70,6 +70,29 @@ const VenueForm: React.FC<VenueFormProps> = ({
 
           if (relationError) throw relationError
         }
+
+        // Automatically process image if venue has google_photo_reference
+        if (data && data.google_photo_reference) {
+          try {
+            console.log(`Automatically processing image for new venue ${data.id}`)
+            const imageResponse = await supabase.functions.invoke('process-venue-images', {
+              body: { 
+                venue_id: data.id,
+                google_photo_reference: data.google_photo_reference
+              }
+            })
+
+            if (imageResponse.error) {
+              console.error('Auto image processing failed:', imageResponse.error)
+              // Don't throw - venue creation should still succeed even if image processing fails
+            } else if (imageResponse.data?.success) {
+              console.log('Image processed automatically for new venue')
+            }
+          } catch (err) {
+            console.error('Auto image processing error:', err)
+            // Don't throw - venue creation should still succeed even if image processing fails
+          }
+        }
       } else if (mode === 'edit' && venueId) {
         // Only update fields user has permission to edit
         const updateData: any = {}

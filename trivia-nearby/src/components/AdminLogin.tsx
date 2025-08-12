@@ -127,6 +127,17 @@ const AdminLogin: React.FC = () => {
             </Link>
           </div>
         </div>
+
+        {/* Provider Sign Up - More Prominent */}
+        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Are you a trivia host?</p>
+          <Link 
+            to="/admin/register" 
+            className="block w-full bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 font-medium py-2 px-4 rounded-lg transition-colors text-center"
+          >
+            Sign up to manage your events →
+          </Link>
+        </div>
       </div>
     </div>
   )

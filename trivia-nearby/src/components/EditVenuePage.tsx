@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Loader2, AlertCircle, Trash2 } from 'lucide-react'
+import { ArrowLeft, Loader2, AlertCircle, Trash2, Image, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
 import VenueForm from './VenueForm'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/auth_context'
@@ -14,7 +14,10 @@ interface VenueData {
   google_formatted_address?: string
   google_phone_number?: string
   google_website?: string
+  google_photo_reference?: string
+  thumbnail_url?: string
   verification_status: string
+  status?: string
 }
 
 const EditVenuePage: React.FC = () => {
@@ -27,6 +30,8 @@ const EditVenuePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [processingImage, setProcessingImage] = useState(false)
+  const [updatingStatus, setUpdatingStatus] = useState(false)
 
   useEffect(() => {
     if (venueId) {
@@ -107,6 +112,80 @@ const EditVenuePage: React.FC = () => {
     navigate('/admin/venues')
   }
 
+  const processVenueImage = async () => {
+    if (!venue?.google_photo_reference || !venueId) return
+    
+    setProcessingImage(true)
+    setError(null)
+    
+    try {
+      console.log('Processing image for venue:', venueId)
+      console.log('Photo reference:', venue.google_photo_reference)
+      
+      // Call the Edge Function to process this venue's image
+      const response = await supabase.functions.invoke('process-venue-images', {
+        body: { 
+          venue_id: venueId,
+          google_photo_reference: venue.google_photo_reference
+        }
+      })
+
+      console.log('Edge Function response:', response)
+
+      if (response.error) {
+        console.error('Edge Function error:', response.error)
+        throw new Error(`Edge Function error: ${response.error.message || response.error}`)
+      }
+
+      const data = response.data
+      console.log('Response data:', data)
+      
+      if (data && data.success) {
+        // Refresh venue data to show the new thumbnail_url
+        await fetchVenue()
+        alert('Image processed successfully!')
+      } else {
+        throw new Error(data?.error || 'Image processing failed - unknown error')
+      }
+    } catch (err: any) {
+      console.error('Process image error:', err)
+      setError(`Failed to process image: ${err.message}`)
+      alert(`Error: ${err.message}`)
+    } finally {
+      setProcessingImage(false)
+    }
+  }
+
+  const updateVenueStatus = async (newStatus: 'approved' | 'rejected' | 'pending') => {
+    if (!venueId) return
+    
+    setUpdatingStatus(true)
+    setError(null)
+    
+    try {
+      const updateData: any = {
+        verification_status: newStatus === 'approved' ? 'verified' : newStatus,
+        status: newStatus,
+        updated_at: new Date().toISOString()
+      }
+
+      const { error } = await supabase
+        .from('venues')
+        .update(updateData)
+        .eq('id', venueId)
+
+      if (error) throw error
+
+      // Refresh venue data
+      await fetchVenue()
+      alert(`Venue ${newStatus} successfully!`)
+    } catch (err: any) {
+      setError(`Failed to update status: ${err.message}`)
+    } finally {
+      setUpdatingStatus(false)
+    }
+  }
+
   const handleSuccess = () => {
     navigate('/admin/venues')
   }
@@ -174,6 +253,113 @@ const EditVenuePage: React.FC = () => {
           </button>
         )}
       </div>
+
+      {/* God Admin Actions */}
+      {isAdmin && (
+        <div className="mb-6 space-y-4">
+          {/* Status Management */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Admin Actions</h3>
+            
+            {/* Current Status */}
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Current Status:</p>
+              <div className="flex items-center gap-4">
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  venue.verification_status === 'verified' 
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                    : venue.verification_status === 'needs_review'
+                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                    : venue.verification_status === 'failed'
+                    ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                    : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+                }`}>
+                  {venue.verification_status}
+                </span>
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  venue.status === 'approved' 
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                    : venue.status === 'rejected'
+                    ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                    : 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
+                }`}>
+                  {venue.status || 'pending'}
+                </span>
+              </div>
+            </div>
+
+            {/* Approval Actions */}
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => updateVenueStatus('approved')}
+                disabled={updatingStatus || venue.status === 'approved'}
+                className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-lg transition-colors"
+              >
+                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+                Approve Venue
+              </button>
+              <button
+                onClick={() => updateVenueStatus('rejected')}
+                disabled={updatingStatus || venue.status === 'rejected'}
+                className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white rounded-lg transition-colors"
+              >
+                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
+                Reject Venue
+              </button>
+              <button
+                onClick={() => updateVenueStatus('pending')}
+                disabled={updatingStatus || venue.status === 'pending'}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white rounded-lg transition-colors"
+              >
+                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                Mark as Pending
+              </button>
+            </div>
+
+            {/* Image Processing */}
+            {venue.google_photo_reference && (
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Image Status:</p>
+                <div className="flex items-center gap-4 mb-3">
+                  {venue.thumbnail_url ? (
+                    <div className="flex items-center gap-2 text-green-600">
+                      <Image className="w-5 h-5" />
+                      <span className="text-sm">Image Processed</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-yellow-600">
+                      <AlertCircle className="w-5 h-5" />
+                      <span className="text-sm">Image Not Processed</span>
+                    </div>
+                  )}
+                </div>
+                
+                {!venue.thumbnail_url && (
+                  <button
+                    onClick={processVenueImage}
+                    disabled={processingImage}
+                    className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white rounded-lg transition-colors"
+                  >
+                    {processingImage ? <Loader2 className="w-4 h-4 animate-spin" /> : <Image className="w-4 h-4" />}
+                    Process Image
+                  </button>
+                )}
+                
+                {venue.thumbnail_url && (
+                  <div className="mt-3">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Thumbnail Preview:</p>
+                    <img 
+                      src={venue.thumbnail_url} 
+                      alt={venue.name_original}
+                      className="w-32 h-24 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <VenueForm
         mode="edit"

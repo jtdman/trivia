@@ -42,6 +42,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     longitude: geocodedCoords?.lng || userLocation.longitude || undefined,
     radiusMiles: 30,
     limit: 50,
+    dateFilter,
   })
 
   // Helper function to get day order (today = 0, tomorrow = 1, etc.)
@@ -69,36 +70,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     return daysFromToday
   }
 
-  // Helper function to check if an event should be shown based on date filter
-  const shouldShowEvent = (eventDayOfWeek: string, filter: DateFilter): boolean => {
-    const today = new Date()
-    const todayDay = today.toLocaleDateString('en-US', { weekday: 'long' })
-    
-    const tomorrow = new Date(today)
-    tomorrow.setDate(today.getDate() + 1)
-    const tomorrowDay = tomorrow.toLocaleDateString('en-US', { weekday: 'long' })
-    
-    // Get days from today through next same day (7 days total)
-    const thisWeekDays: string[] = []
-    const currentDay = new Date(today)
-    
-    // Add 7 days starting from today
-    for (let i = 0; i < 7; i++) {
-      thisWeekDays.push(currentDay.toLocaleDateString('en-US', { weekday: 'long' }))
-      currentDay.setDate(currentDay.getDate() + 1)
-    }
-    
-    switch (filter) {
-      case 'today':
-        return eventDayOfWeek === todayDay
-      case 'tomorrow':
-        return eventDayOfWeek === tomorrowDay
-      case 'this-week':
-        return thisWeekDays.includes(eventDayOfWeek)
-      default:
-        return true
-    }
-  }
+  // Date filtering is now handled at the database level in useVenues
 
   // Transform venues data for display (one card per venue with all events)
   const venueCards = useMemo(() => {
@@ -122,10 +94,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
     }> = []
 
     venues.forEach((venue) => {
-      const activeEvents =
-        venue.events?.filter((event) => 
-          event.is_active && shouldShowEvent(event.day_of_week, dateFilter)
-        ) || []
+      const activeEvents = venue.events?.filter((event) => event.is_active) || []
 
       if (activeEvents.length === 0) return
 

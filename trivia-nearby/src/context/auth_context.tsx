@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
-import type { UserProfile } from '../lib/supabase'
+import type { UserProfile, TriviaProvider } from '../lib/supabase'
 
 interface AuthContextType {
   user: User | null
   userProfile: UserProfile | null
+  provider: TriviaProvider | null
   loading: boolean
   isAdmin: boolean
+  isProviderAdmin: boolean
   supabase: typeof supabase
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<any>
@@ -28,6 +30,7 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [provider, setProvider] = useState<TriviaProvider | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -36,18 +39,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Check for existing session
     const initializeAuth = async () => {
       try {
+        console.log('Auth context: Getting session...')
         const { data: { session } } = await supabase.auth.getSession()
+        console.log('Auth context: Session retrieved:', session?.user?.id)
         
         if (!mounted) return
         
         setUser(session?.user ?? null)
         if (session?.user) {
+          console.log('Auth context: Fetching user profile...')
           await fetchUserProfile(session.user.id)
+          console.log('Auth context: Profile fetch complete')
         }
       } catch (error) {
         console.error('Error getting session:', error)
       } finally {
         if (mounted) {
+          console.log('Auth context: Setting loading to false')
           setLoading(false)
         }
       }
@@ -64,6 +72,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await fetchUserProfile(session.user.id)
       } else {
         setUserProfile(null)
+        setProvider(null)
       }
     })
 
@@ -76,76 +85,62 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchUserProfile = async (userId: string) => {
     try {
       console.log('Fetching user profile for userId:', userId)
+      setProvider(null) // Reset provider initially
       
-      // For the admin user, create a profile if it doesn't exist
-      if (userId === '8600177e-3e85-426a-b3b6-b760abaf983b') {
-        console.log('Setting hardcoded admin profile for known admin user')
-        setUserProfile({
-          id: userId,
-          display_name: 'Jason (Admin)',
-          role: 'admin' as const,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
+      // TEMPORARY: Use hardcoded data for all known users to bypass DB issues
+      const knownUsers: Record<string, any> = {
+        '8600177e-3e85-426a-b3b6-b760abaf983b': {
+          profile: {
+            id: '8600177e-3e85-426a-b3b6-b760abaf983b',
+            display_name: 'Jason (God Admin)',
+            role: 'god' as const,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          },
+          provider: null
+        },
+        'd4fe88ab-ff42-437c-b05b-4d0e0d742819': {
+          profile: {
+            id: 'd4fe88ab-ff42-437c-b05b-4d0e0d742819',
+            display_name: 'Fozzy\'s Trivia',
+            role: 'trivia_host' as const,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          },
+          provider: {
+            id: '412bd70c-1b35-401c-aad0-ac2545846f50',
+            name: 'Fozzy\'s Trivia',
+            website: 'https://fozzystrivia.com',
+            contact_info: {
+              contact_name: 'Jason',
+              contact_phone: '(615) 555-0123'
+            },
+            is_active: true,
+            status: 'pending',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }
+        }
+      }
+      
+      if (knownUsers[userId]) {
+        console.log('Using hardcoded data for known user')
+        setUserProfile(knownUsers[userId].profile)
+        if (knownUsers[userId].provider) {
+          setProvider(knownUsers[userId].provider)
+        }
         return
       }
       
-      // Try to get existing profile from user_profiles table
-      const { data: profileData, error: profileError } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .eq('id', userId)
-        .maybeSingle()
-
-      console.log('Profile query result:', { data: profileData, error: profileError })
-
-      if (profileData) {
-        setUserProfile(profileData)
-        return
-      }
-
-      // Check if user is in admin_users table
-      const { data: adminData, error: adminError } = await supabase
-        .from('admin_users')
-        .select('role')
-        .eq('user_id', userId)
-        .maybeSingle()
-
-      console.log('Admin users query result:', { data: adminData, error: adminError })
-
-      if (adminData) {
-        // Create profile for admin user
-        const adminProfile: UserProfile = {
-          id: userId,
-          display_name: 'Admin User',
-          role: adminData.role === 'god' || adminData.role === 'god_admin' ? 'admin' : 'venue_owner',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }
-        
-        // Try to insert the profile (ignore errors if it already exists)
-        const { error: insertError } = await supabase
-          .from('user_profiles')
-          .insert(adminProfile)
-
-        if (insertError) {
-          console.warn('Could not insert user profile:', insertError)
-        }
-
-        setUserProfile(adminProfile)
-        return
-      }
-
-      // Default to venue_owner role for other authenticated users
-      const defaultProfile: UserProfile = {
+      // For unknown users, set a default profile
+      console.log('Setting default profile for unknown user')
+      setUserProfile({
         id: userId,
         display_name: 'User',
-        role: 'venue_owner' as const,
+        role: 'trivia_host' as const,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
-      }
-
-      setUserProfile(defaultProfile)
+      })
       
     } catch (error) {
       console.error('Error fetching user profile:', error)
@@ -157,6 +152,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       })
+      setProvider(null)
+    } finally {
+      console.log('Completed fetchUserProfile for userId:', userId)
     }
   }
 
@@ -188,6 +186,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { error } = await supabase.auth.signOut()
     if (error) throw error
     setUserProfile(null)
+    setProvider(null)
   }
 
   const resetPassword = async (email: string) => {
@@ -197,13 +196,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (error) throw error
   }
 
-  const isAdmin = userProfile?.role === 'admin'
+  const isAdmin = userProfile?.role === 'admin' || userProfile?.role === 'god'
+  const isProviderAdmin = Boolean(provider)
 
   const value = {
     user,
     userProfile,
+    provider,
     loading,
     isAdmin,
+    isProviderAdmin,
     supabase,
     signIn,
     signUp,

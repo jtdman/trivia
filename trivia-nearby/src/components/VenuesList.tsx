@@ -13,7 +13,10 @@ import {
   AlertCircle,
   ExternalLink,
   Filter,
-  Calendar
+  Calendar,
+  Image,
+  ImageOff,
+  RefreshCw
 } from 'lucide-react'
 
 interface Venue {
@@ -25,6 +28,8 @@ interface Venue {
   google_phone_number?: string
   google_website?: string
   google_rating?: number
+  google_photo_reference?: string
+  thumbnail_url?: string
   verification_status: 'pending' | 'verified' | 'failed' | 'needs_review'
   created_at: string
   updated_at: string
@@ -32,13 +37,14 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  const { } = useAuth()
+  const { isAdmin } = useAuth()
   const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [error, setError] = useState<string | null>(null)
+  const [processingImages, setProcessingImages] = useState(false)
 
   useEffect(() => {
     fetchVenues()
@@ -70,6 +76,46 @@ const VenuesList: React.FC = () => {
       setError(err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const processAllImages = async () => {
+    const venuesNeedingProcessing = venues.filter(v => v.google_photo_reference && !v.thumbnail_url)
+    
+    if (venuesNeedingProcessing.length === 0) {
+      alert('No venues need image processing!')
+      return
+    }
+
+    if (!confirm(`Process images for ${venuesNeedingProcessing.length} venues? This will use Google Places API credits.`)) {
+      return
+    }
+
+    setProcessingImages(true)
+    try {
+      // Call the bulk processing Edge Function
+      const response = await supabase.functions.invoke('process-venue-images-bulk', {
+        body: { limit: Math.min(venuesNeedingProcessing.length, 20) } // Process max 20 at a time
+      })
+
+      if (response.error) {
+        throw response.error
+      }
+
+      const data = response.data
+      if (data.success) {
+        alert(`Successfully processed ${data.processed} images. ${data.failed > 0 ? `${data.failed} failed.` : ''}`)
+      } else {
+        throw new Error(data.error || 'Image processing failed')
+      }
+      
+      // Refresh venues list after processing
+      await fetchVenues()
+    } catch (err: any) {
+      setError(`Failed to process images: ${err.message}`)
+      alert(`Error: ${err.message}`)
+    } finally {
+      setProcessingImages(false)
     }
   }
 
@@ -130,15 +176,33 @@ const VenuesList: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Venues
           </h1>
-          {canCreateVenue && (
-            <Link
-              to="/admin/venues/new"
-              className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              Add Venue
-            </Link>
-          )}
+          
+          <div className="flex gap-2">
+            {isAdmin && venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length > 0 && (
+              <button
+                onClick={processAllImages}
+                disabled={processingImages}
+                className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              >
+                {processingImages ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Image className="w-4 h-4" />
+                )}
+                Process Images ({venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length})
+              </button>
+            )}
+            
+            {canCreateVenue && (
+              <Link
+                to="/admin/venues/new"
+                className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                Add Venue
+              </Link>
+            )}
+          </div>
         </div>
         
         <p className="text-gray-600 dark:text-gray-400">
@@ -176,7 +240,7 @@ const VenuesList: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{venues.length}</div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Total Venues</div>
@@ -192,6 +256,10 @@ const VenuesList: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{venues.reduce((sum, v) => sum + (v.events_count || 0), 0)}</div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Total Events</div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+          <div className="text-2xl font-bold text-red-600">{venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Need Image Processing</div>
         </div>
       </div>
 
@@ -219,6 +287,9 @@ const VenuesList: React.FC = () => {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Events
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Images
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Actions
@@ -265,6 +336,38 @@ const VenuesList: React.FC = () => {
                     <span className="text-sm text-gray-900 dark:text-white">
                       {venue.events_count || 0} events
                     </span>
+                  </td>
+                  
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-2">
+                      {venue.thumbnail_url ? (
+                        <div className="flex items-center gap-2">
+                          <img 
+                            src={venue.thumbnail_url} 
+                            alt={venue.google_name || venue.name_original}
+                            className="w-12 h-8 object-cover rounded border border-gray-300 dark:border-gray-600"
+                            onError={(e) => {
+                              // Hide image if it fails to load
+                              e.currentTarget.style.display = 'none'
+                            }}
+                          />
+                          <div className="flex items-center gap-1 text-green-600">
+                            <Image className="w-4 h-4" />
+                            <span className="text-xs">Processed</span>
+                          </div>
+                        </div>
+                      ) : venue.google_photo_reference ? (
+                        <div className="flex items-center gap-1 text-yellow-600">
+                          <ImageOff className="w-4 h-4" />
+                          <span className="text-xs">Needs Processing</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1 text-gray-400">
+                          <ImageOff className="w-4 h-4" />
+                          <span className="text-xs">No Image</span>
+                        </div>
+                      )}
+                    </div>
                   </td>
                   
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">

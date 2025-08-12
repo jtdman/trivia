@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Event Occurrences</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Debug Event Occurrences</h1>
+    <div id="results"></div>
+    <button onclick="testQuery()">Test Query</button>
+    <button onclick="clearAllCaches()">Clear All Caches</button>
+    
+    <script>
+        // Use your exact Supabase config
+        const supabase = window.supabase.createClient(
+            'https://izaojwusiuvosqrbdwtd.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6YW9qd3VzaXV2b3NxcmJkd3RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMDM3ODksImV4cCI6MjA2Njg3OTc4OX0.dyHrx0jDtlEy6BbwWOQqn-kLOns6zFY8Gg74jYWwcS8'
+        )
+        
+        async function testQuery() {
+            const resultsDiv = document.getElementById('results')
+            resultsDiv.innerHTML = 'Testing...'
+            
+            try {
+                // Test 1: Simple count
+                const { data: countData, error: countError } = await supabase
+                    .from('event_occurrences')
+                    .select('*', { count: 'exact', head: true })
+                
+                // Test 2: Actual query like the UI uses
+                const today = new Date().toISOString().split('T')[0]
+                const { data: queryData, error: queryError } = await supabase
+                    .from('event_occurrences')
+                    .select(`
+                        id,
+                        occurrence_date,
+                        status,
+                        events (event_type, start_time)
+                    `)
+                    .gte('occurrence_date', today)
+                    .limit(10)
+                
+                resultsDiv.innerHTML = `
+                    <h3>Results:</h3>
+                    <p><strong>Count query:</strong> ${countError ? 'Error: ' + countError.message : 'Success, count: ' + (countData?.length || 0)}</p>
+                    <p><strong>Data query:</strong> ${queryError ? 'Error: ' + queryError.message : 'Success, rows: ' + (queryData?.length || 0)}</p>
+                    <p><strong>Raw data:</strong> <pre>${JSON.stringify(queryData, null, 2)}</pre></p>
+                    <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+                `
+            } catch (error) {
+                resultsDiv.innerHTML = `<p>Error: ${error.message}</p>`
+            }
+        }
+        
+        function clearAllCaches() {
+            // Clear various caches
+            localStorage.clear()
+            sessionStorage.clear()
+            
+            // Clear service worker cache if exists
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => caches.delete(name))
+                })
+            }
+            
+            alert('Caches cleared - refresh page and test again')
+        }
+        
+        // Auto-run test on load
+        testQuery()
+    </script>
+</body>
+</html>

@@ -8,7 +8,15 @@ interface AdminRouteProps {
 }
 
 const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
-  const { user, userProfile, loading } = useAuth()
+  const { user, userProfile, loading, isProviderAdmin, provider } = useAuth()
+
+  console.log('AdminRoute check:', {
+    user: user?.id,
+    userProfile,
+    isProviderAdmin,
+    provider,
+    loading
+  })
 
   if (loading) {
     return (
@@ -19,14 +27,33 @@ const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
   }
 
   if (!user) {
+    console.log('No user, redirecting to login')
     return <Navigate to="/admin/login" replace />
   }
 
-  // Allow access for admin, trivia_host, or venue_owner roles
-  if (!userProfile || !userProfile.role || !['admin', 'trivia_host', 'venue_owner'].includes(userProfile.role)) {
+  // Allow access for admin, provider admins, trivia_host, or venue_owner roles
+  if (!userProfile && !isProviderAdmin) {
+    console.log('No profile and not provider admin, denying access')
+    return <Navigate to="/" replace />
+  }
+  
+  // Allow if user is admin, provider admin, or has specific roles
+  const hasAccess = userProfile?.role === 'admin' || 
+                    isProviderAdmin || 
+                    (userProfile?.role && ['trivia_host', 'venue_owner', 'staff'].includes(userProfile.role))
+  
+  console.log('Access check:', {
+    role: userProfile?.role,
+    isProviderAdmin,
+    hasAccess
+  })
+  
+  if (!hasAccess) {
+    console.log('Access denied')
     return <Navigate to="/" replace />
   }
 
+  console.log('Access granted')
   return <>{children}</>
 }
 

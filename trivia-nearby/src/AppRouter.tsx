@@ -15,6 +15,8 @@ import EditEventPage from './components/EditEventPage'
 import EventOccurrenceManager from './components/EventOccurrenceManager'
 import ProviderContactsPage from './components/ProviderContactsPage'
 import AdminTest from './components/AdminTest'
+import SupabaseTest from './components/SupabaseTest'
+import VenueSearchPage from './components/VenueSearchPage'
 import LocationPage from './components/LocationPage'
 import BetaPage from './components/BetaPage'
 import AdminForgotPassword from './components/AdminForgotPassword'
@@ -42,6 +44,7 @@ const AppRouter: React.FC = () => {
           <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
           <Route path="/admin/reset-password" element={<AdminResetPassword />} />
           <Route path="/admin/test" element={<AdminTest />} />
+          <Route path="/admin/supabase-test" element={<SupabaseTest />} />
           
           {/* Protected admin routes */}
           <Route
@@ -54,6 +57,7 @@ const AppRouter: React.FC = () => {
           >
             <Route index element={<AdminDashboard />} />
             <Route path="venues" element={<VenuesList />} />
+            <Route path="venues/search" element={<VenueSearchPage />} />
             <Route path="venues/new" element={<AddVenuePage />} />
             <Route path="venues/my-venues" element={<MyVenuesPage />} />
             <Route path="venues/:venueId" element={<EditVenuePage />} />

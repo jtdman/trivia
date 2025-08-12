@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAdminStats } from '../hooks/useAdminStats'
 
 const AdminDashboard: React.FC = () => {
-  const { user, isAdmin, userProfile } = useAuth()
+  const { user, isAdmin, isProviderAdmin, userProfile, provider } = useAuth()
   const { stats, loading, error } = useAdminStats()
 
   if (loading) {
@@ -46,6 +46,17 @@ const AdminDashboard: React.FC = () => {
           <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1 font-semibold">
             🔱 God Admin - Platform Owner
           </p>
+        ) : isProviderAdmin && provider ? (
+          <div>
+            <p className="text-sm text-purple-600 dark:text-purple-400 mt-1 font-semibold">
+              {provider.name} - Provider Admin
+            </p>
+            {provider.status === 'pending' && (
+              <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1">
+                ⚠️ Your provider account is pending approval
+              </p>
+            )}
+          </div>
         ) : userProfile && userProfile.role !== 'admin' && (
           <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
             {userProfile.display_name} Admin
@@ -63,7 +74,7 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isAdmin ? 'Total Venues' : 'My Venues'}
+                {isAdmin ? 'Total Venues' : isProviderAdmin ? 'Venues with My Events' : 'My Venues'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
                 {isAdmin ? stats.totalVenues : stats.myVenues}
@@ -71,6 +82,11 @@ const AdminDashboard: React.FC = () => {
               {isAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
+                </p>
+              )}
+              {isProviderAdmin && stats.myVenues > 0 && (
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Venues hosting your events
                 </p>
               )}
             </div>
@@ -83,7 +99,7 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isAdmin ? 'Events' : 'My Events'}
+                {isAdmin ? 'Total Events' : isProviderAdmin ? `${provider?.name} Events` : 'My Events'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
                 {isAdmin ? stats.events : stats.myEvents}
@@ -93,6 +109,11 @@ const AdminDashboard: React.FC = () => {
                   Active events platform-wide
                 </p>
               )}
+              {isProviderAdmin && stats.myEvents > 0 && (
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Your active trivia events
+                </p>
+              )}
             </div>
             <Calendar className="w-8 h-8 text-purple-500" />
           </div>
@@ -100,34 +121,80 @@ const AdminDashboard: React.FC = () => {
 
       </div>
 
+      {/* Provider-specific CTA */}
+      {isProviderAdmin && stats.myEvents === 0 && (
+        <div className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow p-6 text-white mb-8">
+          <h2 className="text-xl font-semibold mb-2">Ready to add your first trivia event?</h2>
+          <p className="mb-4 opacity-90">
+            Start by finding a venue where you want to host trivia, then create your recurring events.
+          </p>
+          <Link
+            to="/admin/venues/search"
+            className="inline-flex items-center gap-2 bg-white text-purple-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <MapPin className="w-5 h-5" />
+            Find Venues & Create Events
+          </Link>
+        </div>
+      )}
+
       {/* Quick actions */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link
-            to="/admin/schedule"
-            className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-          >
-            <Calendar className="w-5 h-5" />
-            Manage Schedule
-          </Link>
-          
-          <Link
-            to="/admin/venues/new"
-            className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-          >
-            <MapPin className="w-5 h-5" />
-            Add New Venue
-          </Link>
-          
-          <Link
-            to="/admin/events/new"
-            className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-          >
-            <Calendar className="w-5 h-5" />
-            Add New Event
-          </Link>
-
+          {isProviderAdmin ? (
+            <>
+              <Link
+                to="/admin/venues/search"
+                className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <MapPin className="w-5 h-5" />
+                Find Venues
+              </Link>
+              
+              <Link
+                to="/admin/events/new"
+                className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                Add Event
+              </Link>
+              
+              <Link
+                to="/admin/schedule"
+                className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                Manage Schedule
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/admin/schedule"
+                className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                Manage Schedule
+              </Link>
+              
+              <Link
+                to="/admin/venues/new"
+                className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <MapPin className="w-5 h-5" />
+                Add New Venue
+              </Link>
+              
+              <Link
+                to="/admin/events/new"
+                className="flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              >
+                <Calendar className="w-5 h-5" />
+                Add New Event
+              </Link>
+            </>
+          )}
         </div>
       </div>
 

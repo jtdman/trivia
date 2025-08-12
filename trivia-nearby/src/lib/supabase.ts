@@ -94,9 +94,15 @@ export interface TriviaProvider {
   id: string
   name: string
   website?: string
-  phone?: string
-  email?: string
+  contact_info?: {
+    contact_name?: string
+    contact_phone?: string
+    emails?: string[]
+    phones?: string[]
+    note?: string
+  }
   is_active: boolean
+  status: 'pending' | 'approved' | 'rejected'
   created_at: string
   updated_at: string
 }

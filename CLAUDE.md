@@ -132,3 +132,13 @@ pnpm validate-places stats
 ## Technical Design Decisions
 
 - I'm not concerned with pagination for the end user - we will only show the 20 closest trivias max on a day - maybe the week filter will have more but I prefer a load more button at the bottom
+
+## Current Issues to Fix
+
+**URGENT - Date Filter Issues (Added: Aug 5, 2025)**
+- ❌ **Tomorrow filter**: Not showing results - needs debugging
+- ❌ **This Week filter**: Likely not working properly  
+- ✅ **Today filter**: Working correctly
+- **Debug Steps**: Check console logs for dateFilter value and date ranges in useVenues.ts
+- **Location**: trivia-nearby/src/hooks/useVenues.ts - debug logging already added
+- **Context**: Fixed duplicates by moving to database-level date filtering, but broke Tomorrow/This Week filters in the process
