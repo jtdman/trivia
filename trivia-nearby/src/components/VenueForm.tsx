@@ -23,7 +23,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
   onSuccess
 }) => {
   useNavigate()
-  const { user, isAdmin } = useAuth()
+  const { user, hasProviderAccess, provider } = useAuth()
   const permissions = useVenuePermissions(initialData, userOwnsVenue)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -58,8 +58,8 @@ const VenueForm: React.FC<VenueFormProps> = ({
 
         if (insertError) throw insertError
 
-        // If user is not platform_admin, create a user_venue relationship
-        if (!isAdmin && data) {
+        // If user has a specific provider, create a user_venue relationship
+        if (provider && data) {
           const { error: relationError } = await supabase
             .from('user_venues')
             .insert([{

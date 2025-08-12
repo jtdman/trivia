@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAdminStats } from '../hooks/useAdminStats'
 
 const AdminDashboard: React.FC = () => {
-  const { user, isAdmin, isProviderAdmin, userProfile, provider } = useAuth()
+  const { user, isSuperAdmin, hasProviderAccess, provider } = useAuth()
   const { stats, loading, error } = useAdminStats()
 
   if (loading) {
@@ -42,11 +42,11 @@ const AdminDashboard: React.FC = () => {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0]}` : ''}!
         </h1>
-        {isAdmin ? (
+        {isSuperAdmin ? (
           <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1 font-semibold">
-            🔱 God Admin - Platform Owner
+            🔱 Super Admin - Platform Access
           </p>
-        ) : isProviderAdmin && provider ? (
+        ) : hasProviderAccess && provider ? (
           <div>
             <p className="text-sm text-purple-600 dark:text-purple-400 mt-1 font-semibold">
               {provider.name} - Provider Admin
@@ -74,12 +74,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isAdmin ? 'Total Venues' : isProviderAdmin ? 'Venues with My Events' : 'My Venues'}
+                {isSuperAdmin ? 'Total Venues' : 'My Venues'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isAdmin ? stats.totalVenues : stats.myVenues}
+                {isSuperAdmin ? stats.totalVenues : stats.myVenues}
               </p>
-              {isAdmin && (
+              {isSuperAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Platform-wide
                 </p>
@@ -99,12 +99,12 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {isAdmin ? 'Total Events' : isProviderAdmin ? `${provider?.name} Events` : 'My Events'}
+                {isSuperAdmin ? 'Total Events' : 'My Events'}
               </p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {isAdmin ? stats.events : stats.myEvents}
+                {isSuperAdmin ? stats.events : stats.myEvents}
               </p>
-              {isAdmin && (
+              {isSuperAdmin && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Active events platform-wide
                 </p>

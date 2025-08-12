@@ -7,9 +7,10 @@ interface AuthContextType {
   user: User | null
   userProfile: UserProfile | null
   provider: TriviaProvider | null
+  providers: TriviaProvider[]  // All providers for super admin
   loading: boolean
-  isAdmin: boolean
-  isProviderAdmin: boolean
+  hasProviderAccess: boolean   // Does user have any provider access?
+  isSuperAdmin: boolean        // Super admin with platform-wide access
   supabase: typeof supabase
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<any>
@@ -31,6 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null)
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [provider, setProvider] = useState<TriviaProvider | null>(null)
+  const [providers, setProviders] = useState<TriviaProvider[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -92,12 +94,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         '8600177e-3e85-426a-b3b6-b760abaf983b': {
           profile: {
             id: '8600177e-3e85-426a-b3b6-b760abaf983b',
-            display_name: 'Jason (God Admin)',
-            role: 'god' as const,
+            display_name: 'Jason (Super Admin)',
+            role: 'super_admin' as const,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
           },
-          provider: null
+          provider: null,
+          isSuperAdmin: true  // This user gets access to all providers
         },
         'd4fe88ab-ff42-437c-b05b-4d0e0d742819': {
           profile: {
@@ -125,9 +128,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (knownUsers[userId]) {
         console.log('Using hardcoded data for known user')
-        setUserProfile(knownUsers[userId].profile)
-        if (knownUsers[userId].provider) {
-          setProvider(knownUsers[userId].provider)
+        const userData = knownUsers[userId]
+        setUserProfile(userData.profile)
+        
+        if (userData.isSuperAdmin) {
+          // Super admin gets access to all providers - load them all
+          // For now, just create mock providers - in real app would query all providers
+          setProviders([
+            { id: '1', name: 'All Providers (Super Admin)', website: '', contact_info: {}, created_at: '', updated_at: '', is_active: true, status: 'approved' }
+          ])
+          setProvider(null) // No single provider - has access to all
+        } else if (userData.provider) {
+          setProvider(userData.provider)
+          setProviders([]) // Regular provider admin - only their provider
         }
         return
       }
@@ -196,16 +209,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (error) throw error
   }
 
-  const isAdmin = userProfile?.role === 'admin' || userProfile?.role === 'god'
-  const isProviderAdmin = Boolean(provider)
+  // Super admin has access to all providers, regular provider admin has access to one
+  const isSuperAdmin = Boolean(providers.length > 0)
+  const hasProviderAccess = Boolean(provider) || isSuperAdmin
 
   const value = {
     user,
     userProfile,
     provider,
+    providers,
     loading,
-    isAdmin,
-    isProviderAdmin,
+    hasProviderAccess,
+    isSuperAdmin,
     supabase,
     signIn,
     signUp,

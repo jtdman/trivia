@@ -23,7 +23,7 @@ interface VenueData {
 const EditVenuePage: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>()
   const navigate = useNavigate()
-  const { user, isAdmin } = useAuth()
+  const { user, hasProviderAccess } = useAuth()
   const [venue, setVenue] = useState<VenueData | null>(null)
   const [userOwnsVenue, setUserOwnsVenue] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -242,8 +242,8 @@ const EditVenuePage: React.FC = () => {
           Back to Venues
         </button>
 
-        {/* Delete button - only show for platform_admin or if user owns this venue */}
-        {isAdmin && (
+        {/* Delete button - only show for admins */}
+        {hasProviderAccess && (
           <button
             onClick={() => setShowDeleteConfirm(true)}
             className="flex items-center gap-2 px-4 py-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 border border-red-300 dark:border-red-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
@@ -254,8 +254,8 @@ const EditVenuePage: React.FC = () => {
         )}
       </div>
 
-      {/* God Admin Actions */}
-      {isAdmin && (
+      {/* Admin Actions */}
+      {hasProviderAccess && (
         <div className="mb-6 space-y-4">
           {/* Status Management */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">

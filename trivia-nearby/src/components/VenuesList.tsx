@@ -37,7 +37,7 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  const { isAdmin } = useAuth()
+  const { hasProviderAccess } = useAuth()
   const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
@@ -178,7 +178,7 @@ const VenuesList: React.FC = () => {
           </h1>
           
           <div className="flex gap-2">
-            {isAdmin && venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length > 0 && (
+            {hasProviderAccess && venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length > 0 && (
               <button
                 onClick={processAllImages}
                 disabled={processingImages}
