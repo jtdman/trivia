@@ -32,6 +32,7 @@ const EditVenuePage: React.FC = () => {
   const [deleting, setDeleting] = useState(false)
   const [processingImage, setProcessingImage] = useState(false)
   const [updatingStatus, setUpdatingStatus] = useState(false)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   useEffect(() => {
     if (venueId) {
@@ -143,7 +144,7 @@ const EditVenuePage: React.FC = () => {
       if (data && data.success) {
         // Refresh venue data to show the new thumbnail_url
         await fetchVenue()
-        alert('Image processed successfully!')
+        console.log('Image processed successfully!')
       } else {
         throw new Error(data?.error || 'Image processing failed - unknown error')
       }
@@ -163,23 +164,39 @@ const EditVenuePage: React.FC = () => {
     setError(null)
     
     try {
-      const updateData: any = {
+      // Use a simpler update that only changes verification_status to avoid policy conflicts
+      const updateData = {
         verification_status: newStatus === 'approved' ? 'verified' : newStatus,
-        status: newStatus,
         updated_at: new Date().toISOString()
       }
+
+      console.log('Updating venue with data:', updateData)
 
       const { error } = await supabase
         .from('venues')
         .update(updateData)
         .eq('id', venueId)
 
-      if (error) throw error
+      if (error) {
+        console.error('Supabase error:', error)
+        throw error
+      }
 
       // Refresh venue data
       await fetchVenue()
-      alert(`Venue ${newStatus} successfully!`)
+      
+      // Show success message
+      const statusText = newStatus === 'approved' ? 'approved' : 
+                        newStatus === 'rejected' ? 'rejected' : 
+                        'marked as pending'
+      setSuccessMessage(`Venue ${statusText} successfully!`)
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => setSuccessMessage(null), 3000)
+      
+      console.log(`Venue ${newStatus} successfully!`)
     } catch (err: any) {
+      console.error('Failed to update venue status:', err)
       setError(`Failed to update status: ${err.message}`)
     } finally {
       setUpdatingStatus(false)
@@ -288,32 +305,48 @@ const EditVenuePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Approval Actions */}
+            {/* Success Message */}
+            {successMessage && (
+              <div className="mb-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+                <span className="text-green-800 dark:text-green-200">{successMessage}</span>
+              </div>
+            )}
+
+            {/* Approval Actions - Show appropriate buttons based on current status */}
             <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => updateVenueStatus('approved')}
-                disabled={updatingStatus || venue.status === 'approved'}
-                className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-lg transition-colors"
-              >
-                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
-                Approve Venue
-              </button>
-              <button
-                onClick={() => updateVenueStatus('rejected')}
-                disabled={updatingStatus || venue.status === 'rejected'}
-                className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white rounded-lg transition-colors"
-              >
-                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
-                Reject Venue
-              </button>
-              <button
-                onClick={() => updateVenueStatus('pending')}
-                disabled={updatingStatus || venue.status === 'pending'}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white rounded-lg transition-colors"
-              >
-                {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
-                Mark as Pending
-              </button>
+              {venue.verification_status !== 'verified' && (
+                <button
+                  onClick={() => updateVenueStatus('approved')}
+                  disabled={updatingStatus}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-lg transition-colors"
+                >
+                  {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+                  Approve Venue
+                </button>
+              )}
+              
+              {venue.verification_status !== 'rejected' && (
+                <button
+                  onClick={() => updateVenueStatus('rejected')}
+                  disabled={updatingStatus}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white rounded-lg transition-colors"
+                >
+                  {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
+                  Reject Venue
+                </button>
+              )}
+              
+              {venue.verification_status === 'verified' || venue.verification_status === 'rejected' ? (
+                <button
+                  onClick={() => updateVenueStatus('pending')}
+                  disabled={updatingStatus}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white rounded-lg transition-colors"
+                >
+                  {updatingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                  Reset to Pending
+                </button>
+              ) : null}
             </div>
 
             {/* Image Processing */}

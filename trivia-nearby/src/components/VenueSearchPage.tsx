@@ -167,6 +167,8 @@ const VenueSearchPage: React.FC = () => {
         google_rating: detailedPlace.rating || null,
         google_user_ratings_total: detailedPlace.user_ratings_total || null,
         google_photo_reference: detailedPlace.photos?.[0]?.photo_reference || null,
+        google_location: detailedPlace.geometry?.location ? 
+          `POINT(${detailedPlace.geometry.location.lng} ${detailedPlace.geometry.location.lat})` : null,
         verification_status: 'verified',
         is_imported: false,
         status: 'approved',

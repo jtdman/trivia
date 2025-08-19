@@ -29,7 +29,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
       setLoading(true)
       setError(null)
       
-      console.log('Fetching event occurrences with options:', { latitude, longitude, radiusMiles, limit, dateFilter })
+      console.log('🔍 useVenues fetchVenues called with options:', { latitude, longitude, radiusMiles, limit, dateFilter })
 
       // Calculate date range based on filter
       const today = new Date()
@@ -42,6 +42,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
         case 'today':
           startDate = todayStr
           endDate = todayStr
+          console.log('📅 TODAY filter: Using date', todayStr)
           break
         case 'tomorrow':
           const tomorrow = new Date(today)
@@ -49,6 +50,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
           const tomorrowStr = tomorrow.toISOString().split('T')[0]
           startDate = tomorrowStr
           endDate = tomorrowStr
+          console.log('📅 TOMORROW filter: Using date', tomorrowStr)
           break
         case 'this-week':
         default:
@@ -56,10 +58,11 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
           const weekOut = new Date(today)
           weekOut.setDate(today.getDate() + 6) // Today + 6 more days = 7 days total
           endDate = weekOut.toISOString().split('T')[0]
+          console.log('📅 THIS-WEEK filter: Using date range', startDate, 'to', endDate)
           break
       }
       
-      console.log('Date filter:', dateFilter, 'Date range:', startDate, 'to', endDate)
+      console.log('📊 Final date filter params:', { dateFilter, startDate, endDate })
 
       // If we have user location, use the working PostGIS distance function approach
       if (latitude && longitude) {
@@ -283,6 +286,8 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
   }, [latitude, longitude, radiusMiles, limit, dateFilter])
 
   useEffect(() => {
+    console.log('🔄 useVenues useEffect triggered with deps:', { latitude, longitude, radiusMiles, limit, dateFilter })
+    
     // Only fetch if coordinates have changed significantly (more than ~100m)
     if (latitude !== undefined && longitude !== undefined) {
       const current = { lat: latitude, lng: longitude }
@@ -291,11 +296,15 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
       if (!last || 
           Math.abs(current.lat - last.lat) > 0.001 || 
           Math.abs(current.lng - last.lng) > 0.001) {
+        console.log('🌍 Coordinates changed significantly, fetching venues')
         lastFetchedCoords.current = current
+        fetchVenues()
+      } else {
+        console.log('🌍 Coordinates unchanged, but dateFilter or other params changed, fetching venues')
         fetchVenues()
       }
     } else if (latitude === undefined && longitude === undefined) {
-      // Fetch without coordinates
+      console.log('🌍 No coordinates provided, fetching venues without location')
       fetchVenues()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

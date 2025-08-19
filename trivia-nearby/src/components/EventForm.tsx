@@ -110,6 +110,56 @@ const EventForm: React.FC<EventFormProps> = ({
     }
   }
 
+  const createEventOccurrences = async (event: any) => {
+    try {
+      console.log('Creating event occurrences for:', event.event_type)
+      
+      const dayMap = {
+        'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
+        'Thursday': 4, 'Friday': 5, 'Saturday': 6
+      }
+      
+      const targetDay = dayMap[event.day_of_week as keyof typeof dayMap]
+      const today = new Date()
+      const currentDay = today.getDay()
+      
+      // Calculate days until next occurrence of this day
+      let daysUntil = targetDay - currentDay
+      if (daysUntil < 0) daysUntil += 7 // Next week if day already passed
+      
+      const occurrences = []
+      const weeksToGenerate = event.frequency === 'one-time' ? 1 : 4 // Generate 4 weeks for recurring events
+      
+      for (let week = 0; week < weeksToGenerate; week++) {
+        const occurrenceDate = new Date(today)
+        occurrenceDate.setDate(today.getDate() + daysUntil + (week * 7))
+        const occurrenceDateStr = occurrenceDate.toISOString().split('T')[0]
+        
+        occurrences.push({
+          event_id: event.id,
+          occurrence_date: occurrenceDateStr,
+          status: 'scheduled'
+        })
+      }
+      
+      console.log(`Creating ${occurrences.length} occurrences:`, occurrences.map(o => o.occurrence_date))
+      
+      const { error: occurrenceError } = await supabase
+        .from('event_occurrences')
+        .insert(occurrences)
+      
+      if (occurrenceError) {
+        console.error('Failed to create event occurrences:', occurrenceError)
+        // Don't throw - event creation should still succeed even if occurrences fail
+      } else {
+        console.log('✅ Event occurrences created successfully')
+      }
+    } catch (err) {
+      console.error('Error creating event occurrences:', err)
+      // Don't throw - event creation should still succeed even if occurrences fail
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -125,11 +175,18 @@ const EventForm: React.FC<EventFormProps> = ({
       }
 
       if (mode === 'create') {
-        const { error: insertError } = await supabase
+        const { data: newEvent, error: insertError } = await supabase
           .from('events')
           .insert([eventData])
+          .select()
+          .single()
 
         if (insertError) throw insertError
+
+        // Automatically create event occurrences for the new event
+        if (newEvent) {
+          await createEventOccurrences(newEvent)
+        }
       } else if (mode === 'edit' && eventId) {
         const { error: updateError } = await supabase
           .from('events')

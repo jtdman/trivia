@@ -40,7 +40,7 @@ const AdminDashboard: React.FC = () => {
     <div className="px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0]}` : ''}!
+          Welcome back{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : user?.email ? `, ${user.email.split('@')[0].replace(/[+].*$/, '')}` : ''}!
         </h1>
         {isSuperAdmin ? (
           <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1 font-semibold">
@@ -57,11 +57,7 @@ const AdminDashboard: React.FC = () => {
               </p>
             )}
           </div>
-        ) : userProfile && userProfile.role !== 'admin' && (
-          <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
-            {userProfile.display_name} Admin
-          </p>
-        )}
+        ) : null}
         <p className="mt-2 text-gray-600 dark:text-gray-400">
           Manage your trivia venues and events from one place.
         </p>
@@ -84,7 +80,7 @@ const AdminDashboard: React.FC = () => {
                   Platform-wide
                 </p>
               )}
-              {isProviderAdmin && stats.myVenues > 0 && (
+              {hasProviderAccess && !isSuperAdmin && stats.myVenues > 0 && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Venues hosting your events
                 </p>
@@ -109,7 +105,7 @@ const AdminDashboard: React.FC = () => {
                   Active events platform-wide
                 </p>
               )}
-              {isProviderAdmin && stats.myEvents > 0 && (
+              {hasProviderAccess && !isSuperAdmin && stats.myEvents > 0 && (
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Your active trivia events
                 </p>
@@ -122,7 +118,7 @@ const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Provider-specific CTA */}
-      {isProviderAdmin && stats.myEvents === 0 && (
+      {hasProviderAccess && !isSuperAdmin && stats.myEvents === 0 && (
         <div className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow p-6 text-white mb-8">
           <h2 className="text-xl font-semibold mb-2">Ready to add your first trivia event?</h2>
           <p className="mb-4 opacity-90">
@@ -142,7 +138,7 @@ const AdminDashboard: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {isProviderAdmin ? (
+          {hasProviderAccess && !isSuperAdmin ? (
             <>
               <Link
                 to="/admin/venues/search"

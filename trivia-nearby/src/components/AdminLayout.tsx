@@ -21,7 +21,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/theme_context'
 
 const AdminLayout: React.FC = () => {
-  const { user, isAdmin, signOut } = useAuth()
+  const { user, isSuperAdmin, hasProviderAccess, provider, signOut } = useAuth()
   const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -36,10 +36,10 @@ const AdminLayout: React.FC = () => {
     { path: '/admin/schedule', label: 'Schedule', icon: Calendar },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
-    ...(isAdmin 
+    ...(isSuperAdmin 
       ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
       : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
-    ...(isAdmin 
+    ...(isSuperAdmin 
       ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
       : []),
     { path: '/admin/profile', label: 'Profile', icon: User }
@@ -64,7 +64,9 @@ const AdminLayout: React.FC = () => {
                   <Beer className="w-4 h-4 text-black dark:text-white" />
                 </div>
               </Link>
-              <span className="ml-3 text-sm text-gray-500 dark:text-gray-400">Admin</span>
+              <span className="ml-3 text-sm text-gray-500 dark:text-gray-400">
+                {isSuperAdmin ? '🔱 Super Admin' : hasProviderAccess && provider ? `${provider.name} Admin` : 'Admin'}
+              </span>
             </div>
 
             {/* Desktop Nav */}

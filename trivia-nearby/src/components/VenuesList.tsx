@@ -37,7 +37,7 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  const { hasProviderAccess } = useAuth()
+  const { hasProviderAccess, isSuperAdmin } = useAuth()
   const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,20 +48,65 @@ const VenuesList: React.FC = () => {
 
   useEffect(() => {
     fetchVenues()
-  }, [])
+  }, [isSuperAdmin]) // Re-fetch when super admin status changes
 
   const fetchVenues = async () => {
     try {
       setLoading(true)
       
-      // Get venues with event counts
-      const { data, error } = await supabase
-        .from('venues')
-        .select(`
-          *,
-          events(id)
-        `)
-        .order('updated_at', { ascending: false })
+      console.log('fetchVenues called - isSuperAdmin:', isSuperAdmin)
+      
+      let data, error
+      
+      // Super admins get all venues via chunked queries, others get reasonable limit
+      if (isSuperAdmin) {
+        console.log('Super admin: Fetching all venues in chunks')
+        
+        // Fetch venues in chunks to bypass 1000 row limit
+        const allVenues = []
+        let offset = 0
+        const chunkSize = 1000
+        
+        while (true) {
+          const { data: chunk, error: chunkError } = await supabase
+            .from('venues')
+            .select(`
+              *,
+              events(id)
+            `)
+            .order('updated_at', { ascending: false })
+            .range(offset, offset + chunkSize - 1)
+          
+          if (chunkError) {
+            error = chunkError
+            break
+          }
+          
+          if (!chunk || chunk.length === 0) break
+          
+          allVenues.push(...chunk)
+          
+          // If we got less than chunkSize, we've reached the end
+          if (chunk.length < chunkSize) break
+          
+          offset += chunkSize
+        }
+        
+        data = allVenues
+      } else {
+        console.log('Applying regular limit: 1000')
+        const result = await supabase
+          .from('venues')
+          .select(`
+            *,
+            events(id)
+          `)
+          .order('updated_at', { ascending: false })
+          .limit(1000)
+        
+        data = result.data
+        error = result.error
+      }
 
       if (error) throw error
 
@@ -71,6 +116,7 @@ const VenuesList: React.FC = () => {
         events_count: venue.events?.length || 0
       })) || []
 
+      console.log(`Fetched ${venuesWithCounts.length} venues (Super Admin: ${isSuperAdmin})`)
       setVenues(venuesWithCounts)
     } catch (err: any) {
       setError(err.message)
@@ -195,7 +241,7 @@ const VenuesList: React.FC = () => {
             
             {canCreateVenue && (
               <Link
-                to="/admin/venues/new"
+                to="/admin/venues/search"
                 className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
               >
                 <Plus className="w-4 h-4" />
@@ -247,19 +293,19 @@ const VenuesList: React.FC = () => {
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-green-600">{venues.filter(v => v.verification_status === 'verified').length}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">Verified</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Venues Verified</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-yellow-600">{venues.filter(v => v.verification_status === 'pending').length}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">Pending</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Venues Pending Review</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{venues.reduce((sum, v) => sum + (v.events_count || 0), 0)}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">Total Events</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Events at Venues</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="text-2xl font-bold text-red-600">{venues.filter(v => v.google_photo_reference && !v.thumbnail_url).length}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">Need Image Processing</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Venues Need Images</div>
         </div>
       </div>
 
@@ -304,11 +350,14 @@ const VenuesList: React.FC = () => {
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
                         {venue.google_name || venue.name_original}
                       </div>
-                      {venue.google_name && venue.google_name !== venue.name_original && (
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                          Originally: {venue.name_original}
-                        </div>
-                      )}
+                      <div className="text-xs text-gray-500 dark:text-gray-400 italic">
+                        {(() => {
+                          const address = venue.google_formatted_address || venue.address_original
+                          // Extract city and state from address
+                          const cityStateMatch = address.match(/([^,]+),\s*([A-Z]{2})\s*\d{5}/)
+                          return cityStateMatch ? `${cityStateMatch[1]}, ${cityStateMatch[2]}` : address.split(',')[0]
+                        })()}
+                      </div>
                     </div>
                   </td>
                   

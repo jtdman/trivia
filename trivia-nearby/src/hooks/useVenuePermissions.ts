@@ -12,7 +12,7 @@ interface VenuePermissions {
 }
 
 export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): VenuePermissions => {
-  const { user, isAdmin, userProfile } = useAuth()
+  const { user, isSuperAdmin, userProfile } = useAuth()
 
   return useMemo(() => {
     if (!user || !venue) {
@@ -26,7 +26,7 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       }
     }
 
-    const isPlatformAdmin = isAdmin
+    const isPlatformAdmin = isSuperAdmin
     const isOwner = userOwnsVenue || venue.created_by === user.id
     const isImported = venue.is_imported === true
     const hasEvents = false // TODO: Check if venue has events
@@ -76,13 +76,13 @@ export const useVenuePermissions = (venue?: Venue, userOwnsVenue = false): Venue
       canChangeStatus: false,
       reason: 'Staff role has read-only access'
     }
-  }, [user, isAdmin, userProfile, venue, userOwnsVenue])
+  }, [user, isSuperAdmin, userProfile, venue, userOwnsVenue])
 }
 
 export const useCanCreateVenue = (): boolean => {
-  const { isAdmin, userProfile } = useAuth()
+  const { isSuperAdmin, hasProviderAccess } = useAuth()
   
   return useMemo(() => {
-    return isAdmin || !!userProfile
-  }, [isAdmin, userProfile])
+    return isSuperAdmin || hasProviderAccess
+  }, [isSuperAdmin, hasProviderAccess])
 }

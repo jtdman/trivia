@@ -37,6 +37,8 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
   const { theme, toggleTheme } = React.useContext(ThemeContext)
   const userLocation = useLocation()
   const [dateFilter, setDateFilter] = React.useState<DateFilter>('today')
+  
+  console.log('🎯 TriviaList component rendered with:', { location, geocodedCoords, dateFilter })
   const { venues, loading, error } = useVenues({
     latitude: geocodedCoords?.lat || userLocation.latitude || undefined,
     longitude: geocodedCoords?.lng || userLocation.longitude || undefined,
@@ -364,7 +366,11 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
         <div className='mb-8'>
           <div className='flex gap-3 flex-wrap justify-center md:justify-start'>
             <button
-              onClick={() => setDateFilter('today')}
+              onClick={() => {
+                console.log('🔴 TODAY button clicked')
+                setDateFilter('today')
+                console.log('🔴 Date filter set to: today')
+              }}
               className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
                 dateFilter === 'today'
                   ? 'bg-purple-500 text-white shadow-lg transform scale-105'
@@ -374,7 +380,11 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
               Today
             </button>
             <button
-              onClick={() => setDateFilter('tomorrow')}
+              onClick={() => {
+                console.log('🟡 TOMORROW button clicked')
+                setDateFilter('tomorrow')
+                console.log('🟡 Date filter set to: tomorrow')
+              }}
               className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
                 dateFilter === 'tomorrow'
                   ? 'bg-purple-500 text-white shadow-lg transform scale-105'
@@ -384,7 +394,11 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
               Tomorrow
             </button>
             <button
-              onClick={() => setDateFilter('this-week')}
+              onClick={() => {
+                console.log('🟢 THIS-WEEK button clicked')
+                setDateFilter('this-week')
+                console.log('🟢 Date filter set to: this-week')
+              }}
               className={`px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
                 dateFilter === 'this-week'
                   ? 'bg-purple-500 text-white shadow-lg transform scale-105'
