@@ -66,7 +66,10 @@ const AdminDashboard: React.FC = () => {
       {/* Stats grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Venues */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <Link 
+          to={hasProviderAccess && !isSuperAdmin ? "/admin/venues/my-venues" : "/admin/venues"}
+          className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer block"
+        >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
@@ -88,10 +91,13 @@ const AdminDashboard: React.FC = () => {
             </div>
             <MapPin className="w-8 h-8 text-purple-500" />
           </div>
-        </div>
+        </Link>
 
         {/* Events */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <Link 
+          to="/admin/events"
+          className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer block"
+        >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
@@ -113,7 +119,7 @@ const AdminDashboard: React.FC = () => {
             </div>
             <Calendar className="w-8 h-8 text-purple-500" />
           </div>
-        </div>
+        </Link>
 
       </div>
 

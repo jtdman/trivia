@@ -22,19 +22,22 @@ const correctDayMap = {
 
 function getCurrentWeekStart() {
   const now = new Date()
-  // Start from Monday of current week
+  // Start from today, not Monday - we want to generate occurrences from current date
   const today = new Date(now)
   today.setHours(0, 0, 0, 0)
-  const dayOfWeek = today.getDay()
-  const daysToSubtract = dayOfWeek === 0 ? 6 : dayOfWeek - 1 // If Sunday (0), subtract 6; otherwise subtract (dayOfWeek - 1)
-  today.setDate(today.getDate() - daysToSubtract)
   return today
 }
 
 function getDayOfWeekDate(weekStart, dayOfWeek) {
   const targetDay = correctDayMap[dayOfWeek]
+  const currentDay = weekStart.getDay()
+  
+  // Calculate days until the target day of week
+  let daysUntil = targetDay - currentDay
+  if (daysUntil < 0) daysUntil += 7 // Next week if day already passed
+  
   const date = new Date(weekStart)
-  date.setDate(weekStart.getDate() + targetDay)
+  date.setDate(weekStart.getDate() + daysUntil)
   return date
 }
 

@@ -18,7 +18,7 @@ interface MyVenue {
 }
 
 const MyVenuesPage: React.FC = () => {
-  const { user } = useAuth()
+  const { user, provider, hasProviderAccess } = useAuth()
   const [venues, setVenues] = useState<MyVenue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -38,39 +38,75 @@ const MyVenuesPage: React.FC = () => {
           setError(null)
         }
         
-        const { data, error } = await supabase
-          .from('user_venues')
-          .select(`
-            role,
-            granted_at,
-            venue:venues (
+        if (hasProviderAccess && provider) {
+          // Provider admin - get venues that have events from this provider
+          const { data, error } = await supabase
+            .from('venues')
+            .select(`
               id,
               name_original,
               google_name,
               address_original,
               google_formatted_address,
               verification_status,
-              events (
+              created_at,
+              events!inner (
                 id,
-                is_active
+                is_active,
+                provider_id
               )
-            )
-          `)
-          .eq('user_id', user.id)
-          .order('granted_at', { ascending: false })
+            `)
+            .eq('events.provider_id', provider.id)
+            .order('created_at', { ascending: false })
 
-        if (!mounted) return
-        if (error) throw error
+          if (!mounted) return
+          if (error) throw error
 
-        const processedVenues = (data || []).map((item: any) => ({
-          ...item.venue,
-          role: item.role,
-          claimed_at: item.granted_at,
-          event_count: (item.venue.events as any[])?.length || 0,
-          active_events: (item.venue.events as any[])?.filter((e: any) => e.is_active).length || 0
-        }))
+          const processedVenues = (data || []).map((venue: any) => ({
+            ...venue,
+            role: 'provider',
+            claimed_at: venue.created_at,
+            event_count: venue.events?.length || 0,
+            active_events: venue.events?.filter((e: any) => e.is_active).length || 0
+          }))
 
-        setVenues(processedVenues)
+          setVenues(processedVenues)
+        } else {
+          // Individual host - use user_venues table
+          const { data, error } = await supabase
+            .from('user_venues')
+            .select(`
+              role,
+              granted_at,
+              venue:venues (
+                id,
+                name_original,
+                google_name,
+                address_original,
+                google_formatted_address,
+                verification_status,
+                events (
+                  id,
+                  is_active
+                )
+              )
+            `)
+            .eq('user_id', user.id)
+            .order('granted_at', { ascending: false })
+
+          if (!mounted) return
+          if (error) throw error
+
+          const processedVenues = (data || []).map((item: any) => ({
+            ...item.venue,
+            role: item.role,
+            claimed_at: item.granted_at,
+            event_count: (item.venue.events as any[])?.length || 0,
+            active_events: (item.venue.events as any[])?.filter((e: any) => e.is_active).length || 0
+          }))
+
+          setVenues(processedVenues)
+        }
       } catch (err: any) {
         if (mounted) setError(err.message)
       } finally {

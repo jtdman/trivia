@@ -42,7 +42,7 @@ interface HybridSearchResult {
 
 const VenueSearchPage: React.FC = () => {
   const navigate = useNavigate()
-  const { user, provider, isProviderAdmin } = useAuth()
+  const { user } = useAuth()
   
   const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(false)

@@ -11,7 +11,7 @@ interface VenueWithEvents extends Venue {
 const VenueDetailPage: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>()
   const navigate = useNavigate()
-  const { } = useAuth()
+  const { hasProviderAccess, isSuperAdmin, provider } = useAuth()
   const [venue, setVenue] = useState<VenueWithEvents | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -25,16 +25,28 @@ const VenueDetailPage: React.FC = () => {
   const fetchVenueWithEvents = async () => {
     try {
       setLoading(true)
-      const { data, error } = await supabase
+      
+      let query = supabase
         .from('venues')
         .select(`
           *,
-          events(*)
+          events(
+            *,
+            trivia_providers(id, name)
+          )
         `)
         .eq('id', venueId)
         .single()
 
+      const { data, error } = await query
+
       if (error) throw error
+      
+      // Filter events by provider if user is provider admin
+      if (hasProviderAccess && provider && !isSuperAdmin) {
+        data.events = data.events?.filter((event: any) => event.provider_id === provider.id) || []
+      }
+      
       setVenue(data)
     } catch (err: any) {
       setError(err.message)
@@ -103,11 +115,18 @@ const VenueDetailPage: React.FC = () => {
       {/* Header */}
       <div className="mb-6">
         <button
-          onClick={() => navigate('/admin/venues')}
+          onClick={() => {
+            // If provider admin (not super admin), go back to My Venues
+            // Otherwise go to all venues
+            const backPath = hasProviderAccess && !isSuperAdmin 
+              ? '/admin/venues/my-venues' 
+              : '/admin/venues'
+            navigate(backPath)
+          }}
           className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Venues
+          {hasProviderAccess && !isSuperAdmin ? 'Back to My Venues' : 'Back to Venues'}
         </button>
       </div>
 

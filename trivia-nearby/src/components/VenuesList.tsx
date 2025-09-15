@@ -37,7 +37,7 @@ interface Venue {
 }
 
 const VenuesList: React.FC = () => {
-  const { hasProviderAccess, isSuperAdmin } = useAuth()
+  const { hasProviderAccess, isSuperAdmin, provider } = useAuth()
   const canCreateVenue = useCanCreateVenue()
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
@@ -95,17 +95,36 @@ const VenuesList: React.FC = () => {
         data = allVenues
       } else {
         console.log('Applying regular limit: 1000')
-        const result = await supabase
-          .from('venues')
-          .select(`
-            *,
-            events(id)
-          `)
-          .order('updated_at', { ascending: false })
-          .limit(1000)
         
-        data = result.data
-        error = result.error
+        if (hasProviderAccess && provider && !isSuperAdmin) {
+          // Provider admin - only show venues that have events from this provider
+          console.log('Provider filtering for:', provider.name)
+          const result = await supabase
+            .from('venues')
+            .select(`
+              *,
+              events!inner(id, provider_id)
+            `)
+            .eq('events.provider_id', provider.id)
+            .order('updated_at', { ascending: false })
+            .limit(1000)
+          
+          data = result.data
+          error = result.error
+        } else {
+          // Non-provider or individual host - normal query
+          const result = await supabase
+            .from('venues')
+            .select(`
+              *,
+              events(id)
+            `)
+            .order('updated_at', { ascending: false })
+            .limit(1000)
+          
+          data = result.data
+          error = result.error
+        }
       }
 
       if (error) throw error

@@ -64,8 +64,10 @@ export const useAdminStats = () => {
           const venueIds = [...new Set(providerEventVenues?.map(e => e.venue_id) || [])]
           if (venueIds.length > 0) {
             myVenuesQuery = myVenuesQuery.in('id', venueIds)
+            recentVenuesQuery = recentVenuesQuery.in('id', venueIds)
           } else {
             myVenuesQuery = myVenuesQuery.eq('id', 'no-venues') // Force empty result
+            recentVenuesQuery = recentVenuesQuery.eq('id', 'no-venues') // Force empty result
           }
           recentEventsQuery = recentEventsQuery.eq('provider_id', provider.id)
         }

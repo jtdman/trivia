@@ -20,7 +20,7 @@ const EventForm: React.FC<EventFormProps> = ({
   onCancel,
   onSuccess
 }) => {
-  const { user, isAdmin } = useAuth()
+  const { user, isAdmin, provider, hasProviderAccess } = useAuth()
   const [loading, setLoading] = useState(false)
   const [venuesLoading, setVenuesLoading] = useState(false)
   const [providersLoading, setProvidersLoading] = useState(false)
@@ -30,7 +30,7 @@ const EventForm: React.FC<EventFormProps> = ({
 
   const [formData, setFormData] = useState({
     venue_id: preselectedVenueId || initialData?.venue_id || '',
-    provider_id: initialData?.provider_id || '',
+    provider_id: initialData?.provider_id || (hasProviderAccess && provider ? provider.id : ''),
     event_type: initialData?.event_type || '',
     day_of_week: initialData?.day_of_week || '',
     start_time: initialData?.start_time || '',
@@ -52,9 +52,15 @@ const EventForm: React.FC<EventFormProps> = ({
       setVenuesLoading(true)
       let query = supabase.from('venues').select('*').order('name_original')
 
-      // If not platform admin, only show venues user has access to
+      // Filter venues based on user type
       if (!isAdmin) {
-        query = query.or(`created_by.eq.${user?.id},id.in.(${await getUserVenueIds()})`)
+        if (hasProviderAccess && provider) {
+          // Provider can create events at any venue
+          // No filtering needed - they can add events to any venue
+        } else {
+          // Individual host - only venues they have access to
+          query = query.or(`created_by.eq.${user?.id},id.in.(${await getUserVenueIds()})`)
+        }
       }
 
       const { data, error } = await query

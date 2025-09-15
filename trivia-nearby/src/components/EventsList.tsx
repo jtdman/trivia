@@ -45,7 +45,7 @@ interface EventWithVenue {
 }
 
 const EventsList: React.FC = () => {
-  const { user, isAdmin, userProfile } = useAuth()
+  const { user, isAdmin, userProfile, provider, hasProviderAccess } = useAuth()
   const [events, setEvents] = useState<EventWithVenue[]>([])
   const [providers, setProviders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -86,15 +86,21 @@ const EventsList: React.FC = () => {
         .order('day_of_week', { ascending: true })
         .order('start_time', { ascending: true })
 
-      // If not god admin, only show events for venues user has access to
+      // If not admin, filter by provider or user venues
       if (!isAdmin) {
-        const userVenueIds = await getUserVenueIds()
-        if (userVenueIds.length > 0) {
-          query = query.in('venue_id', userVenueIds)
+        if (hasProviderAccess && provider) {
+          // Provider admin - filter by provider
+          query = query.eq('provider_id', provider.id)
         } else {
-          // User has no venues, return empty
-          setEvents([])
-          return
+          // Individual host - filter by user venues
+          const userVenueIds = await getUserVenueIds()
+          if (userVenueIds.length > 0) {
+            query = query.in('venue_id', userVenueIds)
+          } else {
+            // User has no venues, return empty
+            setEvents([])
+            return
+          }
         }
       }
 

@@ -11,6 +11,8 @@ interface AuthContextType {
   loading: boolean
   hasProviderAccess: boolean   // Does user have any provider access?
   isSuperAdmin: boolean        // Super admin with platform-wide access
+  isAdmin: boolean             // General admin access (super admin or provider admin)
+  isProviderAdmin: boolean     // Provider-specific admin access
   supabase: typeof supabase
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<any>
@@ -212,6 +214,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Super admin has access to all providers, regular provider admin has access to one
   const isSuperAdmin = Boolean(providers.length > 0)
   const hasProviderAccess = Boolean(provider) || isSuperAdmin
+  const isProviderAdmin = Boolean(provider)
+  const isAdmin = isSuperAdmin || isProviderAdmin
 
   const value = {
     user,
@@ -221,6 +225,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     hasProviderAccess,
     isSuperAdmin,
+    isAdmin,
+    isProviderAdmin,
     supabase,
     signIn,
     signUp,

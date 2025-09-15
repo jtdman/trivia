@@ -19,6 +19,7 @@ export interface Venue {
   google_formatted_address?: string
   google_location?: string
   google_rating?: number
+  google_user_ratings_total?: number
   google_phone_number?: string
   google_website?: string
   google_photo_reference?: string

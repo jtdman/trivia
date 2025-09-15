@@ -23,7 +23,7 @@ const VenueForm: React.FC<VenueFormProps> = ({
   onSuccess
 }) => {
   useNavigate()
-  const { user, hasProviderAccess, provider } = useAuth()
+  const { user, provider } = useAuth()
   const permissions = useVenuePermissions(initialData, userOwnsVenue)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

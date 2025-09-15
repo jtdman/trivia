@@ -17,6 +17,7 @@ import ProviderContactsPage from './components/ProviderContactsPage'
 import VenueSearchPage from './components/VenueSearchPage'
 import LocationPage from './components/LocationPage'
 import BetaPage from './components/BetaPage'
+import EventDetailPage from './components/EventDetailPage'
 import AdminForgotPassword from './components/AdminForgotPassword'
 import AdminResetPassword from './components/AdminResetPassword'
 import AdminLogin from './components/AdminLogin'
@@ -35,6 +36,9 @@ const AppRouter: React.FC = () => {
           {/* SEO location routes */}
           <Route path="/trivia-near-me" element={<Navigate to="/" replace />} />
           <Route path="/trivia-near-:location" element={<LocationPage onBack={() => window.history.back()} />} />
+          
+          {/* Public event detail page */}
+          <Route path="/event/:eventId" element={<EventDetailPage />} />
           
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
