@@ -1,39 +1,47 @@
-// Tombstone service worker.
+// Network-only service worker.
 //
-// An earlier build of this app registered a service worker; the app no
-// longer ships one, but installed PWAs on users' devices may still have
-// the stale SW active and serving cached bundles. When the browser does
-// its periodic SW update check against this path, it will install this
-// replacement, which wipes all caches and unregisters itself so the PWA
-// falls back to plain network fetches.
-//
-// Safe to leave in place indefinitely — the sw does nothing on repeat
-// launches because the unregister call removes its own registration.
+// A prior build registered a service worker that aggressively cached
+// bundles; users with that SW still active were seeing stale JS even
+// after redeploys. This replacement does three things:
+//   1. On install/activate, clears every cache storage (wipes stale
+//      assets that the old SW left behind).
+//   2. Registers a fetch handler that never calls respondWith(), so
+//      the browser handles requests natively (network-first, no
+//      caching, no offline fallback).
+//   3. Stays registered — the presence of a SW with a fetch handler
+//      is what qualifies the site for the PWA install prompt on
+//      mobile, so we don't want to unregister.
 
-self.addEventListener('install', () => {
-  self.skipWaiting()
+const VERSION = 'network-only-2026-04-14'
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys()
+      await Promise.all(keys.map((k) => caches.delete(k)))
+      await self.skipWaiting()
+    })(),
+  )
 })
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     (async () => {
-      try {
-        const keys = await caches.keys()
-        await Promise.all(keys.map((k) => caches.delete(k)))
-      } catch (err) {
-        // ignore; we still want to unregister even if cache cleanup fails
-      }
-
-      await self.registration.unregister()
-
-      const clients = await self.clients.matchAll({ type: 'window' })
-      for (const client of clients) {
-        if ('navigate' in client) {
-          client.navigate(client.url)
-        }
-      }
+      // Defensive second pass — in case anything re-created caches
+      // between install and activate.
+      const keys = await caches.keys()
+      await Promise.all(keys.map((k) => caches.delete(k)))
+      await self.clients.claim()
     })(),
   )
 })
 
-// Do not install any fetch handlers — let the network handle requests.
+self.addEventListener('fetch', (_event) => {
+  // Intentionally empty. Not calling event.respondWith() lets the
+  // browser handle the request normally (network, no cache). The
+  // presence of this listener is what qualifies the app for the
+  // Add to Home Screen / install prompt.
+})
+
+// Tag for debugging — visible in DevTools > Application > Service Workers
+self.TRIVIA_NEARBY_SW_VERSION = VERSION
