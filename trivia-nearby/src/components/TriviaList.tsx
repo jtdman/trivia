@@ -431,7 +431,11 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
             <Link
               key={venueCard.venue_id}
               to={venueCard.events[0] ? `/event/${venueCard.events[0].id}` : '#'}
-              className='block text-inherit no-underline bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer'
+              // Scope the scale transform to devices with a real hover
+              // (pointers/mice). On touch devices the hover state fires on
+              // tap, the card scales mid-tap, and the browser treats the
+              // click as cancelled — so taps on mobile never register.
+              className="block text-inherit no-underline bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 cursor-pointer [@media(hover:hover)]:hover:scale-105"
             >
               {/* Venue Image with Overlaid Text */}
               <div className='relative h-48 md:h-56 lg:h-52 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
@@ -441,7 +445,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                     venueCard.thumbnail_url,
                     venueCard.venue_name
                   )}
-                  className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'
+                  className="w-full h-full object-cover transition-transform duration-300 [@media(hover:hover)]:hover:scale-110"
                 />
                 {venueCard.distance && (
                   <div className='absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm bg-opacity-90 shadow-lg'>
