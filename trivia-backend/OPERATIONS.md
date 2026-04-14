@@ -27,7 +27,7 @@ GOOGLE_PLACES_API_KEY=<places key>
 
 The service role key is required for the scheduler and batch imports (it bypasses RLS). Keep it out of the frontend.
 
-If you're bootstrapping a fresh database, apply `setup-complete-database.sql` and the files under `supabase/migrations/` via the Supabase SQL Editor. Auth/provider tables are defined in `MANUAL_SETUP.md` (archived) — apply those only once per environment.
+If you're bootstrapping a fresh database, apply the files under `../supabase/migrations/` (repo-root `supabase/migrations/`) via the Supabase CLI (`supabase db reset`) or the Supabase SQL Editor.
 
 ## Data Model
 
