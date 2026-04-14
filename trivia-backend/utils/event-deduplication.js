@@ -4,7 +4,7 @@
  * Helper functions to prevent duplicate event creation during imports
  */
 
-import { supabase } from '../supabase/config/supabase.js'
+import { supabase } from '../lib/supabase.js'
 
 /**
  * Check if an event already exists

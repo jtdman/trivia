@@ -12,7 +12,7 @@ Challenge Entertainment data files contain arrays of venue objects with:
 ## Files
 
 - `ce-data-*.json` - Raw data files from Challenge Entertainment
-- `import-ce.ts` - Import script for CE data (uses existing supabase/scripts/import-venues.ts)
+- `import-ce.ts` - Import script for CE data (uses existing scripts/import-venues.ts)
 
 ## Usage
 

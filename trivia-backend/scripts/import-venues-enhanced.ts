@@ -1,4 +1,4 @@
-import { supabase, GOOGLE_PLACES_API_KEY, RATE_LIMITS } from '../config/supabase.js'
+import { supabase, GOOGLE_PLACES_API_KEY, RATE_LIMITS } from '../lib/supabase.js'
 import fs from 'fs/promises'
 
 interface VenueData {

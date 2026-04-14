@@ -14,7 +14,11 @@
     "types": ["node"]
   },
   "include": [
-    "supabase/**/*",
+    "lib/**/*",
+    "scripts/**/*",
+    "jobs/**/*",
+    "providers/**/*",
+    "utils/**/*",
     "*.ts"
   ],
   "exclude": [

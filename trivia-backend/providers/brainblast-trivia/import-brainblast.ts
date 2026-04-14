@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/config/supabase.js'
+import { supabase } from '../../lib/supabase.js'
 import fs from 'fs/promises'
 import path from 'path'
 
