@@ -1,0 +1,502 @@
+[
+  {
+    "venue_name": "The Burren",
+    "address": "247 Elm St, Somerville, MA 02144",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.thebostoncalendar.com/events/trivia-nights-at-the-burren-42"
+  },
+  {
+    "venue_name": "The Haven",
+    "address": "284 Amory St, Jamaica Plain, MA 02130",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.thebostoncalendar.com/events/trivia-at-the-haven--37"
+  },
+  {
+    "venue_name": "Roxy's Arcade",
+    "address": "292 Massachusetts Ave, Cambridge, MA 02139",
+    "provider": "Missy Steak (I'm Right Drag Trivia)",
+    "day_of_week": "Monday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://roxysarcade.com/event-schedule"
+  },
+  {
+    "venue_name": "Trillium Brewing Company - Fort Point",
+    "address": "50 Thomson Pl, Boston, MA 02210",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Pub Quiz",
+    "prize": "Bar cash and prizes for winning teams",
+    "source": "https://www.geekswhodrink.com/venues/2351655755/"
+  },
+  {
+    "venue_name": "Remnant Brewing",
+    "address": "2 Bow Market Way, Somerville, MA 02143",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Bar Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.remnantsomerville.com/eventscalendar"
+  },
+  {
+    "venue_name": "Lamplighter Brewing Co. (Cambridge Crossing)",
+    "address": "110 N First St, Cambridge, MA 02141",
+    "provider": "King Trivia",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Beer money for winners",
+    "source": "https://kingtrivia.com/venues/lamplighter-brewing-cambridge-crossing/"
+  },
+  {
+    "venue_name": "Hamilton Restaurant and Bar",
+    "address": "1366 Beacon St, Brookline, MA 02446",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Monday",
+    "start_time": "19:30",
+    "event_type": "Pub Quiz",
+    "prize": "Bar cash and prizes for winning teams",
+    "source": "https://www.geekswhodrink.com/venues/1269009288/"
+  },
+  {
+    "venue_name": "Night Shift Brewing (Everett Taproom)",
+    "address": "87 Santilli Hwy, Everett, MA 02149",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Pub Quiz",
+    "prize": "Free pints and prizes",
+    "source": "https://www.geekswhodrink.com/venues/232225947/"
+  },
+  {
+    "venue_name": "Aeronaut Brewing Co.",
+    "address": "14 Tyler St, Somerville, MA 02143",
+    "provider": "Indie Trivia (volunteer hosts)",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://do617.com/events/weekly/tue/trivia-tuesday"
+  },
+  {
+    "venue_name": "Remnant Satellite",
+    "address": "877 Cambridge St, Cambridge, MA 02141",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": "Gift cards for top two teams",
+    "source": "https://www.thebostoncalendar.com/events/tuesday-trivia-satellite--102"
+  },
+  {
+    "venue_name": "Irish Village",
+    "address": "224 Market St, Brighton, MA 02135",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://pubtrivianight.com/places/ma/brighton/trivia-tuesdays-irish-village/"
+  },
+  {
+    "venue_name": "Olde Magoun's Saloon",
+    "address": "518 Medford St, Somerville, MA 02145",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://magounssaloon.com/team-trivia-every-tuesday/"
+  },
+  {
+    "venue_name": "Sam Adams Downtown Boston Taproom",
+    "address": "60 State St, Boston, MA 02109",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Tuesday",
+    "start_time": "18:00",
+    "event_type": "Pub Quiz",
+    "prize": "Gift card prizes for top teams",
+    "source": "https://www.geekswhodrink.com/venues/2325693743/"
+  },
+  {
+    "venue_name": "Lucky's Lounge",
+    "address": "355 Congress St, Boston, MA 02210",
+    "provider": "Sporcle",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "$25 gift card for winners",
+    "source": "https://www.luckyslounge.com/event/weekday-happy-hour/"
+  },
+  {
+    "venue_name": "Mighty Squirrel Brewing Co.",
+    "address": "1 David Ortiz Dr, Boston, MA 02215",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": "$25, $50, and $75 gift cards for top three teams",
+    "source": "https://www.mightysquirrel.com/fenwaytrivia"
+  },
+  {
+    "venue_name": "Castle Island Brewing Co.",
+    "address": "10 Old Colony Ave, Boston, MA 02127",
+    "provider": "Sporcle",
+    "day_of_week": "Tuesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.castleislandbeer.com/public-events"
+  },
+  {
+    "venue_name": "Club Cafe",
+    "address": "209 Columbus Ave, Boston, MA 02116",
+    "provider": "Jonny Minogue",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.clubcafe.com/club-events/trivia-tuesday/"
+  },
+  {
+    "venue_name": "Widowmaker Taproom + Kitchen",
+    "address": "190 N Beacon St, Brighton, MA 02135",
+    "provider": "Sporcle",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.widowmakerbrewing.com/brighton-events"
+  },
+  {
+    "venue_name": "Lamplighter Brewing Co. (Broadway)",
+    "address": "284 Broadway, Cambridge, MA 02139",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": "Beer money for winners",
+    "source": "https://lamplighterbrewing.com/products/broadway-trivia"
+  },
+  {
+    "venue_name": "The Biltmore Bar & Grille",
+    "address": "1205 Chestnut St, Newton, MA 02464",
+    "provider": "Ponder Trivia",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://thebiltmoregrill.com/happenings/happenings-trivia/"
+  },
+  {
+    "venue_name": "The Dubliner",
+    "address": "2 Center Plaza, Boston, MA 02108",
+    "provider": "Sporcle (Opinionation)",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Gift cards for winners",
+    "source": "https://www.thedublinerboston.com/trivia-tuesday-night-downtown-boston-02108"
+  },
+  {
+    "venue_name": "Coolidge Corner Clubhouse",
+    "address": "307 Harvard St, Brookline, MA 02446",
+    "provider": "Games with James",
+    "day_of_week": "Tuesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.gameswithjames.net/weekly-trivia"
+  },
+  {
+    "venue_name": "Medford Brewing Company",
+    "address": "30 Harvard Ave, Medford, MA 02155",
+    "provider": "Last Call Trivia",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for top teams",
+    "source": "https://medfordbrew.com/"
+  },
+  {
+    "venue_name": "Craft Food Halls - Cambridge",
+    "address": "35 Cambridgepark Dr, Cambridge, MA 02140",
+    "provider": "Geeks Who Drink (Jeopardy! Bar League)",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Gift cards and exclusive merch",
+    "source": "https://www.geekswhodrink.com/venues/3074286933/"
+  },
+  {
+    "venue_name": "Phoenix Landing",
+    "address": "512 Massachusetts Ave, Cambridge, MA 02139",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Pub Quiz",
+    "prize": "Bar cash and prizes for winning teams",
+    "source": "https://www.geekswhodrink.com/venues/30363902/"
+  },
+  {
+    "venue_name": "City Tap House Boston",
+    "address": "10 Boston Wharf Rd, Boston, MA 02210",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "18:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.citytap.com/event/trivia-night/"
+  },
+  {
+    "venue_name": "Dorchester Brewing Company",
+    "address": "1250 Massachusetts Ave, Boston, MA 02125",
+    "provider": "Sporcle",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "DBco gift cards",
+    "source": "https://www.dorchesterbrewing.com/events/event/hump-day-trivia/"
+  },
+  {
+    "venue_name": "Rocco's Cucina & Bar",
+    "address": "162 Richmond St, Boston, MA 02109",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.roccoscucina.com/event/wednesday-trivia-night/"
+  },
+  {
+    "venue_name": "Charlie's Kitchen",
+    "address": "10 Eliot St, Cambridge, MA 02138",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://charlieskitchen.com/weekly-events"
+  },
+  {
+    "venue_name": "PKL Boston",
+    "address": "64 C St, South Boston, MA 02127",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "$50 gift card for 1st, $25 gift card for 2nd",
+    "source": "https://playpkl.com/whats-happening/"
+  },
+  {
+    "venue_name": "Cityside Tavern",
+    "address": "1960 Beacon St, Brighton, MA 02135",
+    "provider": "Sporcle",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Gift cards for winning teams",
+    "source": "https://www.cityside-tavern.com/event/bc-home-games/"
+  },
+  {
+    "venue_name": "Bleacher Bar",
+    "address": "82A Lansdowne St, Boston, MA 02215",
+    "provider": "Sporcle",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Bleacher Bar gift card",
+    "source": "https://www.bleacherbarboston.com/news-item/join-us-for-trivia-nights-on-wednesdays/"
+  },
+  {
+    "venue_name": "Shopper's Cafe",
+    "address": "731 Moody St, Waltham, MA 02453",
+    "provider": "Think About It! Trivia",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "First-place prizes and mystery bucket",
+    "source": "https://shopperswaltham.com/sports-bar-restaurant-waltham-ma/trivia-night-8pm-start-with-thinkaboutittrivia-get-your-friends-and-get-here-waltham-moodyst-shoppers-trivia-humpday/"
+  },
+  {
+    "venue_name": "Long Live Roxbury",
+    "address": "11 Roxbury St, Roxbury, MA 02119",
+    "provider": "Geeks Who Drink (Jeopardy! Bar League)",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.geekswhodrink.com/venues/2965727169/"
+  },
+  {
+    "venue_name": "Harpoon Brewery",
+    "address": "306 Northern Ave, Boston, MA 02210",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Wednesday",
+    "start_time": "18:00",
+    "event_type": "Pub Quiz",
+    "prize": "Gift cards for top teams",
+    "source": "https://www.geekswhodrink.com/venues/2330313477/"
+  },
+  {
+    "venue_name": "The Druid",
+    "address": "1357 Cambridge St, Cambridge, MA 02139",
+    "provider": "Quiz Master Dave",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Cash prize for winners; prizes for 2nd, 3rd, and last place",
+    "source": "https://www.druidpub.com/sports/trivia-with-quiz-master-dave"
+  },
+  {
+    "venue_name": "The Ford Tavern",
+    "address": "61 Locust St, Medford, MA 02155",
+    "provider": "Kevin Richman",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.thefordtavern.com/events/trivia-wednesdays"
+  },
+  {
+    "venue_name": "Orleans Restaurant",
+    "address": "65 Holland St, Somerville, MA 02144",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Weekly jackpot up to $500",
+    "source": "http://orleansrestaurant.com/"
+  },
+  {
+    "venue_name": "Betty's",
+    "address": "1799 Washington St, Boston, MA 02118",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Pub Quiz",
+    "prize": null,
+    "source": "https://www.timeout.com/boston/things-to-do/best-boston-trivia-nights"
+  },
+  {
+    "venue_name": "Short Path Distillery",
+    "address": "71 Kelvin St, Everett, MA 02149",
+    "provider": "Tag Team Trivia",
+    "day_of_week": "Thursday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Gift certificates and prizes",
+    "source": "https://shortpathdistillery.com/event-calendar/trivia-54/"
+  },
+  {
+    "venue_name": "Park-9 Dog Bar",
+    "address": "48 Waters Ave, Everett, MA 02149",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Thursday",
+    "start_time": "19:30",
+    "event_type": "Pub Quiz",
+    "prize": "Prizes for first and second place teams",
+    "source": "https://www.geekswhodrink.com/venues/2671710377/"
+  },
+  {
+    "venue_name": "Winter Hill Brewing Company",
+    "address": "328 Broadway, Somerville, MA 02145",
+    "provider": "Venue Staff",
+    "day_of_week": "Thursday",
+    "start_time": "19:30",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.thebostoncalendar.com/events/thursday-night-trivia-at-winter-hill-brewing--63"
+  },
+  {
+    "venue_name": "Broken Records",
+    "address": "80 Guest St, Brighton, MA 02135",
+    "provider": "Sporcle",
+    "day_of_week": "Thursday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for 1st, 2nd, and 3rd place teams",
+    "source": "https://www.brokenrecordsbeerhall.com/upcoming-events/"
+  },
+  {
+    "venue_name": "Trophy Room (Staypineapple Boston)",
+    "address": "26 Chandler St, Boston, MA 02116",
+    "provider": "Geeks Who Drink",
+    "day_of_week": "Thursday",
+    "start_time": "18:00",
+    "event_type": "Pub Quiz",
+    "prize": "Prizes for winning teams",
+    "source": "https://trophyroomboston.com/events-calendar/dy3t8rgen4tw2s8-l3s9b-lra8n-ey3j2"
+  },
+  {
+    "venue_name": "Snappy Patty's",
+    "address": "454 High St, Medford, MA 02155",
+    "provider": "King Trivia",
+    "day_of_week": "Thursday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://kingtrivia.com/venues/snappy-pattys/"
+  },
+  {
+    "venue_name": "Trident Booksellers & Cafe",
+    "address": "338 Newbury St, Boston, MA 02115",
+    "provider": "Venue Staff",
+    "day_of_week": "Friday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for top three teams",
+    "source": "https://tridentbookscafe.com/event/friday-night-trivia-110"
+  },
+  {
+    "venue_name": "The Berkeley Bistro + Bar",
+    "address": "64 Arlington St, Boston, MA 02116",
+    "provider": "Ponder Trivia",
+    "day_of_week": "Friday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": "Prizes for winners",
+    "source": "https://www.theberkeleyboston.com/"
+  },
+  {
+    "venue_name": "The Puddingstone Tavern",
+    "address": "1592 Tremont St, Boston, MA 02120",
+    "provider": "Sporcle",
+    "day_of_week": "Saturday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.sporcle.com/events/venue/42458/puddingstone-tavern"
+  },
+  {
+    "venue_name": "An Sibin",
+    "address": "1193 Cambridge St, Cambridge, MA 02139",
+    "provider": "Brennan Harkin",
+    "day_of_week": "Sunday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://trivianearme.net/boston/venues/an-sibin-shebeen"
+  },
+  {
+    "venue_name": "Sam Adams Boston Brewery",
+    "address": "30 Germania St, Boston, MA 02130",
+    "provider": "Venue Staff",
+    "day_of_week": "Thursday",
+    "start_time": "18:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://www.samadamsbostonbrewery.com/events"
+  }
+]
