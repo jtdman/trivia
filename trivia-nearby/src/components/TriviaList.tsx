@@ -429,6 +429,10 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
             <div
               key={venueCard.venue_id}
               className='bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer'
+              onClick={() => {
+                const firstEvent = venueCard.events[0]
+                if (firstEvent) navigate(`/event/${firstEvent.id}`)
+              }}
             >
               {/* Venue Image with Overlaid Text */}
               <div className='relative h-48 md:h-56 lg:h-52 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
@@ -465,7 +469,13 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                     <div
                       key={event.id}
                       className='border-t border-gray-200 dark:border-gray-700 pt-3 first:border-t-0 first:pt-0 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 -mx-4 lg:-mx-5 px-4 lg:px-5 py-3 rounded-lg transition-colors'
-                      onClick={() => navigate(`/event/${event.id}`)}
+                      onClick={(e) => {
+                        // Prevent the outer card's onClick from firing with a
+                        // different event id when the user clicks a specific
+                        // event tile within a multi-event card.
+                        e.stopPropagation()
+                        navigate(`/event/${event.id}`)
+                      }}
                     >
                       <div className='flex justify-between items-start mb-2'>
                         <h5 className='font-medium text-purple-400 line-clamp-1 text-sm lg:text-base'>
