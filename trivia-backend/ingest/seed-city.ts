@@ -67,8 +67,14 @@ async function findOrCreateProvider(name: string, dryRun: boolean): Promise<stri
   return data.id
 }
 
-async function findExistingVenue(name: string, address: string) {
-  // Try exact-ish match on name + first 10 chars of address
+interface VenueRow {
+  id: string
+  name_original: string
+  address_original: string
+  verification_status: string
+}
+
+async function findExistingVenue(name: string, address: string): Promise<VenueRow | null> {
   const addressPrefix = address.split(',')[0].trim()
   const { data } = await supabase
     .from('venues')
@@ -77,12 +83,19 @@ async function findExistingVenue(name: string, address: string) {
     .ilike('address_original', `${addressPrefix}%`)
     .limit(1)
 
-  if (data && data.length > 0) return data[0]
+  if (data && data.length > 0) return data[0] as VenueRow
   return null
 }
 
-async function insertPendingVenue(name: string, address: string, dryRun: boolean) {
-  if (dryRun) return { id: 'dry-run-venue-id', name_original: name, address_original: address }
+async function insertPendingVenue(name: string, address: string, dryRun: boolean): Promise<VenueRow> {
+  if (dryRun) {
+    return {
+      id: 'dry-run-venue-id',
+      name_original: name,
+      address_original: address,
+      verification_status: 'pending',
+    }
+  }
 
   const { data, error } = await supabase
     .from('venues')
@@ -91,11 +104,11 @@ async function insertPendingVenue(name: string, address: string, dryRun: boolean
       address_original: address,
       verification_status: 'pending',
     })
-    .select('id, name_original, address_original')
+    .select('id, name_original, address_original, verification_status')
     .single()
 
   if (error) throw new Error(`Failed to insert venue "${name}": ${error.message}`)
-  return data
+  return data as VenueRow
 }
 
 async function findOrCreateEvent(
@@ -226,8 +239,9 @@ async function main() {
     const providerId = await findOrCreateProvider(entry.provider, dryRun)
 
     const existingVenue = await findExistingVenue(entry.venue_name, entry.address)
-    let venue = existingVenue
+    let venue: VenueRow
     if (existingVenue) {
+      venue = existingVenue
       venuesReused++
       console.log(`  ~ venue exists (${existingVenue.verification_status})`)
     } else {
@@ -237,17 +251,14 @@ async function main() {
 
       if (!dryRun && !skipPlaces) {
         // Enrich inline — get google_place_id, lat/lng, thumbnail, etc.
-        const ok = await validator.validateVenue(
-          { id: venue.id, name_original: entry.venue_name, address_original: entry.address, verification_status: 'pending' },
-          false,
-        )
+        const ok = await validator.validateVenue(venue, false)
         if (ok) venuesEnriched++
         else venuesEnrichFailed++
       }
     }
 
     const { id: eventId, created } = await findOrCreateEvent(
-      venue!.id,
+      venue.id,
       providerId,
       entry.event_type,
       entry.day_of_week,
