@@ -94,7 +94,7 @@ Venues today come from three paths: scraped, Google-Places-validated, user-submi
 ### Google Places as canonical venue identity
 - Make `google_place_id` the dedup key.
 - Run validation as a scheduled job (weekly batch), not manual.
-- Hybrid search per `trivia-nearby/HYBRID_SEARCH_STRATEGY.md`: local DB first, fall back to Google Places only when nothing matches, use session tokens to minimize API cost.
+- Hybrid search per [`docs/HYBRID_SEARCH_STRATEGY.md`](docs/HYBRID_SEARCH_STRATEGY.md): local DB first, fall back to Google Places only when nothing matches, use session tokens to minimize API cost.
 
 ### Rewrite vs. evolve?
 **Evolve.** The data model is the part that's hardest to get right, and it's correct. The broken parts (auth, admin flows, scrapers) are in discrete layers that can be replaced without touching the DB. A full rewrite would re-learn lessons already paid for.
