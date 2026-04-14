@@ -264,7 +264,7 @@ const MyVenuesPage: React.FC = () => {
                     <Calendar className="w-4 h-4" />
                   </Link>
                   <Link
-                    to={`/admin/venues/${venue.id}/edit`}
+                    to={`/admin/venues/${venue.id}`}
                     className="p-2 text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300"
                   >
                     <Edit3 className="w-4 h-4" />

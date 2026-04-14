@@ -150,7 +150,7 @@ const VenueDetailPage: React.FC = () => {
           
           <div className="flex gap-2">
             <Link
-              to={`/admin/venues/${venue.id}/edit`}
+              to={`/admin/venues/${venue.id}`}
               className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
             >
               <Edit3 className="w-4 h-4" />
