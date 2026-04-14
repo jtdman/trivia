@@ -1,159 +1,168 @@
 # Deployment
 
-Production runs on a Hetzner VPS serving `trivianearby.com`. The frontend is a static Vite build; the backend is a Node project invoked by cron.
+Production runs on a Hetzner VPS serving `trivianearby.com`. Frontend is a static Vite build; backend is a Node project intended to be invoked by cron.
+
+The whole repo is checked out on the server at `/var/www/trivia/`. Both the frontend build output and the backend code live inside that checkout. SSH to the server via the `jtdev` alias (configured in `~/.ssh/config` → `178.156.139.162:2222` as user `jason`).
 
 ## Production Layout
 
 ```
-/var/www/trivianearby/dist/      # built frontend (trivia-nearby/dist)
-/var/www/trivia-backend/         # backend checkout, includes .env and scheduler
-/var/log/trivia-scheduler.log    # cron output
-/backups/                        # database + config backups
+/var/www/trivia/                       full repo checkout
+  trivia-nearby/dist/                  built frontend (nginx serves from here)
+  trivia-backend/                      Node scripts, .env, scheduler
+    scheduler.log                      scheduler cron output
+/backups/                              database + config backups
 ```
 
-Nginx serves the frontend as a SPA (fallback to `index.html`). The `/admin` route is part of the same SPA bundle — there is no separate admin subdomain in use.
+Nginx config (`/etc/nginx/sites-enabled/...`):
 
 ```nginx
 server {
     listen 443 ssl;
-    server_name trivianearby.com;
-    root /var/www/trivianearby/dist;
+    server_name trivianearby.com www.trivianearby.com;
+    root /var/www/trivia/trivia-nearby/dist;
     index index.html;
     location / { try_files $uri $uri/ /index.html; }
 }
 ```
 
-SSL is managed by `certbot` (`sudo certbot --nginx -d trivianearby.com`) with auto-renewal.
+The SPA handles `/admin` internally — no separate admin subdomain.
 
-Supabase is hosted (project `izaojwusiuvosqrbdwtd`) — there is no local Postgres.
-
-Branches: deploy from `main`.
+SSL: `certbot` auto-renewal. Supabase project `izaojwusiuvosqrbdwtd`; no local Postgres.
 
 ## Deploying a Frontend Change
 
-```bash
-# local
-cd trivia-nearby
-pnpm install
-pnpm build
+The repo is already on the server. Easiest path is to pull and build in place (server has Node 20.20+ which Vite 7 requires):
 
-# copy the build to the server
-rsync -avz --delete dist/ user@hetzner:/var/www/trivianearby/dist/
+```bash
+ssh jtdev
+cd /var/www/trivia
+git fetch origin
+git checkout main              # first time only; subsequent pulls stay on main
+git pull origin main
+cd trivia-nearby
+pnpm install                   # only if deps changed
+pnpm build
 ```
 
-Nginx picks it up immediately; no reload required for static content. Hard-refresh the browser to bust the cache.
+Nginx serves the new `dist/` immediately — no reload needed. Hard-refresh to bust browser cache.
+
+Alternate path (build locally, rsync):
+
+```bash
+cd trivia-nearby
+pnpm build
+rsync -avz --delete dist/ jtdev:/var/www/trivia/trivia-nearby/dist/
+```
+
+Use the rsync path if you don't want to change the server's checked-out branch state.
 
 ## Deploying a Backend Change
 
-Backend changes only matter if they affect the scheduler, scrapers, or import scripts.
+Backend changes matter if they touch the scheduler, scrapers, or importers. No long-running process to restart.
 
 ```bash
-# on the server
-ssh user@hetzner
-cd /var/www/trivia-backend
+ssh jtdev
+cd /var/www/trivia
 git pull origin main
-pnpm install           # only if dependencies changed
+cd trivia-backend
+pnpm install                   # only if deps changed
 
 # smoke test
 node sunday-night-scheduler.js --dry-run
 pnpm monitor
 ```
 
-No process to restart — the scheduler is a cron-invoked one-shot, not a long-running service.
+Apply any Supabase schema changes via the Supabase SQL Editor *before* pulling the dependent code.
 
-If a migration is required, apply it via the Supabase SQL Editor before pulling the code that depends on it.
+## Cron / Scheduler State
 
-## Installing the Cron Scheduler on Prod
+**Known issue (2026-04 snapshot):** `crontab -l` as user `jason` is empty — the Sunday-night scheduler is not currently installed. Check `sudo crontab -l` for a root-level install; if neither exists, the scheduler hasn't run since September 2025 and `event_occurrences` will stop filling in.
 
-From a fresh `/var/www/trivia-backend` checkout with `.env` in place:
+To install:
 
 ```bash
-cd /var/www/trivia-backend
+cd /var/www/trivia/trivia-backend
 ./setup-cron.sh
 ```
 
-`setup-cron.sh` installs this crontab entry for the current user:
+The script installs this crontab entry for the current user:
 
 ```
-0 22 * * SUN cd /var/www/trivia-backend && /usr/bin/node sunday-night-scheduler.js >> scheduler.log 2>&1
+0 22 * * SUN cd /var/www/trivia/trivia-backend && /usr/bin/node sunday-night-scheduler.js >> scheduler.log 2>&1
 ```
 
-It's idempotent — re-running it won't create duplicates (it strips prior `sunday-night-scheduler.js` lines before adding the new one).
+It's idempotent — re-running it won't create duplicates.
 
 Verify:
 
 ```bash
 crontab -l | grep scheduler
-systemctl status cron       # ensure cron is running
+systemctl status cron
 ```
 
-If you want logs in `/var/log/` instead of the project directory, edit the crontab entry by hand to redirect there and make sure the user has write access.
+If the scheduler has been down long enough that there's a gap, run the backfill first:
+
+```bash
+cd /var/www/trivia/trivia-backend
+node jobs/backfill-occurrences.js --dry-run
+node jobs/backfill-occurrences.js
+```
 
 ## Health Checks After Deploy
 
 ```bash
-# scheduler dry-run (should complete without errors)
-cd /var/www/trivia-backend && node sunday-night-scheduler.js --dry-run
-
-# monitor summary
-pnpm monitor
-
-# cron installed?
-crontab -l | grep sunday-night-scheduler
-
-# scheduler can reach Supabase and recent runs are logged?
-tail -50 /var/log/trivia-scheduler.log
-# or
-tail -50 /var/www/trivia-backend/scheduler.log
-
-# frontend serving?
+# frontend serving
 curl -I https://trivianearby.com
 curl -I https://trivianearby.com/admin
 
-# SSL valid?
+# bundle age (Last-Modified reflects the last `pnpm build`)
+curl -sI https://trivianearby.com/assets/index-*.js | grep -i last-modified
+
+# SSL valid
 sudo certbot certificates
 
 # disk space
 df -h
+
+# scheduler reachable?
+cd /var/www/trivia/trivia-backend
+node sunday-night-scheduler.js --dry-run
+pnpm monitor
+
+# recent cron runs?
+tail -50 /var/www/trivia/trivia-backend/scheduler.log
 ```
 
-Spot-check in the app: load `https://trivianearby.com`, confirm events for today render, log into `/admin` and confirm the provider dashboard loads.
-
-After the first Sunday post-deploy, verify new `event_occurrences` rows were created:
-
-```sql
-SELECT COUNT(*) FROM event_occurrences
-WHERE created_at > NOW() - INTERVAL '1 day';
-```
+Spot-check in the app: load https://trivianearby.com, confirm events for today render. Log into `/admin` and confirm the dashboard loads.
 
 ## Rollback
 
-Frontend:
+Frontend rollback via git:
 
 ```bash
-# keep the previous build around before deploying
-ssh user@hetzner 'cp -r /var/www/trivianearby/dist /var/www/trivianearby/dist.prev'
-# then to roll back
-ssh user@hetzner 'rm -rf /var/www/trivianearby/dist && mv /var/www/trivianearby/dist.prev /var/www/trivianearby/dist'
-```
-
-Backend:
-
-```bash
-cd /var/www/trivia-backend
+ssh jtdev
+cd /var/www/trivia
 git log --oneline -5
 git checkout <previous-sha>
-pnpm install
-node sunday-night-scheduler.js --dry-run
+cd trivia-nearby && pnpm build
 ```
 
-Database: restore from the latest `/backups/trivia-*.sql.gz` dump via `psql`. Only do this if a migration corrupted data — most issues are fixable by code-only rollback.
+Or keep the previous `dist/` around before deploying:
 
-DNS rollback is not a realistic step (we control one domain, one server).
+```bash
+ssh jtdev 'cp -r /var/www/trivia/trivia-nearby/dist /var/www/trivia/trivia-nearby/dist.prev'
+# roll back
+ssh jtdev 'rm -rf /var/www/trivia/trivia-nearby/dist && mv /var/www/trivia/trivia-nearby/dist.prev /var/www/trivia/trivia-nearby/dist'
+```
+
+Backend rollback: same `git checkout <sha>` approach in `/var/www/trivia`, no restart required.
+
+Database rollback: restore from the latest `/backups/trivia-*.sql.gz` dump via `psql`. Only do this if a migration corrupted data — most issues are fixable via code-only rollback.
 
 ## Backups
 
-Weekly crontab entry dumps Postgres:
+Weekly Postgres dump:
 
 ```
 0 2 * * 0 pg_dump $DATABASE_URL | gzip > /backups/trivia-$(date +\%Y\%m\%d).sql.gz
@@ -163,10 +172,11 @@ Log rotation is configured via `/etc/logrotate.d/trivia` (weekly, 52 rotations, 
 
 ## Production Gotchas
 
-- **Service role key never goes to the frontend.** Only `VITE_SUPABASE_ANON_KEY` is bundled. The service role key lives in `/var/www/trivia-backend/.env` and is used by the scheduler and importers.
-- **RLS is on for every table.** If an admin suddenly can't see rows, check `admin_users` / `provider_users` linkage before blaming the code.
-- **Cron uses server time.** Confirm the server timezone (`timedatectl`) matches what "Sunday 10 PM" is supposed to mean for your data. Events are generated using server-local dates.
-- **Google Places has a 1000/day cap.** A big import can burn through it; pace with `--limit` and check `api_usage_log`.
-- **The scheduler is a one-shot, not a daemon.** If it fails mid-run, just run it again — it's idempotent and won't re-create existing occurrences.
-- **Two log path conventions exist** (`scheduler.log` in the project dir vs `/var/log/trivia-scheduler.log`). Check both when investigating; they depend on which installer script was used.
-- **Don't amend Supabase schemas from code.** Apply migrations through the Supabase SQL Editor; the service role key in scripts does not have DDL helpers wired up.
+- **Service role key never ships to the frontend.** Only `VITE_SUPABASE_ANON_KEY` is bundled. Service role lives in `/var/www/trivia/trivia-backend/.env`.
+- **RLS is on for every table.** If an admin can't see rows, check role/claim linkage before blaming the code.
+- **Cron uses server time.** `timedatectl` to confirm. Events are generated using server-local dates.
+- **Google Places has a 1000/day cap.** Big imports can burn through it; pace with `--limit` and check `api_usage_log`.
+- **The scheduler is a one-shot, not a daemon.** If it fails mid-run, just run it again — it's idempotent.
+- **Two log path conventions exist** (`scheduler.log` in the project dir vs `/var/log/trivia-scheduler.log`). Check both when investigating; depends on which installer script was used.
+- **Don't run DDL from code.** Apply migrations via the Supabase SQL Editor; the service role key in scripts is for DML only.
+- **Server is typically on the `main` branch.** Older docs may reference a `deployment` branch — that branch exists but hasn't been the source of truth since the 2026 cleanup.

@@ -2,7 +2,7 @@
 
 echo "🔧 Fixing SSL permissions and restarting nginx..."
 
-ssh trivia << 'EOF'
+ssh jtdev << 'EOF'
   echo "📋 Current certificate permissions:"
   ls -la /etc/letsencrypt/live/trivianearby.com/ 2>/dev/null || echo "Cannot access cert directory"
   

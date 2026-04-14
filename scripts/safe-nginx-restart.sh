@@ -3,7 +3,7 @@
 # Safe nginx restart script
 echo "🔍 Checking nginx status..."
 
-ssh trivia << 'EOF'
+ssh jtdev << 'EOF'
   echo "Current nginx status:"
   systemctl is-active nginx
   

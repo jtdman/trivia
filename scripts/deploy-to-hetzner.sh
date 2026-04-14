@@ -1,34 +1,30 @@
 #!/bin/bash
+#
+# Deploy trivia-nearby frontend to production.
+# Pulls latest main on the server and rebuilds in place.
+# Requires the `jtdev` SSH alias configured in ~/.ssh/config.
 
-# Deployment script for Trivia app to Hetzner
-echo "🚀 Starting deployment to Hetzner server..."
+set -e
 
-# Build locally first
-echo "📦 Building trivia-nearby locally..."
-cd trivia-nearby
-pnpm install
-pnpm build
-cd ..
+echo "Deploying trivia-nearby to production..."
 
-echo "✅ Local build complete!"
-
-# Deploy to server
-echo "🌐 Deploying to Hetzner server..."
-ssh trivia << 'EOF'
+ssh jtdev << 'EOF'
+  set -e
   cd /var/www/trivia
-  echo "📥 Pulling latest code..."
+
+  echo "Pulling latest main..."
+  git fetch origin
+  git checkout main
   git pull origin main
-  
-  echo "📦 Building on server..."
+
   cd trivia-nearby
+  echo "Installing dependencies (if changed)..."
   pnpm install
+
+  echo "Building..."
   pnpm build
-  
-  echo "🔄 Restarting services..."
-  sudo systemctl restart nginx
-  # Add PM2 restart if using PM2: pm2 restart trivia-app
-  
-  echo "✅ Deployment complete!"
+
+  echo "Done."
 EOF
 
-echo "🎉 Deployment finished! Check https://trivianearby.com"
+echo "Deployed. Verify at https://trivianearby.com (hard-refresh to bust cache)."
