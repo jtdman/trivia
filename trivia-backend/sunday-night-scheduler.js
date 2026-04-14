@@ -131,8 +131,6 @@ async function generateEventOccurrences(dryRun = false) {
             occurrence_date: occurrenceDateStr,
             status: 'scheduled',
             notes: null,
-            created_by: 'system',
-            created_by_user_id: null
           })
         }
       }
