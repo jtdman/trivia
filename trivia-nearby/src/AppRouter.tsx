@@ -62,14 +62,11 @@ const AppRouter: React.FC = () => {
             <Route path="venues/my-venues" element={<MyVenuesPage />} />
             <Route path="venues/:venueId" element={<EditVenuePage />} />
             <Route path="venues/:venueId/detail" element={<VenueDetailPage />} />
-            <Route path="venues/:venueId/edit" element={<EditVenuePage />} />
             <Route path="events" element={<EventsList />} />
             <Route path="events/new" element={<AddEventPage />} />
             <Route path="events/:eventId" element={<EditEventPage />} />
             <Route path="schedule" element={<EventOccurrenceManager />} />
             <Route path="providers" element={<ProviderContactsPage />} />
-            <Route path="team" element={<div className="p-8">Team page coming soon</div>} />
-            <Route path="profile" element={<div className="p-8">Profile page coming soon</div>} />
           </Route>
         </Routes>
       </AuthProvider>

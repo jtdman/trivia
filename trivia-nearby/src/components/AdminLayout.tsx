@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/auth_context'
-import { 
-  Brain, 
-  Beer, 
-  Search, 
-  Home, 
-  MapPin, 
-  Calendar, 
-  Users, 
-  User, 
+import {
+  Brain,
+  Beer,
+  Search,
+  Home,
+  MapPin,
+  Calendar,
   LogOut,
   Menu,
   X,
@@ -36,13 +34,9 @@ const AdminLayout: React.FC = () => {
     { path: '/admin/schedule', label: 'Schedule', icon: Calendar },
     { path: '/admin/venues', label: 'Venues', icon: MapPin },
     { path: '/admin/events', label: 'Events', icon: Calendar },
-    ...(isSuperAdmin 
-      ? [{ path: '/admin/providers', label: 'Providers', icon: Building }] 
+    ...(isSuperAdmin
+      ? [{ path: '/admin/providers', label: 'Providers', icon: Building }]
       : [{ path: '/admin/venues/my-venues', label: 'My Venues', icon: MapPin }]),
-    ...(isSuperAdmin 
-      ? [{ path: '/admin/team', label: 'Team', icon: Users }] 
-      : []),
-    { path: '/admin/profile', label: 'Profile', icon: User }
   ]
 
   return (
