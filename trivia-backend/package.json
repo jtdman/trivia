@@ -4,6 +4,9 @@
   "description": "Data processing and management for trivia venue database",
   "type": "module",
   "scripts": {
+    "ingest": "tsx ingest/seed-city.ts",
+    "scrape:trivia-nation": "tsx providers/trivia-nation/scrape.ts",
+    "parse:outspoken": "tsx providers/outspoken-entertainment/parse.ts",
     "import-venues": "tsx scripts/import-venues.ts",
     "import-venues-enhanced": "tsx scripts/import-venues-enhanced.ts",
     "import-nerdytalk": "tsx providers/nerdytalk/import-nerdytalk-corrected.ts",
