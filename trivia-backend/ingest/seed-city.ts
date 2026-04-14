@@ -232,11 +232,15 @@ async function main() {
   const args = process.argv.slice(2)
   const filePath = args.find((a) => !a.startsWith('--'))
   if (!filePath) {
-    console.error('Usage: tsx ingest/seed-city.ts <seed-json> [--dry-run] [--skip-places]')
+    console.error('Usage: tsx ingest/seed-city.ts <seed-json> [--preview] [--skip-places]')
     process.exit(1)
   }
-  const dryRun = args.includes('--dry-run')
+  // --preview (aliased --dry-run) skips all DB writes and Places API
+  // calls. Renamed from --dry-run because pnpm's CLI consumes the
+  // --dry-run flag itself and never passes it through to the script.
+  const dryRun = args.includes('--preview') || args.includes('--dry-run')
   const skipPlaces = args.includes('--skip-places')
+  if (dryRun) console.log('** PREVIEW MODE — no database writes, no Places API calls **')
 
   const raw = await fs.readFile(filePath, 'utf-8')
   const entries: SeedEntry[] = JSON.parse(raw)
