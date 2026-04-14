@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 import { useVenues } from '../hooks/useVenues'
 import { useLocation } from '../hooks/useLocation'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import {
   formatDayOfWeek,
   formatTime,
@@ -426,13 +426,12 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
         {/* Venue Cards - Grid Layout for Desktop */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
           {venueCards.map((venueCard) => (
-            <div
+            // Use a Link for the outer card so iOS Safari handles the tap
+            // natively (plain div onClick is unreliable on mobile).
+            <Link
               key={venueCard.venue_id}
-              className='bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer'
-              onClick={() => {
-                const firstEvent = venueCard.events[0]
-                if (firstEvent) navigate(`/event/${firstEvent.id}`)
-              }}
+              to={venueCard.events[0] ? `/event/${venueCard.events[0].id}` : '#'}
+              className='block text-inherit no-underline bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer'
             >
               {/* Venue Image with Overlaid Text */}
               <div className='relative h-48 md:h-56 lg:h-52 bg-gradient-to-br from-amber-400 to-orange-600 overflow-hidden'>
@@ -470,10 +469,12 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                       key={event.id}
                       className='border-t border-gray-200 dark:border-gray-700 pt-3 first:border-t-0 first:pt-0 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 -mx-4 lg:-mx-5 px-4 lg:px-5 py-3 rounded-lg transition-colors'
                       onClick={(e) => {
-                        // Prevent the outer card's onClick from firing with a
-                        // different event id when the user clicks a specific
-                        // event tile within a multi-event card.
+                        // The outer <Link> would otherwise navigate to the
+                        // first event; stop + prevent so clicks on a
+                        // specific event tile within a multi-event card go
+                        // to *that* event instead.
                         e.stopPropagation()
+                        e.preventDefault()
                         navigate(`/event/${event.id}`)
                       }}
                     >
@@ -508,7 +509,7 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                   ))}
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
