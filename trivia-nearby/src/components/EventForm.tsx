@@ -136,14 +136,16 @@ const EventForm: React.FC<EventFormProps> = ({
       const occurrences = []
       const weeksToGenerate = event.frequency === 'one-time' ? 1 : 4 // Generate 4 weeks for recurring events
       
+      const toLocalDateStr = (d: Date) =>
+        `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
       for (let week = 0; week < weeksToGenerate; week++) {
         const occurrenceDate = new Date(today)
         occurrenceDate.setDate(today.getDate() + daysUntil + (week * 7))
-        const occurrenceDateStr = occurrenceDate.toISOString().split('T')[0]
-        
+
         occurrences.push({
           event_id: event.id,
-          occurrence_date: occurrenceDateStr,
+          occurrence_date: toLocalDateStr(occurrenceDate),
           status: 'scheduled'
         })
       }

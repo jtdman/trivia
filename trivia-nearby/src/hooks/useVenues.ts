@@ -31,13 +31,18 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
       
       console.log('🔍 useVenues fetchVenues called with options:', { latitude, longitude, radiusMiles, limit, dateFilter })
 
-      // Calculate date range based on filter
+      // Format a Date as YYYY-MM-DD in the user's local timezone.
+      // toISOString() converts to UTC, which shifts the date forward after
+      // ~7pm in US timezones and caused "today" to query tomorrow's events.
+      const toLocalDateStr = (d: Date) =>
+        `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
       const today = new Date()
-      const todayStr = today.toISOString().split('T')[0]
-      
+      const todayStr = toLocalDateStr(today)
+
       let startDate: string
       let endDate: string
-      
+
       switch (dateFilter) {
         case 'today':
           startDate = todayStr
@@ -47,7 +52,7 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
         case 'tomorrow':
           const tomorrow = new Date(today)
           tomorrow.setDate(today.getDate() + 1)
-          const tomorrowStr = tomorrow.toISOString().split('T')[0]
+          const tomorrowStr = toLocalDateStr(tomorrow)
           startDate = tomorrowStr
           endDate = tomorrowStr
           console.log('📅 TOMORROW filter: Using date', tomorrowStr)
@@ -56,8 +61,8 @@ export function useVenues(options?: UseVenuesOptions): UseVenuesResult {
         default:
           startDate = todayStr
           const weekOut = new Date(today)
-          weekOut.setDate(today.getDate() + 6) // Today + 6 more days = 7 days total
-          endDate = weekOut.toISOString().split('T')[0]
+          weekOut.setDate(today.getDate() + 6)
+          endDate = toLocalDateStr(weekOut)
           console.log('📅 THIS-WEEK filter: Using date range', startDate, 'to', endDate)
           break
       }
