@@ -35,6 +35,12 @@ interface SeedEntry {
   event_type: string
   prize?: string | null
   source?: string
+  // If provided, skip the inline Google Places lookup and set
+  // google_location directly. The venue will still land as
+  // verification_status='pending' so a later validate-places run can
+  // enrich it with a photo, rating, phone, etc.
+  latitude?: number
+  longitude?: number
 }
 
 const SELF_HOSTED = new Set(['Venue Staff', 'venue_staff', 'self-hosted', 'Self-Hosted'])
@@ -87,7 +93,12 @@ async function findExistingVenue(name: string, address: string): Promise<VenueRo
   return null
 }
 
-async function insertPendingVenue(name: string, address: string, dryRun: boolean): Promise<VenueRow> {
+async function insertPendingVenue(
+  name: string,
+  address: string,
+  coords: { lat: number; lng: number } | null,
+  dryRun: boolean,
+): Promise<VenueRow> {
   if (dryRun) {
     return {
       id: 'dry-run-venue-id',
@@ -97,13 +108,22 @@ async function insertPendingVenue(name: string, address: string, dryRun: boolean
     }
   }
 
+  const insertPayload: Record<string, any> = {
+    name_original: name,
+    address_original: address,
+    verification_status: 'pending',
+  }
+  // If we already know the coordinates (e.g. scraped from the
+  // provider's site), set google_location so the PostGIS distance
+  // query can find the venue immediately — no Google Places call
+  // needed up front.
+  if (coords) {
+    insertPayload.google_location = `POINT(${coords.lng} ${coords.lat})`
+  }
+
   const { data, error } = await supabase
     .from('venues')
-    .insert({
-      name_original: name,
-      address_original: address,
-      verification_status: 'pending',
-    })
+    .insert(insertPayload)
     .select('id, name_original, address_original, verification_status')
     .single()
 
@@ -240,17 +260,24 @@ async function main() {
 
     const existingVenue = await findExistingVenue(entry.venue_name, entry.address)
     let venue: VenueRow
+    const hasCoords =
+      typeof entry.latitude === 'number' && typeof entry.longitude === 'number'
+    const coords = hasCoords ? { lat: entry.latitude!, lng: entry.longitude! } : null
+
     if (existingVenue) {
       venue = existingVenue
       venuesReused++
       console.log(`  ~ venue exists (${existingVenue.verification_status})`)
     } else {
-      venue = await insertPendingVenue(entry.venue_name, entry.address, dryRun)
+      venue = await insertPendingVenue(entry.venue_name, entry.address, coords, dryRun)
       venuesCreated++
-      console.log(`  + venue inserted (pending)`)
+      console.log(`  + venue inserted (pending${coords ? ', coords seeded' : ''})`)
 
-      if (!dryRun && !skipPlaces) {
-        // Enrich inline — get google_place_id, lat/lng, thumbnail, etc.
+      // Only call Google Places when we don't already have coordinates.
+      // Pre-seeded coords make the venue immediately queryable by the
+      // PostGIS distance RPC; photos/rating/phone can be backfilled
+      // later via `pnpm validate-places --pending`.
+      if (!dryRun && !skipPlaces && !coords) {
         const ok = await validator.validateVenue(venue, false)
         if (ok) venuesEnriched++
         else venuesEnrichFailed++
