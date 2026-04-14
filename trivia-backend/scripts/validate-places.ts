@@ -7,7 +7,7 @@ interface ValidationOptions {
   dryRun?: boolean
 }
 
-class PlacesValidator {
+export class PlacesValidator {
   private apiCallsToday = 0
 
   async checkDailyLimit(): Promise<boolean> {

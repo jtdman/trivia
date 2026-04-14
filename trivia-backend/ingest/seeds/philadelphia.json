@@ -1,0 +1,322 @@
+[
+  {
+    "venue_name": "Clarkville",
+    "address": "4301 Baltimore Ave, Philadelphia, PA 19104",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": "$50 gift card for first place",
+    "source": "https://johnnygoodtimes.com/weekly-quizzo/"
+  },
+  {
+    "venue_name": "Loco Pez",
+    "address": "700 S 20th St, Philadelphia, PA 19146",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.inquirer.com/philly-tips/where-to-play-quizzo-nights-bars-philly.html"
+  },
+  {
+    "venue_name": "Stogie Joe's Tavern",
+    "address": "1801 E Passyunk Ave, Philadelphia, PA 19148",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": "1st: $100 cash; 2nd: $50 gift card; 3rd: $25 gift card",
+    "source": "https://975thefanatic.com/listicle/8-terrific-bars-with-quizzo-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "Cavanaugh's Rittenhouse",
+    "address": "1921 Sansom St, Philadelphia, PA 19103",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "18:30",
+    "event_type": "Quizzo",
+    "prize": "Prizes and giveaways with drink specials",
+    "source": "https://www.inquirer.com/philly-tips/where-to-play-quizzo-nights-bars-philly.html"
+  },
+  {
+    "venue_name": "Strangelove's",
+    "address": "216 S 11th St, Philadelphia, PA 19107",
+    "provider": "JB",
+    "day_of_week": "Monday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": "Up to $25 off tab",
+    "source": "https://975thefanatic.com/listicle/8-terrific-bars-with-quizzo-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "P.J. Whelihan's Pub + Restaurant - Conshohocken",
+    "address": "200 Ridge Pike, Conshohocken, PA 19428",
+    "provider": "Venue Staff",
+    "day_of_week": "Monday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://locations.pjspub.com/pa/conshohocken/200-ridge-pike"
+  },
+  {
+    "venue_name": "Founding Fathers",
+    "address": "1612 South St, Philadelphia, PA 19146",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.foundingfathersbar.com/news-events/quizzo-tuesdays-the-perfect-fusion-of-smarts-and-sips"
+  },
+  {
+    "venue_name": "Redcrest Kitchen",
+    "address": "625 S 6th St, Philadelphia, PA 19147",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": "Drink specials, food specials, and prizes",
+    "source": "https://redcrest.kitchen/events/IHoxzdc9knIk"
+  },
+  {
+    "venue_name": "Fergie's Pub",
+    "address": "1214 Sansom St, Philadelphia, PA 19107",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": "Bar tab credit for winners",
+    "source": "https://www.cbsnews.com/philadelphia/news/top-trivia-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "Tapster Philadelphia",
+    "address": "110 S 16th St, Philadelphia, PA 19102",
+    "provider": "King Trivia",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://kingtrivia.com/venues/tapster-philadelphia/"
+  },
+  {
+    "venue_name": "Bar-Ly Chinatown",
+    "address": "101 N 11th St, Philadelphia, PA 19107",
+    "provider": "Quizzodelphia",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": "Cash and prizes",
+    "source": "https://quizzodelphia.com/"
+  },
+  {
+    "venue_name": "Attic Brewing Company",
+    "address": "137 Berkley St, Philadelphia, PA 19144",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": "$50 gift certificate and prizes for best team name",
+    "source": "https://www.atticbrewing.com/event-details/live-"
+  },
+  {
+    "venue_name": "JD McGillicuddy's Manayunk",
+    "address": "111 Cotton St, Philadelphia, PA 19127",
+    "provider": "DJ Pressplay",
+    "day_of_week": "Tuesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": "Weekly prizes for top teams",
+    "source": "https://www.jdmcgillicuddysmanayunk.com/event/trivia-tuesdays/"
+  },
+  {
+    "venue_name": "Workhorse Brewing Company",
+    "address": "250 King Manor Dr, King of Prussia, PA 19406",
+    "provider": "Venue Staff",
+    "day_of_week": "Tuesday",
+    "start_time": "18:30",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://visitkop.com/recurring-events/tuesday-trivia-workhorse-brewing/"
+  },
+  {
+    "venue_name": "Pistolas del Sur",
+    "address": "1934 E Passyunk Ave, Philadelphia, PA 19148",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": "Prizes for 1st and 2nd place teams",
+    "source": "https://www.visiteastpassyunk.com/events/at3p95mne0wwhfewdui1nyjgv5qk5b-y2jmy"
+  },
+  {
+    "venue_name": "Fringe Bar",
+    "address": "140 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://johnnygoodtimes.com/weekly-quizzo/"
+  },
+  {
+    "venue_name": "Two Locals Brewing Company",
+    "address": "3675 Market St, Philadelphia, PA 19104",
+    "provider": "Ya Fav Trashman (Johnny Goodtimes)",
+    "day_of_week": "Wednesday",
+    "start_time": "18:00",
+    "event_type": "Quizzo",
+    "prize": "Prizes for 1st and 2nd place",
+    "source": "https://www.twolocalsbrewing.com/events/quizzo"
+  },
+  {
+    "venue_name": "National Mechanics",
+    "address": "22 S 3rd St, Philadelphia, PA 19106",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.cbsnews.com/philadelphia/news/top-trivia-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "12 Steps Down",
+    "address": "831 Christian St, Philadelphia, PA 19147",
+    "provider": "Xiomara",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.inquirer.com/philly-tips/where-to-play-quizzo-nights-bars-philly.html"
+  },
+  {
+    "venue_name": "Kelliann's Bar & Grill",
+    "address": "1549 Spring Garden St, Philadelphia, PA 19130",
+    "provider": "Damon Hollis",
+    "day_of_week": "Wednesday",
+    "start_time": "20:30",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.urbancraftandcrawl.com/blog/best-bars-with-quizzo-nights-in-philadelphia"
+  },
+  {
+    "venue_name": "The Black Sheep Pub & Restaurant",
+    "address": "247 S 17th St, Philadelphia, PA 19103",
+    "provider": "Captain Forrester",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Pub Quiz",
+    "prize": null,
+    "source": "https://theblacksheep.com/events/trivia-night/"
+  },
+  {
+    "venue_name": "Urban Saloon",
+    "address": "2120 Fairmount Ave, Philadelphia, PA 19130",
+    "provider": "PHL Quizzo",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://badslava.com/philadelphia-trivia-nights.php"
+  },
+  {
+    "venue_name": "Fado Irish Pub",
+    "address": "1500 Locust St, Philadelphia, PA 19102",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Pub Quiz",
+    "prize": null,
+    "source": "https://badslava.com/philadelphia-trivia-nights.php"
+  },
+  {
+    "venue_name": "Topside Tavern",
+    "address": "10 S 20th St, Philadelphia, PA 19103",
+    "provider": "Philly Quizzo",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.phillyquizzo.net/upcoming-events"
+  },
+  {
+    "venue_name": "Evil Genius Beer Company",
+    "address": "1727 N Front St, Philadelphia, PA 19122",
+    "provider": "Lunch Money Quizzo",
+    "day_of_week": "Wednesday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://do215.com/events/weekly/wed/quizzo-tickets"
+  },
+  {
+    "venue_name": "The Great American Pub - Conshohocken",
+    "address": "123 Fayette St, Conshohocken, PA 19428",
+    "provider": "Venue Staff",
+    "day_of_week": "Wednesday",
+    "start_time": "20:00",
+    "event_type": "Trivia",
+    "prize": null,
+    "source": "https://thegreatamericanpub.com/events/trivia/"
+  },
+  {
+    "venue_name": "Deli at Dwell",
+    "address": "1300 N 2nd St, Philadelphia, PA 19122",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Thursday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://johnnygoodtimes.com/weekly-quizzo/"
+  },
+  {
+    "venue_name": "Pizzata Pizzeria & Birreria",
+    "address": "1700 E Passyunk Ave, Philadelphia, PA 19148",
+    "provider": "Johnny Goodtimes",
+    "day_of_week": "Thursday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://johnnygoodtimes.com/weekly-quizzo/"
+  },
+  {
+    "venue_name": "Fergie's Pub",
+    "address": "1214 Sansom St, Philadelphia, PA 19107",
+    "provider": "Venue Staff",
+    "day_of_week": "Thursday",
+    "start_time": "21:00",
+    "event_type": "Quizzo",
+    "prize": "Bar tab credit for winners",
+    "source": "https://www.cbsnews.com/philadelphia/news/top-trivia-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "Wissahickon Brewing Company",
+    "address": "3705 W School House Ln, Philadelphia, PA 19129",
+    "provider": "Sean P. Maguire",
+    "day_of_week": "Thursday",
+    "start_time": "19:30",
+    "event_type": "Quizzo",
+    "prize": "Prizes for winners, rotating themes",
+    "source": "https://975thefanatic.com/listicle/8-terrific-bars-with-quizzo-nights-in-philadelphia/"
+  },
+  {
+    "venue_name": "The Abbaye",
+    "address": "637 N 3rd St, Philadelphia, PA 19123",
+    "provider": "Venue Staff",
+    "day_of_week": "Thursday",
+    "start_time": "20:00",
+    "event_type": "Quizzo",
+    "prize": "$50 and $25 gift certificates for 1st and 2nd place",
+    "source": "https://www.inquirer.com/philly-tips/where-to-play-quizzo-nights-bars-philly.html"
+  },
+  {
+    "venue_name": "Dock Street Brewing Co.",
+    "address": "2118 Washington Ave, Philadelphia, PA 19146",
+    "provider": "Philly Quizzo",
+    "day_of_week": "Thursday",
+    "start_time": "19:00",
+    "event_type": "Quizzo",
+    "prize": null,
+    "source": "https://www.phillyquizzo.net/upcoming-events"
+  }
+]
