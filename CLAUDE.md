@@ -14,9 +14,9 @@ The app is designed as a mobile-first web application that helps users find triv
 
 ### Current Status
 - **Production URL**: https://trivianearby.com
-- **Deployment**: Hetzner VPS
+- **Deployment**: Hetzner VPS (SSH alias `jtdev`, repo checkout at `/var/www/trivia/`). See [trivia-backend/DEPLOYMENT.md](trivia-backend/DEPLOYMENT.md).
 - **Domain**: trivianearby.com (may expand to .co.uk depending on success)
-- **Data Sources**: Active scraping from Challenge Entertainment, NerdyTalk, and other trivia providers
+- **Data Sources**: Hand-curated city seed JSONs (via `ingest/seed-city.ts`), plus per-provider importers for Challenge Entertainment, NerdyTalk, and BrainBlast. Automated scheduling has been intermittent — see `ARCHITECTURE_REVIEW.md` for current state and planned ingestion-harness work.
 
 ## Development Commands
 
@@ -60,35 +60,49 @@ The app uses a custom theme context that:
 
 ### Backend Architecture (Active)
 - **Supabase** with PostGIS for location-based queries
-- **Database schema**: venues, events, trivia_providers, users, admin_users
-- **Data Collection**: N8N workflows for automated scraping
-- **Authentication**: Supabase Auth with admin dashboard
-- **API**: REST endpoints for venue/event data
-- **Location Services**: Nominatim/OpenStreetMap geocoding with Vite proxy
-- Database schema includes: venues, events, trivia_providers, users
-- Authentication system for venue owners to manage events
-- **trivia-backend/** directory contains data processing scripts
+- **Database schema (active)**: `venues`, `events`, `event_occurrences`, `trivia_providers`, `api_usage_log`. Auth-related legacy tables (`admin_users`, `provider_users`, `user_profiles`) exist in the schema but are largely vestigial — see `ARCHITECTURE_REVIEW.md` for the auth consolidation plan.
+- **Data pipeline**:
+  - `ingest/seed-city.ts` — reusable adapter: JSON seed → venues (enriched via Google Places) → events → occurrences
+  - `providers/*/` — per-provider scrapers + importers (Challenge Entertainment, NerdyTalk, BrainBlast)
+  - `scripts/validate-places.ts` — Google Places enrichment (addresses, photos, lat/lng)
+  - `jobs/generate-weekly-events.js` + `sunday-night-scheduler.js` — weekly occurrence generation
+  - `jobs/backfill-occurrences.js` — idempotent gap-filler when the scheduler falls behind
+  - `n8n/CE_Scraper.json` — n8n workflow (historical; not actively running)
+- **Authentication**: Supabase native auth; admin dashboard at `/admin`. (Legacy RLS policies referencing dropped tables still exist — scheduled for cleanup.)
+- **Location services**: Nominatim/OpenStreetMap for user-entered locations; Google Places for venue enrichment. Both proxied through Vite in dev.
+- **Subdirectories**: `lib/` (Supabase client), `scripts/` (TS importers), `jobs/` (scheduled Node jobs), `providers/` (per-source scrapers), `ingest/` (city seed adapter + seed JSONs), `utils/` (dedup helpers), `supabase/` does **not** exist inside trivia-backend anymore — the Supabase CLI project lives at the repo root under `../supabase/`.
 
 ### Backend Commands
 
-All backend commands should be run from the `trivia-backend/` directory using **pnpm**:
+All backend commands run from `trivia-backend/` using **pnpm**. Requires Node 20.19+ (see `../.nvmrc`).
 
 ```bash
 # Install backend dependencies
 pnpm install
 
-# Import venues from providers
+# Seed a city's venues + events + 4 weeks of occurrences from a JSON file
+pnpm tsx ingest/seed-city.ts ingest/seeds/philadelphia.json
+pnpm tsx ingest/seed-city.ts ingest/seeds/philadelphia.json --dry-run
+
+# Import from a per-provider scraper output
 pnpm import-nerdytalk
+pnpm import-brainblast
 
-# Validate venues with Google Places API (downloads images)
+# Validate / enrich venues via Google Places (downloads images)
 pnpm validate-places validate --limit 10
-
-# Process existing photos (batch download)
-pnpm process-photos
-
-# Show validation statistics
 pnpm validate-places stats
+
+# Occurrence scheduling / maintenance
+pnpm scheduler                              # runs the Sunday-night generator
+pnpm scheduler:dry-run
+node jobs/backfill-occurrences.js           # idempotent gap-filler
+node jobs/backfill-occurrences.js --dry-run
+
+# Monitor
+pnpm monitor
 ```
+
+Full operations guide: [trivia-backend/OPERATIONS.md](trivia-backend/OPERATIONS.md).
 
 ## Important Technical Details
 
@@ -119,8 +133,8 @@ pnpm validate-places stats
 ## Partnership Strategy
 
 ### Active Partnership
-- **NerdyTalk**: Local Tennessee trivia provider, data sharing agreement in progress
-- **Challenge Entertainment**: Automated scraping of event data
+- **NerdyTalk**: Local Tennessee trivia provider, data-sharing conversation in progress. Importer lives at `providers/nerdytalk/import-nerdytalk-corrected.ts`.
+- **Challenge Entertainment**: Manual JSON dumps from their site (no active partnership); last data pulled July 2025. Scraper + n8n workflow exist under `providers/challenge-entertainment/` and `n8n/CE_Scraper.json` but are not running on a schedule.
 
 ### Target Partnerships
 - **JAMMIN' Trivia**: Multi-state presence (CO, GA, OR) - Contact: steve@myjammindjs.com
@@ -133,12 +147,12 @@ pnpm validate-places stats
 
 - I'm not concerned with pagination for the end user - we will only show the 20 closest trivias max on a day - maybe the week filter will have more but I prefer a load more button at the bottom
 
-## Current Issues to Fix
+## Known Rough Edges
 
-**URGENT - Date Filter Issues (Added: Aug 5, 2025)**
-- ❌ **Tomorrow filter**: Not showing results - needs debugging
-- ❌ **This Week filter**: Likely not working properly  
-- ✅ **Today filter**: Working correctly
-- **Debug Steps**: Check console logs for dateFilter value and date ranges in useVenues.ts
-- **Location**: trivia-nearby/src/hooks/useVenues.ts - debug logging already added
-- **Context**: Fixed duplicates by moving to database-level date filtering, but broke Tomorrow/This Week filters in the process
+Tracked in `ARCHITECTURE_REVIEW.md`; short list here for context:
+
+- **Auth layer has legacy code paths.** Hardcoded super-admin user IDs in `auth_context.tsx` and RLS policies referencing dropped tables. A consolidation pass is planned (JWT `app_metadata.role` as the single source of truth).
+- **Sunday-night scheduler has been intermittent.** `jobs/backfill-occurrences.js` is the idempotent fallback. Cron install is in `setup-cron.sh`.
+- **Per-event editing by venue owners** is scaffolded but not completed.
+
+Previously tracked and resolved: Tomorrow/This-Week date filter was returning empty due to `toISOString()` producing UTC dates after ~7pm local; fixed in `useVenues.ts`.
