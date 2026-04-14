@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 import { useVenues } from '../hooks/useVenues'
 import { useLocation } from '../hooks/useLocation'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   formatDayOfWeek,
   formatTime,
@@ -37,7 +37,6 @@ type DateFilter = 'today' | 'tomorrow' | 'this-week'
 const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBack }) => {
   const { theme, toggleTheme } = React.useContext(ThemeContext)
   const userLocation = useLocation()
-  const navigate = useNavigate()
   const [dateFilter, setDateFilter] = React.useState<DateFilter>('today')
   
   console.log('🎯 TriviaList component rendered with:', { location, geocodedCoords, dateFilter })
@@ -469,18 +468,14 @@ const TriviaList: React.FC<TriviaListProps> = ({ location, geocodedCoords, onBac
                 {/* Events */}
                 <div className='space-y-3'>
                   {venueCard.events.map((event) => (
+                    // Non-interactive — the whole card (outer <Link>)
+                    // handles navigation. Avoiding nested click handlers
+                    // because the preventDefault/stopPropagation dance
+                    // raced with the anchor's native click in standalone
+                    // PWA mode on Android and swallowed the tap.
                     <div
                       key={event.id}
-                      className='border-t border-gray-200 dark:border-gray-700 pt-3 first:border-t-0 first:pt-0 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 -mx-4 lg:-mx-5 px-4 lg:px-5 py-3 rounded-lg transition-colors'
-                      onClick={(e) => {
-                        // The outer <Link> would otherwise navigate to the
-                        // first event; stop + prevent so clicks on a
-                        // specific event tile within a multi-event card go
-                        // to *that* event instead.
-                        e.stopPropagation()
-                        e.preventDefault()
-                        navigate(`/event/${event.id}`)
-                      }}
+                      className='border-t border-gray-200 dark:border-gray-700 pt-3 first:border-t-0 first:pt-0 -mx-4 lg:-mx-5 px-4 lg:px-5 py-3 rounded-lg'
                     >
                       <div className='flex justify-between items-start mb-2'>
                         <h5 className='font-medium text-purple-400 line-clamp-1 text-sm lg:text-base'>
